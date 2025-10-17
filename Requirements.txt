@@ -1,0 +1,16 @@
+Flask
+pandas
+matplotlib
+boto3
+xarray
+numpy
+langchain-openai
+langchain-core
+langgraph
+pydantic
+scikit-learn
+netCDF4
+gunicorn
+geopandas
+folium
+tabulate
