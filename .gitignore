@@ -1,2 +1,4 @@
 osvenv/*
 __pycache__/*
+a2a/__pycache__/*
+*.pyc

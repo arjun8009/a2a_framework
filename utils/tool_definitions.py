@@ -19,3 +19,19 @@ send_message_definitions = {
         }
     }
 
+
+code_executor_definition = {
+        "type":"function",
+        "name":"code_executor",
+        "description":"Tool that executes code written by an agent",
+        "parameters":{
+            "type":"object",
+            "properties":{
+                "code":{
+                    "type":"string",
+                    "description":"Name of the agent the task needs to be delegated to"
+                }
+            }
+        }
+    }
+

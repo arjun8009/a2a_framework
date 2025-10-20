@@ -1,10 +1,14 @@
 from utils.llms import *
 from a2a.AgentCard import AgentCard
+from a2a.Artifact import Artifact
 from pydantic import BaseModel
 
 class Agent():
 
-    def __init__(self, agent_details:AgentCard, llm_name:str, schema:BaseModel=None, tools:dict=None, tool_definitions:list=None, additional_args:dict=None, available_agents=None):
+    def __init__(self, agent_details:AgentCard, llm_name:str, schema:BaseModel=None, 
+                 tools:dict=None, tool_definitions:list=None, additional_args:dict=None, 
+                 available_agents=None, artifacts_req:Artifact = None):
+        
         ''' Default agent is defined here. It contains an identity of the agent and assigns an llm to control the agent
         args:
             1. agent_identity : An identification of the agent of type AgentCard
@@ -12,11 +16,12 @@ class Agent():
             3. schema : A pydantic BaseModel type schema
             4. tools : A dictionary of functions {"add_numbers":add_numbers, "substract_numbers":substract_numbers}
             5. tool_definitions : A list of tool defintions
-            6. Addtional_args : A dictionary of additional args to disable parallel tool calls 
-            7. Avaialable agents : A list of available agents for send_messages 
-        
+            6. additional_args : A dictionary of additional args to disable parallel tool calls 
+            7. available_agents : A list of available agents for send_messages 
+            8. artifacts_req : A list of data artifacts required
         outputs : 
             1. llm output can be schema, string or tool evalutation results of type string
+
             
         We are still working on returning raw data. Will be implemented using Artifacts'''
 
@@ -27,6 +32,7 @@ class Agent():
         self.schema = schema
         self.additional_args = additional_args
         self.available_agents = available_agents
+        self.artifacts_req = artifacts_req
     
     def run_agent(self,messages):
 
@@ -45,12 +51,12 @@ class Agent():
                 fn_calls = [i for i in output.output if i.type=="function_call"]
 
                 # running of tools without multithreading
-                messages = self.run_tools(messages,fn_calls)
+                messages,artifacts = self.run_tools(messages,fn_calls)
                 attempts = attempts + 1
                 output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
 
         if hasattr(output,"output_text"):
-            return output.output_text
+            return output.output_text,artifacts
         else:
             return output
     
@@ -66,6 +72,7 @@ class Agent():
         output:
             updated_messages : A list of updated messages with stringified outputs'''
         
+        artifacts = []
         for call in fn_calls:
             messages.append(call)
             args = json.loads(call.arguments)
@@ -74,12 +81,25 @@ class Agent():
             # In case we need to provide available agents
             if call.name in tool_names:
                 print(f"Calling tool {call.name} with args : {args}")
+                
                 if call.name == "send_message":
                     args["agents"] = self.available_agents
                     args["source"] = self.agent_identity.agent_name
+                
+                # If we need to provide raw data to the llm to code
+                if self.artifacts_req is not None:
+                    args["data"] = [i.data for i in self.artifacts_req]
 
                 result = self.tools[call.name](**args)
+                # Assuming that the results of the agent will be a list consisting of output and the data. Output will be a description of what it has found
+                if isinstance(result,list):
+                    messages.append({"type":"function_call_output", "call_id":call.call_id,"output":str(result[0])})
+                    artifacts.append(result[1])
                 messages.append({"type":"function_call_output", "call_id":call.call_id,"output":str(result)})
-        return messages
+        
+        if len(artifacts) > 0:
+            return messages,artifacts
+        else:
+            return messages,None
         
         

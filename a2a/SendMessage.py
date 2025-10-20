@@ -22,7 +22,9 @@ class SendMessage():
     def send_messages(self):
 
         try:
-            output = self.agent.run_agent(self.task.history)
+            output,artifact = self.agent.run_agent(self.task.history)
+            if artifact is not None:
+                self.task.task_artifact = artifact
             self.task.task_status = "success"
             self.task.task_output = output
             self.task.history.append({"role":"assistant","content":str(output)})

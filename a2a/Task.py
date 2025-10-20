@@ -4,7 +4,7 @@ class Task():
 
     def __init__(self,messages:list, task_id:str):
 
-        ''' Single stateful conversation between agents. Wil implement artifacts here too
+        ''' Single stateful conversation between agents.
         
         args:
             1. messages: A conversation history between the two agents
@@ -16,3 +16,4 @@ class Task():
         self.task_status = None
         # agent output will later add artifacts
         self.task_output = None
+        self.task_artifact = None
