@@ -1,37 +1,34 @@
-from Task import Task
-from Agent import Agent
+from a2a.Task import Task
+from a2a.Agent import Agent
 
 class SendMessage():
     
-    def __init__(self, task:Task, source:str, target:str, agents:list[Agent]):
+    def __init__(self, task:Task,agent:Agent):
         
         ''' A router which enables communication between two agents and sends instructions from 1 agent to another
         args:
             1. task : An object of type Task which contains details of the agent communication
             2. source : agent name sending the task
             3. target : agent name that will perform the task
-            4. agents: a list of agent objects
+            4. agents: a single agent object
         output:
             1. task: updated task with output
         '''
 
         self.task = task
-        self.source = source
-        self.target = target
-        self.agents=agents
+        self.agent=agent
 
-        return self.send_messages()
 
     def send_messages(self):
 
-        agent_names = [i.agent_identity.agent_name for i in self.agents]
-        target_agent = self.agents[agent_names.index(self.target)]
-
         try:
-            output = target_agent.run_agent(self.task.history)
+            output = self.agent.run_agent(self.task.history)
             self.task.task_status = "success"
             self.task.task_output = output
+            self.task.history.append({"role":"assistant","content":str(output)})
         except Exception as e:
+            print(e)
             self.task.task_status = "failure"
+            self.task.history.append({"role":"assistant","content":"Something failed"})
 
         return self.task
