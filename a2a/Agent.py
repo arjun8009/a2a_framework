@@ -7,7 +7,7 @@ class Agent():
 
     def __init__(self, agent_details:AgentCard, llm_name:str, schema:BaseModel=None, 
                  tools:dict=None, tool_definitions:list=None, additional_args:dict=None, 
-                 available_agents=None, artifacts_req:Artifact = None):
+                 available_agents=None, artifacts_req:Artifact = None, system_instruction:str=None):
         
         ''' Default agent is defined here. It contains an identity of the agent and assigns an llm to control the agent
         args:
@@ -33,6 +33,7 @@ class Agent():
         self.additional_args = additional_args
         self.available_agents = available_agents
         self.artifacts_req = artifacts_req
+        self.system_instruction = system_instruction
     
     def run_agent(self,messages):
 
@@ -42,6 +43,12 @@ class Agent():
             1. messages : A list of messages openai style. We dont have the messages in the init bec we want to blank initialise an agent and run it whenever we want
         outputs:
             1. output : ouptut of the llm can be string, schema and in a later stage data artifacts'''
+        
+        if self.system_instruction:
+            messages.insert(0,{"role":"system","content":self.system_instruction})
+
+        if self.artifacts_req:
+            messages[-1]["content"] = messages[-1]["content"] + f"\n The data artifacts provided to you are : {[i.name for i in self.artifacts_req]} with descriptions {[i.description for i in self.artifacts_req]}"
 
         output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
         
@@ -88,14 +95,21 @@ class Agent():
                 
                 # If we need to provide raw data to the llm to code
                 if self.artifacts_req is not None:
-                    args["data"] = [i.data for i in self.artifacts_req]
+                    args["data"] = [i for i in self.artifacts_req]
 
                 result = self.tools[call.name](**args)
+
                 # Assuming that the results of the agent will be a list consisting of output and the data. Output will be a description of what it has found
-                if isinstance(result,list):
-                    messages.append({"type":"function_call_output", "call_id":call.call_id,"output":str(result[0])})
+                if (isinstance(result,set) or isinstance(result,list)) and len(result)==2 and (isinstance(result[1],Artifact) or (isinstance(result[1],list) and all([isinstance(i,Artifact) for i in result[1]]))):
+                    
+                    if isinstance(result[1],list):
+                        message_content = str(result[0]) + "\n" + f" Additionally some data artifacts have been generated with names : {[i.name for i in result[1]]} and descriptions : {[i.description for i in result[1]]} "
+                    else:
+                        message_content = str(result[0]) + "\n" + f" An artifact has been generated with name : {result[1].name} and description : {result[1].description} "
+                    messages.append({"type":"function_call_output", "call_id":call.call_id,"output":message_content})
                     artifacts.append(result[1])
-                messages.append({"type":"function_call_output", "call_id":call.call_id,"output":str(result)})
+                else:
+                    messages.append({"type":"function_call_output", "call_id":call.call_id,"output":str(result)})
         
         if len(artifacts) > 0:
             return messages,artifacts

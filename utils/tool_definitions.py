@@ -23,15 +23,41 @@ send_message_definitions = {
 code_executor_definition = {
         "type":"function",
         "name":"code_executor",
-        "description":"Tool that executes code written by an agent",
+        "description":"Tool that executes code written by an agent using provided artifact names as data inputs.",
         "parameters":{
             "type":"object",
             "properties":{
                 "code":{
                     "type":"string",
-                    "description":"Name of the agent the task needs to be delegated to"
+                    "description":"A string containing python code to be executed"
+                },
+                "artifact_names":{
+                    "type":"array",
+                    "items":{
+                        "type":"string"
+                    },
+                    "description":"A list of artifact names which the code will be executed on"
                 }
             }
         }
     }
+
+code_metadata_generator_definition = {
+        "type":"function",
+        "name":"generate_metadata_for_artifacts",
+        "description":"Tool that generates metadata for a list of artifact names provided to it",
+        "parameters":{
+            "type":"object",
+            "properties":{
+                "artifact_names":{
+                    "type":"array",
+                    "items":{
+                        "type":"string"
+                    },
+                    "description":"A list of artifact names to generate metadata for"
+                }
+            }
+        }
+    }
+
 
