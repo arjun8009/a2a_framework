@@ -14,3 +14,4 @@ gunicorn
 geopandas
 folium
 tabulate
+osdatahub
