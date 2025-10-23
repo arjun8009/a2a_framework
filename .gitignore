@@ -4,3 +4,6 @@ a2a/__pycache__/*
 *.pyc
 message_store/*
 artifacts/*
+*.pkl
+utils/__pycache__/*
+artifacts/*
