@@ -99,7 +99,7 @@ class Agent():
 
                 result = self.tools[call.name](**args)
 
-                # Assuming that the results of the agent will be a list consisting of output and the data. Output will be a description of what it has found
+                # Assuming that the results of the agent will be a list consisting of output and the data. Output will be a description of what it has found. Aritfact can be an object or a list of objects
                 if (isinstance(result,set) or isinstance(result,list)) and len(result)==2 and (isinstance(result[1],Artifact) or (isinstance(result[1],list) and all([isinstance(i,Artifact) for i in result[1]]))):
                     
                     if isinstance(result[1],list):

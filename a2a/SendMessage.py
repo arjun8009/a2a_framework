@@ -17,6 +17,7 @@ class SendMessage():
 
         self.task = task
         self.agent=agent
+    
 
 
     def send_messages(self):

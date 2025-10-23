@@ -4,11 +4,11 @@ import numpy as np
 from a2a.Task import Task
 from a2a.SendMessage import SendMessage
 from a2a.Artifact import Artifact
+from a2a.Messages import Messages
 import uuid
 import warnings
 import joblib
 import os
-
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
 
@@ -36,21 +36,42 @@ def send_message(**kwargs):
     agent = agents[agent_names.index(target)]
 
 
-
+    # Make a set of messages and then create a task object
     messages_list = [{"role":"user","content":task_description}]
-    task = Task(messages=messages_list,task_id=uuid.uuid4())
+    task_id = source + "^" + target + "^" + str(uuid.uuid4())
+
+    # save the messages to the message store or update existing messages and then save
+    message_obj = Messages(messages=messages_list,task_id=task_id)
+    message_obj.add_or_update_messages()
+
+    messages_list = message_obj.get_messages()
+
+    # Filter messages to last 10 only to avoid token overload
+    if len(messages_list) > 10:
+        messages_list = messages_list[-10:]
+
+    task = Task(messages=messages_list,task_id=task_id)
+    print("Messages being sent to agent", messages_list)
 
     output = SendMessage(task,agent).send_messages()
 
 
     if output.task_status == "success":
+        
+        # Storing the updated messages again in the message store with output from the agent
         if output.task_artifact is not None:
-            return [output.task_output + f"Addtionally some data artifacts have been generated with names  {[i.name for i in output.task_artifact]} and \n descriptions {[i.description for i in output.task_artifact]}" , output.task_artifact]
+            output_msg = output.task_output + f"Addtionally some data artifacts have been generated with names  {[i.name for i in output.task_artifact]} and \n descriptions {[i.description for i in output.task_artifact]}" 
+            message_obj.add_messages([{"role":"assistant","content":output_msg}])
+            return [output_msg , output.task_artifact]
+
         else:
+            message_obj.add_messages([{"role":"assistant","content":str(output.task_output)}])
             return output.task_output
+        
 
     else:
         warnings.warn(f"Error encountered in sending message from {source} to {target} : ")
+        message_obj.add_messages([{"role":"assistant","content":str(output.task_output)}])
         return output.task_output
 
 
@@ -98,7 +119,7 @@ def code_executor(**kwargs):
         function_name = [name for name in namespace if callable(namespace[name])][-1]
         print("function name",function_name)
         output = namespace[function_name](data=data)
-        print("code executed, output generated",output)
+        #print("code executed, output generated",output)
         # We are assuming that the output of the coding agent will be  a list of 4 things [summary of output, artifact name, artifact description, artifact data ], None if no artifact
         if isinstance(output,list):
 
