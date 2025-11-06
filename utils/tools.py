@@ -22,7 +22,9 @@ def call_os_ngd(**kwargs):
         output:
         The data fetched from the os ngd database in the form of a geopandas dataframe as an artifact and a summary of the data fetched'''
     
-    if kwargs["ngd_name"] == "Address":
+    
+    
+    if kwargs["ngd_name"] == "address" or kwargs["ngd_name"] =="buildings":
         
         # Make the params dynamically, We are only searching addresses with terms so filters will be None and terms will be not None
         if kwargs["terms"] is not None:
@@ -34,21 +36,24 @@ def call_os_ngd(**kwargs):
 
         result =  query_address_and_buildings(address_or_building=address_or_buildings,name_or_theme=search_terms,bbox=kwargs["bbox"])
     
-    if kwargs["ngd_name"] == "Named Area":
+    if kwargs["ngd_name"] == "named_area":
         search_terms = kwargs["terms"]
         result =  query_named_area(search_areas=search_terms)
     
-    if len(result) > 0:
+    if result is not None and len(result) > 0:
         artifact = Artifact(name=f"""{kwargs["ngd_name"]}_search_results""", description="A concatenated geopandas dataframe containing multiple results per search. Filter it if required",
                          data=result)
         joblib.dump(artifact, f"./artifacts/{artifact.name}.pkl")
-        return ["Multiple search results have been found for each of your search terms. Please filter them as you seem fit",
+        print("Multiple search results have been found for each of your search terms. Please filter them as you seem fit. Also if you had asked for bbox then the bbox has been applied. You can skip bbox join")
+        return ["Multiple search results have been found for each of your search terms. Please filter them as you seem fit. Also if you had asked for bbox then the bbox has been applied. You can skip bbox join",
                 artifact]
     
-    if len(result) == 0:
+    if result is not None and len(result) == 0:
+        print("No results found")
         return "No results found for your search terms "
     else:
-        return "some error occured"
+        print("some error occured in os ngd")
+        return "some error occured. Make sure that you cannot use a point as bbox and search within a point"
 
 def send_message(**kwargs):
     
@@ -86,7 +91,6 @@ def send_message(**kwargs):
         messages_list = messages_list[-10:]
 
     task = Task(messages=messages_list,task_id=task_id)
-    print("Messages being sent to agent", messages_list)
 
     output = SendMessage(task,agent).send_messages()
 
@@ -129,6 +133,22 @@ def generate_metadata_for_artifacts(**kwargs):
     filenames = [df.name for df in artifacts]  
     return columns,first_five_rows,filenames
 
+def generate_metadata_for_all_artifacts():
+
+    '''Function to generate metadata for artifacts passed to it
+    args:
+        1. artifact_names : A list of artifact names to generate metadata for
+    output:
+        1. columns : A list of columns for each artifact
+        2. first_five_rows : A list of dataframes containing first five rows of each artifac
+        3. filenames : filename of each artifact'''
+    
+
+    artifacts = [joblib.load(f"./artifacts/{name}") for name in os.listdir("./artifacts/")]
+    print("artifacts loaded for metadata generation", [i.name for i in artifacts])
+    names = [i.name for i in artifacts]
+    description = [i.description for i in artifacts]
+    return names,description
 
 
 
@@ -154,7 +174,6 @@ def code_executor(**kwargs):
         function_name = [name for name in namespace if callable(namespace[name])][-1]
         print("function name",function_name)
         output = namespace[function_name](data=data)
-        #print("code executed, output generated",output)
         # We are assuming that the output of the coding agent will be  a list of 4 things [summary of output, artifact name, artifact description, artifact data ], None if no artifact
         if isinstance(output,list):
 

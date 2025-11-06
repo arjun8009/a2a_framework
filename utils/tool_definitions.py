@@ -60,6 +60,13 @@ code_metadata_generator_definition = {
         }
     }
 
+metadata_all_artifacts = {
+        "type":"function",
+        "name":"generate_metadata_for_all_artifacts",
+        "description":"Tool that generates metadata for all artifacts so you can tell the agents what artifacts to use correctly",
+    }
+
+
 
 os_ngd_tool_description = {
         "type":"function",
@@ -68,11 +75,6 @@ os_ngd_tool_description = {
         "parameters":{
             "type":"object",
             "properties":{
-                "ngd_name":{
-                    "type":"string",
-                    "description":"Name of os ngd to search in can be Address, Named Area",
-                    "enum":["Address","Named Area"]
-                },
                 "terms":{
                     "type":["array","null"],
                     "description":"A list of strings containing exact search terms.",
@@ -92,6 +94,5 @@ os_ngd_tool_description = {
                     "description":"bbox tells the tool to search within an artifact polygon. So an artifact of an area maybe stored and you can give the name of the artifact to search within"
                 }
             },
-            "required":["ngd_name"]
         }
     }

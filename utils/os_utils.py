@@ -114,35 +114,38 @@ def query_address_and_buildings(address_or_building : bool, name_or_theme:list, 
         1. A geopandas dataframe
     '''    
 
-    all_results = []
+    try:
+        all_results = []
 
-    # initialize all apis here
-    places_api = PlacesAPI(key=os.getenv("OSNDG_API_KEY"))
-    ngd = NGD(key=os.getenv("OSNDG_API_KEY"),collection="bld-fts-building-3")
-    
-    if bbox is not None:
-        bbox = generate_extent_from_artifact(bbox)
+        # initialize all apis here
+        places_api = PlacesAPI(key=os.getenv("OSNDG_API_KEY"))
+        ngd = NGD(key=os.getenv("OSNDG_API_KEY"),collection="bld-fts-building-3")
         
-    # if address begins
-    if address_or_building:
+        if bbox is not None:
+            bbox = generate_extent_from_artifact(bbox)
+            
+        # if address begins
+        if address_or_building:
 
-        # check for extent
-        if not bbox:
-            # find search if not extent
-            all_results = [gpd.GeoDataFrame.from_features(places_api.find(i)["features"]) for i in name_or_theme]
-        
+            # check for extent
+            if not bbox:
+                # find search if not extent
+                all_results = [gpd.GeoDataFrame.from_features(places_api.find(i)["features"]) for i in name_or_theme]
+            
+            else:
+                # searching with specific terms is not supported within extent, search with logical codes but if we want to search specific things then codes dont matter so search within extent and let coding agent do its work
+                all_results = [gpd.GeoDataFrame.from_features(places_api.query(extent=bbox,limit=1000)["features"])]
         else:
-            # searching with specific terms is not supported within extent, search with logical codes but if we want to search specific things then codes dont matter so search within extent and let coding agent do its work
-            all_results = [gpd.GeoDataFrame.from_features(places_api.query(extent=bbox,limit=1000)["features"])]
-    else:
 
-        if not bbox:
-            # search using description filters
-            all_results = [gpd.GeoDataFrame.from_features(ngd.query(cql_filter=f"description = {i}")["features"]) for i in name_or_theme]
+            if not bbox:
+                # search using description filters
+                all_results = [gpd.GeoDataFrame.from_features(ngd.query(cql_filter=f"description = {i}")["features"]) for i in name_or_theme]
+            
+            else:
+                # search using description filters within extent. Later will link this to address using UPRN
+                all_results = [gpd.GeoDataFrame.from_features(ngd.query(extent=bbox, cql_filter=f"description = {i}")["features"]) for i in name_or_theme]
         
-        else:
-            # search using description filters within extent. Later will link this to address using UPRN
-            all_results = [gpd.GeoDataFrame.from_features(ngd.query(extent=bbox, cql_filter=f"description = {i}")["features"]) for i in name_or_theme]
-    
-    all_results = gpd.GeoDataFrame(pd.concat(all_results, ignore_index=True))
-    return all_results
+        all_results = gpd.GeoDataFrame(pd.concat(all_results, ignore_index=True))
+        return all_results
+    except Exception as e:
+        return None

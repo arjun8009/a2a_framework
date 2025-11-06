@@ -1,5 +1,6 @@
 from a2a.Task import Task
 from a2a.Agent import Agent
+import traceback
 
 class SendMessage():
     
@@ -30,7 +31,7 @@ class SendMessage():
             self.task.task_output = output
             self.task.history.append({"role":"assistant","content":str(output)})
         except Exception as e:
-            print(e)
+            traceback.print_exc()
             self.task.task_status = "failure"
             self.task.history.append({"role":"assistant","content":"Something failed"})
 

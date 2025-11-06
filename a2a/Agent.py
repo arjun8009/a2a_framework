@@ -51,10 +51,10 @@ class Agent():
             messages[-1]["content"] = messages[-1]["content"] + f"\n The data artifacts provided to you are : {[i.name for i in self.artifacts_req]} with descriptions {[i.description for i in self.artifacts_req]}"
 
         output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
-        
+        artifacts = None
         attempts = 0
         if hasattr(output,"output"):
-            while(output.output[-1].type=="function_call" and attempts < 4):
+            while(output.output[-1].type=="function_call" and attempts < 25):
                 fn_calls = [i for i in output.output if i.type=="function_call"]
 
                 # running of tools without multithreading
@@ -65,7 +65,7 @@ class Agent():
         if hasattr(output,"output_text"):
             return output.output_text,artifacts
         else:
-            return output
+            return output,None
     
     def run_tools(self,messages,fn_calls):
 
@@ -89,6 +89,9 @@ class Agent():
             if call.name in tool_names:
                 print(f"Calling tool {call.name} with args : {args}")
                 
+                if call.name == "call_os_ngd":
+                    args["ngd_name"] = self.agent_identity.agent_name
+
                 if call.name == "send_message":
                     args["agents"] = self.available_agents
                     args["source"] = self.agent_identity.agent_name
@@ -99,15 +102,19 @@ class Agent():
 
                 result = self.tools[call.name](**args)
 
+
+
                 # Assuming that the results of the agent will be a list consisting of output and the data. Output will be a description of what it has found. Aritfact can be an object or a list of objects
                 if (isinstance(result,set) or isinstance(result,list)) and len(result)==2 and (isinstance(result[1],Artifact) or (isinstance(result[1],list) and all([isinstance(i,Artifact) for i in result[1]]))):
                     
                     if isinstance(result[1],list):
                         message_content = str(result[0]) + "\n" + f" Additionally some data artifacts have been generated with names : {[i.name for i in result[1]]} and descriptions : {[i.description for i in result[1]]} "
+                        artifacts = [i for i in result[1]]
                     else:
                         message_content = str(result[0]) + "\n" + f" An artifact has been generated with name : {result[1].name} and description : {result[1].description} "
+                        artifacts.append(result[1])
                     messages.append({"type":"function_call_output", "call_id":call.call_id,"output":message_content})
-                    artifacts.append(result[1])
+                    
                 else:
                     messages.append({"type":"function_call_output", "call_id":call.call_id,"output":str(result)})
         
