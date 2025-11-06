@@ -61,3 +61,37 @@ code_metadata_generator_definition = {
     }
 
 
+os_ngd_tool_description = {
+        "type":"function",
+        "name":"call_os_ngd",
+        "description":"Tool that search os ngd and returns close results based on query but is not fully accurate",
+        "parameters":{
+            "type":"object",
+            "properties":{
+                "ngd_name":{
+                    "type":"string",
+                    "description":"Name of os ngd to search in can be Address, Named Area",
+                    "enum":["Address","Named Area"]
+                },
+                "terms":{
+                    "type":["array","null"],
+                    "description":"A list of strings containing exact search terms.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "filters":{
+                    "type":["array","null"],
+                    "items":{
+                        "type":"string"
+                    },
+                    "description":"A list of predefined filters provided"
+                },
+                "bbox":{
+                    "type":["string","null"],
+                    "description":"bbox tells the tool to search within an artifact polygon. So an artifact of an area maybe stored and you can give the name of the artifact to search within"
+                }
+            },
+            "required":["ngd_name"]
+        }
+    }

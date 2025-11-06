@@ -25,7 +25,6 @@ class SendMessage():
         try:
             output,artifact = self.agent.run_agent(self.task.history)
             if artifact is not None:
-                
                 self.task.task_artifact = artifact
             self.task.task_status = "success"
             self.task.task_output = output

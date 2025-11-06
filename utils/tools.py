@@ -5,6 +5,7 @@ from a2a.Task import Task
 from a2a.SendMessage import SendMessage
 from a2a.Artifact import Artifact
 from a2a.Messages import Messages
+from utils.os_utils import *
 import uuid
 import warnings
 import joblib
@@ -12,8 +13,42 @@ import os
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
 
-def call_os_ngd():
-    return None
+def call_os_ngd(**kwargs):
+    '''This is a single tool for calling os ngd data base. It checks which agent is calling it and calls that particular ngd
+    args:
+        1. Different args based on different ngd features
+        2. ngd_name : mandatory name of the ngd to call
+
+        output:
+        The data fetched from the os ngd database in the form of a geopandas dataframe as an artifact and a summary of the data fetched'''
+    
+    if kwargs["ngd_name"] == "Address":
+        
+        # Make the params dynamically, We are only searching addresses with terms so filters will be None and terms will be not None
+        if kwargs["terms"] is not None:
+            address_or_buildings = True
+            search_terms = kwargs["terms"]
+        else:
+            address_or_buildings = False
+            search_terms = kwargs["terms"]
+
+        result =  query_address_and_buildings(address_or_building=address_or_buildings,name_or_theme=search_terms,bbox=kwargs["bbox"])
+    
+    if kwargs["ngd_name"] == "Named Area":
+        search_terms = kwargs["terms"]
+        result =  query_named_area(search_areas=search_terms)
+    
+    if len(result) > 0:
+        artifact = Artifact(name=f"""{kwargs["ngd_name"]}_search_results""", description="A concatenated geopandas dataframe containing multiple results per search. Filter it if required",
+                         data=result)
+        joblib.dump(artifact, f"./artifacts/{artifact.name}.pkl")
+        return ["Multiple search results have been found for each of your search terms. Please filter them as you seem fit",
+                artifact]
+    
+    if len(result) == 0:
+        return "No results found for your search terms "
+    else:
+        return "some error occured"
 
 def send_message(**kwargs):
     
