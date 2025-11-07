@@ -54,7 +54,7 @@ class Agent():
         artifacts = None
         attempts = 0
         if hasattr(output,"output"):
-            while(output.output[-1].type=="function_call" and attempts < 25):
+            while(output.output[-1].type=="function_call" and attempts < 50):
                 fn_calls = [i for i in output.output if i.type=="function_call"]
 
                 # running of tools without multithreading

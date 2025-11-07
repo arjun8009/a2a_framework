@@ -41,11 +41,11 @@ def call_os_ngd(**kwargs):
         result =  query_named_area(search_areas=search_terms)
     
     if result is not None and len(result) > 0:
-        artifact = Artifact(name=f"""{kwargs["ngd_name"]}_search_results""", description="A concatenated geopandas dataframe containing multiple results per search. Filter it if required",
+        artifact = Artifact(name=f"""{kwargs["ngd_name"]}_search_results""", description="A concatenated geopandas dataframe containing multiple results per search found within the bbox if requested so assume all points are in the bbox. Filter it if required",
                          data=result)
         joblib.dump(artifact, f"./artifacts/{artifact.name}.pkl")
         print("Multiple search results have been found for each of your search terms. Please filter them as you seem fit. Also if you had asked for bbox then the bbox has been applied. You can skip bbox join")
-        return ["Multiple search results have been found for each of your search terms. Please filter them as you seem fit. Also if you had asked for bbox then the bbox has been applied. You can skip bbox join",
+        return ["Multiple search results have been found for each of your search terms. Please filter them as you seem fit. Also if you had asked for bbox then the search results have been found within the bbox so further filter will not require the bbox",
                 artifact]
     
     if result is not None and len(result) == 0:
@@ -90,6 +90,7 @@ def send_message(**kwargs):
     if len(messages_list) > 10:
         messages_list = messages_list[-10:]
 
+    print(f"Messages sent to agent {target}", messages_list)
     task = Task(messages=messages_list,task_id=task_id)
 
     output = SendMessage(task,agent).send_messages()

@@ -134,7 +134,8 @@ def query_address_and_buildings(address_or_building : bool, name_or_theme:list, 
             
             else:
                 # searching with specific terms is not supported within extent, search with logical codes but if we want to search specific things then codes dont matter so search within extent and let coding agent do its work
-                all_results = [gpd.GeoDataFrame.from_features(places_api.query(extent=bbox,limit=1000)["features"])]
+                #all_results = [gpd.GeoDataFrame.from_features(places_api.find(i)["features"]) for i in name_or_theme]
+                all_results = [gpd.GeoDataFrame.from_features(places_api.query(extent=bbox,limit=2500)["features"])]
         else:
 
             if not bbox:

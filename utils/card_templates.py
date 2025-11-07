@@ -53,6 +53,7 @@ plotting_agent_card = AgentCard(agent_name="plotting_agent",
 
 coding_agent_details = AgentCard(agent_name="data_analysis_agent",
                                     agent_description="It is a useful agent that can perform data analysis on a given data set and provide insights",
-                                    capabilities=["Given a dataset, it can perform various data analysis tasks like summarization, statistical analysis, visualization etc."],
+                                    capabilities=["Given a dataset, it can perform various data analysis tasks like summarization, statistical analysis, visualization etc."
+                                                  "Cannot search for point in 1 artifact using another."],
                                     input_modes=["task in str with the filenames provided to analyse data"],
                                     output_modes=["str","list out outputs including summaries, artifacts like plots and data files and their name and description"])
