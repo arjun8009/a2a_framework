@@ -2,6 +2,7 @@ from utils.llms import *
 from a2a.AgentCard import AgentCard
 from a2a.Artifact import Artifact
 from pydantic import BaseModel
+import requests
 
 class Agent():
 
@@ -80,6 +81,8 @@ class Agent():
             updated_messages : A list of updated messages with stringified outputs'''
         
         artifacts = []
+        interaction = {}
+        interaction_sent = False
         for call in fn_calls:
             messages.append(call)
             args = json.loads(call.arguments)
@@ -95,6 +98,10 @@ class Agent():
                 if call.name == "send_message":
                     args["agents"] = self.available_agents
                     args["source"] = self.agent_identity.agent_name
+                    # visualisation only
+                    interaction = {"source":args["source"], "target":args["target"], "msg":args["task_description"]}
+                    requests.post("http://localhost:5000/interact",json=interaction)
+
                 
                 # If we need to provide raw data to the llm to code
                 if self.artifacts_req is not None:
@@ -117,6 +124,8 @@ class Agent():
                     
                 else:
                     messages.append({"type":"function_call_output", "call_id":call.call_id,"output":str(result)})
+        
+                
         
         if len(artifacts) > 0:
             return messages,artifacts

@@ -15,3 +15,4 @@ geopandas
 folium
 tabulate
 osdatahub
+flask_socketio

@@ -10,6 +10,13 @@ host_agent_card = AgentCard(agent_name="host_agent",
                             input_modes=["query:string"],
                             output_modes=["output:string"])
 
+planning_agent_card = AgentCard(agent_name="planning_agent",
+                            agent_description="A geospatial planning agent",
+                            capabilities=["Provides a sequence of steps to solve the queries"],
+                            input_modes=["query:string"],
+                            output_modes=["output:string"])
+
+
 address_agent_card = AgentCard(agent_name="address",
                                agent_description="a search agent for ordance surveys address database within an area, Given a query you will try to find relevant addresses or places given a name of a place or address. Artifacts are points",
                                capabilities=["1. Given a place name or address name and the artifact name of where to search, it will search places in an area",

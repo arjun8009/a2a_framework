@@ -10,6 +10,7 @@ import uuid
 import warnings
 import joblib
 import os
+import requests
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
 
@@ -94,7 +95,7 @@ def send_message(**kwargs):
     task = Task(messages=messages_list,task_id=task_id)
 
     output = SendMessage(task,agent).send_messages()
-
+    
 
     if output.task_status == "success":
         

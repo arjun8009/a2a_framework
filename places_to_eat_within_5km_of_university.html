@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_dd7fbaf02bb75cc332b9df46a957d1e3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_dd7fbaf02bb75cc332b9df46a957d1e3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_dd7fbaf02bb75cc332b9df46a957d1e3 = L.map(
+                "map_dd7fbaf02bb75cc332b9df46a957d1e3",
+                {
+                    center: [50.735895032495414, -3.530008980485363],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f52ed2fefd4b80e9e106283151fa84d2 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f52ed2fefd4b80e9e106283151fa84d2.addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var marker_fae3578ba7c5d7841d5d95accd175b2a = L.marker(
+                [50.735895032495414, -3.530008980485363],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_ca627f6882a9de310faf3542b781405b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "university",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6965c34a01890fb780cf6fc85fc874f2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dea0f98ecfd36ff86e4ac88e7a584c39 = $(`<div id="html_dea0f98ecfd36ff86e4ac88e7a584c39" style="width: 100.0%; height: 100.0%;">University of Exeter</div>`)[0];
+                popup_6965c34a01890fb780cf6fc85fc874f2.setContent(html_dea0f98ecfd36ff86e4ac88e7a584c39);
+            
+        
+
+        marker_fae3578ba7c5d7841d5d95accd175b2a.bindPopup(popup_6965c34a01890fb780cf6fc85fc874f2)
+        ;
+
+        
+    
+    
+                marker_fae3578ba7c5d7841d5d95accd175b2a.setIcon(icon_ca627f6882a9de310faf3542b781405b);
+            
+    
+        function geo_json_897e55007ec4ef98b15231fbc15262d5_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"color": "blue", "fillColor": "blue", "fillOpacity": 0.1, "weight": 2};
+            }
+        }
+
+        function geo_json_897e55007ec4ef98b15231fbc15262d5_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_897e55007ec4ef98b15231fbc15262d5 = L.geoJson(null, {
+                onEachFeature: geo_json_897e55007ec4ef98b15231fbc15262d5_onEachFeature,
+            
+                style: geo_json_897e55007ec4ef98b15231fbc15262d5_styler,
+            ...{
+}
+        });
+
+        function geo_json_897e55007ec4ef98b15231fbc15262d5_add (data) {
+            geo_json_897e55007ec4ef98b15231fbc15262d5
+                .addData(data);
+        }
+            geo_json_897e55007ec4ef98b15231fbc15262d5_add({"features": [{"geometry": {"coordinates": [[[-3.4850932162793873, 50.73589503249542], [-3.485309497960766, 50.73310861585958], [-3.48595626009408, 50.73034887056073], [-3.4870272740064276, 50.727642381520745], [-3.4885122252483587, 50.72501522518549], [-3.4903968129276564, 50.72249271795347], [-3.4926628874347476, 50.720099171771615], [-3.4952886252333677, 50.717857659274536], [-3.4982487390331416, 50.71578979075708], [-3.501514721320014, 50.71391550515987], [-3.5050551188991954, 50.7122528771148], [-3.50883583580662, 50.71081794194502], [-3.512820461671719, 50.7096245403401], [-3.5169706223691937, 50.70868418423715], [-3.521246349582819, 50.7080059452308], [-3.5256064657221766, 50.70759636661494], [-3.530008980485363, 50.70745939992584], [-3.5344114952485497, 50.70759636661494], [-3.538771611387908, 50.7080059452308], [-3.543047338601533, 50.70868418423715], [-3.5471974992990076, 50.7096245403401], [-3.5511821251641065, 50.71081794194502], [-3.5549628420715313, 50.7122528771148], [-3.5585032396507126, 50.71391550515987], [-3.561769221937585, 50.71578979075708], [-3.5647293357373586, 50.717857659274536], [-3.567355073535979, 50.720099171771615], [-3.5696211480430704, 50.72249271795347], [-3.571505735722368, 50.72501522518549], [-3.5729906869642987, 50.727642381520745], [-3.574061700876647, 50.73034887056073], [-3.5747084630099604, 50.73310861585958], [-3.5749247446913395, 50.73589503249542], [-3.5747084630099604, 50.738681283369196], [-3.574061700876647, 50.74144053775196], [-3.5729906869642987, 50.74414622958751], [-3.571505735722368, 50.74677231306608], [-3.5696211480430704, 50.74929351301845], [-3.567355073535979, 50.75168556773575], [-3.5647293357373586, 50.7539254618995], [-3.561769221937585, 50.75599164740649], [-3.5585032396507126, 50.75786424999326], [-3.5549628420715313, 50.75952525970506], [-3.5511821251641065, 50.76095870341038], [-3.5471974992990076, 50.76215079773577], [-3.543047338601533, 50.76309008098216], [-3.538771611387908, 50.763767522784164], [-3.5344114952485497, 50.76417661048402], [-3.530008980485363, 50.764313411411074], [-3.5256064657221766, 50.76417661048402], [-3.521246349582819, 50.763767522784164], [-3.5169706223691937, 50.76309008098216], [-3.512820461671719, 50.76215079773577], [-3.50883583580662, 50.76095870341038], [-3.5050551188991954, 50.75952525970506], [-3.501514721320014, 50.75786424999326], [-3.4982487390331416, 50.75599164740649], [-3.4952886252333677, 50.7539254618995], [-3.4926628874347476, 50.75168556773575], [-3.4903968129276564, 50.74929351301845], [-3.4885122252483587, 50.74677231306608], [-3.4870272740064276, 50.74414622958751], [-3.48595626009408, 50.74144053775196], [-3.485309497960766, 50.738681283369196], [-3.4850932162793873, 50.73589503249542]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_897e55007ec4ef98b15231fbc15262d5.addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var marker_74c4d3215adc15f08d8b64511c383dc5 = L.marker(
+                [50.72445658310095, -3.535505399663343],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_93ef18059e512db2f4fbda5d1091185a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8ba22807d0dc649facf22183ccfb1483 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_508f34b2f35736d5888ebe1223b53d24 = $(`<div id="html_508f34b2f35736d5888ebe1223b53d24" style="width: 100.0%; height: 100.0%;">OLIWOOD BARBERS, 18, LOWER NORTH STREET, EXETER, EX4 3ET</div>`)[0];
+                popup_8ba22807d0dc649facf22183ccfb1483.setContent(html_508f34b2f35736d5888ebe1223b53d24);
+            
+        
+
+        marker_74c4d3215adc15f08d8b64511c383dc5.bindPopup(popup_8ba22807d0dc649facf22183ccfb1483)
+        ;
+
+        
+    
+    
+                marker_74c4d3215adc15f08d8b64511c383dc5.setIcon(icon_93ef18059e512db2f4fbda5d1091185a);
+            
+    
+            var marker_1096bac93955ba3bb3a2293345d26354 = L.marker(
+                [50.72346629147016, -3.530797671508462],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_6a7f5c11e48f2c160be9cb4dd9d24879 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3e54b02459f19ac2c3bac54f4b9b80d4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c42f6e3c680a2711321c5c23b8777216 = $(`<div id="html_c42f6e3c680a2711321c5c23b8777216" style="width: 100.0%; height: 100.0%;">BROOK TAVERNER, 43-44, HIGH STREET, EXETER, EX4 3DJ</div>`)[0];
+                popup_3e54b02459f19ac2c3bac54f4b9b80d4.setContent(html_c42f6e3c680a2711321c5c23b8777216);
+            
+        
+
+        marker_1096bac93955ba3bb3a2293345d26354.bindPopup(popup_3e54b02459f19ac2c3bac54f4b9b80d4)
+        ;
+
+        
+    
+    
+                marker_1096bac93955ba3bb3a2293345d26354.setIcon(icon_6a7f5c11e48f2c160be9cb4dd9d24879);
+            
+    
+            var marker_fb3a18f3c4890b3446601fc42062c16a = L.marker(
+                [50.72632122138534, -3.5222479005243916],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_8d81e643ca460814748948d24c72c48d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_97b4bb245c6be9e08601f63daf864d54 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8299741434ef16bb5aa876d93bf7722c = $(`<div id="html_8299741434ef16bb5aa876d93bf7722c" style="width: 100.0%; height: 100.0%;">ROYAL MAIL, DELIVERY OFFICE, 4, BELGRAVE ROAD, EXETER, EX1 2AA</div>`)[0];
+                popup_97b4bb245c6be9e08601f63daf864d54.setContent(html_8299741434ef16bb5aa876d93bf7722c);
+            
+        
+
+        marker_fb3a18f3c4890b3446601fc42062c16a.bindPopup(popup_97b4bb245c6be9e08601f63daf864d54)
+        ;
+
+        
+    
+    
+                marker_fb3a18f3c4890b3446601fc42062c16a.setIcon(icon_8d81e643ca460814748948d24c72c48d);
+            
+    
+            var marker_c0c87bf1a5a867e5ee60247155da3d7b = L.marker(
+                [50.72182707992563, -3.5338351093509175],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_7842067695080bd5908242ad90f8d426 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2548402387c93015faf92eece8c05912 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_991d17a223f35d3a6fd8ad5c4512754b = $(`<div id="html_991d17a223f35d3a6fd8ad5c4512754b" style="width: 100.0%; height: 100.0%;">EX4, 161, FORE STREET, EXETER, EX4 3AT</div>`)[0];
+                popup_2548402387c93015faf92eece8c05912.setContent(html_991d17a223f35d3a6fd8ad5c4512754b);
+            
+        
+
+        marker_c0c87bf1a5a867e5ee60247155da3d7b.bindPopup(popup_2548402387c93015faf92eece8c05912)
+        ;
+
+        
+    
+    
+                marker_c0c87bf1a5a867e5ee60247155da3d7b.setIcon(icon_7842067695080bd5908242ad90f8d426);
+            
+    
+            var marker_38407fc3d41f52e523ed6397d4bf029c = L.marker(
+                [50.73156828713637, -3.5573475137285757],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_f10fa0a966f3a02b1d0009a4f8634576 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_658c4d6bed8eafc92e35786175d92ecc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ebc85433a68f295b531bb84963bba599 = $(`<div id="html_ebc85433a68f295b531bb84963bba599" style="width: 100.0%; height: 100.0%;">89, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_658c4d6bed8eafc92e35786175d92ecc.setContent(html_ebc85433a68f295b531bb84963bba599);
+            
+        
+
+        marker_38407fc3d41f52e523ed6397d4bf029c.bindPopup(popup_658c4d6bed8eafc92e35786175d92ecc)
+        ;
+
+        
+    
+    
+                marker_38407fc3d41f52e523ed6397d4bf029c.setIcon(icon_f10fa0a966f3a02b1d0009a4f8634576);
+            
+    
+            var marker_383ea2dcf07131a2e58455520fe10631 = L.marker(
+                [50.73156734091113, -3.5574183333671137],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_73aeef5081280c9c3390724094517381 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_542666e746636a03a0e6c117c688292b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_31f78ce32ede9ec5952cdcad9bb00e1e = $(`<div id="html_31f78ce32ede9ec5952cdcad9bb00e1e" style="width: 100.0%; height: 100.0%;">91, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_542666e746636a03a0e6c117c688292b.setContent(html_31f78ce32ede9ec5952cdcad9bb00e1e);
+            
+        
+
+        marker_383ea2dcf07131a2e58455520fe10631.bindPopup(popup_542666e746636a03a0e6c117c688292b)
+        ;
+
+        
+    
+    
+                marker_383ea2dcf07131a2e58455520fe10631.setIcon(icon_73aeef5081280c9c3390724094517381);
+            
+    
+            var marker_979c6056387903d0b233a620e8ddf915 = L.marker(
+                [50.73156620538409, -3.557503316928332],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_566b6d944dd966c79675bc63c41a30e1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_25600de8c88e2a52ba1c63a425b0578a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_55159541c67058dd4f952238f83f6dc7 = $(`<div id="html_55159541c67058dd4f952238f83f6dc7" style="width: 100.0%; height: 100.0%;">93, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_25600de8c88e2a52ba1c63a425b0578a.setContent(html_55159541c67058dd4f952238f83f6dc7);
+            
+        
+
+        marker_979c6056387903d0b233a620e8ddf915.bindPopup(popup_25600de8c88e2a52ba1c63a425b0578a)
+        ;
+
+        
+    
+    
+                marker_979c6056387903d0b233a620e8ddf915.setIcon(icon_566b6d944dd966c79675bc63c41a30e1);
+            
+    
+            var marker_629eb7e26ad39a276578a8282a12d779 = L.marker(
+                [50.73156525906424, -3.557574136558489],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_99f8d634389c5d1baaccef3caebd195f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fd71180117e17542eac0823276f87c03 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ab4ed4a0a2375abe378587a4b1a5930e = $(`<div id="html_ab4ed4a0a2375abe378587a4b1a5930e" style="width: 100.0%; height: 100.0%;">95, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_fd71180117e17542eac0823276f87c03.setContent(html_ab4ed4a0a2375abe378587a4b1a5930e);
+            
+        
+
+        marker_629eb7e26ad39a276578a8282a12d779.bindPopup(popup_fd71180117e17542eac0823276f87c03)
+        ;
+
+        
+    
+    
+                marker_629eb7e26ad39a276578a8282a12d779.setIcon(icon_99f8d634389c5d1baaccef3caebd195f);
+            
+    
+            var marker_c9e49e899fa9e27223f22d0b89cdabd8 = L.marker(
+                [50.731564312701416, -3.5576449561848342],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_4c6aa17c1d3de158da49f91eedc6fc5d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a7f598798fbb464b3908d4b3acf9ffd7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_017da9c1ee68c3e5c14dddeb778d7d22 = $(`<div id="html_017da9c1ee68c3e5c14dddeb778d7d22" style="width: 100.0%; height: 100.0%;">97, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_a7f598798fbb464b3908d4b3acf9ffd7.setContent(html_017da9c1ee68c3e5c14dddeb778d7d22);
+            
+        
+
+        marker_c9e49e899fa9e27223f22d0b89cdabd8.bindPopup(popup_a7f598798fbb464b3908d4b3acf9ffd7)
+        ;
+
+        
+    
+    
+                marker_c9e49e899fa9e27223f22d0b89cdabd8.setIcon(icon_4c6aa17c1d3de158da49f91eedc6fc5d);
+            
+    
+            var marker_5648a5ce6e46a02bc41816a86ce33917 = L.marker(
+                [50.731563177009264, -3.5577299397314217],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_03d4d1ea9bc63d695559bc2d3c53f14f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_72cc4329b4be34da63b836c3f42c9e02 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4354d3c6db6c719648266ba8a2e14f0a = $(`<div id="html_4354d3c6db6c719648266ba8a2e14f0a" style="width: 100.0%; height: 100.0%;">99, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_72cc4329b4be34da63b836c3f42c9e02.setContent(html_4354d3c6db6c719648266ba8a2e14f0a);
+            
+        
+
+        marker_5648a5ce6e46a02bc41816a86ce33917.bindPopup(popup_72cc4329b4be34da63b836c3f42c9e02)
+        ;
+
+        
+    
+    
+                marker_5648a5ce6e46a02bc41816a86ce33917.setIcon(icon_03d4d1ea9bc63d695559bc2d3c53f14f);
+            
+    
+            var marker_40020a881ccafefc3c1a062505319e12 = L.marker(
+                [50.73154093337141, -3.5587211155984377],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_4c14823a7a9c0e2465105de5b0254456 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ab80cb193624b5652669aa2ab514293d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_09120397cb62dce06d77f7441af46982 = $(`<div id="html_09120397cb62dce06d77f7441af46982" style="width: 100.0%; height: 100.0%;">101, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_ab80cb193624b5652669aa2ab514293d.setContent(html_09120397cb62dce06d77f7441af46982);
+            
+        
+
+        marker_40020a881ccafefc3c1a062505319e12.bindPopup(popup_ab80cb193624b5652669aa2ab514293d)
+        ;
+
+        
+    
+    
+                marker_40020a881ccafefc3c1a062505319e12.setIcon(icon_4c14823a7a9c0e2465105de5b0254456);
+            
+    
+            var marker_f4f3396d172c377f9d454cfa60e23e2c = L.marker(
+                [50.731539796895355, -3.5588060990592467],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_d80d2985eb7f6c3c50f7c9740e3b7cb6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0391354cab74e081d3d70059747763f4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_128871b0ab326abadd033092a0e2151d = $(`<div id="html_128871b0ab326abadd033092a0e2151d" style="width: 100.0%; height: 100.0%;">103, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_0391354cab74e081d3d70059747763f4.setContent(html_128871b0ab326abadd033092a0e2151d);
+            
+        
+
+        marker_f4f3396d172c377f9d454cfa60e23e2c.bindPopup(popup_0391354cab74e081d3d70059747763f4)
+        ;
+
+        
+    
+    
+                marker_f4f3396d172c377f9d454cfa60e23e2c.setIcon(icon_d80d2985eb7f6c3c50f7c9740e3b7cb6);
+            
+    
+            var marker_f15a085d2e2e3ad890317783abfb168b = L.marker(
+                [50.73153884978465, -3.5588769186057254],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_a3896da30bb0bebba269e047e4c539a1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a5518816554e8766eac4a210c5756e3d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a5912931baac75dc86c64ba5128a5912 = $(`<div id="html_a5912931baac75dc86c64ba5128a5912" style="width: 100.0%; height: 100.0%;">105, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_a5518816554e8766eac4a210c5756e3d.setContent(html_a5912931baac75dc86c64ba5128a5912);
+            
+        
+
+        marker_f15a085d2e2e3ad890317783abfb168b.bindPopup(popup_a5518816554e8766eac4a210c5756e3d)
+        ;
+
+        
+    
+    
+                marker_f15a085d2e2e3ad890317783abfb168b.setIcon(icon_a3896da30bb0bebba269e047e4c539a1);
+            
+    
+            var marker_fda44a2ed9d1564fc61e3c9b37559c45 = L.marker(
+                [50.73152891331083, -3.558947439667559],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_b885a0ee74faf03715035c7f30117095 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_814840b94a1dc7dff8fa77f5f3e47951 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_339c14866af4944f1d8bb984d461d0eb = $(`<div id="html_339c14866af4944f1d8bb984d461d0eb" style="width: 100.0%; height: 100.0%;">107, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_814840b94a1dc7dff8fa77f5f3e47951.setContent(html_339c14866af4944f1d8bb984d461d0eb);
+            
+        
+
+        marker_fda44a2ed9d1564fc61e3c9b37559c45.bindPopup(popup_814840b94a1dc7dff8fa77f5f3e47951)
+        ;
+
+        
+    
+    
+                marker_fda44a2ed9d1564fc61e3c9b37559c45.setIcon(icon_b885a0ee74faf03715035c7f30117095);
+            
+    
+            var marker_b158c3673586741d5cbc419720fec1f0 = L.marker(
+                [50.73153695543429, -3.559018557687246],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_66838483db440f131c7dcf553b80c4f2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b158ffbd6c208632e40697ba41e6e36d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_26f0f717b41e86edad5d8a2e6be15234 = $(`<div id="html_26f0f717b41e86edad5d8a2e6be15234" style="width: 100.0%; height: 100.0%;">109, KINNERTON WAY, EXETER, EX4 2BL</div>`)[0];
+                popup_b158ffbd6c208632e40697ba41e6e36d.setContent(html_26f0f717b41e86edad5d8a2e6be15234);
+            
+        
+
+        marker_b158c3673586741d5cbc419720fec1f0.bindPopup(popup_b158ffbd6c208632e40697ba41e6e36d)
+        ;
+
+        
+    
+    
+                marker_b158c3673586741d5cbc419720fec1f0.setIcon(icon_66838483db440f131c7dcf553b80c4f2);
+            
+    
+            var marker_ffec9477d56f1b47e33da53dfb7ca9e6 = L.marker(
+                [50.72958472507136, -3.5188821583458068],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_9f35f4316886e95c897a44c8075ffa27 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_80033330025cfe5588934350556a5d7f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_072bd7677ea40983870f0e2eaa554b19 = $(`<div id="html_072bd7677ea40983870f0e2eaa554b19" style="width: 100.0%; height: 100.0%;">14A, SPINNING PATH, BLACKBOY ROAD, EXETER, EX4 6SN</div>`)[0];
+                popup_80033330025cfe5588934350556a5d7f.setContent(html_072bd7677ea40983870f0e2eaa554b19);
+            
+        
+
+        marker_ffec9477d56f1b47e33da53dfb7ca9e6.bindPopup(popup_80033330025cfe5588934350556a5d7f)
+        ;
+
+        
+    
+    
+                marker_ffec9477d56f1b47e33da53dfb7ca9e6.setIcon(icon_9f35f4316886e95c897a44c8075ffa27);
+            
+    
+            var marker_e1198a4236da6693e63e8ed1cf396f3d = L.marker(
+                [50.721068375989816, -3.5366979935837235],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_bbe10bb70d1acfecb5b139bded8dcfe3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e20923eca82c4c790abf9a84c13754ce = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2a6db65df00425bbf17508e3306fc22a = $(`<div id="html_2a6db65df00425bbf17508e3306fc22a" style="width: 100.0%; height: 100.0%;">9, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_e20923eca82c4c790abf9a84c13754ce.setContent(html_2a6db65df00425bbf17508e3306fc22a);
+            
+        
+
+        marker_e1198a4236da6693e63e8ed1cf396f3d.bindPopup(popup_e20923eca82c4c790abf9a84c13754ce)
+        ;
+
+        
+    
+    
+                marker_e1198a4236da6693e63e8ed1cf396f3d.setIcon(icon_bbe10bb70d1acfecb5b139bded8dcfe3);
+            
+    
+            var marker_4f23af295d2b78bb7bb1171d2b81e2be = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_7b6553dcdef501d30e4c760a0bd2f2be = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ba2284eb15b7f54bb16a04100c88ac73 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_840f77e6bf6052fb2ce88a2c8150e7fa = $(`<div id="html_840f77e6bf6052fb2ce88a2c8150e7fa" style="width: 100.0%; height: 100.0%;">FLAT 2, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_ba2284eb15b7f54bb16a04100c88ac73.setContent(html_840f77e6bf6052fb2ce88a2c8150e7fa);
+            
+        
+
+        marker_4f23af295d2b78bb7bb1171d2b81e2be.bindPopup(popup_ba2284eb15b7f54bb16a04100c88ac73)
+        ;
+
+        
+    
+    
+                marker_4f23af295d2b78bb7bb1171d2b81e2be.setIcon(icon_7b6553dcdef501d30e4c760a0bd2f2be);
+            
+    
+            var marker_145cc80ea3d6777cd89a2007f6754150 = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_77445789c28117803dfad9e183236bba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_72b086059c8a8324ffc5ffd7c90b9d2f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a7bf049aa96c97e623dbdde34c7ee87 = $(`<div id="html_0a7bf049aa96c97e623dbdde34c7ee87" style="width: 100.0%; height: 100.0%;">FLAT 3, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_72b086059c8a8324ffc5ffd7c90b9d2f.setContent(html_0a7bf049aa96c97e623dbdde34c7ee87);
+            
+        
+
+        marker_145cc80ea3d6777cd89a2007f6754150.bindPopup(popup_72b086059c8a8324ffc5ffd7c90b9d2f)
+        ;
+
+        
+    
+    
+                marker_145cc80ea3d6777cd89a2007f6754150.setIcon(icon_77445789c28117803dfad9e183236bba);
+            
+    
+            var marker_bdd5a6649dd2254921d258f37648fbee = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_d49f35cc9a74c287cf0e3d83781f0862 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b3487b92ec2ab18fcefb6cddf2223c5c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2ce4412aeafbc2f308d8b56f1680b1cc = $(`<div id="html_2ce4412aeafbc2f308d8b56f1680b1cc" style="width: 100.0%; height: 100.0%;">FLAT 4, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_b3487b92ec2ab18fcefb6cddf2223c5c.setContent(html_2ce4412aeafbc2f308d8b56f1680b1cc);
+            
+        
+
+        marker_bdd5a6649dd2254921d258f37648fbee.bindPopup(popup_b3487b92ec2ab18fcefb6cddf2223c5c)
+        ;
+
+        
+    
+    
+                marker_bdd5a6649dd2254921d258f37648fbee.setIcon(icon_d49f35cc9a74c287cf0e3d83781f0862);
+            
+    
+            var marker_eb5610fa425f65166886cf38bac4d737 = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_a5d87a21af3d2363ae77a483c4cbbec5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d51f7d3f4abbff7f5f915e67cf6d6e29 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eca49fd4b94a70b92fb73adc97383320 = $(`<div id="html_eca49fd4b94a70b92fb73adc97383320" style="width: 100.0%; height: 100.0%;">FLAT 5, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_d51f7d3f4abbff7f5f915e67cf6d6e29.setContent(html_eca49fd4b94a70b92fb73adc97383320);
+            
+        
+
+        marker_eb5610fa425f65166886cf38bac4d737.bindPopup(popup_d51f7d3f4abbff7f5f915e67cf6d6e29)
+        ;
+
+        
+    
+    
+                marker_eb5610fa425f65166886cf38bac4d737.setIcon(icon_a5d87a21af3d2363ae77a483c4cbbec5);
+            
+    
+            var marker_8ade594156acd2de8bdd7ae348251a17 = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_e1d9df33670da945ebfa41f167ae6b2c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0f2a4f7e6bfc4ed6483dadcf22e5343f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_77d2c37df32839c72865e04da4f1d811 = $(`<div id="html_77d2c37df32839c72865e04da4f1d811" style="width: 100.0%; height: 100.0%;">FLAT 6, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_0f2a4f7e6bfc4ed6483dadcf22e5343f.setContent(html_77d2c37df32839c72865e04da4f1d811);
+            
+        
+
+        marker_8ade594156acd2de8bdd7ae348251a17.bindPopup(popup_0f2a4f7e6bfc4ed6483dadcf22e5343f)
+        ;
+
+        
+    
+    
+                marker_8ade594156acd2de8bdd7ae348251a17.setIcon(icon_e1d9df33670da945ebfa41f167ae6b2c);
+            
+    
+            var marker_38e4ca1dbe2c8539afb7993cb747e8d4 = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_268a7e54604d8cb3f989d86d1f7d0f34 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5e9405322379b20f54b8efc39f14b054 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dbc2ba23d437c324d83d7bceca6a58c0 = $(`<div id="html_dbc2ba23d437c324d83d7bceca6a58c0" style="width: 100.0%; height: 100.0%;">FLAT 7, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_5e9405322379b20f54b8efc39f14b054.setContent(html_dbc2ba23d437c324d83d7bceca6a58c0);
+            
+        
+
+        marker_38e4ca1dbe2c8539afb7993cb747e8d4.bindPopup(popup_5e9405322379b20f54b8efc39f14b054)
+        ;
+
+        
+    
+    
+                marker_38e4ca1dbe2c8539afb7993cb747e8d4.setIcon(icon_268a7e54604d8cb3f989d86d1f7d0f34);
+            
+    
+            var marker_a5885626ef64bcebb04deb693bd579ef = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_6b4fb1848d0f771b631e27ed7ccef2fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eb0ef0e0eea371c81c0ae5bd528b145d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8673d47723b0276ffb396e725c74f217 = $(`<div id="html_8673d47723b0276ffb396e725c74f217" style="width: 100.0%; height: 100.0%;">FLAT 8, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_eb0ef0e0eea371c81c0ae5bd528b145d.setContent(html_8673d47723b0276ffb396e725c74f217);
+            
+        
+
+        marker_a5885626ef64bcebb04deb693bd579ef.bindPopup(popup_eb0ef0e0eea371c81c0ae5bd528b145d)
+        ;
+
+        
+    
+    
+                marker_a5885626ef64bcebb04deb693bd579ef.setIcon(icon_6b4fb1848d0f771b631e27ed7ccef2fe);
+            
+    
+            var marker_cd6bb48f0f88625655e76d4f296a2cd2 = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_338c7a6fc31c6e123798e1d1ad8db26d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3b4d9a217b024c046c9d898f0d52fce8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c7fd0d88e0cf941f861442e6cbc3d641 = $(`<div id="html_c7fd0d88e0cf941f861442e6cbc3d641" style="width: 100.0%; height: 100.0%;">FLAT 9, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_3b4d9a217b024c046c9d898f0d52fce8.setContent(html_c7fd0d88e0cf941f861442e6cbc3d641);
+            
+        
+
+        marker_cd6bb48f0f88625655e76d4f296a2cd2.bindPopup(popup_3b4d9a217b024c046c9d898f0d52fce8)
+        ;
+
+        
+    
+    
+                marker_cd6bb48f0f88625655e76d4f296a2cd2.setIcon(icon_338c7a6fc31c6e123798e1d1ad8db26d);
+            
+    
+            var marker_7c36d3d2f030f5033bfa85726c6602ea = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_05f332e3c883851f5615a9e9b371ccd9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2452e2d5f26433da2e98a968b02a3245 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_51ff9543118c4e484a65dcfebf27e4a6 = $(`<div id="html_51ff9543118c4e484a65dcfebf27e4a6" style="width: 100.0%; height: 100.0%;">FLAT 10, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_2452e2d5f26433da2e98a968b02a3245.setContent(html_51ff9543118c4e484a65dcfebf27e4a6);
+            
+        
+
+        marker_7c36d3d2f030f5033bfa85726c6602ea.bindPopup(popup_2452e2d5f26433da2e98a968b02a3245)
+        ;
+
+        
+    
+    
+                marker_7c36d3d2f030f5033bfa85726c6602ea.setIcon(icon_05f332e3c883851f5615a9e9b371ccd9);
+            
+    
+            var marker_2bccfd8434defb928c7529b82eb84e15 = L.marker(
+                [50.72063554719884, -3.536102990600528],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_7096a5e26e2eb6ef0ef245ab72e86213 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f717589522aa7398a2c7d1d43822faf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0342e36f431ead798f60dfdd843fc0ab = $(`<div id="html_0342e36f431ead798f60dfdd843fc0ab" style="width: 100.0%; height: 100.0%;">FLAT 11, 53, BARTHOLOMEW STREET WEST, EXETER, EX4 3AJ</div>`)[0];
+                popup_9f717589522aa7398a2c7d1d43822faf.setContent(html_0342e36f431ead798f60dfdd843fc0ab);
+            
+        
+
+        marker_2bccfd8434defb928c7529b82eb84e15.bindPopup(popup_9f717589522aa7398a2c7d1d43822faf)
+        ;
+
+        
+    
+    
+                marker_2bccfd8434defb928c7529b82eb84e15.setIcon(icon_7096a5e26e2eb6ef0ef245ab72e86213);
+            
+    
+            var marker_fb04cc1d6b7a7e37100fb10c39020bb2 = L.marker(
+                [50.71461445299739, -3.5350845340898087],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_e4fb2f06b5a343ed31593a261b919e2f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_43b492c41de7a8e00b54b8fadb6e63bc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c3f65b869fec1e6d42f9dfe946001407 = $(`<div id="html_c3f65b869fec1e6d42f9dfe946001407" style="width: 100.0%; height: 100.0%;">FULL OF BEANS, THE KIOSK, MATFORD PARK ROAD, MATFORD BUSINESS PARK, MARSH BARTON TRADING ESTATE, EXETER, EX2 8FD</div>`)[0];
+                popup_43b492c41de7a8e00b54b8fadb6e63bc.setContent(html_c3f65b869fec1e6d42f9dfe946001407);
+            
+        
+
+        marker_fb04cc1d6b7a7e37100fb10c39020bb2.bindPopup(popup_43b492c41de7a8e00b54b8fadb6e63bc)
+        ;
+
+        
+    
+    
+                marker_fb04cc1d6b7a7e37100fb10c39020bb2.setIcon(icon_e4fb2f06b5a343ed31593a261b919e2f);
+            
+    
+            var marker_fe1d70ae8f4524e476e4b229126821bd = L.marker(
+                [50.707708231900355, -3.5249789651509467],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_3a76219825f92a68a997bec52f6ba5b5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b84f4f798a175889150b4704478f5f68 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1ff7e655d6815722070b1f8bfc9d566a = $(`<div id="html_1ff7e655d6815722070b1f8bfc9d566a" style="width: 100.0%; height: 100.0%;">U P S LTD, 17A, MARSH GREEN ROAD NORTH, MARSH BARTON TRADING ESTATE, EXETER, EX2 8NY</div>`)[0];
+                popup_b84f4f798a175889150b4704478f5f68.setContent(html_1ff7e655d6815722070b1f8bfc9d566a);
+            
+        
+
+        marker_fe1d70ae8f4524e476e4b229126821bd.bindPopup(popup_b84f4f798a175889150b4704478f5f68)
+        ;
+
+        
+    
+    
+                marker_fe1d70ae8f4524e476e4b229126821bd.setIcon(icon_3a76219825f92a68a997bec52f6ba5b5);
+            
+    
+            var marker_007a169257b203490ed7a4e5a010e301 = L.marker(
+                [50.72388711586341, -3.5289318812668995],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_6b51985966be8f3340e49604df07f9f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6b6e3d674ca24edabcfe9345a613a8ae = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9240d82c18e96388dc988cf522b4a2f1 = $(`<div id="html_9240d82c18e96388dc988cf522b4a2f1" style="width: 100.0%; height: 100.0%;">YO SUSHI, 8, BEDFORD STREET, EXETER, EX1 1LL</div>`)[0];
+                popup_6b6e3d674ca24edabcfe9345a613a8ae.setContent(html_9240d82c18e96388dc988cf522b4a2f1);
+            
+        
+
+        marker_007a169257b203490ed7a4e5a010e301.bindPopup(popup_6b6e3d674ca24edabcfe9345a613a8ae)
+        ;
+
+        
+    
+    
+                marker_007a169257b203490ed7a4e5a010e301.setIcon(icon_6b51985966be8f3340e49604df07f9f3);
+            
+    
+            var marker_46b71966ad7419ae214df2ed8d5be938 = L.marker(
+                [50.72377844548927, -3.5287628633560995],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_74564b969bf594a53b5c961e17090cbf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_58b198f45b07d469f67d34b837fc2cfe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b46fb7b4ccc95a65e2052da8419e718c = $(`<div id="html_b46fb7b4ccc95a65e2052da8419e718c" style="width: 100.0%; height: 100.0%;">COSTA COFFEE, 12, BEDFORD STREET, EXETER, EX1 1LL</div>`)[0];
+                popup_58b198f45b07d469f67d34b837fc2cfe.setContent(html_b46fb7b4ccc95a65e2052da8419e718c);
+            
+        
+
+        marker_46b71966ad7419ae214df2ed8d5be938.bindPopup(popup_58b198f45b07d469f67d34b837fc2cfe)
+        ;
+
+        
+    
+    
+                marker_46b71966ad7419ae214df2ed8d5be938.setIcon(icon_74564b969bf594a53b5c961e17090cbf);
+            
+    
+            var marker_640976073a92735adce8ebccfe3b7597 = L.marker(
+                [50.70921790682534, -3.528174081113656],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_95019feb69e7d5c770aa1fb6644f5b6c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_655f69679069f415c5ad6c8507c86dd5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d8556fda1106e3dfad7fed3a708fdfdc = $(`<div id="html_d8556fda1106e3dfad7fed3a708fdfdc" style="width: 100.0%; height: 100.0%;">COUNTY CHIROPRACTIC, MARSH GREEN ROAD NORTH, MARSH BARTON TRADING ESTATE, EXETER, EX2 8NY</div>`)[0];
+                popup_655f69679069f415c5ad6c8507c86dd5.setContent(html_d8556fda1106e3dfad7fed3a708fdfdc);
+            
+        
+
+        marker_640976073a92735adce8ebccfe3b7597.bindPopup(popup_655f69679069f415c5ad6c8507c86dd5)
+        ;
+
+        
+    
+    
+                marker_640976073a92735adce8ebccfe3b7597.setIcon(icon_95019feb69e7d5c770aa1fb6644f5b6c);
+            
+    
+            var marker_ea639c3a488b2028f530c0bf9687f356 = L.marker(
+                [50.73263826935565, -3.551969865594527],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_5ba4d20794cb9c19682e35eb7e1ffa7d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_342bf2ee4f90749cf87bd4bf5a95ee91 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5ad28bf870308d07415b0fe2538d792d = $(`<div id="html_5ad28bf870308d07415b0fe2538d792d" style="width: 100.0%; height: 100.0%;">15 KINNERTON COURT, KINNERTON WAY, EXETER, EX4 2EZ</div>`)[0];
+                popup_342bf2ee4f90749cf87bd4bf5a95ee91.setContent(html_5ad28bf870308d07415b0fe2538d792d);
+            
+        
+
+        marker_ea639c3a488b2028f530c0bf9687f356.bindPopup(popup_342bf2ee4f90749cf87bd4bf5a95ee91)
+        ;
+
+        
+    
+    
+                marker_ea639c3a488b2028f530c0bf9687f356.setIcon(icon_5ba4d20794cb9c19682e35eb7e1ffa7d);
+            
+    
+            var marker_985f21f794d27adcf0d90a76c39dd12f = L.marker(
+                [50.72009686102086, -3.5362521156606777],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_ef4b8b8549141acfc2220298e27e5541 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_02b7b6cd60b9808681a456c5e9da8459 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a10306d2be45e03c6175d3313b61408d = $(`<div id="html_a10306d2be45e03c6175d3313b61408d" style="width: 100.0%; height: 100.0%;">FLAT 1, CRAWGENT HOUSE, BARTHOLOMEW STREET WEST, EXETER, EX4 3AG</div>`)[0];
+                popup_02b7b6cd60b9808681a456c5e9da8459.setContent(html_a10306d2be45e03c6175d3313b61408d);
+            
+        
+
+        marker_985f21f794d27adcf0d90a76c39dd12f.bindPopup(popup_02b7b6cd60b9808681a456c5e9da8459)
+        ;
+
+        
+    
+    
+                marker_985f21f794d27adcf0d90a76c39dd12f.setIcon(icon_ef4b8b8549141acfc2220298e27e5541);
+            
+    
+            var marker_dd232c6fc4f988e1c4d19084f9e45ca9 = L.marker(
+                [50.72009686102086, -3.5362521156606777],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_2f1355b2bb98e2ef1e78cbaed6b2c6cf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_171f475951980aa8e9bd6c135ccc88fa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_247a3a8f4fb122b08e031fdb00c69415 = $(`<div id="html_247a3a8f4fb122b08e031fdb00c69415" style="width: 100.0%; height: 100.0%;">FLAT 2, CRAWGENT HOUSE, BARTHOLOMEW STREET WEST, EXETER, EX4 3AG</div>`)[0];
+                popup_171f475951980aa8e9bd6c135ccc88fa.setContent(html_247a3a8f4fb122b08e031fdb00c69415);
+            
+        
+
+        marker_dd232c6fc4f988e1c4d19084f9e45ca9.bindPopup(popup_171f475951980aa8e9bd6c135ccc88fa)
+        ;
+
+        
+    
+    
+                marker_dd232c6fc4f988e1c4d19084f9e45ca9.setIcon(icon_2f1355b2bb98e2ef1e78cbaed6b2c6cf);
+            
+    
+            var marker_195816e87833c97e6251b7afffccce5b = L.marker(
+                [50.72009686102086, -3.5362521156606777],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_7af9b38eb4a746230005251f85b68df6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_20e657f1c5e65dcf74dd6b9a8507383d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7062e5b3f36634b63064b896f232c54d = $(`<div id="html_7062e5b3f36634b63064b896f232c54d" style="width: 100.0%; height: 100.0%;">FLAT 3, CRAWGENT HOUSE, BARTHOLOMEW STREET WEST, EXETER, EX4 3AG</div>`)[0];
+                popup_20e657f1c5e65dcf74dd6b9a8507383d.setContent(html_7062e5b3f36634b63064b896f232c54d);
+            
+        
+
+        marker_195816e87833c97e6251b7afffccce5b.bindPopup(popup_20e657f1c5e65dcf74dd6b9a8507383d)
+        ;
+
+        
+    
+    
+                marker_195816e87833c97e6251b7afffccce5b.setIcon(icon_7af9b38eb4a746230005251f85b68df6);
+            
+    
+            var marker_2a0e919b6d51db6fccb601ef3e82eeb6 = L.marker(
+                [50.72009686102086, -3.5362521156606777],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_eb49bd2deb35ce5239dea2cb010923f1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3bb7d03a0ea80769fcf9b45f736d2106 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_616fcef6d534f860ec166e1b5d9264c8 = $(`<div id="html_616fcef6d534f860ec166e1b5d9264c8" style="width: 100.0%; height: 100.0%;">FLAT 4, CRAWGENT HOUSE, BARTHOLOMEW STREET WEST, EXETER, EX4 3AG</div>`)[0];
+                popup_3bb7d03a0ea80769fcf9b45f736d2106.setContent(html_616fcef6d534f860ec166e1b5d9264c8);
+            
+        
+
+        marker_2a0e919b6d51db6fccb601ef3e82eeb6.bindPopup(popup_3bb7d03a0ea80769fcf9b45f736d2106)
+        ;
+
+        
+    
+    
+                marker_2a0e919b6d51db6fccb601ef3e82eeb6.setIcon(icon_eb49bd2deb35ce5239dea2cb010923f1);
+            
+    
+            var marker_f9ac64b7b5d16e2d6f8f2875b1c64978 = L.marker(
+                [50.72009686102086, -3.5362521156606777],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_f475c24c0b0b0fca8bf369f5062b7263 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_765dc4f5fcebcfec6cc51977b67ad1ac = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f0080c44c0029caf8b14f2cfc5fb6f89 = $(`<div id="html_f0080c44c0029caf8b14f2cfc5fb6f89" style="width: 100.0%; height: 100.0%;">FLAT 5, CRAWGENT HOUSE, BARTHOLOMEW STREET WEST, EXETER, EX4 3AG</div>`)[0];
+                popup_765dc4f5fcebcfec6cc51977b67ad1ac.setContent(html_f0080c44c0029caf8b14f2cfc5fb6f89);
+            
+        
+
+        marker_f9ac64b7b5d16e2d6f8f2875b1c64978.bindPopup(popup_765dc4f5fcebcfec6cc51977b67ad1ac)
+        ;
+
+        
+    
+    
+                marker_f9ac64b7b5d16e2d6f8f2875b1c64978.setIcon(icon_f475c24c0b0b0fca8bf369f5062b7263);
+            
+    
+            var marker_c653dccdc826d181f347b411224353d2 = L.marker(
+                [50.72009686102086, -3.5362521156606777],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_35f74b1b585db58daf59c1da58aecfec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d7b1347e776d28c07a8ec0c9dad5a5af = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88f9e64c1c997ea7a4619f920c48b7c3 = $(`<div id="html_88f9e64c1c997ea7a4619f920c48b7c3" style="width: 100.0%; height: 100.0%;">FLAT 6, CRAWGENT HOUSE, BARTHOLOMEW STREET WEST, EXETER, EX4 3AG</div>`)[0];
+                popup_d7b1347e776d28c07a8ec0c9dad5a5af.setContent(html_88f9e64c1c997ea7a4619f920c48b7c3);
+            
+        
+
+        marker_c653dccdc826d181f347b411224353d2.bindPopup(popup_d7b1347e776d28c07a8ec0c9dad5a5af)
+        ;
+
+        
+    
+    
+                marker_c653dccdc826d181f347b411224353d2.setIcon(icon_35f74b1b585db58daf59c1da58aecfec);
+            
+    
+            var marker_4b162ff802d88b319ea8e464b2342e36 = L.marker(
+                [50.72159122649034, -3.5359217389559485],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_84857c4dcc10ccdd00b65ff4091bcd2d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5a276acb018f362954b2cf7f4448c854 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c65366d8d896822c95cd3380f612d19d = $(`<div id="html_c65366d8d896822c95cd3380f612d19d" style="width: 100.0%; height: 100.0%;">FLAT 1, 34, BARTHOLOMEW STREET WEST, EXETER, EX4 3BN</div>`)[0];
+                popup_5a276acb018f362954b2cf7f4448c854.setContent(html_c65366d8d896822c95cd3380f612d19d);
+            
+        
+
+        marker_4b162ff802d88b319ea8e464b2342e36.bindPopup(popup_5a276acb018f362954b2cf7f4448c854)
+        ;
+
+        
+    
+    
+                marker_4b162ff802d88b319ea8e464b2342e36.setIcon(icon_84857c4dcc10ccdd00b65ff4091bcd2d);
+            
+    
+            var marker_c045ef24a2b733683217c1a44b81459b = L.marker(
+                [50.709058337687935, -3.528711065631332],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_c0bc4e895e01de7233bec1a4cc97fceb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_455f535903da746bfef70db49dbb138d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3578dc987d1d9ead08b0fbf21a23ecf0 = $(`<div id="html_3578dc987d1d9ead08b0fbf21a23ecf0" style="width: 100.0%; height: 100.0%;">A M S LTD, UNIT 4, 6, MARSH GREEN ROAD NORTH, MARSH BARTON TRADING ESTATE, EXETER, EX2 8NY</div>`)[0];
+                popup_455f535903da746bfef70db49dbb138d.setContent(html_3578dc987d1d9ead08b0fbf21a23ecf0);
+            
+        
+
+        marker_c045ef24a2b733683217c1a44b81459b.bindPopup(popup_455f535903da746bfef70db49dbb138d)
+        ;
+
+        
+    
+    
+                marker_c045ef24a2b733683217c1a44b81459b.setIcon(icon_c0bc4e895e01de7233bec1a4cc97fceb);
+            
+    
+            var marker_e25b7f0bb3af2e597e94a0311bebf84e = L.marker(
+                [50.70893553084328, -3.5289341086388872],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_cb4ed59fd146fa671ae0504b000c611a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_169f7d1161af9ca20e8935ee54e2eeb2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dcfe2ea1f8c3274776b1b370907ece0d = $(`<div id="html_dcfe2ea1f8c3274776b1b370907ece0d" style="width: 100.0%; height: 100.0%;">BUNDL CLOTHING, UNIT 2, 6, MARSH GREEN ROAD NORTH, MARSH BARTON TRADING ESTATE, EXETER, EX2 8NY</div>`)[0];
+                popup_169f7d1161af9ca20e8935ee54e2eeb2.setContent(html_dcfe2ea1f8c3274776b1b370907ece0d);
+            
+        
+
+        marker_e25b7f0bb3af2e597e94a0311bebf84e.bindPopup(popup_169f7d1161af9ca20e8935ee54e2eeb2)
+        ;
+
+        
+    
+    
+                marker_e25b7f0bb3af2e597e94a0311bebf84e.setIcon(icon_cb4ed59fd146fa671ae0504b000c611a);
+            
+    
+            var marker_1f1c78653843d88c16f533e8ef10bd71 = L.marker(
+                [50.70879463183075, -3.527642788530521],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_90bcbc40d0e4dc99e17dd6dfba752d6c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f2cbd399ffe01348baf65625678d62da = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cc7f9294cb2e1ecaae64ca6fc538c3f1 = $(`<div id="html_cc7f9294cb2e1ecaae64ca6fc538c3f1" style="width: 100.0%; height: 100.0%;">DEVON CAR SERVICES, UNIT 4, 8, MARSH GREEN ROAD NORTH, MARSH BARTON TRADING ESTATE, EXETER, EX2 8NY</div>`)[0];
+                popup_f2cbd399ffe01348baf65625678d62da.setContent(html_cc7f9294cb2e1ecaae64ca6fc538c3f1);
+            
+        
+
+        marker_1f1c78653843d88c16f533e8ef10bd71.bindPopup(popup_f2cbd399ffe01348baf65625678d62da)
+        ;
+
+        
+    
+    
+                marker_1f1c78653843d88c16f533e8ef10bd71.setIcon(icon_90bcbc40d0e4dc99e17dd6dfba752d6c);
+            
+    
+            var marker_5c07eb4979000abce9e3a9c444838243 = L.marker(
+                [50.70841961381369, -3.5291991692526223],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_e3f9fe5e43c1686d1d21005a5192f7b4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_edfd3f8360010e9979cc11916496088b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_70a686880a1fb5c98ff4eb43bab24720 = $(`<div id="html_70a686880a1fb5c98ff4eb43bab24720" style="width: 100.0%; height: 100.0%;">LA FABRICO TILE SHOWROOM, 3-4, BRIDFORD ROAD, MARSH BARTON TRADING ESTATE, EXETER, EX2 8QX</div>`)[0];
+                popup_edfd3f8360010e9979cc11916496088b.setContent(html_70a686880a1fb5c98ff4eb43bab24720);
+            
+        
+
+        marker_5c07eb4979000abce9e3a9c444838243.bindPopup(popup_edfd3f8360010e9979cc11916496088b)
+        ;
+
+        
+    
+    
+                marker_5c07eb4979000abce9e3a9c444838243.setIcon(icon_e3f9fe5e43c1686d1d21005a5192f7b4);
+            
+    
+            var marker_77fa4534e2d91fe4bb575ae592fb942f = L.marker(
+                [50.72009686102086, -3.5362521156606777],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_d3e2f817d904f19a6deb583fe11779a4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5be8911fe770ad64ef65d7d3b7b362d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4706004970447d3f8abde0754aa499d2 = $(`<div id="html_4706004970447d3f8abde0754aa499d2" style="width: 100.0%; height: 100.0%;">FLAT 7, CRAWGENT HOUSE, BARTHOLOMEW STREET WEST, EXETER, EX4 3AG</div>`)[0];
+                popup_e5be8911fe770ad64ef65d7d3b7b362d.setContent(html_4706004970447d3f8abde0754aa499d2);
+            
+        
+
+        marker_77fa4534e2d91fe4bb575ae592fb942f.bindPopup(popup_e5be8911fe770ad64ef65d7d3b7b362d)
+        ;
+
+        
+    
+    
+                marker_77fa4534e2d91fe4bb575ae592fb942f.setIcon(icon_d3e2f817d904f19a6deb583fe11779a4);
+            
+    
+            var marker_5f91c714b82d3e560e8a72c86dc4ad64 = L.marker(
+                [50.72441329980488, -3.5307623752706645],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_aec9810c4ba4412e8850755aebc45d44 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e9810ff7def1c9862e1228ff641ea6e0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_08092c16ffda8bcc6fc5961dfe094772 = $(`<div id="html_08092c16ffda8bcc6fc5961dfe094772" style="width: 100.0%; height: 100.0%;">BILLS CAFE, 32-33, GANDY STREET, EXETER, EX4 3LS</div>`)[0];
+                popup_e9810ff7def1c9862e1228ff641ea6e0.setContent(html_08092c16ffda8bcc6fc5961dfe094772);
+            
+        
+
+        marker_5f91c714b82d3e560e8a72c86dc4ad64.bindPopup(popup_e9810ff7def1c9862e1228ff641ea6e0)
+        ;
+
+        
+    
+    
+                marker_5f91c714b82d3e560e8a72c86dc4ad64.setIcon(icon_aec9810c4ba4412e8850755aebc45d44);
+            
+    
+            var marker_f7e2bbc4cc8d1de01ce3427610b67666 = L.marker(
+                [50.72356295524637, -3.5290379287378575],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_265bc4351a9700618b7564f694e93319 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_695ca2c04ddf2ae45bfcb91630e91aeb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_902be718e88223308080a1c0678acd98 = $(`<div id="html_902be718e88223308080a1c0678acd98" style="width: 100.0%; height: 100.0%;">WAGAMAMA, 16, BEDFORD STREET, EXETER, EX1 1LL</div>`)[0];
+                popup_695ca2c04ddf2ae45bfcb91630e91aeb.setContent(html_902be718e88223308080a1c0678acd98);
+            
+        
+
+        marker_f7e2bbc4cc8d1de01ce3427610b67666.bindPopup(popup_695ca2c04ddf2ae45bfcb91630e91aeb)
+        ;
+
+        
+    
+    
+                marker_f7e2bbc4cc8d1de01ce3427610b67666.setIcon(icon_265bc4351a9700618b7564f694e93319);
+            
+    
+            var marker_515381a0d41b8448e09d33e1257b4fee = L.marker(
+                [50.7248246439317, -3.5208841627021443],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_7f128f188b6fbcfd7fe4313bd1183824 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2dca7a105ff16f2f8a83b8772f676963 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f9180dcdee7fb56c6081f9fe01132c7f = $(`<div id="html_f9180dcdee7fb56c6081f9fe01132c7f" style="width: 100.0%; height: 100.0%;">DEE YI, 21A, HEAVITREE ROAD, EXETER, EX1 2LD</div>`)[0];
+                popup_2dca7a105ff16f2f8a83b8772f676963.setContent(html_f9180dcdee7fb56c6081f9fe01132c7f);
+            
+        
+
+        marker_515381a0d41b8448e09d33e1257b4fee.bindPopup(popup_2dca7a105ff16f2f8a83b8772f676963)
+        ;
+
+        
+    
+    
+                marker_515381a0d41b8448e09d33e1257b4fee.setIcon(icon_7f128f188b6fbcfd7fe4313bd1183824);
+            
+    
+            var marker_12c9e5b9cef9f3bc4ef4669255e234a1 = L.marker(
+                [50.72329843886549, -3.5353541925326635],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_54a6b59487f296796f8024975b639581 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4d7645a57be076033c2e460dc380896e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d2d85aac4b164cd00b1631b5ebc5c17a = $(`<div id="html_d2d85aac4b164cd00b1631b5ebc5c17a" style="width: 100.0%; height: 100.0%;">THE CITY WALL HOUSE, BARTHOLOMEW STREET EAST, EXETER, EX4 3BG</div>`)[0];
+                popup_4d7645a57be076033c2e460dc380896e.setContent(html_d2d85aac4b164cd00b1631b5ebc5c17a);
+            
+        
+
+        marker_12c9e5b9cef9f3bc4ef4669255e234a1.bindPopup(popup_4d7645a57be076033c2e460dc380896e)
+        ;
+
+        
+    
+    
+                marker_12c9e5b9cef9f3bc4ef4669255e234a1.setIcon(icon_54a6b59487f296796f8024975b639581);
+            
+    
+            var marker_43ba8f011ec9ba7806c980e42ac89cbf = L.marker(
+                [50.728199355753404, -3.521671173999269],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_950661d96dd81f288673cd910d4fa8a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5c9cb6ec3c0823f7ecdd0b7b923ffcb0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8540c271701b3ecbcae03d4c560df25e = $(`<div id="html_8540c271701b3ecbcae03d4c560df25e" style="width: 100.0%; height: 100.0%;">INOODLE, 114-115, SIDWELL STREET, EXETER, EX4 6RY</div>`)[0];
+                popup_5c9cb6ec3c0823f7ecdd0b7b923ffcb0.setContent(html_8540c271701b3ecbcae03d4c560df25e);
+            
+        
+
+        marker_43ba8f011ec9ba7806c980e42ac89cbf.bindPopup(popup_5c9cb6ec3c0823f7ecdd0b7b923ffcb0)
+        ;
+
+        
+    
+    
+                marker_43ba8f011ec9ba7806c980e42ac89cbf.setIcon(icon_950661d96dd81f288673cd910d4fa8a2);
+            
+    
+            var marker_0ab2ffaba6f065198230d4d778ef8c9d = L.marker(
+                [50.724417106567735, -3.531458432119271],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_007d084b829419830d11cdcaa1d0be14 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9b0533ed706132186a1c1751c094edb9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8238f12576059547759890a3a568e238 = $(`<div id="html_8238f12576059547759890a3a568e238" style="width: 100.0%; height: 100.0%;">CAFFE NERO, 89, QUEEN STREET, EXETER, EX4 3RP</div>`)[0];
+                popup_9b0533ed706132186a1c1751c094edb9.setContent(html_8238f12576059547759890a3a568e238);
+            
+        
+
+        marker_0ab2ffaba6f065198230d4d778ef8c9d.bindPopup(popup_9b0533ed706132186a1c1751c094edb9)
+        ;
+
+        
+    
+    
+                marker_0ab2ffaba6f065198230d4d778ef8c9d.setIcon(icon_007d084b829419830d11cdcaa1d0be14);
+            
+    
+            var marker_79db28dc4f076648bb7fdaf376db818f = L.marker(
+                [50.73926283784067, -3.4972279939707223],
+                {
+}
+            ).addTo(map_dd7fbaf02bb75cc332b9df46a957d1e3);
+        
+    
+            var icon_8f18706f6de4a72c9af299bd5a6c91fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cutlery",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c8e07911c873f21fcb8d8c6bf513a16a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6f4094b7506a24570536fd79c07bac06 = $(`<div id="html_6f4094b7506a24570536fd79c07bac06" style="width: 100.0%; height: 100.0%;">THE DEVON YEOMAN, 156, BEACON LANE, EXETER, EX4 8LX</div>`)[0];
+                popup_c8e07911c873f21fcb8d8c6bf513a16a.setContent(html_6f4094b7506a24570536fd79c07bac06);
+            
+        
+
+        marker_79db28dc4f076648bb7fdaf376db818f.bindPopup(popup_c8e07911c873f21fcb8d8c6bf513a16a)
+        ;
+
+        
+    
+    
+                marker_79db28dc4f076648bb7fdaf376db818f.setIcon(icon_8f18706f6de4a72c9af299bd5a6c91fe);
+            
+</script>
+</html>
