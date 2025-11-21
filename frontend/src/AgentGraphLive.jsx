@@ -11,6 +11,8 @@ export default function AgentGraphLive() {
   const [selectedLink, setSelectedLink] = useState(null);
   const [hoveredAgent, setHoveredAgent] = useState(null);
   const simulationRef = useRef(null);
+  const [activeMessage, setActiveMessage] = useState(null);
+
 
   const AgentCard = ({ agent }) => (
   <div className="bg-white shadow-md border border-gray-300 p-3 rounded-lg w-60 text-sm">
@@ -31,6 +33,8 @@ export default function AgentGraphLive() {
     socket.on("new_interaction", (interaction) => {
       console.log("interaction received",interaction)
       setInteractions((prev) => [...prev, interaction]);
+      setActiveMessage(`${interaction.source} → ${interaction.target}: ${interaction.msg}`);
+
     });
 
     return () => {
@@ -43,6 +47,7 @@ export default function AgentGraphLive() {
     if (!agents.length) return;
 
     const width = 800, height = 600;
+    const color = d3.schemeSet2[Math.floor(Math.random() * 8)];
     const svg = d3.select(svgRef.current)
       .attr("viewBox", [0, 0, width, height])
        .attr("width", "100%")
@@ -52,21 +57,40 @@ export default function AgentGraphLive() {
 
     svg.selectAll("*").remove();
 
+    const defs = svg.append("defs");
+
+    defs.append("marker")
+      .attr("id", "arrow")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 10) // ~ circle radius + offset
+      .attr("refY", 0)
+      .attr("markerWidth", 8)
+      .attr("markerHeight", 8)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .attr("fill", color);
+
+
     const simulation = d3.forceSimulation(agents)
-      .force("link", d3.forceLink(interactions).id(d => d.agent_name).distance(150))
-      .force("charge", d3.forceManyBody().strength(-300))
+      .force("link", d3.forceLink(interactions).id(d => d.agent_name).distance(190))
+      .force("charge", d3.forceManyBody().strength(-150))
       .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("x", d3.forceX(width / 2).strength(0.1))  // keeps nodes towards center horizontally
-      .force("y", d3.forceY(height / 2).strength(0.1));
+      .force("x", d3.forceX(width / 2).strength(0.04))  // keeps nodes towards center horizontally
+      .force("y", d3.forceY(height / 2).strength(0.04))
+      .alphaDecay(0.05);
 
     simulationRef.current = simulation;
 
     const link = svg.append("g")
-      .selectAll("line")
+      .attr("stroke", "#666")
+      .attr("stroke-opacity", 0.8)
+      .selectAll("path")
       .data(interactions)
-      .join("line")
-      .attr("stroke", "#aaa")
+      .join("path")
       .attr("stroke-width", 2)
+      .attr("fill", "none")
+      .attr("marker-end", "url(#arrow)") // directed
       .on("click", (_, d) => setSelectedLink(d));
 
     const node = svg.append("g")
@@ -91,15 +115,52 @@ export default function AgentGraphLive() {
 
 
 
-    simulation.on("tick", () => {
-      node.attr("transform", d => `translate(${d.x},${d.y})`);
-      link
-        .attr("x1", (d) => d.source.x)
-        .attr("y1", (d) => d.source.y)
-        .attr("x2", (d) => d.target.x)
-        .attr("y2", (d) => d.target.y);
-      node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-    });
+  simulation.on("tick", () => {
+  node.attr("transform", d => `translate(${d.x},${d.y})`);
+  
+
+
+
+  link.attr("d", d => {
+  const r = 40; // node radius
+  const sx = d.source.x;
+  const sy = d.source.y;
+  const tx = d.target.x;
+  const ty = d.target.y;
+
+  const dx = tx - sx;
+  const dy = ty - sy;
+  const dr = Math.sqrt(dx * dx + dy * dy);
+
+  const nx = dx / dr;
+  const ny = dy / dr;
+
+  const startX = sx + nx * r;
+  const startY = sy + ny * r;
+  const endX = tx - nx * r;
+  const endY = ty - ny * r;
+
+  // multiple links, including opposite directions
+  const sameLinks = interactions.filter(
+    l =>
+      (l.source.agent_name === d.source.agent_name && l.target.agent_name === d.target.agent_name) ||
+      (l.source.agent_name === d.target.agent_name && l.target.agent_name === d.source.agent_name)
+  );
+  const index = sameLinks.findIndex(l => l === d);
+
+  const curveStrength = 25 * (index - (sameLinks.length - 1) / 2) * (d.source.agent_name > d.target.agent_name ? 1 : -1);
+
+  // perpendicular offset
+  const offsetX = -ny * curveStrength;
+  const offsetY = nx * curveStrength;
+  const controlX = (startX + endX) / 2 + offsetX;
+  const controlY = (startY + endY) / 2 + offsetY;
+
+  return `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
+});
+
+});
+
 
   }, [agents, interactions]);
 
@@ -116,16 +177,11 @@ export default function AgentGraphLive() {
           
         </div>
       )}
-      {hoveredAgent && (
-  <div
-    className="absolute bg-white border border-gray-300 shadow-lg p-3 rounded-lg w-60 text-sm pointer-events-none"
-    style={{
-      left: `${hoveredAgent.x + 25}px`, // 25px offset to the right of the node
-      top: `${hoveredAgent.y - 20}px`,  // 20px offset above the node
-    }}
-  >
-    <AgentCard agent={hoveredAgent} />
-  </div>)}
+      {activeMessage && (
+  <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white border border-gray-300 shadow-lg p-3 rounded-lg w-72 text-sm">
+    <p>{activeMessage}</p>
+  </div>
+)}
     </div>
   );
 }

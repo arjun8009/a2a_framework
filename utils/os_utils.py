@@ -70,8 +70,11 @@ def get_filterable_features(collection):
         return mapping["description"]
     else:
         print("In here")
-        data_address = pd.read_csv("addressbase-product-classification-scheme.csv")
-        filters = list(data_address["Class_Desc"])
+        data_builtaddress = gpd.read_file(r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\os_ngd_sample\add_gb_builtaddress\add_gb_builtaddress.gpkg")
+        data_historicaddress = gpd.read_file(r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\os_ngd_sample\add_gb_historicaddress\add_gb_historicaddress.gpkg")
+        data_nonaddress = gpd.read_file(r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\os_ngd_sample\add_gb_nonaddressableobject\add_gb_nonaddressableobject.gpkg")
+
+        filters = set(list(data_builtaddress["classificationdescription"].unique()) + list(data_historicaddress["classificationdescription"].unique()) + list(data_nonaddress["classificationdescription"].unique()))
         return  filters
 
 
@@ -149,4 +152,5 @@ def query_address_and_buildings(address_or_building : bool, name_or_theme:list, 
         all_results = gpd.GeoDataFrame(pd.concat(all_results, ignore_index=True))
         return all_results
     except Exception as e:
+        print(e)
         return None

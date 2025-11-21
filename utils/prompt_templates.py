@@ -147,9 +147,9 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
         Then return that you cannot solve this\
     ELSE\
     2. call the os ngd tool with the appropriate params \
-        a. terms : list = A list of search terms but will be None as buildings api cannot search terms \
         b. filters: list = A list of filters which are provided below \
         c. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
+        d. filename : str = The name of the file to save the artifact as \
     3. The tool will return to you number of search results and the artifact names.\
     4. The search is rugged and if you need to filter further you may use the coding agent but do not ask it to search artifact a in artifact and remember you cannot search using names of buildings. It is your decision to call the coding agent \
     5. Finally return the filtered artifact names only and the results of your search. \
@@ -157,12 +157,12 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
     7. If you have asked API for results within a bbox then do not tell the coding agent to use the bbox artifact again as it confuses it \
 </PRINCIPLES>
 
-<NOTE VITAL>
-Only mention 1 artifact name for coding agent not more than 1.  \
-<NOTE VITAL>
+<CONSTRAINT FOR DATA ANALYSIS AGENT>
+Only mention 1 artifact name in the query.  \
+<CONSTRAINT FOR DATA ANALYSIS AGENT>
 
     <FILTERS AVAILABLE>
-    {get_filterable_features("bld-fts-building-3")}
+    {get_filterable_features("bld-fts-building-3")} + \n {get_filterable_features("bld-fts-buildingline")} \n {get_filterable_features("bld-fts-buildingpart")} 
     </FILTERS AVAILABLE>
 """
 
@@ -181,9 +181,10 @@ places_prompt = f""" You are a search agent for ordance surveys address database
         Then return that you cannot solve this\
     ELSE\
     2. call the os ngd tool with the appropriate params \
-        a. terms : list = A list of search terms  \
-        b. filters: list = A list of filters but address has not filter search so will be None \
-        c. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
+        a. filters: list = A list of filters \
+        b. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
+        c. street_address : boolean = True if searching street address (roads or streets) else False \
+        d. filename : str = The name of the file to save the artifact as \
     3. The tool will return to you number of search results and the artifact names.\
     4. The search is rugged and if you need to filter further you may use the coding agent but do not ask it to search artifact a in artifact b. You can ask the coding tool what you can filter on as adding it to the prompt would be big \
     5.  It is your decision to call the coding agent \
@@ -192,9 +193,13 @@ places_prompt = f""" You are a search agent for ordance surveys address database
     8. If you have asked API for results within a bbox then do not tell the coding agent to use the bbox artifact again as it confuses it \
 </PRINCIPLES>
 
-<NOTE VITAL> \
-Only mention 1 artifact name for coding agent not more than 1 \
-<NOTE VITAL>\
+<FILTERS AVAILABLE>
+    {get_filterable_features("address")}
+<FILTERS AVAILABLE>
+
+<CONSTRAINT FOR DATA ANALYSIS AGENT>
+Only mention 1 artifact name in the query.  \
+<CONSTRAINT FOR DATA ANALYSIS AGENT>
 """
 
 
@@ -217,18 +222,20 @@ A named area by OS is defined as : A settlement, locality, geographical feature,
         Then return that you cannot solve this\
     ELSE\
     2. call the os ngd tool with the appropriate params \
-        a. terms : list = A list of search terms  \
-        b. filters: list = A list of filters but address has not filter search so will be None \
-        c. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
+        a. filters: list = A list of filters but address has not filter search so will be None \
+        b. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
+        c. point_or_polygon : boolean = True if searching polygon data else False \
+        d. filename : str = The name of the file to save the artifact as \
     3. The tool will return to you number of search results and the artifact names.\
     4. The search is rugged and if you need to filter further you may use the coding agent but do not ask it to search artifact a in artifact b. You can ask the coding tool what you can filter on as adding it to the prompt would be big \
     5. Finally return the filtered artifact names only and the results of your search. \
     6. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
 </PRINCIPLES>
 
-<NOTE VITAL> \
-Only mention 1 artifact name for coding agent not more than 1 \
-<NOTE VITAL> \
+<CONSTRAINT FOR DATA ANALYSIS AGENT>
+Only mention 1 artifact name in the query.  \
+<CONSTRAINT FOR DATA ANALYSIS AGENT>
+
 
 """
 

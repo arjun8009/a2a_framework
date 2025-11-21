@@ -75,13 +75,6 @@ os_ngd_tool_description = {
         "parameters":{
             "type":"object",
             "properties":{
-                "terms":{
-                    "type":["array","null"],
-                    "description":"A list of strings containing exact search terms.",
-                    "items":{
-                        "type":"string"
-                    }
-                },
                 "filters":{
                     "type":["array","null"],
                     "items":{
@@ -92,6 +85,18 @@ os_ngd_tool_description = {
                 "bbox":{
                     "type":["string","null"],
                     "description":"bbox tells the tool to search within an artifact polygon. So an artifact of an area maybe stored and you can give the name of the artifact to search within"
+                },
+                "polygon_or_point":{
+                    "type":["boolean","null"],
+                    "description":"A boolean to indicate if the user wants to search named area point data or polygon data. True for polygon data and False for point data"
+                },
+                "street_address":{
+                    "type":["boolean","null"],
+                    "description":"A boolean to indicate if the user wants to search streets or roads. True for street address data and False for address data"
+                },
+                "filename":{
+                    "type":"string",
+                    "description":"The name of the file to save the artifact as"
                 }
             },
         }

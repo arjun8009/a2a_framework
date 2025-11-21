@@ -8,3 +8,4 @@ artifacts/*
 utils/__pycache__/*
 artifacts/*
 frontend/node_modules/*
+os_ngd_sample/*

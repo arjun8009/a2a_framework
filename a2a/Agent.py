@@ -100,7 +100,7 @@ class Agent():
                     args["source"] = self.agent_identity.agent_name
                     # visualisation only
                     interaction = {"source":args["source"], "target":args["target"], "msg":args["task_description"]}
-                    requests.post("http://localhost:5000/interact",json=interaction)
+                    #requests.post("http://localhost:5000/interact",json=interaction)
 
                 
                 # If we need to provide raw data to the llm to code
@@ -108,6 +108,7 @@ class Agent():
                     args["data"] = [i for i in self.artifacts_req]
 
                 result = self.tools[call.name](**args)
+                #print(f"Tool {call.name} returned result : {result}")
 
 
 

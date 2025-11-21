@@ -5,15 +5,20 @@ from a2a.Task import Task
 from a2a.SendMessage import SendMessage
 from a2a.Artifact import Artifact
 from a2a.Messages import Messages
-from utils.os_utils import *
+from utils.os_utils_data_raw import *
 import uuid
 import warnings
 import joblib
 import os
+import inspect
 import requests
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
+        
 
+
+
+# New function with raw data
 def call_os_ngd(**kwargs):
     '''This is a single tool for calling os ngd data base. It checks which agent is calling it and calls that particular ngd
     args:
@@ -23,38 +28,47 @@ def call_os_ngd(**kwargs):
         output:
         The data fetched from the os ngd database in the form of a geopandas dataframe as an artifact and a summary of the data fetched'''
     
+    ngd_util_mapping = {"address":query_address,
+                       "buildings":query_buildings,
+                       "named_area":apply_extent_named_area}
     
+    args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
     
-    if kwargs["ngd_name"] == "address" or kwargs["ngd_name"] =="buildings":
-        
-        # Make the params dynamically, We are only searching addresses with terms so filters will be None and terms will be not None
-        if kwargs["terms"] is not None:
-            address_or_buildings = True
-            search_terms = kwargs["terms"]
-        else:
-            address_or_buildings = False
-            search_terms = kwargs["terms"]
+    result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args) })
 
-        result =  query_address_and_buildings(address_or_building=address_or_buildings,name_or_theme=search_terms,bbox=kwargs["bbox"])
-    
-    if kwargs["ngd_name"] == "named_area":
-        search_terms = kwargs["terms"]
-        result =  query_named_area(search_areas=search_terms)
-    
-    if result is not None and len(result) > 0:
-        artifact = Artifact(name=f"""{kwargs["ngd_name"]}_search_results""", description="A concatenated geopandas dataframe containing multiple results per search found within the bbox if requested so assume all points are in the bbox. Filter it if required",
-                         data=result)
-        joblib.dump(artifact, f"./artifacts/{artifact.name}.pkl")
-        print("Multiple search results have been found for each of your search terms. Please filter them as you seem fit. Also if you had asked for bbox then the bbox has been applied. You can skip bbox join")
-        return ["Multiple search results have been found for each of your search terms. Please filter them as you seem fit. Also if you had asked for bbox then the search results have been found within the bbox so further filter will not require the bbox",
-                artifact]
-    
-    if result is not None and len(result) == 0:
-        print("No results found")
-        return "No results found for your search terms "
+    print("NGD query result", result.attrs if result is not None else "No results found")
+
+    if result is not None:
+
+        if isinstance(result,list):
+            artifacts = [
+                Artifact(name=f"""{df.attrs["name"]}""", description=df.attrs["description"],
+                         data=df) for i,df in enumerate(result)
+            ]
+            [joblib.dump(artifacts[i], f"./artifacts/{artifacts[i].name}.pkl") for i in range(len(artifacts))]
+
+            return_msg = f"""Multiple search results have been found in multiple datasets. A summary of each is provided.
+            Artifacts generated are : {[i.name for i in artifacts]},
+            Descriptions are : {[i.description for i in artifacts]},
+            counts of records fetched are : {[i.attrs["count"] for i in result]}.
+            """
+            return [return_msg, artifacts]
+        else:
+            artifact = Artifact(name=f"""{result.attrs["name"]}""", description=result.attrs["description"],
+                                data=result)
+            joblib.dump(artifact, f"./artifacts/{artifact.name}.pkl")
+            return_msg = f"""Search results have been found. 
+            Artifact generated is : {artifact.name},
+            Description is : {artifact.description},
+            count of records fetched : {result.attrs["count"]}.
+            """
+            return [return_msg, artifact]
+
     else:
-        print("some error occured in os ngd")
-        return "some error occured. Make sure that you cannot use a point as bbox and search within a point"
+        return "No results found for your search terms "
+
+    
+
 
 def send_message(**kwargs):
     
@@ -95,6 +109,9 @@ def send_message(**kwargs):
     task = Task(messages=messages_list,task_id=task_id)
 
     output = SendMessage(task,agent).send_messages()
+    # Return the output of the agent to visualise
+    interaction = {"source":target, "target":source, "msg":output.task_output}
+    #requests.post("http://localhost:5000/interact",json=interaction)
     
 
     if output.task_status == "success":
@@ -172,6 +189,7 @@ def code_executor(**kwargs):
     try:
         namespace = {}
         code = "import matplotlib\nmatplotlib.use('Agg')\n" + code
+        print("Executing code:\n")
         exec(code,namespace)
         function_name = [name for name in namespace if callable(namespace[name])][-1]
         print("function name",function_name)
