@@ -6,6 +6,8 @@ from a2a.SendMessage import SendMessage
 from a2a.Artifact import Artifact
 from a2a.Messages import Messages
 from utils.os_utils_data_raw import *
+from a2a.Human import Human
+from utils.card_templates import human_agent_card
 import uuid
 import warnings
 import joblib
@@ -94,11 +96,17 @@ def send_message(**kwargs):
     source = kwargs["source"]
 
     agent_names = [i.agent_identity.agent_name for i in agents]
-    agent = agents[agent_names.index(target)]
+    
+    # Need to handle human agent separately because human needs host agent and host agent needs human
+    if target == "human_agent":
 
-
+        agent = Human(human_details=human_agent_card)
+    else:
+        agent = agents[agent_names.index(target)]
+    
     # Make a set of messages and then create a task object
     messages_list = [{"role":"user","content":task_description}]
+    
     task_id = source + "^" + target + "^" + str(uuid.uuid4())
 
     # save the messages to the message store or update existing messages and then save
@@ -215,3 +223,17 @@ def code_executor(**kwargs):
     except Exception as e:
         print(e)
         return e
+
+def human_send_message(message:str, target_agent:list):
+    '''This function will be a stopgap for human to send messages to other agents, currently only host agent
+    args:
+        1. message : The message the human is sending to the agent
+        2. target_agent : The agent object the human is sending the message to
+    output:
+        The updated task
+    '''
+    output = send_message(source="human_agent",
+                    target="host_agent",
+                    task_description=message,
+                    agents=target_agent)
+    return output

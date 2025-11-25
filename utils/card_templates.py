@@ -99,3 +99,10 @@ coding_agent_details = AgentCard(agent_name="data_analysis_agent",
                                                   "Cannot search for point in 1 artifact using another."],
                                     input_modes=["task in str with the filenames provided to analyse data"],
                                     output_modes=["str","list out outputs including summaries, artifacts like plots and data files and their name and description"])
+
+human_agent_card = AgentCard(agent_name="human_agent",
+                                agent_description="A human agent that can be queried for help when there is ambiguity in the user query",
+                                capabilities=["Can help resolve ambiguities in user queries",
+                                            "Can provide clarifications on spatial conditions"],
+                                input_modes=["query : str containing the ambiguity or clarification needed"],
+                                output_modes=["string containing the human response"])

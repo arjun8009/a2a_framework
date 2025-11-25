@@ -43,8 +43,7 @@ def query_address(filters:list, bbox:str, street_address:bool, filename:str):
     if filters:
         for filter in filters:
             data_filtered.append(gdf[gdf["classificationdescription"] == filter])
-    
-    gdf = pd.concat(data_filtered, ignore_index=True)
+        gdf = pd.concat(data_filtered, ignore_index=True)
     
     if not street_address:
         gdf.attrs = {"name":f"{filename}","description":"A geopandas dataframe containing address data with filters and bbox applied as per user request.","count":len(gdf)}
@@ -124,7 +123,7 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str):
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf = gpd.clip(gdf, extent_polygon)
     
-    gdf.attrs = {"name":f"{filename}","description":"A geopandas dataframe containing named area data with bbox applied as per user request.","count":len(gdf)}
+    gdf.attrs = {"name":f"{filename}","description":"A geopandas dataframe containing named area data with bbox applied but no filters applied as per user request.","count":len(gdf)}
     return gdf
 
 
