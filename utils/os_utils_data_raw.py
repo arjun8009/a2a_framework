@@ -196,3 +196,56 @@ def query_water_network(bbox:str, filename:str):
     if len(gdf_list) == 0:
         return None
     return gdf_list
+
+
+def query_land_features(bbox:str, filters:list, filename:str):
+    '''Utility function to query OS Data Hub Land API
+    args:
+        1. bbox : NGD Extent to limit the query
+        2. filter : list of filters to apply to the query
+        3. filename : name of the output file
+    output:
+        1. gdf : GeoDataFrame of the queried land features
+    '''
+    # Add paths to different land related geopackage files
+    paths = [ os.path.join(BASE_PATH,r"lnd_fts_land\lnd_fts_land.gpkg"),
+              os.path.join(BASE_PATH,r"lnd_fts_landpoint\lnd_fts_landpoint.gpkg"),
+              os.path.join(BASE_PATH,r"lnd_fts_landform\lnd_fts_landform.gpkg"),
+              os.path.join(BASE_PATH,r"lnd_fts_landformline\lnd_fts_landformline.gpkg"),
+              os.path.join(BASE_PATH,r"lnd_fts_landformpoint\lnd_fts_landformpoint.gpkg")]
+    
+    # Read the geopackage files into geopandas dataframes
+    gdf_list = [gpd.read_file(path) for path in paths]
+
+    # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
+    if bbox:
+        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
+        gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
+    
+    if filters:
+        gdf_filtered = []
+        for gdf in gdf_list:
+            data_filtered = []
+            for filter in filters:
+                data_filtered.append(gdf[gdf["description"] == filter])
+            gdf_filtered.append(pd.concat(data_filtered, ignore_index=True))
+        gdf_list = gdf_filtered
+
+    # Assign attributes to each GeoDataFrame
+    gdf_attrs_list =[{"name":f"land_{filename}","description":"A geopandas dataframe containing land data with filters and bbox applied as per user request.","count":len(gdf_list[0])},
+                     {"name":f"landpoint_{filename}","description":"A geopandas dataframe containing land point data with filters and bbox applied as per user request. Further name filtering is available for this","count":len(gdf_list[1])},
+                     {"name":f"landform_{filename}","description":"A geopandas dataframe containing land form data with filters and bbox applied as per user request.","count":len(gdf_list[2])},
+                     {"name":f"landformline_{filename}","description":"A geopandas dataframe containing land form line data with filters and bbox applied as per user request. Further name filtering is available for this","count":len(gdf_list[3])},
+                     {"name":f"landformpoint_{filename}","description":"A geopandas dataframe containing land form point data with filters and bbox applied as per user request.Further name filtering is available for this","count":len(gdf_list[4])}]
+    
+    for index, gdf in enumerate(gdf_list):
+        gdf.attrs = gdf_attrs_list[index]
+    
+    # Return None if no dataframes are left after filtering
+    gdf_list = [gdf for gdf in gdf_list if not gdf.empty]
+    
+    if len(gdf_list) == 0:
+        return None
+    
+    return gdf_list

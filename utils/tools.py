@@ -32,7 +32,8 @@ def call_os_ngd(**kwargs):
                        "buildings":query_buildings,
                        "named_area":apply_extent_named_area,
                        "water_features":query_water_features,
-                       "water_network":query_water_network}
+                       "water_network":query_water_network,
+                       "land_features":query_land_features}
     
     args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
     

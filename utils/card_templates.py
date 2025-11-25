@@ -61,6 +61,19 @@ water_network_agent_card = AgentCard(agent_name="water_network",
                                 input_modes=["query : string"],
                                 output_modes=["output and the artifact name"])
 
+land_features_agent_card = AgentCard(agent_name="land_features",
+                               agent_description="a search agent for ordance surveys land features database within an area, Given a query, it will try to find relevant features which can be manmade \
+                                                (for example, tennis courts, residential gardens, construction sites) or natural land \
+                                                (for example, coniferous trees, cliffs, heath or rough grassland), but excludes features exclusively associated with buildings, structures, transport and water.",
+                                capabilities=["1. Given a query it will search it in an area artifact.",
+                                             "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
+                                             "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
+                                             "4. Has access to coding agent so can search further if you ask it to",
+                                             "5. Artifacts contain point, line and polygon features of land features"],
+                                input_modes=["query : string"],
+                                output_modes=["output and the artifact name"])
+
+
 
 named_area_agent_card = AgentCard(agent_name="named_area",
                                   agent_description="a search agent for ordance surveys named area database. A named area by OS is defined as : A settlement, locality, geographical feature, or area of water that has a name, represented as a polygon. It contains information related to cities, counties, geographical descriptions etc. Artifacts are area polygons ",
