@@ -40,6 +40,28 @@ building_agent_card = AgentCard(agent_name="buildings",
                                 output_modes=["output and the artifact name"])
 
 
+water_features_agent_card = AgentCard(agent_name="water_features",
+                               agent_description="a search agent for ordance surveys water features database within an area, Given a query you will try to find relevant features such as watercourses, lakes, drains, springs and intertidal watercourses across Great Britain",
+                               capabilities=["1. Given a query it will search it in an area artifact.",
+                                             "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
+                                             "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
+                                             "4. Has access to coding agent so can search further if you ask it to",
+                                             "5. Artifacts contain points and polygons of water features"],
+                                input_modes=["query : string"],
+                                output_modes=["output and the artifact name"])
+
+
+water_network_agent_card = AgentCard(agent_name="water_network",
+                               agent_description="a search agent for ordance surveys water network database within an area, Given a query you will try to find relevant Rivers, streams, lakes, lochs, drains and canals ",
+                               capabilities=["1. Given a query it will search it in an area artifact.",
+                                             "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
+                                             "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
+                                             "4. Has access to coding agent so can search further if you ask it to",
+                                             "5. Artifacts contain lines of Rivers, streams, lakes"],
+                                input_modes=["query : string"],
+                                output_modes=["output and the artifact name"])
+
+
 named_area_agent_card = AgentCard(agent_name="named_area",
                                   agent_description="a search agent for ordance surveys named area database. A named area by OS is defined as : A settlement, locality, geographical feature, or area of water that has a name, represented as a polygon. It contains information related to cities, counties, geographical descriptions etc. Artifacts are area polygons ",
                                   capabilities=["1. Given a named area like a city or a place it will search it",

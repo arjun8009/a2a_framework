@@ -126,3 +126,73 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str):
     
     gdf.attrs = {"name":f"{filename}","description":"A geopandas dataframe containing named area data with bbox applied as per user request.","count":len(gdf)}
     return gdf
+
+
+def query_water_features(bbox:str, filename:str):
+    '''Utility function to query OS Data Hub Water API
+    args:
+        1. bbox : NGD Extent to limit the query
+        2. filters : list of filters to apply to the query
+        3. filename : name of the output file
+    output:
+        1. gdf : GeoDataFrame of the queried water features'''
+    
+    # Add paths to different water related geopackage files
+    paths = [ os.path.join(BASE_PATH,r"wtr_ntwk_waterpoint\wtr_ntwk_waterpoint.gpkg"),
+              os.path.join(BASE_PATH,r"wtr_ntwk_water\wtr_ntwk_water.gpkg")]
+    
+    # Read the geopackage files into geopandas dataframes
+    gdf_list = [gpd.read_file(path) for path in paths]
+
+    # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
+    if bbox:
+        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
+        gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
+    
+    
+    # Assign attributes to each GeoDataFrame
+    gdf_attrs_list =[{"name":f"waterpoint_{filename}","description":"A geopandas dataframe containing water point data with bbox applied as per user request.","count":len(gdf_list[0])},
+                     {"name":f"water_{filename}","description":"A geopandas dataframe containing water data with bbox applied as per user request.","count":len(gdf_list[1])}]
+    
+    for index, gdf in enumerate(gdf_list):
+        gdf.attrs = gdf_attrs_list[index]
+    
+    if len(gdf_list) == 0:
+        return None
+    return gdf_list
+
+
+
+def query_water_network(bbox:str, filename:str):
+    '''Utility function to query OS Data Hub Water Network API
+    args:
+        1. bbox : NGD Extent to limit the query
+        2. filename : name of the output file
+    output:
+        1. gdf : GeoDataFrame of the queried water network features'''
+    
+    # Add paths to different water network related geopackage files
+    paths = [ os.path.join(BASE_PATH,r"wtr_ntwk_waterlinkset\wtr_ntwk_waterlinkset.gpkg"),
+              os.path.join(BASE_PATH,r"wtr_ntwk_waterlink\wtr_ntwk_waterlink.gpkg")]
+    
+    # Read the geopackage files into geopandas dataframes
+    gdf_list = [gpd.read_file(path) for path in paths]
+
+    # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
+    if bbox:
+        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
+        gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
+      
+    
+    # Assign attributes to each GeoDataFrame
+    gdf_attrs_list =[{"name":f"waterlinkset_{filename}","description":"A geopandas dataframe containing water link set data with bbox applied as per user request.","count":len(gdf_list[0])},
+                     {"name":f"waterlink_{filename}","description":"A geopandas dataframe containing water link data with bbox applied as per user request.","count":len(gdf_list[1])}]
+    
+    for index, gdf in enumerate(gdf_list):
+        gdf.attrs = gdf_attrs_list[index]
+    
+    if len(gdf_list) == 0:
+        return None
+    return gdf_list

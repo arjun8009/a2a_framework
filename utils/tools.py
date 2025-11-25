@@ -30,13 +30,18 @@ def call_os_ngd(**kwargs):
     
     ngd_util_mapping = {"address":query_address,
                        "buildings":query_buildings,
-                       "named_area":apply_extent_named_area}
+                       "named_area":apply_extent_named_area,
+                       "water_features":query_water_features,
+                       "water_network":query_water_network}
     
     args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
     
     result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args) })
 
-    print("NGD query result", result.attrs if result is not None else "No results found")
+    if not isinstance(result,list):
+        print("NGD query result", result.attrs if result is not None else "No results found")
+    else:
+        print("NGD query result", [df.attrs for df in result] if result is not None else "No results found")
 
     if result is not None:
 
