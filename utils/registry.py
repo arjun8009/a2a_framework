@@ -14,6 +14,8 @@ import joblib
 from utils.tools import *
 from utils.prompt_templates import *
 
+''' This is the registry the singular mapping of all the classes and variables in the Repo. It
+    is used to initialise the agents.'''
 
 registry = {
     
