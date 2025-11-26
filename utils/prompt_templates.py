@@ -35,6 +35,7 @@ generic_coding_agent_template = """You are a coding agent whose task is to gener
         3. Search using multiple columns to increase search quality not just one column \
         4. Make sure that the search results are relevant to the query asked. like if Exe river is requested, you do not return exe street \
         5. stick to the code template provided and output format \
+        6. Never return code but only the output as defined \
     <POLICIES> \
     
     <RESPONSE EXPECTATION> : \
@@ -163,6 +164,7 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
     6. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
     7. Provide a filename for the coding agent to save the filtered results as well \
     8. If you have asked API for results within a bbox then do not tell the coding agent to use the bbox artifact again as it confuses it \
+    9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
 <CONSTRAINT FOR DATA ANALYSIS AGENT>
@@ -200,6 +202,7 @@ places_prompt = f""" You are a search agent for ordance surveys address database
     7. Provide a filename for the coding agent to save the filtered results as well \
     8. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
     9. If you have asked API for results within a bbox then do not tell the coding agent to use the bbox artifact again as it confuses it \
+    10. 9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
 <FILTERS AVAILABLE>
@@ -239,6 +242,7 @@ A named area by OS is defined as : A settlement, locality, geographical feature,
     5. Finally return the filtered artifact names only and the results of your search. \
     6. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
     7. Provide a filename for the coding agent to save the filtered results as well \
+    8. 9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
 <CONSTRAINT FOR DATA ANALYSIS AGENT>
@@ -258,6 +262,7 @@ plotting_agent_template = generic_coding_agent_template + """<PLOTTING AGENT SPE
     4. Before plotting convert all crs to EPSG:4326 because folium only supports this \
     5. Stick to the template (do not call the function you generate). Generate code (function) only. You cannot ask questions \
     6. Save the folium map as a html and give the map filename as the last part of the output instead of the map object as it causes pickling error \
+    7. You are to only return outptut as defined in the generic template and not code. \
     <PLOTTING AGENT SPECIFIC COMMENTS>"""
 
 
@@ -286,6 +291,7 @@ water_features_prompt = f""" You are a search agent for ordance surveys water fe
     6. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
     7. If you have asked API for results within a bbox then do not tell the data_analysis_agent to use the bbox artifact again as it confuses it \
     8. Provide a filename for the data_analysis_agent to save the filtered results as well \
+    9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
 <CONSTRAINT FOR DATA ANALYSIS AGENT>
@@ -317,7 +323,8 @@ water_network_prompt = f""" You are a search agent for ordance surveys water net
     5. Finally return the filtered artifact names only and the results of your search. \
     6. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
     7. If you have asked API for results within a bbox then do not tell the data_analysis_agent to use the bbox artifact again as it confuses it \
-    7. Provide a filename for the data_analysis_agent to save the filtered results as well \
+    8. Provide a filename for the data_analysis_agent to save the filtered results as well \
+    9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
 <CONSTRAINT FOR DATA ANALYSIS AGENT>
@@ -353,6 +360,7 @@ land_features_prompt = f""" You are a search agent for ordance surveys land feat
     6. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
     7. If you have asked API for results within a bbox then do not tell the data_analysis_agent to use the bbox artifact again as it confuses it \
     8. Provide a filename for the data_analysis_agent to save the filtered results as well \
+    9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES> \
 
 <CONSTRAINT FOR DATA ANALYSIS AGENT> \

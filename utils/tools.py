@@ -126,6 +126,7 @@ def send_message(**kwargs):
     # Return the output of the agent to visualise
     interaction = {"source":target, "target":source, "msg":output.task_output}
     #requests.post("http://localhost:5000/interact",json=interaction)
+    print(f"Output from agent {target} :", output.task_output)
     
 
     if output.task_status == "success":
