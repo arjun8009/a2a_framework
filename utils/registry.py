@@ -1,16 +1,11 @@
 import warnings
 warnings.filterwarnings("ignore")
-import os
 from utils.tool_definitions import send_message_definitions
-from pydantic import BaseModel,Field
 from utils.tool_definitions import *
 from a2a.Agent import Agent
 from a2a.Human import Human
 from utils.card_templates import *
 from a2a.Artifact import Artifact
-import pandas as pd
-import joblib
-# We set the api keys as earlier
 from utils.tools import *
 from utils.prompt_templates import *
 
@@ -51,6 +46,7 @@ registry = {
     "code_executor_definition":code_executor_definition,
     "code_metadata_generator_definition":code_metadata_generator_definition,
     "metadata_all_artifacts":metadata_all_artifacts,
+    "human_agent_card":human_agent_card,
     "Agent":Agent,
     "Human":Human,
     "AgentCard":AgentCard,

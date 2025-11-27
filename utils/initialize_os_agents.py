@@ -25,16 +25,21 @@ class OSAgentsInitializer():
             1. agentconfig : A dictionary containing the configuration for a single agent
         '''
 
-        return registry["Agent"](
-            agent_details=registry[agentconfig["agent_details"]],
-            llm_name=agentconfig["llm_name"],
-            tools={tool_name:registry[tool_name] for tool_name in agentconfig.get("tools",[])},
-            tool_definitions=[registry[tool_def] for tool_def in agentconfig.get("tool_definitions",[])],
-            schema=registry[agentconfig.get("schema",None)] if agentconfig.get("schema",None) is not None else None,
-            additional_args=agentconfig.get("additional_args",None),
-            system_instruction=registry[agentconfig.get("system_instruction",None)],
-            available_agents=None
-        )
+        if agentconfig["agent_details"].lower() == "human":
+            return registry["Human"](
+                human_details = registry[agentconfig["agent_details"]]
+            )
+        else:
+            return registry["Agent"](
+                agent_details=registry[agentconfig["agent_details"]],
+                llm_name=agentconfig["llm_name"],
+                tools={tool_name:registry[tool_name] for tool_name in agentconfig.get("tools",[])},
+                tool_definitions=[registry[tool_def] for tool_def in agentconfig.get("tool_definitions",[])],
+                schema=registry[agentconfig.get("schema",None)] if agentconfig.get("schema",None) is not None else None,
+                additional_args=agentconfig.get("additional_args",None),
+                system_instruction=registry[agentconfig.get("system_instruction",None)],
+                available_agents=None
+            )
     
     def add_agent_dependencies(self,initialized_agents:dict):
         '''Add system instructions and available agent dependencies to initialized agents.
