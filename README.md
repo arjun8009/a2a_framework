@@ -13,3 +13,16 @@
 #### Making New agent frameworks
 * The process is simple. Use the templates in agent_frameworks folder
 * If using some new agent then add the agent details in the config files and if using new variables like prompts, tools etc then add the mapping in utils.registry
+
+#### commands to run simulation UI
+
+```bash
+    cd frontend
+    npm start
+```
+
+#### Commands to run backend
+```bash
+    cd visualization
+    python server.py
+```
