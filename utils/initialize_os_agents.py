@@ -25,7 +25,7 @@ class OSAgentsInitializer():
             1. agentconfig : A dictionary containing the configuration for a single agent
         '''
 
-        if agentconfig["agent_details"].lower() == "human":
+        if agentconfig["agent_name"].lower() == "human":
             return registry["Human"](
                 human_details = registry[agentconfig["agent_details"]]
             )

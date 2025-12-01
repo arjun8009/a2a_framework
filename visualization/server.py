@@ -1,26 +1,40 @@
 from flask import Flask,request
 from flask_socketio import SocketIO
+from flask_cors import CORS
 import sys, os
+import json
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.card_templates import *
+from utils.initialize_os_agents import OSAgentsInitializer
+from utils.tools import human_send_message
+
 
 
 app = Flask(__name__)
+CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Predefined agents
-agents = [host_agent_card.model_dump(),planning_agent_card.model_dump(),address_agent_card.model_dump(), named_area_agent_card.model_dump(),building_agent_card.model_dump(),plotting_agent_card.model_dump(),coding_agent_details.model_dump()]
 
-@app.route("/agents")
-def get_agents():
-    return {"agents": agents}
 
-@socketio.on("connect")
-def handle_connect():
-    print("Client connected")
+@app.route("/config-choice",methods=['POST'])
+def initialise_config():
+    global agents
+    global agent_archiecture
+    choice = request.get_json()
+    print("Choice",choice)
+    choice = choice["choice"]
+    config = None
+    with open(f"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/agent_frameworks/{choice}.json","rb") as file:
+        config = json.load(file)
+    agent_archiecture = OSAgentsInitializer(config).initialize_all_agents()
+    agents = [agent_archiecture[i].agent_identity.model_dump() for i in agent_archiecture.keys()]
     socketio.emit("agents_init", agents)
+    return {"status":"connected"},200
+    
 
-# ✅ Exposed function: call this to push new interactions dynamically
+
+
 def send_interaction(interaction):
     """
     interaction = {
@@ -40,6 +54,24 @@ def interact():
         return {"error": "No JSON payload"}, 400
     send_interaction(data)
     return {"status": "ok"}, 200
+
+@app.route("/receive-data",methods=["POST"])
+def receive_data():
+    query = request.get_json()["query"]
+    if "human" in agent_archiecture.keys():
+        response = human_send_message(query,[agent_archiecture["host_agent"]])
+    else:
+        response = agent_archiecture["host_agent"].run_agent([{"role":"user","content":query}])
+    
+    if isinstance(response,list) and len(response)>1:
+        return [{"role":"assistant","content":response[0]},{"role":"assitant","content":response[1]}]
+    else:
+        return [{"role":"assistant","content":response[0]}]
+
+
+
+
+
 
 if __name__ == "__main__":
     # Optional background thread for testing
