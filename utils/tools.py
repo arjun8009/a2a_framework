@@ -16,7 +16,8 @@ import inspect
 import requests
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
-        
+
+ARTIFACT_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\artifacts"
 
 
 
@@ -53,7 +54,7 @@ def call_os_ngd(**kwargs):
                 Artifact(name=f"""{df.attrs["name"]}""", description=df.attrs["description"],
                          data=df) for i,df in enumerate(result)
             ]
-            [joblib.dump(artifacts[i], f"./artifacts/{artifacts[i].name}.pkl") for i in range(len(artifacts))]
+            [joblib.dump(artifacts[i], os.path.join(ARTIFACT_PATH,f"{artifacts[i].name}.pkl")) for i in range(len(artifacts))]
 
             return_msg = f"""Multiple search results have been found in multiple datasets. A summary of each is provided.
             Artifacts generated are : {[i.name for i in artifacts]},
@@ -64,7 +65,7 @@ def call_os_ngd(**kwargs):
         else:
             artifact = Artifact(name=f"""{result.attrs["name"]}""", description=result.attrs["description"],
                                 data=result)
-            joblib.dump(artifact, f"./artifacts/{artifact.name}.pkl")
+            joblib.dump(artifact, os.path.join(ARTIFACT_PATH,f"{artifact.name}.pkl"))
             return_msg = f"""Search results have been found. 
             Artifact generated is : {artifact.name},
             Description is : {artifact.description},
@@ -125,7 +126,7 @@ def send_message(**kwargs):
     output = SendMessage(task,agent).send_messages()
     # Return the output of the agent to visualise
     interaction = {"source":target, "target":source, "msg":output.task_output}
-    #requests.post("http://localhost:5000/interact",json=interaction)
+    requests.post("http://localhost:5000/interact",json=interaction)
     print(f"Output from agent {target} :", output.task_output)
     
 
@@ -160,7 +161,7 @@ def generate_metadata_for_artifacts(**kwargs):
         3. filenames : filename of each artifact'''
     
 
-    artifacts = [joblib.load(f"./artifacts/{name}.pkl") for name in kwargs["artifact_names"] if name+".pkl" in os.listdir("./artifacts/")]
+    artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if name+".pkl" in os.listdir(ARTIFACT_PATH)]
     print("artifacts loaded for metadata generation", [i.name for i in artifacts])
     columns = [list(df.data.columns) for df in artifacts]
     first_five_rows = [df.data.head() for df in artifacts]
@@ -178,7 +179,7 @@ def generate_metadata_for_all_artifacts():
         3. filenames : filename of each artifact'''
     
 
-    artifacts = [joblib.load(f"./artifacts/{name}") for name in os.listdir("./artifacts/")]
+    artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in os.listdir(ARTIFACT_PATH)]
     print("artifacts loaded for metadata generation", [i.name for i in artifacts])
     names = [i.name for i in artifacts]
     description = [i.description for i in artifacts]
@@ -199,7 +200,7 @@ def code_executor(**kwargs):
     code = kwargs["code"]
     artifact_names = kwargs["artifact_names"]
     data = kwargs.get("data",None)
-    data = [i.data for i in data if i.name in artifact_names] if data is not None else [joblib.load(f"./artifacts/{name}.pkl").data for name in artifact_names if name+".pkl" in os.listdir("./artifacts/")]
+    data = [i.data for i in data if i.name in artifact_names] if data is not None else [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")).data for name in artifact_names if name+".pkl" in os.listdir(ARTIFACT_PATH)]
 
     try:
         namespace = {}
@@ -215,7 +216,7 @@ def code_executor(**kwargs):
             # if a valid artifact is returned we will save it to the artifacts folder so that it can be used later
             if output[1] is not None and output[2] is not None and output[3] is not None:
                 artifact = Artifact(name=output[1],description=output[2],data=output[3])
-                joblib.dump(artifact, f"./artifacts/{artifact.name}.pkl")
+                joblib.dump(artifact, os.path.join(ARTIFACT_PATH,f"{artifact.name}.pkl"))
                 return [output[0], Artifact(name=output[1],description=output[2],data=output[3])]
             else:
                 return output[0]

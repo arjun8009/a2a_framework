@@ -100,7 +100,7 @@ class Agent():
                     args["source"] = self.agent_identity.agent_name
                     # visualisation only
                     interaction = {"source":args["source"], "target":args["target"], "msg":args["task_description"]}
-                    #requests.post("http://localhost:5000/interact",json=interaction)
+                    requests.post("http://localhost:5000/interact",json=interaction)
 
                 
                 # If we need to provide raw data to the llm to code

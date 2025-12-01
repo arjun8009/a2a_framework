@@ -2,12 +2,14 @@ import os
 import joblib
 import shutil
 
+
+
 class Messages():
     '''Simple class to help correlate messages with a task id. This will help in tracking conversations across multiple tasks.'''
     def __init__(self, messages : list, task_id:str):
         self.messages = messages
         self.task_id = task_id
-        self.filepath = "./message_store"
+        self.filepath = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\message_store"
     
     def get_relevant_files(self):
         '''Function to get all relevant files corresponding to the source and target agents in the task id'''

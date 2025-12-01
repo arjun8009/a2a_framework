@@ -81,19 +81,20 @@ export default function ChatUI(){
                 const result = await response.json()
 
                 if(result.length==1){
-                    setMessages([...message,result[0]])
+                    setMessages([...messages,result[0]])
                 }
                 else{
-                    setMessages([...message,result[0]])
+                    setMessages([...messages,result[0]])
+                    setMessages([...messages,result[1]])
                     setArtifacts(result[1])
                 }   
             }else{
-                setMessages([...message,{role:"user",content:"Something went wrong"}])    
+                setMessages([...messages,{role:"user",content:"Something went wrong"}])    
             }
             setButtonDisabled(true)
 
         }catch(error){
-            setMessages([...message,{role:"user",content:"Something went wrong"}])
+            setMessages([...messages,{role:"user",content:"Something went wrong"}])
         }finally{
             setLoading(false)
         }

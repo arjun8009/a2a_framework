@@ -11,7 +11,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 BASE_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\os_ngd_sample"
-
+ARTIFACT_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\artifacts"
 
 def query_address(filters:list, bbox:str, street_address:bool, filename:str):
     '''Utility function to query OS Data Hub Address API
@@ -35,7 +35,7 @@ def query_address(filters:list, bbox:str, street_address:bool, filename:str):
     gdf = gdf.set_crs(epsg=27700)
 
     if bbox:
-        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf = gpd.clip(gdf, extent_polygon)
     
@@ -73,7 +73,7 @@ def query_buildings(filters:list, bbox:str, filename:str):
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
     if bbox:
-        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
@@ -119,7 +119,7 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str):
     gdf = gdf.set_crs(epsg=27700)
 
     if bbox:
-        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf = gpd.clip(gdf, extent_polygon)
     
@@ -145,7 +145,7 @@ def query_water_features(bbox:str, filename:str):
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
     if bbox:
-        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
@@ -180,7 +180,7 @@ def query_water_network(bbox:str, filename:str):
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
     if bbox:
-        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
       
@@ -218,7 +218,7 @@ def query_land_features(bbox:str, filters:list, filename:str):
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
     if bbox:
-        entent_polygon_file = joblib.load(f"./artifacts/{bbox}.pkl")
+        entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     

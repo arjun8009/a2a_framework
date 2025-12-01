@@ -7,7 +7,8 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.card_templates import *
 from utils.initialize_os_agents import OSAgentsInitializer
 from utils.tools import human_send_message
-
+from utils.keys import set_api_keys
+set_api_keys()
 
 
 app = Flask(__name__)
@@ -57,7 +58,7 @@ def interact():
 
 @app.route("/receive-data",methods=["POST"])
 def receive_data():
-    query = request.get_json()["query"]
+    query = request.get_json()["updated_message"]["content"]
     if "human" in agent_archiecture.keys():
         response = human_send_message(query,[agent_archiecture["host_agent"]])
     else:
