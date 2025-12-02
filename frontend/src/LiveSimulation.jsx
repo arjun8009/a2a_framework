@@ -95,7 +95,7 @@ export default function LiveSimulation(){
                 sx={{
                 flex: 1,
                 height: "100%",
-                overflow: "hidden",
+                overflow: "auto",
                 }}
             >
                 <AgentGraphLive />

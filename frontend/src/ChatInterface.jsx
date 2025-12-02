@@ -60,9 +60,10 @@ export default function ChatUI(){
 
         // create the new message
         var message = {role:"user", content:input}
+        const updated_messages = [...messages,message]
 
         // update the messages
-        setMessages([...messages,message])
+        setMessages(updated_messages)
         setInput("") // set input to empty
         setLoading(true) 
         try{
@@ -79,22 +80,23 @@ export default function ChatUI(){
 
                 // we are expecting the api to return a list of 1 or 2 elements, 1 element indicates some answer and 2 elements indicates [answer, artifact]
                 const result = await response.json()
+                console.log("Result",result)
 
                 if(result.length==1){
-                    setMessages([...messages,result[0]])
+                    setMessages([...updated_messages,result[0]])
                 }
                 else{
-                    setMessages([...messages,result[0]])
-                    setMessages([...messages,result[1]])
+
+                    setMessages([...updated_messages,result[0],result[1]])
                     setArtifacts(result[1])
                 }   
             }else{
-                setMessages([...messages,{role:"user",content:"Something went wrong"}])    
+                setMessages([...updated_messages,{role:"assistant",content:"Something went wrong"}])    
             }
             setButtonDisabled(true)
 
         }catch(error){
-            setMessages([...messages,{role:"user",content:"Something went wrong"}])
+            setMessages([...updated_messages,{role:"assistant",content:"Something went wrong"}])
         }finally{
             setLoading(false)
         }
@@ -193,29 +195,89 @@ export default function ChatUI(){
 const Message = ({message}) => {
 
     const isBot = message.role === "assistant";
-    const renderMessageContent = () =>{
-        const isHTML = (text) => /<\/?[a-z][\s\S]*>/i.test(text);
-    if (typeof(message.content) == "string") {
-      return (
-        <Typography variant="body2" 
-          sx={{ fontSize: "0.95rem", lineHeight: 1.5 }}>
-          {isHTML(message.content) ? (
-          <div dangerouslySetInnerHTML={{ __html: message.content }} />
-        ) : (
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
-        )}
-        </Typography>
+    const renderMessageContent = () => {
+  const content = message.content;
 
-      );
-    } else {
+  const openInNewTab = () => {
+      const blob = new Blob([content], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      window.open(url, "_blank");
+    };
+
+    // If content is not a string
+    if (typeof content !== "string") {
+      return <Typography variant="body2">{content}</Typography>;
+    }
+
+    // Detect Folium HTML
+    const isFoliumHTML =
+      content.includes("folium") ||
+      content.includes("Leaflet") ||
+      content.includes("<script") ||
+      content.includes("map_");
+
+    // Detect generic HTML
+    const isHTML = /<\/?[a-z][\s\S]*>/i.test(content);
+
+    // Handle Folium (iframe)
+    if (isFoliumHTML) {
       return (
-        <Typography   variant="body2" 
-        sx={{ fontSize: "0.95rem", lineHeight: 1.5 }}>
-          {message.content}
-        </Typography>
+        <>
+          <button
+            onClick={openInNewTab}
+            style={{
+              marginBottom: "8px",
+              padding: "4px 8px",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+          >
+            Open in New Tab
+          </button>
+
+          <iframe
+            srcDoc={content}
+            style={{
+              width: "100%",
+              height: "400px",
+              border: "none",
+              borderRadius: "10px",
+            }}
+          />
+        </>
       );
     }
+
+    // Handle generic HTML
+    if (isHTML) {
+      return (
+        <>
+          <button
+            onClick={openInNewTab}
+            style={{
+              marginBottom: "8px",
+              padding: "4px 8px",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+          >
+            Open in New Tab
+          </button>
+
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        </>
+      );
     }
+
+    // Else treat as Markdown
+    return (
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {content}
+      </ReactMarkdown>
+    );
+  };
+
+
 
     return (
     <Box

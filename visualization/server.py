@@ -3,6 +3,7 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 import sys, os
 import json
+import joblib
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.card_templates import *
 from utils.initialize_os_agents import OSAgentsInitializer
@@ -10,6 +11,7 @@ from utils.tools import human_send_message
 from utils.keys import set_api_keys
 set_api_keys()
 
+PATH_VISUALIZATION = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\visualization"
 
 app = Flask(__name__)
 CORS(app)
@@ -56,6 +58,13 @@ def interact():
     send_interaction(data)
     return {"status": "ok"}, 200
 
+
+def load_html(filepath):
+    with open(filepath, "r", encoding="utf-8") as f:
+        content = f.read()
+    return content
+
+
 @app.route("/receive-data",methods=["POST"])
 def receive_data():
     query = request.get_json()["updated_message"]["content"]
@@ -64,8 +73,18 @@ def receive_data():
     else:
         response = agent_archiecture["host_agent"].run_agent([{"role":"user","content":query}])
     
-    if isinstance(response,list) and len(response)>1:
-        return [{"role":"assistant","content":response[0]},{"role":"assitant","content":response[1]}]
+    print("\n \n RESPONSE FINAL \n \n",response)
+    if (isinstance(response,list) or isinstance(response,set) or isinstance(response,tuple)) and len(response)>1:
+
+        if response[1] is None:
+            return [{"role":"assistant","content":response[0]}]
+        elif isinstance(response[1][0].data,str):
+            path = os.path.join(PATH_VISUALIZATION,response[1][0].data)
+            data = load_html(path)
+            return [{"role":"assistant","content":response[0]},{"role":"assistant","content":data}]
+        else:
+            return [{"role":"assistant","content":response[0]}]
+
     else:
         return [{"role":"assistant","content":response[0]}]
 

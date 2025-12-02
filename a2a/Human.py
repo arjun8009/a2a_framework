@@ -20,6 +20,6 @@ class Human():
             1. output : ouptut of the human can be string, schema and in a later stage data artifacts'''
         
         print("Messages for human to process:", messages[-1]["content"])
-        output = input("Please provide your response:")
-        return output,None
+        #output = input("Please provide your response:")
+        return messages[-1]["content"],None
     

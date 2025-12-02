@@ -165,23 +165,13 @@ export default function AgentGraphLive() {
   }, [agents, interactions]);
 
   return (
-    <div className="relative flex justify-center items-center h-screen w-screen overflow-hidden">
-      <svg ref={svgRef} width="100%" height="100%" style={{"overflow":"hidden"}} />
-      {selectedLink && (
-        <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-white border border-gray-300 shadow-lg p-3 rounded-lg w-72 text-sm">
-          <div className="flex justify-between items-center mb-2">
-            <strong>{selectedLink.source.name} → {selectedLink.target.name}</strong>
-            <button onClick={() => setSelectedLink(null)}>✕</button>
-          </div>
-          <p><strong>Message:</strong> {selectedLink.msg}</p>
-          
-        </div>
-      )}
-      {activeMessage && (
-  <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white border border-gray-300 shadow-lg p-3 rounded-lg w-72 text-sm">
-    <p>{activeMessage}</p>
+  <div className="relative flex justify-center items-center h-full w-full overflow-hidden">
+    <svg ref={svgRef} width="100%" height="100%" style={{"overflow":"hidden"}} />
+    {activeMessage && (
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-white border border-gray-300 shadow-lg p-3 rounded-lg w-80 max-w-[90%] max-h-[40vh] z-20" style={{overflow: 'auto'}}>
+        <p className="m-0 text-sm whitespace-pre-wrap break-words">{activeMessage}</p>
+      </div>
+    )}
   </div>
-)}
-    </div>
-  );
+);
 }
