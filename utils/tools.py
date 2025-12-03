@@ -40,7 +40,11 @@ def call_os_ngd(**kwargs):
     
     args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
     
-    result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args) })
+    try:
+        result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args) })
+    except Exception as e:
+        print("Exception while calling NGD")
+        return "There was an error while calling NGD. Most probable cause is wrong artifact name for bbox parameter. Try a few times with the correct artifact names."
 
     if not isinstance(result,list):
         print("NGD query result", result.attrs if result is not None else "No results found")
@@ -125,10 +129,13 @@ def send_message(**kwargs):
 
     output = SendMessage(task,agent).send_messages()
     # Return the output of the agent to visualise
-    interaction = {"source":target, "target":source, "msg":output.task_output}
-    requests.post("http://localhost:5000/interact",json=interaction)
-    print(f"Output from agent {target} :", output.task_output)
-    
+    try:
+        interaction = {"source":target, "target":source, "msg":output.task_output}
+        requests.post("http://localhost:5000/interact",json=interaction)
+        print(f"Output from agent {target} :", output.task_output)
+    except Exception as e:
+        print("OFFLINE MODE")
+        print(f"Output from agent {target} :", output.task_output)
 
     if output.task_status == "success":
         

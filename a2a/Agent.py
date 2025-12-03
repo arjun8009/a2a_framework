@@ -99,8 +99,11 @@ class Agent():
                     args["agents"] = self.available_agents
                     args["source"] = self.agent_identity.agent_name
                     # visualisation only
-                    interaction = {"source":args["source"], "target":args["target"], "msg":args["task_description"]}
-                    requests.post("http://localhost:5000/interact",json=interaction)
+                    try:
+                        interaction = {"source":args["source"], "target":args["target"], "msg":args["task_description"]}
+                        requests.post("http://localhost:5000/interact",json=interaction)
+                    except Exception as e:
+                        print("OFFLINE MODE")
 
                 
                 # If we need to provide raw data to the llm to code
