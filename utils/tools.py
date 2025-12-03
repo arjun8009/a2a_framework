@@ -36,7 +36,8 @@ def call_os_ngd(**kwargs):
                        "named_area":apply_extent_named_area,
                        "water_features":query_water_features,
                        "water_network":query_water_network,
-                       "land_features":query_land_features}
+                       "land_features":query_land_features,
+                       "land_use_features":query_land_use}
     
     args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
     
@@ -186,11 +187,10 @@ def generate_metadata_for_all_artifacts():
         3. filenames : filename of each artifact'''
     
 
-    artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in os.listdir(ARTIFACT_PATH)]
+    artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}")) for name in os.listdir(ARTIFACT_PATH)]
     print("artifacts loaded for metadata generation", [i.name for i in artifacts])
-    names = [i.name for i in artifacts]
-    description = [i.description for i in artifacts]
-    return names,description
+    metadata = {i.name:i.description for i in artifacts}
+    return metadata
 
 
 

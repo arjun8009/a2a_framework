@@ -73,6 +73,18 @@ land_features_agent_card = AgentCard(agent_name="land_features",
                                 input_modes=["query : string"],
                                 output_modes=["output and the artifact name"])
 
+land_use_features_agent_card = AgentCard(agent_name="land_use_features",
+                               agent_description="a search agent for ordance surveys land use features database within an area, Given a query, it will try to find relevant features which are geographical representations \
+                                of areas identified as having a specific purpose (such as schools, universities, and caravan parks), as well as information about access to such areas. \
+                                Polygon feature which represents the recognisable extent of certain types of function or activity. Examples include a caravan site, a university, and a railway centre.",
+                                capabilities=["1. Given a query it will search it in an area artifact.",
+                                             "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
+                                             "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
+                                             "4. Has access to coding agent so can search further if you ask it to",
+                                             "5. Artifacts contain point, line and polygon features of land features"],
+                                input_modes=["query : string"],
+                                output_modes=["output and the artifact name"])
+
 
 
 named_area_agent_card = AgentCard(agent_name="named_area",

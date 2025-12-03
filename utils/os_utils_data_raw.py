@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore")
 BASE_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\os_ngd_sample"
 ARTIFACT_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\artifacts"
 
-def query_address(filters:list, bbox:str, street_address:bool, filename:str):
+def query_address(filters:list, bbox:str, street_address:bool, filename:str, query:str):
     '''Utility function to query OS Data Hub Address API
     args:
         1. filters : list of filters to apply to the query
@@ -46,16 +46,16 @@ def query_address(filters:list, bbox:str, street_address:bool, filename:str):
         gdf = pd.concat(data_filtered, ignore_index=True)
     
     if not street_address:
-        gdf.attrs = {"name":f"{filename}","description":"A geopandas dataframe containing address data with filters and bbox applied as per user request.","count":len(gdf)}
+        gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing address data with filters and bbox applied for the query {query}.","count":len(gdf)}
     else:
-        gdf.attrs = {"name":f"{filename}","description":"A geopandas dataframe containing street address data with filters and bbox applied as per user request.","count":len(gdf)}
+        gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing street address data with filters and bbox applied for the query {query}.","count":len(gdf)}
 
     if gdf.empty:
         return None
 
     return gdf
 
-def query_buildings(filters:list, bbox:str, filename:str):
+def query_buildings(filters:list, bbox:str, filename:str, query:str):
     '''Utility function to query OS Data Hub Building API
     args:
         1. filters : list of filters to apply to the query
@@ -87,9 +87,9 @@ def query_buildings(filters:list, bbox:str, filename:str):
 
     gdf_list = [gdf for gdf in gdf_filtered if not gdf.empty]
     # Assign attributes to each GeoDataFrame
-    gdf_attrs_list =[{"name":f"buildings_{filename}","description":"A geopandas dataframe containing building data with filters and bbox applied as per user request.","count":len(gdf_list[0])},
-                     {"name":f"buildingline_{filename}","description":"A geopandas dataframe containing building line data with filters and bbox applied as per user request.","count":len(gdf_list[1])},
-                     {"name":f"buildingpart_{filename}","description":"A geopandas dataframe containing building part data with filters and bbox applied as per user request.","count":len(gdf_list[2])}]
+    gdf_attrs_list =[{"name":f"buildings_{filename}","description":f"A geopandas dataframe containing building data with filters and bbox applied for the query {query}..","count":len(gdf_list[0])},
+                     {"name":f"buildingline_{filename}","description":f"A geopandas dataframe containing building line data with filters and bbox applied for the query {query}.","count":len(gdf_list[1])},
+                     {"name":f"buildingpart_{filename}","description":f"A geopandas dataframe containing building part data with filters and bbox applied for the query {query}.","count":len(gdf_list[2])}]
     
     # Return None if no dataframes are left after filtering
     for index, gdf in enumerate(gdf_list):
@@ -100,7 +100,7 @@ def query_buildings(filters:list, bbox:str, filename:str):
     
     return gdf_list
 
-def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str):
+def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str,query:str):
     '''Utility function to apply bbox to named area data
     args:
         1. bbox : NGD Extent to limit the query
@@ -123,11 +123,11 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str):
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf = gpd.clip(gdf, extent_polygon)
     
-    gdf.attrs = {"name":f"{filename}","description":"A geopandas dataframe containing named area data with bbox applied but no filters applied as per user request.","count":len(gdf)}
+    gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing named area data with bbox applied but no filters applied for the query {query}.","count":len(gdf)}
     return gdf
 
 
-def query_water_features(bbox:str, filename:str):
+def query_water_features(bbox:str, filename:str,query:str):
     '''Utility function to query OS Data Hub Water API
     args:
         1. bbox : NGD Extent to limit the query
@@ -151,8 +151,8 @@ def query_water_features(bbox:str, filename:str):
     
     
     # Assign attributes to each GeoDataFrame
-    gdf_attrs_list =[{"name":f"waterpoint_{filename}","description":"A geopandas dataframe containing water point data with bbox applied as per user request.","count":len(gdf_list[0])},
-                     {"name":f"water_{filename}","description":"A geopandas dataframe containing water data with bbox applied as per user request.","count":len(gdf_list[1])}]
+    gdf_attrs_list =[{"name":f"waterpoint_{filename}",f"description":"A geopandas dataframe containing water point data with bbox applied for the query {query}.","count":len(gdf_list[0])},
+                     {"name":f"water_{filename}",f"description":"A geopandas dataframe containing water data with bbox applied for the query {query}.","count":len(gdf_list[1])}]
     
     for index, gdf in enumerate(gdf_list):
         gdf.attrs = gdf_attrs_list[index]
@@ -163,7 +163,7 @@ def query_water_features(bbox:str, filename:str):
 
 
 
-def query_water_network(bbox:str, filename:str):
+def query_water_network(bbox:str, filename:str,query:str):
     '''Utility function to query OS Data Hub Water Network API
     args:
         1. bbox : NGD Extent to limit the query
@@ -186,8 +186,8 @@ def query_water_network(bbox:str, filename:str):
       
     
     # Assign attributes to each GeoDataFrame
-    gdf_attrs_list =[{"name":f"waterlinkset_{filename}","description":"A geopandas dataframe containing water link set data with bbox applied as per user request.","count":len(gdf_list[0])},
-                     {"name":f"waterlink_{filename}","description":"A geopandas dataframe containing water link data with bbox applied as per user request.","count":len(gdf_list[1])}]
+    gdf_attrs_list =[{"name":f"waterlinkset_{filename}","description":f"A geopandas dataframe containing water link set data with bbox applied for the query {query}.","count":len(gdf_list[0])},
+                     {"name":f"waterlink_{filename}","description":f"A geopandas dataframe containing water link data with bbox applied for the query {query}.","count":len(gdf_list[1])}]
     
     for index, gdf in enumerate(gdf_list):
         gdf.attrs = gdf_attrs_list[index]
@@ -197,7 +197,7 @@ def query_water_network(bbox:str, filename:str):
     return gdf_list
 
 
-def query_land_features(bbox:str, filters:list, filename:str):
+def query_land_features(bbox:str, filters:list, filename:str,query:str):
     '''Utility function to query OS Data Hub Land API
     args:
         1. bbox : NGD Extent to limit the query
@@ -232,11 +232,11 @@ def query_land_features(bbox:str, filters:list, filename:str):
         gdf_list = gdf_filtered
 
     # Assign attributes to each GeoDataFrame
-    gdf_attrs_list =[{"name":f"land_{filename}","description":"A geopandas dataframe containing land data with filters and bbox applied as per user request.","count":len(gdf_list[0])},
-                     {"name":f"landpoint_{filename}","description":"A geopandas dataframe containing land point data with filters and bbox applied as per user request. Further name filtering is available for this","count":len(gdf_list[1])},
-                     {"name":f"landform_{filename}","description":"A geopandas dataframe containing land form data with filters and bbox applied as per user request.","count":len(gdf_list[2])},
-                     {"name":f"landformline_{filename}","description":"A geopandas dataframe containing land form line data with filters and bbox applied as per user request. Further name filtering is available for this","count":len(gdf_list[3])},
-                     {"name":f"landformpoint_{filename}","description":"A geopandas dataframe containing land form point data with filters and bbox applied as per user request.Further name filtering is available for this","count":len(gdf_list[4])}]
+    gdf_attrs_list =[{"name":f"land_{filename}","description":f"A geopandas dataframe containing land data with filters and bbox applied for the query {query}.","count":len(gdf_list[0])},
+                     {"name":f"landpoint_{filename}","description":f"A geopandas dataframe containing land point data with filters and bbox applied for the query {query}. Further name filtering is available for this","count":len(gdf_list[1])},
+                     {"name":f"landform_{filename}","description":f"A geopandas dataframe containing land form data with filters and bbox applied for the query {query}.","count":len(gdf_list[2])},
+                     {"name":f"landformline_{filename}","description":f"A geopandas dataframe containing land form line data with filters and bbox applied for the query {query}. Further name filtering is available for this","count":len(gdf_list[3])},
+                     {"name":f"landformpoint_{filename}","description":f"A geopandas dataframe containing land form point data with filters and bbox applied for the query {query}.Further name filtering is available for this","count":len(gdf_list[4])}]
     
     for index, gdf in enumerate(gdf_list):
         gdf.attrs = gdf_attrs_list[index]
@@ -248,3 +248,48 @@ def query_land_features(bbox:str, filters:list, filename:str):
         return None
     
     return gdf_list
+
+
+def query_land_use(bbox:str,filters:str,filename:str,query:str):
+    '''Utility function to query OS Data Hub Land API
+    args:
+        1. bbox : NGD Extent to limit the query
+        2. filter : list of filters to apply to the query
+        3. filename : name of the output file
+    output:
+        1. gdf : GeoDataFrame of the queried land features
+    '''
+    paths = [ os.path.join(BASE_PATH,r"lus_fts_site\lus_fts_site.gpkg")]
+    
+    # Read the geopackage files into geopandas dataframes
+    gdf_list = [gpd.read_file(path) for path in paths]
+
+    # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
+    if bbox:
+        entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
+        extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
+        gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
+    
+    if filters:
+        gdf_filtered = []
+        for gdf in gdf_list:
+            data_filtered = []
+            for filter in filters:
+                data_filtered.append(gdf[gdf["description"] == filter])
+            gdf_filtered.append(pd.concat(data_filtered, ignore_index=True))
+        gdf_list = gdf_filtered
+
+    # Assign attributes to each GeoDataFrame
+    gdf_attrs_list =[{"name":f"landuse_{filename}","description":f"A geopandas dataframe containing land use data with filters and bbox applied for the query {query}.","count":len(gdf_list[0])}]
+    
+    for index, gdf in enumerate(gdf_list):
+        gdf.attrs = gdf_attrs_list[index]
+    
+    # Return None if no dataframes are left after filtering
+    gdf_list = [gdf for gdf in gdf_list if not gdf.empty]
+    
+    if len(gdf_list) == 0:
+        return None
+    
+    return gdf_list
+

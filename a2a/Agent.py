@@ -54,12 +54,13 @@ class Agent():
         output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
         artifacts = None
         attempts = 0
+        query = messages[-1]["content"]
         if hasattr(output,"output"):
             while(output.output[-1].type=="function_call" and attempts < 50):
                 fn_calls = [i for i in output.output if i.type=="function_call"]
 
                 # running of tools without multithreading
-                messages,artifacts = self.run_tools(messages,fn_calls)
+                messages,artifacts = self.run_tools(messages,fn_calls,query)
                 attempts = attempts + 1
                 output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
 
@@ -68,7 +69,7 @@ class Agent():
         else:
             return output,None
     
-    def run_tools(self,messages,fn_calls):
+    def run_tools(self,messages,fn_calls,query):
 
         '''run tools will actually run the llm tool calls. However this functionality is limited to openai tool calling. Will later implement open source tool calling here and
         in run_llms
@@ -94,6 +95,7 @@ class Agent():
                 
                 if call.name == "call_os_ngd":
                     args["ngd_name"] = self.agent_identity.agent_name
+                    args["query"] = query
 
                 if call.name == "send_message":
                     args["agents"] = self.available_agents

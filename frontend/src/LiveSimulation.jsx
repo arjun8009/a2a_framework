@@ -63,6 +63,7 @@ export default function LiveSimulation(){
                     >
                     <MenuItem value="agent_config_with_human">Agent Config With Human</MenuItem>
                     <MenuItem value="agent_config">Agent Config</MenuItem>
+                    <MenuItem value="agent_config_with_human_updated">Agent Config With Human Updated</MenuItem>
                     </Select>
             </FormControl>
 
