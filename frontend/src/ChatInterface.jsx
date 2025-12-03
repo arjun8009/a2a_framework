@@ -56,6 +56,7 @@ export default function ChatUI(){
 
 
 
+
     const handleSend = async() =>{
 
         // create the new message

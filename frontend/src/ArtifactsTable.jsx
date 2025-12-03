@@ -32,7 +32,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.question}
+          {row.name}
         </TableCell>
       </TableRow>
       <TableRow>
@@ -45,19 +45,17 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Title</TableCell>
-                    <TableCell>Contexts</TableCell>
+                    {Object.keys(row.artifact[0] || {}).map((colname)=>(
+                        <TableCell key={colname}>{colname}</TableCell>
+                    ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.sources.map((historyRow) => (
-                    <TableRow key={historyRow.content}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.File}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {historyRow.content}
-                      </TableCell>
+                  {row.artifact.map((historyRow) => (
+                    <TableRow key={historyRow.osid}>
+                      {Object.keys(historyRow).map((colname)=>(
+                        <TableCell key={colname}>{historyRow[colname]}</TableCell>
+                      ))}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -77,12 +75,12 @@ export default function ArtifactsTable({rows}) {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Question</TableCell>
+            <TableCell>Artifacts</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row,index) => (
-            <Row key={row.question+index} row={row} />
+            <Row key={row.name+index} row={row} />
           ))}
         </TableBody>
       </Table>

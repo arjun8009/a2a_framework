@@ -4,6 +4,7 @@ from flask_cors import CORS
 import sys, os
 import json
 import joblib
+import geopandas as gpd
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.card_templates import *
 from utils.initialize_os_agents import OSAgentsInitializer
@@ -12,6 +13,7 @@ from utils.keys import set_api_keys
 set_api_keys()
 
 PATH_VISUALIZATION = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\visualization"
+PATH_ARTIFACTS = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\artifacts"
 
 app = Flask(__name__)
 CORS(app)
@@ -88,6 +90,18 @@ def receive_data():
     else:
         return [{"role":"assistant","content":response[0]}]
 
+@app.route("/get-artifacts",methods=["POST"])
+def extract_artifacts():
+    if len(os.listdir(PATH_ARTIFACTS)) == 0:
+        return {"data":{}}
+    else:
+        artifacts = [joblib.load(os.path.join(PATH_ARTIFACTS,i)) for i in os.listdir(PATH_ARTIFACTS)]
+        artifacts_filtered = [i for i in artifacts if isinstance(i.data,gpd.GeoDataFrame)]
+        artifacts_json = [{"name":i.name, "artifact":json.loads(i.data.drop(columns="geometry").copy().applymap(lambda x: x.isoformat() if hasattr(x, "isoformat") else x).to_json(orient="records"))} for i in artifacts_filtered]
+        return artifacts_json
+
+
+    
 
 
 

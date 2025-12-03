@@ -3,22 +3,15 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, IconButton }
 import CloseIcon from "@mui/icons-material/Close";
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
-import BasicTable from "./Table";
+import ArtifactsTable from "./ArtifactsTable";
 
-export default function ArtifactWindow({data, messages, open, onClose }) {
+export default function ArtifactWindow({data, open, onClose }) {
 
   const [isFullScreen, setIsFullScreen] = useState(false);
-  console.log("In window",messages)
   console.log("In Window",data)
-  const newmessages = messages.filter(item => item.role === 'user');
-  function createData(question,sources){
-    return {
-      question,
-      sources:sources
-    }
-  }
+  
 
-  const rows = newmessages.map((question, index) => createData(question.content, data[index].sources));
+  const rows = data
   console.log("In window",rows)
 
 
@@ -47,7 +40,7 @@ export default function ArtifactWindow({data, messages, open, onClose }) {
           </Button>
         </DialogTitle>
         <DialogContent>
-          <BasicTable rows={rows}/>
+          <ArtifactsTable rows={rows}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} color="primary">
