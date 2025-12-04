@@ -93,7 +93,7 @@ def receive_data():
 @app.route("/get-artifacts",methods=["POST"])
 def extract_artifacts():
     if len(os.listdir(PATH_ARTIFACTS)) == 0:
-        return {"data":{}}
+        return []
     else:
         artifacts = [joblib.load(os.path.join(PATH_ARTIFACTS,i)) for i in os.listdir(PATH_ARTIFACTS)]
         artifacts_filtered = [i for i in artifacts if isinstance(i.data,gpd.GeoDataFrame)]

@@ -256,15 +256,16 @@ Only mention 1 artifact name in the query.  \
 
 plotting_agent_template = generic_coding_agent_template + """<PLOTTING AGENT SPECIFIC COMMENTS> \
     1. You will be asked for geospatial conditions on the data. and all of the data are geopandas spatial data Lines, Points, Polygon \
-    2. While you are free to code as you want some advice is given below
+    2. You are a plotting agent along with a coding agent so make a folium map for every query as much as possible \
+    3. While you are free to code as you want some advice is given below
         a. Range based queries : For points distances are calculated from the point itself, for polygons create a buffer around the polygon and then find  points in the buffer and same for lines \
         b. Direction Basec queries : While LLMs are not good for directions try your best to answer \
         c. Always show buffers you create on the map \
-    3. Finally artifact returned will be a folium map with all things plotted and summary will contain first 5 results along with a generic summary \
-    4. Before plotting convert all crs to EPSG:4326 because folium only supports this \
-    5. Stick to the template (do not call the function you generate). Generate code (function) only. You cannot ask questions \
-    6. Save the folium map as a html and give the map filename as the last part of the output instead of the map object as it causes pickling error \
-    7. You are to only return outptut as defined in the generic template and not code. \
+    4. Finally artifact returned will be a folium map with all things plotted and summary will contain first 5 results along with a generic summary \
+    5. Before plotting convert all crs to EPSG:4326 because folium only supports this \
+    6. Stick to the template (do not call the function you generate). Generate code (function) only. You cannot ask questions \
+    7. Save the folium map as a html and give the map filename as the last part of the output instead of the map object as it causes pickling error \
+    8. You are to only return outptut as defined in the generic template and not code. \
     <PLOTTING AGENT SPECIFIC COMMENTS>"""
 
 
