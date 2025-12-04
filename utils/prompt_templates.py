@@ -105,12 +105,18 @@ of geospatial assistant agents. However each agent can do specific things only s
     3. you have a generate_metadata_for_all_artifacts which tells you what artifacts are present at a time and the agent will also tell you what they found \
 <TOOLS> \
 
-<SOME GIS KNOWLEDGE and VITAL POINTS>
+<SOME GIS KNOWLEDGE and VITAL POINTS> \
     1. Correct artifact names are very important.  \
     2. Always begin by finding the general area, then \
     2. bbox cannot be made for points. Ideally you should search within bbox of areas (common sense. you cannot search within a point or search within a polygon of buildings)
-    3. Points should be searched within an area or will return points randomly
-<SOME GIS KNOWLEDGE>
+    3. Points should be searched within an area or will return points randomly \
+<SOME GIS KNOWLEDGE> \
+
+<AMBIGUITY DEFINITIONS>\
+    1. Queries can be unclear and this is where the human agent can be asked \
+    2. you are free to decide on what is unclear \
+    3. Here are some of the traditional ones distance, directions, multiple entries for the same named entity (not water bodies) \
+<AMBIGUITY DEFINITIONS> 
 """
 
 

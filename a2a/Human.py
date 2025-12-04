@@ -21,5 +21,5 @@ class Human():
         
         print("Messages for human to process:", messages[-1]["content"])
         #output = input("Please provide your response:")
-        return messages[-1]["content"],None
+        return f"<HUMAN AGENT>The agent wants help for the following query : \n query : {messages[-1]["content"]}",None
     
