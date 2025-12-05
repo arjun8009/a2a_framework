@@ -14,7 +14,7 @@ generic_coding_agent_template = """You are a coding agent whose task is to gener
             
             NOTE: An artifact here is a data object, it can be a pandas dataframe, geopandas dataframe or a plot object only. \
             if an artifact is to be generated then return [a summary of the output, artifact name, artifact description, artifact data ] where : \
-                a. summary of the output : A brief description of the results or summary of the results \
+                a. summary of the output : A brief description of the results or summary of the results including number of entries and other feasible information \
                 b. artifact name : A short name for any output data artifact you generate. \
                 c. artifact description : A detailed description of the artifact you are generating. \
                 d. artifact data : The actual data object you are generating. only 3 types dataframe, plots, geodataframe are allowed. \
@@ -132,6 +132,12 @@ planning_agent_prompt = """You are a planning agent for solving geospatial queri
             d. Information about count of entities needs to be captured if required \
             e. If the general area is not clear you must ask the user to clarify it before making steps \
     <REASONING STEPS> \
+    <AMBIGUITY DEFINITIONS>\
+    1. Queries can be unclear and this is where the human agent can be asked \
+    2. you are free to decide on what is unclear \
+    3. Here are some of the traditional ones distance, directions, multiple entries for the same named entity (not water bodies) \
+    <AMBIGUITY DEFINITIONS> \
+
     <EXAMPLES> \
         Query : Find places to eat in Exeter \
         <Internal Thoughts> area is exeter so 1 entry of Exeter, entities is places to eat, need to search for places to eat in exeter as many entires as possible <Thoughts> \
@@ -175,9 +181,10 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
     9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
-Only mention 1 artifact name in the query.  \
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
+    1. Only mention 1 artifact name in the query.  \
+    2. Filters are generic and named entities search require further analysis \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
     <FILTERS AVAILABLE>
     {get_filterable_features("bld-fts-building-3")} + \n {get_filterable_features("bld-fts-buildingline")} \n {get_filterable_features("bld-fts-buildingpart")} 
@@ -217,9 +224,10 @@ places_prompt = f""" You are a search agent for ordance surveys address database
     {get_filterable_features("address")}
 <FILTERS AVAILABLE>
 
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
-Only mention 1 artifact name in the query.  \
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
+1. Only mention 1 artifact name in the query.  \
+2. Filters are generic and named entities search require further analysis \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 """
 
 
@@ -246,16 +254,17 @@ A named area by OS is defined as : A settlement, locality, geographical feature,
         b. point_or_polygon : boolean = True if searching polygon data else False \
         c. filename : str = The name of the file to save the artifact as \
     3. The tool will return to you number of search results and the artifact names.\
-    4. The search is very rugged and if you need to filter further you may use the coding agent but do not ask it to search artifact a in artifact b. You can ask the coding tool what you can filter on as adding it to the prompt would be big \
+    4. The search is very rugged and if you need to filter entites then coding agent is a must but do not ask it to search artifact a in artifact b. You can ask the coding tool what you can filter on as adding it to the prompt would be big \
     5. Finally return the filtered artifact names only and the results of your search. \
     6. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
     7. Provide a filename for the coding agent to save the filtered results as well \
     8. 9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
-Only mention 1 artifact name in the query.  \
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
+1. Only mention 1 artifact name in the query.  \
+2. Filters not applied here and named entities search require further analysis \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
 
 """
@@ -303,9 +312,10 @@ water_features_prompt = f""" You are a search agent for ordance surveys water fe
     9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
-Only mention 1 artifact name in the query.  \
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
+1. Only mention 1 artifact name in the query.  \
+2. Filters are not available here and named entities search require further analysis \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
 """
 
@@ -336,9 +346,10 @@ water_network_prompt = f""" You are a search agent for ordance surveys water net
     9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES>
 
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
-Only mention 1 artifact name in the query.  \
-<CONSTRAINT FOR DATA ANALYSIS AGENT>
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
+1. Only mention 1 artifact name in the query.  \
+2. Filters are not available and named entities search require further analysis \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
 """
 land_features_prompt = f""" You are a search agent for ordance surveys land features database, Given a query you will try to find relevant data using call_os_ngd tool \
@@ -372,9 +383,10 @@ land_features_prompt = f""" You are a search agent for ordance surveys land feat
     9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES> \
 
-<CONSTRAINT FOR DATA ANALYSIS AGENT> \
-Only mention 1 artifact name in the query.  \
-<CONSTRAINT FOR DATA ANALYSIS AGENT> \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL> \
+1. Only mention 1 artifact name in the query.  \
+2. Filters are generic and named entities search require further analysis \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL> \
 
 <FILTERS AVAILABLE> \
     {get_filterable_features("lnd-fts-land")} + \n {get_filterable_features("lnd-fts-landpoint")} + \n 
@@ -415,9 +427,10 @@ land_use_features_prompt = f""" You are a search agent for ordance surveys land 
     9. Use the generate_metadata_for_all_artifacts tool to understand what artifacts are present at a time in case the query does not mention the artifact for bbox parameter. \
 </PRINCIPLES> \
 
-<CONSTRAINT FOR DATA ANALYSIS AGENT> \
-Only mention 1 artifact name in the query.  \
-<CONSTRAINT FOR DATA ANALYSIS AGENT> \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL> \
+1. Only mention 1 artifact name in the query.  \
+2. Filters are generic and named entities search require further analysis \
+<CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL> \
 
 <FILTERS AVAILABLE> \
     {get_filterable_features("lus-fts-site")} 

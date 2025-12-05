@@ -88,7 +88,7 @@ def receive_data():
             return [{"role":"assistant","content":response[0]}]
 
     else:
-        return [{"role":"assistant","content":response[0]}]
+        return [{"role":"assistant","content":response}]
 
 @app.route("/get-artifacts",methods=["POST"])
 def extract_artifacts():

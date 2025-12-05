@@ -217,14 +217,21 @@ def code_executor(**kwargs):
         function_name = [name for name in namespace if callable(namespace[name])][-1]
         print("function name",function_name)
         output = namespace[function_name](data=data)
+        print("Output completed")
         # We are assuming that the output of the coding agent will be  a list of 4 things [summary of output, artifact name, artifact description, artifact data ], None if no artifact
         if isinstance(output,list):
 
             # if a valid artifact is returned we will save it to the artifacts folder so that it can be used later
             if output[1] is not None and output[2] is not None and output[3] is not None:
                 artifact = Artifact(name=output[1],description=output[2],data=output[3])
-                joblib.dump(artifact, os.path.join(ARTIFACT_PATH,f"{artifact.name}.pkl"))
-                return [output[0], Artifact(name=output[1],description=output[2],data=output[3])]
+                if isinstance(output[3], (gpd.GeoDataFrame, gpd.GeoSeries)):
+                    if not output[3].empty:
+                        joblib.dump(artifact, os.path.join(ARTIFACT_PATH,f"{artifact.name}.pkl"))
+                        return [output[0], Artifact(name=output[1],description=output[2],data=output[3])]
+                    return "The search return no results and no artifacts are generated"
+                else:
+                    joblib.dump(artifact, os.path.join(ARTIFACT_PATH,f"{artifact.name}.pkl"))
+                    return [output[0], Artifact(name=output[1],description=output[2],data=output[3])]
             else:
                 return output[0]
         else:
@@ -241,6 +248,13 @@ def human_send_message(message:str, target_agent:list):
     output:
         The updated task
     '''
+
+    try:
+        interaction = {"source":"human_agent", "target":"host_agent", "msg":message}
+        requests.post("http://localhost:5000/interact",json=interaction)
+    except Exception as e:
+        print("OFFLINE MODE")
+        
     output = send_message(source="human_agent",
                     target="host_agent",
                     task_description=message,

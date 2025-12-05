@@ -46,9 +46,9 @@ def query_address(filters:list, bbox:str, street_address:bool, filename:str, que
         gdf = pd.concat(data_filtered, ignore_index=True)
     
     if not street_address:
-        gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing address data with filters and bbox applied for the query {query}.","count":len(gdf)}
+        gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing address data with filters and bbox applied for the query {query}. Further Name filtering is available for this","count":len(gdf)}
     else:
-        gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing street address data with filters and bbox applied for the query {query}.","count":len(gdf)}
+        gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing street address data with filters and bbox applied for the query {query}.Further Name filtering is available for this","count":len(gdf)}
 
     if gdf.empty:
         return None
@@ -123,7 +123,7 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str,query:s
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf = gpd.clip(gdf, extent_polygon)
     
-    gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing named area data with bbox applied but no filters applied for the query {query}.","count":len(gdf)}
+    gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing named area data with no filters applied for the query (so remember no search is performed here so spurious entities present) {query}.","count":len(gdf)}
     return gdf
 
 
@@ -232,7 +232,7 @@ def query_land_features(bbox:str, filters:list, filename:str,query:str):
         gdf_list = gdf_filtered
 
     # Assign attributes to each GeoDataFrame
-    gdf_attrs_list =[{"name":f"land_{filename}","description":f"A geopandas dataframe containing land data with filters and bbox applied for the query {query}.","count":len(gdf_list[0])},
+    gdf_attrs_list =[{"name":f"land_{filename}","description":f"A geopandas dataframe containing land data with filters and bbox applied for the query {query}. ","count":len(gdf_list[0])},
                      {"name":f"landpoint_{filename}","description":f"A geopandas dataframe containing land point data with filters and bbox applied for the query {query}. Further name filtering is available for this","count":len(gdf_list[1])},
                      {"name":f"landform_{filename}","description":f"A geopandas dataframe containing land form data with filters and bbox applied for the query {query}.","count":len(gdf_list[2])},
                      {"name":f"landformline_{filename}","description":f"A geopandas dataframe containing land form line data with filters and bbox applied for the query {query}. Further name filtering is available for this","count":len(gdf_list[3])},
@@ -280,7 +280,7 @@ def query_land_use(bbox:str,filters:str,filename:str,query:str):
         gdf_list = gdf_filtered
 
     # Assign attributes to each GeoDataFrame
-    gdf_attrs_list =[{"name":f"landuse_{filename}","description":f"A geopandas dataframe containing land use data with filters and bbox applied for the query {query}.","count":len(gdf_list[0])}]
+    gdf_attrs_list =[{"name":f"landuse_{filename}","description":f"A geopandas dataframe containing land use data with filters and bbox applied for the query {query}. Further Name filtering is available for this","count":len(gdf_list[0])}]
     
     for index, gdf in enumerate(gdf_list):
         gdf.attrs = gdf_attrs_list[index]

@@ -62,7 +62,7 @@ class Agent():
                 # running of tools without multithreading
                 messages,artifacts = self.run_tools(messages,fn_calls,query)
                 if "<HUMAN>" in messages[-1]["output"]:
-                    return messages[-1]["output"].replace("<HUMAN AGENT>",""),None
+                    return messages[-1]["output"],None
                 attempts = attempts + 1
                 output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
 
