@@ -115,7 +115,7 @@ class Agent():
                     args["data"] = [i for i in self.artifacts_req]
 
                 result = self.tools[call.name](**args)
-                #print(f"Tool {call.name} returned result : {result}")
+                print(f"Tool {call.name} returned result : {result}")
 
 
 

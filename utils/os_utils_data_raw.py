@@ -149,6 +149,8 @@ def query_water_features(bbox:str, filename:str,query:str):
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
+    gdf_list = [i for i in gdf_list if not i.empty]
+    
     
     # Assign attributes to each GeoDataFrame
     gdf_attrs_list =[{"name":f"waterpoint_{filename}",f"description":"A geopandas dataframe containing water point data with bbox applied for the query {query}.","count":len(gdf_list[0])},

@@ -36,6 +36,7 @@ generic_coding_agent_template = """You are a coding agent whose task is to gener
         4. Make sure that the search results are relevant to the query asked. like if Exe river is requested, you do not return exe street \
         5. stick to the code template provided and output format \
         6. Never return code but only the output as defined \
+        7. Keep on making code and handle the errors do not return error as output \
     <POLICIES> \
     
     <RESPONSE EXPECTATION> : \
@@ -96,7 +97,8 @@ of geospatial assistant agents. However each agent can do specific things only s
 
 <VITAL NOTE>
 1. Agents cannot go gis operations like ranges, intersections etc. They are good at filtering and searches. These GIS operations need to be done at the end by plotting agent \
-2. Always reuse artifacts they are stored so call the generate_metadata_for_all_artifacts too to know what information you have. This is mandatory for all questions follow up or new \
+2. Always reuse artifacts they are stored so call the generate_metadata_for_all_artifacts too to know what information you have. This is mandatory for all questions follow up or new. \
+3. Do not stop if information is not found in 1 database try in other relevant ones \
 <VITAL NOTE>\
 
 <TOOLS> \
@@ -126,7 +128,7 @@ planning_agent_prompt = """You are a planning agent for solving geospatial queri
         1. Given a query you will read the query and understand it \
         2. You will make a number of steps required to solve the query \
         3. For any given query the following will be the though process to define the steps \
-            a. Identify the general geographical area of the query can be city, county, national park etc \
+            a. Identify the general geographical area of the query can be city, county or country \
             b. Entities must be searched within the geographical area \
             c. Finaly conditions in the query must be applied because multiple geographic names or entities maybe present so we need to tell which ones we need 1 and which ones we can have many off \
             d. Information about count of entities needs to be captured if required \

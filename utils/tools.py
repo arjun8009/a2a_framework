@@ -14,6 +14,7 @@ import joblib
 import os
 import inspect
 import requests
+import traceback
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
 
@@ -237,8 +238,8 @@ def code_executor(**kwargs):
         else:
             return output
     except Exception as e:
-        print(e)
-        return e
+        print(traceback.format_exc())
+        return traceback.format_exc()
 
 def human_send_message(message:str, target_agent:list):
     '''This function will be a stopgap for human to send messages to other agents, currently only host agent
