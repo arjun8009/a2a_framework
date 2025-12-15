@@ -16,3 +16,7 @@ folium
 tabulate
 osdatahub
 flask_socketio
+transformers
+accelerate
+peft
+trl
