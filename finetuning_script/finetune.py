@@ -2,15 +2,15 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import torch
 from huggingface_hub import login
 import os
-from utils.keys import set_api_keys
 from peft import LoraConfig, get_peft_model
 import pandas as pd
 from trl import SFTTrainer
 import gc
 
-set_api_keys()
 DATA_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\test_data_for_ambiguity\dataset_mapeval_approved_ambiguities_updated.csv"
-hf_token = os.environ.get("HF_TOKEN")
+
+
+hf_token = "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"
 login(hf_token)
 
 # This is quantization we can aim for 16 bit quantization. not currently using it
@@ -22,13 +22,14 @@ bnb_config = BitsAndBytesConfig(
 )
 
 # We load the model and use FP16 for training settings
-model_dir = "Qwen/Qwen3-32B"
+model_dir = "Qwen/Qwen3-30B-A3B"
 tokenizer = AutoTokenizer.from_pretrained(model_dir, use_fast=True)
 model = AutoModelForCausalLM.from_pretrained(
     model_dir,
     device_map="auto",  
     torch_dtype=torch.bfloat16,
-    trust_remote_code=True             
+    trust_remote_code=True,
+    quantization_config = bnb_config            
 )
 
 model.config.use_cache = False
@@ -52,6 +53,7 @@ def preprocess_data_with_eos(eos_token,examples):
         for q,a in zip(queries,answers):
             a += eos_token
             chat = [
+                {"role":"system","content":system_prompt},
                 {"role":"user", "content":q},
                 {"role":"assistant","content":a}
             ]
@@ -60,7 +62,6 @@ def preprocess_data_with_eos(eos_token,examples):
         return {"messages":chats}
     
     dataset = examples.map(preprocess_examples,batched=True)
-    dataset["messages"].insert(0,{"role":"system","content":system_prompt})
     return dataset
 
 
@@ -128,3 +129,31 @@ model.config.use_cache = False
 trainer.train()
 
 
+# Inference
+
+question = "Find places to eat near st Davids station in Exeter"
+
+# Set it in a way accepted by the formatting function
+text_example = {"messages":[{"role":"system","content":system_prompt + tokenizer.eos_token},
+                {"role":"user","content":question + tokenizer.eos_token}]}
+
+# Now apply the chat template
+formatted_text_example = formatting_function(text_example)
+
+inputs = tokenizer(
+    formatted_text_example,
+    return_tensors="pt"
+).to("cuda")
+
+
+outputs = model.generate(
+    input_ids=inputs.input_ids,
+    attention_mask=inputs.attention_mask,
+    max_new_tokens=2048,
+    eos_token_id=tokenizer.eos_token_id,
+    use_cache=True,
+)
+
+response = tokenizer.batch_decode(outputs, skip_special_tokens=True)
+
+print("Inferrence Response")

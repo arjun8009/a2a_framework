@@ -20,3 +20,4 @@ transformers
 accelerate
 peft
 trl
+bitsandbytes
