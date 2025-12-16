@@ -35,3 +35,18 @@ Unnamed: 0,index,question,answer,classification,approve,reason
 33,296,I am currently at Dublin Castle. Find a nearby atm which is at north of the castle.,0,unanswerable,y,"Ambiguity of distance: terms like 'nearest/nearby/close' do not specify an exact distance threshold (e.g., within 200 m vs 2 km); relative positioning ('left side', cardinal directions) depends on the chosen route or map orientation"
 34,297,I am going from Menteng to Kebayoran Baru by car. Find a good coffee shop based on rating on the left side of the road.,0,unanswerable,y,"Ambiguity of distance: relative positioning ('left side', cardinal directions) depends on the chosen route or map orientation | Other ambiguity: subjective qualifiers like 'best/good/renowned' lack criteria (rating source, style, price range)"
 35,299,I'm in Bangkok and want to visit some tourist attractions. Which nearby attractions are the most renowned?,0,unanswerable,y,"Ambiguity of distance: terms like 'nearest/nearby/close' do not specify an exact distance threshold (e.g., within 200 m vs 2 km) | Other ambiguity: subjective qualifiers like 'best/good/renowned' lack criteria (rating source, style, price range)"
+36,500,Where are vegan friendly restaurants in a 1km radius of University of Exeter ?,0,answered,y,No ambiguity s there is only 1 university of Exeter and the city name is also exeter and the distance Is also given
+37,501,Castles that I can visit in Devon,0,answered,y,No ambiguity as devon is in UK
+38,502,Youth hostels in Snowdonia,0,answered,y,No ambiguity as general location of Snowdonia is mentioned
+39,503,Show me the hospitals and medical centres in Swansea?,0,answered,y,No ambiguity as city names are mentioned
+40,504, Child friendly activities to do in Edinburgh,0,answered,y,No ambiguity as city names are mentioned
+41,505,Lakes near University of Reading,0,answered,y,Ambiguity of distance what does near mean
+42,506,Exeter banks farther than a mile to any police station,0,answered,y,No Ambiguity as place name is Exeter and no directional or distance based ambiguity
+43,507,Give me the nearest Health Center near John Lewis in Exeter sidwell street ?,0,answered,y,No ambiguity as location is sidwell street in Exeter and distance is mentioned in a comparitive sense
+44,508, Give me locations of 24 hrs gas station in Exeter ?,0,answered,y,No ambiguity as query is specific with place name and description of gas station
+45,509,The most beautiful route from Cathedral to Quayside ,0,answered,y,Ambiguity of POI as where is the cathedral located and Other Ambiguity as what is meant by most beautiful route
+46,510, Is there any bicycle hire in Exeter ?,0,answered,y,No Ambiguity as place name is Exeter and no directional or distance based ambiguity
+47,511,The best  rating barbor shops in Exeter ?,0,answered,y ,No Ambiguity as place name is Exeter and no directional or distance based ambiguity
+48,512,Where can I park my car near Innovation Centre in Exeter,0,answered,y,Ambiguity of distance what does near mean
+49,513,List the community centres in the Tyne and Wear ? ,0,answered,y,No Ambiguity Tyne and wear is a county in UK
+50,514,Find suitable locations for solar farms in London?,0,answered,y,No Ambiguity as all information is provided in query
