@@ -37,6 +37,8 @@ registry = {
     "land_use_features_agent_card":land_use_features_agent_card,
     "land_features_prompt":land_features_prompt,
     "land_use_features_prompt":land_use_features_prompt,
+    "structure_prompt":structure_prompt,
+    "structure_agent_card":structure_agent_card,
     "planning_agent_card":planning_agent_card,
     "planning_agent_prompt":planning_agent_prompt,
     "generate_metadata_for_all_artifacts":generate_metadata_for_all_artifacts,

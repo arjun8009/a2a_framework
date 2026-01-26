@@ -295,3 +295,37 @@ def query_land_use(bbox:str,filters:str,filename:str,query:str):
     
     return gdf_list
 
+def query_structure(bbox:str, filters:list, filename:str,query:str):
+    '''Utility function to query OS Data Hub Structure API
+    args:
+        1. bbox : NGD Extent to limit the query
+        2. filter : list of filters to apply to the query
+        3. filename : name of the output file
+    output:
+        1. gdf : GeoDataFrame of the queried structure features'''
+    
+    path = os.path.join(BASE_PATH,r"str_fts_structure\str_fts_structure.gpkg")
+    
+    # Read the geopackage file into geopandas dataframe
+    gdf = gpd.read_file(path)
+
+    # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
+    gdf = gdf.set_crs(epsg=27700)
+
+    if bbox:
+        entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
+        extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
+        gdf = gpd.clip(gdf, extent_polygon)
+    
+    if filters:
+        data_filtered = []
+        for filter in filters:
+            data_filtered.append(gdf[gdf["description"] == filter])
+        gdf = pd.concat(data_filtered, ignore_index=True)
+    
+    gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing structure data with filters and bbox applied for the query {query}. Further Name filtering is available for this","count":len(gdf)}
+    
+    if gdf.empty:
+        return None
+
+    return gdf
