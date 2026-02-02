@@ -21,6 +21,9 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Predefined agents
 
+@app.route("/Health", methods=['GET'])
+def health_check():
+    return {"status":"success"},200
 
 @app.route("/config-choice",methods=['POST'])
 def initialise_config():

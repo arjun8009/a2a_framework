@@ -8,7 +8,7 @@
             "tool_definitions":["send_message_definitions","metadata_all_artifacts"],
             "additional_args":{"parallel_tool_calls":false},
             "system_instruction":"host_prompt_template_for_os_version_2",
-            "available_agents":["planning_agent","address_agent","named_area_agent","buildings_agent","water_features_agent","water_network_agent","land_features_agent","land_use_features_agent","plotting_agent","human"]
+            "available_agents":["planning_agent","address_agent","named_area_agent","buildings_agent","water_features_agent","water_network_agent","land_features_agent","land_use_features_agent","structures_agent","plotting_agent","human"]
         },
         {
             "agent_name":"planning_agent",

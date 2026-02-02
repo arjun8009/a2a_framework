@@ -98,7 +98,7 @@ named_area_agent_card = AgentCard(agent_name="named_area",
                                     input_modes=["query : string"],
                                     output_modes=["output and the artifact name"])
 
-structure_agent_card = AgentCard(agent_name="structure_agent",
+structure_agent_card = AgentCard(agent_name="structures_agent",
                                 agent_description="a search agent for ordance surveys structure database within an area, Polygon feature representing a manmade construction that is not a building. Examples include a mast, a chimney, crane, solar panel etc, Artifacts are structure polygons",
                                 capabilities=["1. Given a structure type or description it will search it in an area artifact",
                                              "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",

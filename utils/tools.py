@@ -38,7 +38,8 @@ def call_os_ngd(**kwargs):
                        "water_features":query_water_features,
                        "water_network":query_water_network,
                        "land_features":query_land_features,
-                       "land_use_features":query_land_use}
+                       "land_use_features":query_land_use,
+                       "structures_agent":query_structure}
     
     args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
     
@@ -46,6 +47,7 @@ def call_os_ngd(**kwargs):
         result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args) })
     except Exception as e:
         print("Exception while calling NGD")
+        print(traceback.format_exc())
         return "There was an error while calling NGD. Most probable cause is wrong artifact name for bbox parameter. Try a few times with the correct artifact names."
 
     if not isinstance(result,list):

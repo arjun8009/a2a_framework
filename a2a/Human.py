@@ -1,4 +1,5 @@
 from a2a.AgentCard import AgentCard
+import requests
 
 
 class Human():
@@ -20,6 +21,12 @@ class Human():
             1. output : ouptut of the human can be string, schema and in a later stage data artifacts'''
         
         print("Messages for human to process:", messages[-1]["content"])
-        #output = input("Please provide your response:")
-        return f'<HUMAN AGENT>The agent wants help for the following query : \n query : {messages[-1]["content"]}',None
+        try:
+            status = requests.get("http://localhost:5000/Health")
+            if status.status_code == 200:
+                return f'<HUMAN AGENT>The agent wants help for the following query : \n query : {messages[-1]["content"]}',None
+        except Exception as e:
+            print("OFFLINE MODE : Please provide your response to the following query:")
+            output = input("Please provide your response:")
+            return output,None
     

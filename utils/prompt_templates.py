@@ -171,7 +171,7 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
         Then return that you cannot solve this\
     ELSE\
     2. call the os ngd tool with the appropriate params \
-        b. filters: list = A list of filters which are provided below \
+        b. filters: list = A list of filters which are provided below if any are required \
         c. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
         d. filename : str = The name of the file to save the artifact as \
     3. The tool will return to you number of search results and the artifact names.\
@@ -186,6 +186,9 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
     1. Only mention 1 artifact name in the query.  \
     2. Filters are generic and named entities search require further analysis \
+    3. Use of filters is optional for example if user wants all buildings with roof height>10 or with more than 1 feature then use all buildings without filters and then filter using coding agent to filter it further \
+    4. **REMEMBER:** A home or a house in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1. So add these conditions with other conditions in the query for houses or home. If you see this term, it should be your default behavior irrespective of what the user says \
+    5. eg: <description> home or house would lead to using the above conditions + filtering for description like black home would lead to searching for homes using the coding agent and then tell it to filter for color black \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
     <FILTERS AVAILABLE>
@@ -198,7 +201,7 @@ Structure is defined as Polygon feature representing a manmade construction that
 <CAPABILITIES OF API>
     1. The API can search structures by applying some filters in 2 ways \
         a. within an area or bbox \
-    2. It does not have names of buildings. It also has other features but you can use a coding agent to try and filter further using the returned data \
+    2. It does not have names of structures. It also has other features but you can use a coding agent to try and filter further using the returned data \
     3. bbox is mandatory here (practically you should search structures in an area)
 
 <PRINCIPLES>\
@@ -222,6 +225,7 @@ Structure is defined as Polygon feature representing a manmade construction that
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
     1. Only mention 1 artifact name in the query.  \
     2. Filters are generic and named entities search require further analysis \
+    3. Use of filters is optional  \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
     <FILTERS AVAILABLE>
@@ -318,6 +322,7 @@ plotting_agent_template = generic_coding_agent_template + """<PLOTTING AGENT SPE
     6. Stick to the template (do not call the function you generate). Generate code (function) only. You cannot ask questions \
     7. Save the folium map as a html and give the map filename as the last part of the output instead of the map object as it causes pickling error \
     8. You are to only return outptut as defined in the generic template and not code. \
+    9. 5. **REMEMBER** use relativeroofbase column features to find heights of buildings correctly and absolute_min or max column to find the highest point of a building like a chimney or a lowest point of a building (do not use it for finding heights of buildings) \
     <PLOTTING AGENT SPECIFIC COMMENTS>"""
 
 
@@ -353,7 +358,6 @@ water_features_prompt = f""" You are a search agent for ordance surveys water fe
 1. Only mention 1 artifact name in the query.  \
 2. Filters are not available here and named entities search require further analysis \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
-
 """
 
 
