@@ -2,9 +2,10 @@
 import warnings
 warnings.filterwarnings("ignore")
 from utils.registry import registry
+import logging
 
 class OSAgentsInitializer():
-    def __init__(self, config):
+    def __init__(self, config, logging_filename = "log"):
         '''
         This class accepts a dictionary of agent configurations and initializes OS agents accordingly.
         args:
@@ -17,6 +18,10 @@ class OSAgentsInitializer():
                 - system_instruction : System-level instructions for the agent
         '''
         self.agent_dict = config
+        self.logging_filename = logging_filename
+        logging.basicConfig(filename=f"evaluation/evaluation_logs/{self.logging_filename}.log",format="%(asctime)s" "%(levelname)s %(message)s",filemode='w')
+        self.logger = logging.getLogger()
+        self.logger.setLevel(logging.INFO)
     
     def initialize_agent(self,agentconfig:dict):
 
@@ -38,7 +43,8 @@ class OSAgentsInitializer():
                 schema=registry[agentconfig.get("schema",None)] if agentconfig.get("schema",None) is not None else None,
                 additional_args=agentconfig.get("additional_args",None),
                 system_instruction=registry[agentconfig.get("system_instruction",None)],
-                available_agents=None
+                available_agents=None,
+                logger = self.logger
             )
     
     def add_agent_dependencies(self,initialized_agents:dict):
@@ -64,7 +70,7 @@ class OSAgentsInitializer():
         initialized_agents = {}
         for agent_config in self.agent_dict:
             initialized_agents[agent_config["agent_name"]] = self.initialize_agent(agent_config)
-            print(f"""Agent {agent_config["agent_name"]} Initialised""")
+            self.logger.info(f"""Agent {agent_config["agent_name"]} Initialised""")
         self.add_agent_dependencies(initialized_agents)
         return initialized_agents
     

@@ -42,18 +42,18 @@ def call_os_ngd(**kwargs):
                        "structures_agent":query_structure}
     
     args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
+    logger = kwargs["logger"]
     
     try:
-        result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args) })
+        result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args and k!="logger") })
     except Exception as e:
-        print("Exception while calling NGD")
-        print(traceback.format_exc())
+        logger.exception("Exception in call os ngd",e)
         return "There was an error while calling NGD. Most probable cause is wrong artifact name for bbox parameter. Try a few times with the correct artifact names."
 
     if not isinstance(result,list):
-        print("NGD query result", result.attrs if result is not None else "No results found")
+        logger.info("NGD query result %s",result)
     else:
-        print("NGD query result", [df.attrs for df in result] if result is not None else "No results found")
+        logger.info("NGD query result %s",result)
 
     if result is not None:
 
@@ -103,6 +103,7 @@ def send_message(**kwargs):
     task_description = kwargs["task_description"]
     agents = kwargs["agents"]
     source = kwargs["source"]
+    logger = kwargs["logger"]
 
     agent_names = [i.agent_identity.agent_name for i in agents]
     
@@ -128,18 +129,18 @@ def send_message(**kwargs):
     if len(messages_list) > 10:
         messages_list = messages_list[-10:]
 
-    print(f"Messages sent to agent {target}", messages_list)
+    logger.info(f"Messages sent to agent {target} : {messages_list}")
     task = Task(messages=messages_list,task_id=task_id)
 
-    output = SendMessage(task,agent).send_messages()
+    output = SendMessage(task,agent,logger).send_messages()
     # Return the output of the agent to visualise
     try:
         interaction = {"source":target, "target":source, "msg":output.task_output}
         requests.post("http://localhost:5000/interact",json=interaction)
-        print(f"Output from agent {target} :", output.task_output)
+        logger.info(f"Output from agent {target} : {output.task_output}")
     except Exception as e:
-        print("OFFLINE MODE")
-        print(f"Output from agent {target} :", output.task_output)
+        logger.warning("OFFLINE MODE")
+        logger.info(f"Output from agent {target} : {output.task_output}")
 
     if output.task_status == "success":
         
@@ -173,13 +174,14 @@ def generate_metadata_for_artifacts(**kwargs):
     
 
     artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if name+".pkl" in os.listdir(ARTIFACT_PATH)]
-    print("artifacts loaded for metadata generation", [i.name for i in artifacts])
+    logger = kwargs["logger"]
+    logger.info(f"artifacts loaded for metadata generation : {[i.name for i in artifacts]}")
     columns = [list(df.data.columns) for df in artifacts]
     first_five_rows = [df.data.head() for df in artifacts]
     filenames = [df.name for df in artifacts]  
     return columns,first_five_rows,filenames
 
-def generate_metadata_for_all_artifacts():
+def generate_metadata_for_all_artifacts(**kwargs):
 
     '''Function to generate metadata for artifacts passed to it
     args:
@@ -189,9 +191,8 @@ def generate_metadata_for_all_artifacts():
         2. first_five_rows : A list of dataframes containing first five rows of each artifac
         3. filenames : filename of each artifact'''
     
-
+    logger = kwargs["logger"]
     artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}")) for name in os.listdir(ARTIFACT_PATH)]
-    print("artifacts loaded for metadata generation", [i.name for i in artifacts])
     metadata = {i.name:i.description for i in artifacts}
     return metadata
 
@@ -211,16 +212,16 @@ def code_executor(**kwargs):
     artifact_names = kwargs["artifact_names"]
     data = kwargs.get("data",None)
     data = [i.data for i in data if i.name in artifact_names] if data is not None else [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")).data for name in artifact_names if name+".pkl" in os.listdir(ARTIFACT_PATH)]
-
+    logger = kwargs["logger"]
     try:
         namespace = {}
         code = "import matplotlib\nmatplotlib.use('Agg')\n" + code
-        print("Executing code:\n")
+        logger.info(f"Executing code {code}")
         exec(code,namespace)
         function_name = [name for name in namespace if callable(namespace[name])][-1]
-        print("function name",function_name)
+        logger.info(f"function name {function_name}")
         output = namespace[function_name](data=data)
-        print("Output completed")
+        logger.info("Output completed")
         # We are assuming that the output of the coding agent will be  a list of 4 things [summary of output, artifact name, artifact description, artifact data ], None if no artifact
         if isinstance(output,list):
 
@@ -240,7 +241,7 @@ def code_executor(**kwargs):
         else:
             return output
     except Exception as e:
-        print(traceback.format_exc())
+        logger.exception("ERROR EXECUTING CODE %s",e)
         return traceback.format_exc()
 
 def human_send_message(message:str, target_agent:list):
@@ -251,15 +252,17 @@ def human_send_message(message:str, target_agent:list):
     output:
         The updated task
     '''
-
+    logger = target_agent[0].logger
     try:
+        logger.info(f"sending message from human to host {message}")
         interaction = {"source":"human_agent", "target":"host_agent", "msg":message}
         requests.post("http://localhost:5000/interact",json=interaction)
     except Exception as e:
-        print("OFFLINE MODE")
+        logger.info("OFFLINE MODE")
         
     output = send_message(source="human_agent",
                     target="host_agent",
                     task_description=message,
-                    agents=target_agent)
+                    agents=target_agent,
+                    logger=logger)
     return output

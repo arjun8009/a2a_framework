@@ -4,7 +4,7 @@ import traceback
 
 class SendMessage():
     
-    def __init__(self, task:Task,agent:Agent):
+    def __init__(self, task:Task,agent:Agent,logger:object):
         
         ''' A router which enables communication between two agents and sends instructions from 1 agent to another
         args:
@@ -18,6 +18,7 @@ class SendMessage():
 
         self.task = task
         self.agent=agent
+        self.logger = logger
     
 
 
@@ -32,7 +33,7 @@ class SendMessage():
             self.task.task_output = output
             self.task.history.append({"role":"assistant","content":str(output)})
         except Exception as e:
-            traceback.print_exc()
+            self.logger.exception("ERROR sending messages %s",e)
             self.task.task_status = "failure"
             self.task.history.append({"role":"assistant","content":"Something failed"})
 

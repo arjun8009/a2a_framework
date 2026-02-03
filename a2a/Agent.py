@@ -3,12 +3,13 @@ from a2a.AgentCard import AgentCard
 from a2a.Artifact import Artifact
 from pydantic import BaseModel
 import requests
+import logging
 
 class Agent():
 
     def __init__(self, agent_details:AgentCard, llm_name:str, schema:BaseModel=None, 
                  tools:dict=None, tool_definitions:list=None, additional_args:dict=None, 
-                 available_agents=None, artifacts_req:Artifact = None, system_instruction:str=None):
+                 available_agents=None, artifacts_req:Artifact = None, system_instruction:str=None,logger=None):
         
         ''' Default agent is defined here. It contains an identity of the agent and assigns an llm to control the agent
         args:
@@ -35,6 +36,13 @@ class Agent():
         self.available_agents = available_agents
         self.artifacts_req = artifacts_req
         self.system_instruction = system_instruction
+        
+        if logger is None:
+            logging.basicConfig(f"evaluation/evaluation_logs/{self.logging_filename}.log",format="%(asctime)s" "%(levelname)s %(message)s",filemode='w')
+            self.logger = logging.getLogger()
+            self.logger.setLevel(logging.DEBUG)
+        else:
+            self.logger = logger
     
     def run_agent(self,messages):
 
@@ -93,8 +101,9 @@ class Agent():
 
             # In case we need to provide available agents
             if call.name in tool_names:
-                print(f"Calling tool {call.name} with args : {args}")
-                
+
+                self.logger.info(f"Calling tool {call.name} with args : {args}")
+                args["logger"] = self.logger
                 if call.name == "call_os_ngd":
                     args["ngd_name"] = self.agent_identity.agent_name
                     args["query"] = query
@@ -107,7 +116,7 @@ class Agent():
                         interaction = {"source":args["source"], "target":args["target"], "msg":args["task_description"]}
                         requests.post("http://localhost:5000/interact",json=interaction)
                     except Exception as e:
-                        print("OFFLINE MODE")
+                        self.logger.warning("OFFLINE MODE")
 
                 
                 # If we need to provide raw data to the llm to code
@@ -115,8 +124,7 @@ class Agent():
                     args["data"] = [i for i in self.artifacts_req]
 
                 result = self.tools[call.name](**args)
-                print(f"Tool {call.name} returned result : {result}")
-
+                self.logger.info(f"Tool {call.name} returned result : {result}")
 
 
                 # Assuming that the results of the agent will be a list consisting of output and the data. Output will be a description of what it has found. Aritfact can be an object or a list of objects
