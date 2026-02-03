@@ -18,20 +18,21 @@ planning_agent_card = AgentCard(agent_name="planning_agent",
 
 
 address_agent_card = AgentCard(agent_name="address",
-                               agent_description="a search agent for ordance surveys address database within an area, Given a query you will try to find relevant addresses or places given a name of a place or address. Artifacts are points",
+                               agent_description="a search agent for ordance surveys address database within an area, Given a query you will try to find relevant addresses or places given a name of a place or address.Use this only for named location geolocation. Artifacts are points",
                                capabilities=["1. Given a place name or address name and the artifact name of where to search, it will search places in an area",
-                                             "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
-                                             "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
-                                             "4. Has access to coding agent so can search further if you ask it to",
-                                             "5. It cannot apply conditions. That job is for the plotting agent",
-                                             "6. Artifacts contain points of addresses"],
+                                             "2. Note : only use this for named entitiy geo coding only. Do not using it for finding generic things without names"
+                                             "3. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
+                                             "4. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
+                                             "5. Has access to coding agent so can search further if you ask it to",
+                                             "6. It cannot apply conditions. That job is for the plotting agent",
+                                             "7. Artifacts contain points of addresses"],
                                 input_modes=["query : string "],
                                 output_modes=["output and the artifact name"])
 
 
 building_agent_card = AgentCard(agent_name="buildings",
-                               agent_description="a search agent for ordance surveys buildings database within an area, Given a query you will try to find relevant buildings, Artifacts are small building polygons",
-                               capabilities=["1. Given a query it will search it in an area artifact. Best used when the query asks for various types or classes of buildings",
+                               agent_description="a search agent for ordance surveys buildings database within an area, Given a query you will try to find relevant buildings.It has 89 features and is a rich set so normally it can filter for all conditions related to buildings.Artifacts are small building polygons",
+                               capabilities=["1. Given a query it will search it in an area artifact. It is very rich with 89 features so all conditions attached to buildings can be handled by it.",
                                              "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
                                              "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
                                              "4. Has access to coding agent so can search further if you ask it to",

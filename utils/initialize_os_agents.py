@@ -19,9 +19,20 @@ class OSAgentsInitializer():
         '''
         self.agent_dict = config
         self.logging_filename = logging_filename
-        logging.basicConfig(filename=f"evaluation/evaluation_logs/{self.logging_filename}.log",format="%(asctime)s" "%(levelname)s %(message)s",filemode='w')
-        self.logger = logging.getLogger()
+    
+        self.logger = logging.getLogger(f"evaluation/evaluation_logs/{self.logging_filename}")
         self.logger.setLevel(logging.INFO)
+        self.logger.handlers.clear()
+        filehandler = logging.FileHandler(f"evaluation/evaluation_logs/{self.logging_filename}.log",mode="w")
+        filehandler.setLevel(logging.INFO)
+        formatter = logging.Formatter("%(asctime)s %(levelname)s %(message)s")
+        filehandler.setFormatter(formatter)
+        self.logger.addHandler(filehandler)
+        
+        # Prevent propagation to root logger
+        self.logger.propagate = False
+
+        
     
     def initialize_agent(self,agentconfig:dict):
 

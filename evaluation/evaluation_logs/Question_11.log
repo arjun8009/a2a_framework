@@ -1,0 +1,862 @@
+2026-02-03 12:47:59,379 INFO Agent host_agent Initialised
+2026-02-03 12:47:59,379 INFO Agent planning_agent Initialised
+2026-02-03 12:47:59,379 INFO Agent coding_agent Initialised
+2026-02-03 12:47:59,379 INFO Agent plotting_agent Initialised
+2026-02-03 12:47:59,379 INFO Agent address_agent Initialised
+2026-02-03 12:47:59,379 INFO Agent named_area_agent Initialised
+2026-02-03 12:47:59,388 INFO Agent buildings_agent Initialised
+2026-02-03 12:47:59,388 INFO Agent water_features_agent Initialised
+2026-02-03 12:47:59,388 INFO Agent water_network_agent Initialised
+2026-02-03 12:47:59,388 INFO Agent land_features_agent Initialised
+2026-02-03 12:47:59,388 INFO Agent land_use_features_agent Initialised
+2026-02-03 12:47:59,388 INFO Agent structures_agent Initialised
+2026-02-03 12:47:59,388 INFO Agent human Initialised
+2026-02-03 12:47:59,873 INFO sending message from human to host Which buildings in Exeter already have solar panels on roofs?
+2026-02-03 12:48:03,906 INFO OFFLINE MODE
+2026-02-03 12:48:03,929 INFO Messages sent to agent host_agent : [{'role': 'user', 'content': 'Which buildings in Exeter already have solar panels on roofs?'}]
+2026-02-03 12:48:05,972 INFO Calling tool send_message with args : {'target': 'planning_agent', 'task_description': 'User wants to find which buildings in Exeter already have solar panels on roofs. Provide the general steps to solve this geospatial query.'}
+2026-02-03 12:48:10,028 WARNING OFFLINE MODE
+2026-02-03 12:48:10,039 INFO Messages sent to agent planning_agent : [{'role': 'user', 'content': 'User wants to find which buildings in Exeter already have solar panels on roofs. Provide the general steps to solve this geospatial query.'}]
+2026-02-03 12:48:17,048 WARNING OFFLINE MODE
+2026-02-03 12:48:17,048 INFO Output from agent planning_agent : <Internal Thoughts> The area specified is Exeter, so there will be 1 entry for Exeter. The entity to be searched is buildings with solar panels on their roofs. The query does not specify a condition regarding the number of buildings, so we will aim to find as many entries as possible.
+
+<Thoughts> 
+output steps: ["Find Exeter 1 area", "Search for buildings in Exeter with solar panels on roofs as many search results"]
+2026-02-03 12:48:17,048 INFO Tool send_message returned result : <Internal Thoughts> The area specified is Exeter, so there will be 1 entry for Exeter. The entity to be searched is buildings with solar panels on their roofs. The query does not specify a condition regarding the number of buildings, so we will aim to find as many entries as possible.
+
+<Thoughts> 
+output steps: ["Find Exeter 1 area", "Search for buildings in Exeter with solar panels on roofs as many search results"]
+2026-02-03 12:48:19,268 INFO Calling tool send_message with args : {'target': 'named_area', 'task_description': 'Find the area polygon for Exeter.'}
+2026-02-03 12:48:23,328 WARNING OFFLINE MODE
+2026-02-03 12:48:23,336 INFO Messages sent to agent named_area : [{'role': 'user', 'content': 'Find the area polygon for Exeter.'}]
+2026-02-03 12:48:25,036 INFO Calling tool call_os_ngd with args : {'filters': None, 'bbox': None, 'polygon_or_point': True, 'street_address': None, 'filename': 'exeter_area_polygon'}
+2026-02-03 12:48:25,059 INFO NGD query result                                     osid versiondate  \
+0   63c1644f-ce63-4605-88c4-f4f63eca7464  2024-07-21   
+1   03f86278-b36a-4384-bc41-5935aa6c6dd3  2022-07-29   
+2   36f29f4a-0f86-411f-adfd-7a921cb3d154  2022-07-29   
+3   37e0c394-19d3-4e28-a534-73ccb42667b6  2022-07-29   
+4   5fb21b9b-e98f-4278-96c0-85a517b54909  2022-07-29   
+..                                   ...         ...   
+93  58db2138-8696-4d27-a741-a33d66bf2f47  2024-09-25   
+94  97259661-757f-40c8-ac70-5990a1b02a7d  2025-06-05   
+95  64338406-53ac-47af-8344-4e51eb3b5bd2  2025-06-19   
+96  eaeed505-6584-4fa0-b734-8491211c62a9  2025-08-29   
+97  dc813a6c-39c3-493b-ad98-9ded7c3bb80f  2025-10-29   
+
+    versionavailablefromdate versionavailabletodate  \
+0  2024-07-22 00:00:00+00:00                    NaT   
+1  2022-07-30 00:00:00+00:00                    NaT   
+2  2022-07-30 00:00:00+00:00                    NaT   
+3  2022-07-30 00:00:00+00:00                    NaT   
+4  2022-07-30 00:00:00+00:00                    NaT   
+..                       ...                    ...   
+93 2024-09-26 00:00:00+00:00                    NaT   
+94 2025-06-06 00:00:00+00:00                    NaT   
+95 2025-06-20 00:00:00+00:00                    NaT   
+96 2025-08-30 00:00:00+00:00                    NaT   
+97 2025-10-30 00:00:00+00:00                    NaT   
+
+                          changetype  geometry_area geometry_evidencedate  \
+0                                New   7.610553e+03            2024-07-20   
+1                                New   3.000016e+04            2021-07-27   
+2                                New   1.236117e+03            2014-11-19   
+3                                New   7.210933e+04            2014-11-19   
+4                                New   6.824504e+03            2018-04-30   
+..                               ...            ...                   ...   
+93  Modified Geometry And Attributes   1.549032e+06            2024-09-24   
+94  Modified Geometry And Attributes   1.159562e+06            2025-06-03   
+95  Modified Geometry And Attributes   4.633501e+05            2025-06-18   
+96  Modified Geometry And Attributes   3.208213e+07            2025-08-28   
+97  Modified Geometry And Attributes   1.540315e+06            2025-10-28   
+
+   geometry_updatedate  geometry_source               theme  ... name4_text  \
+0           2024-07-20  Ordnance Survey  Geographical Names  ...       None   
+1           2021-07-27  Ordnance Survey  Geographical Names  ...       None   
+2           2015-05-06  Ordnance Survey  Geographical Names  ...       None   
+3           2015-05-06  Ordnance Survey  Geographical Names  ...       None   
+4           2018-04-30  Ordnance Survey  Geographical Names  ...       None   
+..                 ...              ...                 ...  ...        ...   
+93          2024-09-24  Ordnance Survey  Geographical Names  ...       None   
+94          2025-06-03  Ordnance Survey  Geographical Names  ...       None   
+95          2025-06-18  Ordnance Survey  Geographical Names  ...       None   
+96          2025-08-28  Ordnance Survey  Geographical Names  ...       None   
+97          2025-10-28  Ordnance Survey  Geographical Names  ...       None   
+
+   name4_language name4_evidencedate name4_updatedate name4_source  \
+0            None                NaT              NaT         None   
+1            None                NaT              NaT         None   
+2            None                NaT              NaT         None   
+3            None                NaT              NaT         None   
+4            None                NaT              NaT         None   
+..            ...                ...              ...          ...   
+93           None                NaT              NaT         None   
+94           None                NaT              NaT         None   
+95           None                NaT              NaT         None   
+96           None                NaT              NaT         None   
+97           None                NaT              NaT         None   
+
+                                  sameasdbpedia  \
+0                                          None   
+1                                          None   
+2                                          None   
+3                                          None   
+4                                          None   
+..                                          ...   
+93                                         None   
+94                                         None   
+95                                         None   
+96                                         None   
+97  https://dbpedia.org/resource/Topsham,_Devon   
+
+                      sameasgeonames sameasdbobih height  \
+0                               None          NaN    NaN   
+1                               None          NaN  159.0   
+2                               None          NaN    NaN   
+3                               None          NaN    NaN   
+4                               None          NaN    NaN   
+..                               ...          ...    ...   
+93                              None          NaN    NaN   
+94  https://sws.GeoNames.org/2657436          NaN    NaN   
+95                              None          NaN    NaN   
+96  https://sws.GeoNames.org/2649808          NaN    NaN   
+97  https://sws.GeoNames.org/2635680          NaN    NaN   
+
+                                             geometry  
+0   POLYGON ((292747.589 94221.096, 292771.401 942...  
+1   POLYGON ((292461.36 95357.29, 292447.963 95407...  
+2   POLYGON ((291921.65 95445.35, 291893.75 95458....  
+3   POLYGON ((289548.37 94560.12, 289503.97 94498....  
+4   POLYGON ((292998.087 90964.701, 292982.339 909...  
+..                                                ...  
+93  POLYGON ((294272.65 94200.045, 294154.655 9406...  
+94  POLYGON ((291754.039 89509.807, 291821.805 893...  
+95  POLYGON ((290295.76 92873.674, 290057.23 92949...  
+96  POLYGON ((295173.81 89150.11, 295192.057 89168...  
+97  POLYGON ((296472.774 89603.429, 296467.29 8961...  
+
+[98 rows x 41 columns]
+2026-02-03 12:48:25,072 INFO Tool call_os_ngd returned result : ['Search results have been found. \n            Artifact generated is : exeter_area_polygon,\n            Description is : A geopandas dataframe containing named area data with no filters applied for the query (so remember no search is performed here so spurious entities present) Find the area polygon for Exeter..,\n            count of records fetched : 98.\n            ', <a2a.Artifact.Artifact object at 0x000001E78F66CBD0>]
+2026-02-03 12:48:27,479 INFO Calling tool send_message with args : {'target': 'data_analysis_agent', 'task_description': "Filter the artifact 'exeter_area_polygon' to find the specific area polygon for Exeter. Save the filtered results as 'filtered_exeter_area_polygon'."}
+2026-02-03 12:48:31,529 WARNING OFFLINE MODE
+2026-02-03 12:48:31,548 INFO Messages sent to agent data_analysis_agent : [{'role': 'user', 'content': "Filter the artifact 'exeter_area_polygon' to find the specific area polygon for Exeter. Save the filtered results as 'filtered_exeter_area_polygon'."}]
+2026-02-03 12:48:32,736 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['exeter_area_polygon']}
+2026-02-03 12:48:32,759 INFO artifacts loaded for metadata generation : ['exeter_area_polygon']
+2026-02-03 12:48:32,772 INFO Tool generate_metadata_for_artifacts returned result : ([['osid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'changetype', 'geometry_area', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_source', 'theme', 'descriptiongroup', 'description', 'description_evidencedate', 'description_updatedate', 'description_source', 'extentdefinition', 'name1_text', 'name1_language', 'name1_evidencedate', 'name1_updatedate', 'name1_source', 'name2_text', 'name2_language', 'name2_evidencedate', 'name2_updatedate', 'name2_source', 'name3_text', 'name3_language', 'name3_evidencedate', 'name3_updatedate', 'name3_source', 'name4_text', 'name4_language', 'name4_evidencedate', 'name4_updatedate', 'name4_source', 'sameasdbpedia', 'sameasgeonames', 'sameasdbobih', 'height', 'geometry']], [[{'osid': '63c1644f-ce63-4605-88c4-f4f63eca7464', 'versiondate': Timestamp('2024-07-21 00:00:00'), 'versionavailablefromdate': Timestamp('2024-07-22 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 7610.552765, 'geometry_evidencedate': Timestamp('2024-07-20 00:00:00'), 'geometry_updatedate': Timestamp('2024-07-20 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Other Name', 'description': 'Named Other Geographic Area', 'description_evidencedate': Timestamp('2024-07-20 00:00:00'), 'description_updatedate': Timestamp('2024-07-20 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Pennsylvania Park', 'name1_language': None, 'name1_evidencedate': Timestamp('2024-07-20 00:00:00'), 'name1_updatedate': Timestamp('2024-07-20 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((292747.589 94221.096, 292771.401 94249.671, 292776.958 94265.81, ...>}, {'osid': '03f86278-b36a-4384-bc41-5935aa6c6dd3', 'versiondate': Timestamp('2022-07-29 00:00:00'), 'versionavailablefromdate': Timestamp('2022-07-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 30000.159218, 'geometry_evidencedate': Timestamp('2021-07-27 00:00:00'), 'geometry_updatedate': Timestamp('2021-07-27 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Landform Name', 'description': 'Named Hill Or Mountain', 'description_evidencedate': Timestamp('2004-12-30 00:00:00'), 'description_updatedate': Timestamp('2004-12-30 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Auto-Generated Indication', 'name1_text': 'Roman Hill', 'name1_language': None, 'name1_evidencedate': Timestamp('2004-12-30 00:00:00'), 'name1_updatedate': Timestamp('2011-06-25 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': 159.0, 'geometry': <POLYGON ((292461.36 95357.29, 292447.963 95407.29, 292411.36 95443.893, 292...>}, {'osid': '36f29f4a-0f86-411f-adfd-7a921cb3d154', 'versiondate': Timestamp('2022-07-29 00:00:00'), 'versionavailablefromdate': Timestamp('2022-07-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 1236.116748, 'geometry_evidencedate': Timestamp('2014-11-19 00:00:00'), 'geometry_updatedate': Timestamp('2015-05-06 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Land Name', 'description': 'Named Woodland Or Forest', 'description_evidencedate': Timestamp('2015-05-09 00:00:00'), 'description_updatedate': Timestamp('2015-05-09 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Jubilee Copse', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-09 00:00:00'), 'name1_updatedate': Timestamp('2015-05-09 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((291921.65 95445.35, 291893.75 95458.85, 291874.9 95468.35, 291859...>}, {'osid': '37e0c394-19d3-4e28-a534-73ccb42667b6', 'versiondate': Timestamp('2022-07-29 00:00:00'), 'versionavailablefromdate': Timestamp('2022-07-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 72109.331375, 'geometry_evidencedate': Timestamp('2014-11-19 00:00:00'), 'geometry_updatedate': Timestamp('2015-05-06 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Land Name', 'description': 'Named Woodland Or Forest', 'description_evidencedate': Timestamp('2015-05-09 00:00:00'), 'description_updatedate': Timestamp('2015-05-09 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Bolsters Wood', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-09 00:00:00'), 'name1_updatedate': Timestamp('2015-05-09 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((289548.37 94560.12, 289503.97 94498.02, 289470.1 94447.92, 289461...>}, {'osid': '5fb21b9b-e98f-4278-96c0-85a517b54909', 'versiondate': Timestamp('2022-07-29 00:00:00'), 'versionavailablefromdate': Timestamp('2022-07-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 6824.50407, 'geometry_evidencedate': Timestamp('2018-04-30 00:00:00'), 'geometry_updatedate': Timestamp('2018-04-30 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Water Name', 'description': 'Named Stretch Of Inland Water', 'description_evidencedate': Timestamp('2015-05-09 00:00:00'), 'description_updatedate': Timestamp('2015-05-09 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Auto-Generated Indication', 'name1_text': 'Salmon Pool', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-09 00:00:00'), 'name1_updatedate': Timestamp('2015-05-09 00:00:00'), 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((292998.087 90964.701, 292982.339 90956.833, 292975.776 90945.017,...>}]], ['exeter_area_polygon'])
+2026-02-03 12:48:38,059 INFO Calling tool code_executor with args : {'code': 'def filter_exeter_area_polygon(data: list):\n    gdf = data[0]\n    # Search for polygons where any of the name columns contain \'Exeter\' (case-insensitive)\n    mask = (\n        gdf[\'name1_text\'].str.contains(\'Exeter\', case=False, na=False) |\n        gdf[\'name2_text\'].str.contains(\'Exeter\', case=False, na=False) |\n        gdf[\'name3_text\'].str.contains(\'Exeter\', case=False, na=False) |\n        gdf[\'name4_text\'].str.contains(\'Exeter\', case=False, na=False)\n    )\n    filtered = gdf[mask]\n    summary = f"Filtered polygons for Exeter. Number of matching polygons: {len(filtered)}."\n    description = "GeoDataFrame containing only the area polygons whose name columns contain \'Exeter\'."\n    return [summary, \'filtered_exeter_area_polygon\', description, filtered]\n', 'artifact_names': ['exeter_area_polygon']}
+2026-02-03 12:48:38,059 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_exeter_area_polygon(data: list):
+    gdf = data[0]
+    # Search for polygons where any of the name columns contain 'Exeter' (case-insensitive)
+    mask = (
+        gdf['name1_text'].str.contains('Exeter', case=False, na=False) |
+        gdf['name2_text'].str.contains('Exeter', case=False, na=False) |
+        gdf['name3_text'].str.contains('Exeter', case=False, na=False) |
+        gdf['name4_text'].str.contains('Exeter', case=False, na=False)
+    )
+    filtered = gdf[mask]
+    summary = f"Filtered polygons for Exeter. Number of matching polygons: {len(filtered)}."
+    description = "GeoDataFrame containing only the area polygons whose name columns contain 'Exeter'."
+    return [summary, 'filtered_exeter_area_polygon', description, filtered]
+
+2026-02-03 12:48:38,059 INFO function name filter_exeter_area_polygon
+2026-02-03 12:48:38,067 INFO Output completed
+2026-02-03 12:48:38,068 INFO Tool code_executor returned result : ['Filtered polygons for Exeter. Number of matching polygons: 1.', <a2a.Artifact.Artifact object at 0x000001E78D97E390>]
+2026-02-03 12:48:46,556 WARNING OFFLINE MODE
+2026-02-03 12:48:46,556 INFO Output from agent data_analysis_agent : Filtered polygons for Exeter. Number of matching polygons: 1.
+An artifact has been generated with the name: filtered_exeter_area_polygon and description: GeoDataFrame containing only the area polygons whose name columns contain 'Exeter'.
+2026-02-03 12:48:46,558 INFO Tool send_message returned result : ['Filtered polygons for Exeter. Number of matching polygons: 1.\nAn artifact has been generated with the name: filtered_exeter_area_polygon and description: GeoDataFrame containing only the area polygons whose name columns contain \'Exeter\'.Addtionally some data artifacts have been generated with names  [\'filtered_exeter_area_polygon\'] and \n descriptions ["GeoDataFrame containing only the area polygons whose name columns contain \'Exeter\'."]', [<a2a.Artifact.Artifact object at 0x000001E78D97E390>]]
+2026-02-03 12:48:52,156 WARNING OFFLINE MODE
+2026-02-03 12:48:52,156 INFO Output from agent named_area : The specific area polygon for Exeter has been filtered and saved as `filtered_exeter_area_polygon`.
+2026-02-03 12:48:52,156 INFO Tool send_message returned result : ['The specific area polygon for Exeter has been filtered and saved as `filtered_exeter_area_polygon`.Addtionally some data artifacts have been generated with names  [\'filtered_exeter_area_polygon\'] and \n descriptions ["GeoDataFrame containing only the area polygons whose name columns contain \'Exeter\'."]', [<a2a.Artifact.Artifact object at 0x000001E78D97E390>]]
+2026-02-03 12:48:52,156 INFO Calling tool generate_metadata_for_all_artifacts with args : {}
+2026-02-03 12:48:52,177 INFO Tool generate_metadata_for_all_artifacts returned result : {'exeter_area_polygon': 'A geopandas dataframe containing named area data with no filters applied for the query (so remember no search is performed here so spurious entities present) Find the area polygon for Exeter..', 'filtered_exeter_area_polygon': "GeoDataFrame containing only the area polygons whose name columns contain 'Exeter'."}
+2026-02-03 12:48:55,980 INFO Calling tool send_message with args : {'target': 'buildings', 'task_description': "Search for buildings in the artifact 'filtered_exeter_area_polygon' that have solar panels on roofs."}
+2026-02-03 12:49:00,048 WARNING OFFLINE MODE
+2026-02-03 12:49:00,078 INFO Messages sent to agent buildings : [{'role': 'user', 'content': "Search for buildings in the artifact 'filtered_exeter_area_polygon' that have solar panels on roofs."}]
+2026-02-03 12:49:02,228 INFO Calling tool call_os_ngd with args : {'filters': None, 'bbox': 'filtered_exeter_area_polygon', 'polygon_or_point': True, 'street_address': False, 'filename': 'exeter_buildings_with_solar_panels'}
+2026-02-03 12:49:34,733 INFO NGD query result [                                       osid versiondate  \
+45098  32ff414d-d1c8-454b-9b67-ac472217e4ce  2025-03-11   
+62699  b9a49c80-fecf-4308-a98d-cf90ea4ea2e4  2025-03-11   
+24664  9dfb4b41-f53d-44c0-8a7a-5f7884375677  2025-03-11   
+27514  aea058f2-6a39-4829-ae6b-85c6863a250e  2025-03-11   
+37791  ef3285ad-8a1d-4d4d-aa50-333888085e10  2025-03-11   
+...                                     ...         ...   
+11335  482f76ab-1729-4955-9762-8fbb489883d4  2025-03-11   
+12171  4d0502a5-ff1f-4134-953b-a316d3b0262a  2025-03-11   
+44980  1c8d8028-6ea7-4ea1-9b12-f248db91a09e  2025-03-11   
+26416  a5ad94b1-26ec-4ce1-acff-04cdfd1a6282  2025-03-11   
+32416  ca652a35-9c36-4e06-a9bd-9d747939e355  2025-03-11   
+
+       versionavailablefromdate versionavailabletodate changetype  \
+45098 2025-03-12 00:00:00+00:00                    NaT        New   
+62699 2025-03-12 00:00:00+00:00                    NaT        New   
+24664 2025-03-12 00:00:00+00:00                    NaT        New   
+27514 2025-03-12 00:00:00+00:00                    NaT        New   
+37791 2025-03-12 00:00:00+00:00                    NaT        New   
+...                         ...                    ...        ...   
+11335 2025-03-12 00:00:00+00:00                    NaT        New   
+12171 2025-03-12 00:00:00+00:00                    NaT        New   
+44980 2025-03-12 00:00:00+00:00                    NaT        New   
+26416 2025-03-12 00:00:00+00:00                    NaT        New   
+32416 2025-03-12 00:00:00+00:00                    NaT        New   
+
+       geometry_area_m2 geometry_updatedate      theme           description  \
+45098            18.438          2025-03-10  Buildings  Domestic Outbuilding   
+62699            99.338          2025-03-10  Buildings  End-Of-Terrace House   
+24664            78.565          2025-03-10  Buildings     Mid-Terrace House   
+27514            66.910          2025-03-10  Buildings     Mid-Terrace House   
+37791             7.858          2025-03-10  Buildings      Unknown Building   
+...                 ...                 ...        ...                   ...   
+11335            56.509          2025-03-10  Buildings     Mid-Terrace House   
+12171            47.028          2025-03-10  Buildings  End-Of-Terrace House   
+44980            61.010          2025-03-10  Buildings     Mid-Terrace House   
+26416            45.275          2025-03-10  Buildings  End-Of-Terrace House   
+32416             4.018          2025-03-10  Buildings      Unknown Building   
+
+      description_updatedate  ... roofshapeaspect_areafacingsouthwest_m2  \
+45098             2025-03-10  ...                                    0.0   
+62699             2025-03-10  ...                                    8.9   
+24664             2025-03-10  ...                                    0.0   
+27514             2025-03-10  ...                                    0.0   
+37791             2025-03-10  ...                                    0.0   
+...                      ...  ...                                    ...   
+11335             2025-03-10  ...                                    0.0   
+12171             2025-03-10  ...                                    0.0   
+44980             2025-03-10  ...                                   25.4   
+26416             2025-03-10  ...                                    0.0   
+32416             2025-03-10  ...                                    0.0   
+
+      roofshapeaspect_areafacingwest_m2  \
+45098                               0.0   
+62699                               0.0   
+24664                              10.7   
+27514                              18.2   
+37791                               0.0   
+...                                 ...   
+11335                              36.6   
+12171                              22.7   
+44980                              15.5   
+26416                              25.1   
+32416                               0.0   
+
+       roofshapeaspect_areafacingnorthwest_m2  \
+45098                                     0.0   
+62699                                     0.0   
+24664                                     0.0   
+27514                                     0.0   
+37791                                     0.0   
+...                                       ...   
+11335                                     0.0   
+12171                                     0.0   
+44980                                     0.0   
+26416                                     0.0   
+32416                                     0.0   
+
+       roofshapeaspect_areaindeterminable_m2 roofshapeaspect_areatotal_m2  \
+45098                                    0.0                         18.7   
+62699                                    0.0                        128.7   
+24664                                    0.0                        103.5   
+27514                                    0.0                         87.5   
+37791                                    0.0                         10.7   
+...                                      ...                          ...   
+11335                                    0.0                         60.3   
+12171                                    0.0                         50.7   
+44980                                    0.0                         64.7   
+26416                                    0.0                         49.7   
+32416                                    0.0                          9.8   
+
+       roofshapeaspect_confidenceindicator roofshapeaspect_evidencedate  \
+45098                 Expected Data Output                   2024-04-20   
+62699                 Expected Data Output                   2024-04-20   
+24664                 Expected Data Output                   2024-04-20   
+27514                 Expected Data Output                   2024-04-20   
+37791           Insufficient Building Size                   2024-04-20   
+...                                    ...                          ...   
+11335                 Expected Data Output                   2024-04-20   
+12171                 Expected Data Output                   2024-04-20   
+44980                 Expected Data Output                   2024-04-20   
+26416                 Expected Data Output                   2024-04-20   
+32416           Insufficient Building Size                   2024-04-20   
+
+      roofshapeaspect_updatedate roofshapeaspect_capturemethod  \
+45098                 2025-03-10             Automated Process   
+62699                 2025-03-10             Automated Process   
+24664                 2025-03-10             Automated Process   
+27514                 2025-03-10             Automated Process   
+37791                 2025-03-10             Automated Process   
+...                          ...                           ...   
+11335                 2025-03-10             Automated Process   
+12171                 2025-03-10             Automated Process   
+44980                 2025-03-10             Automated Process   
+26416                 2025-03-10             Automated Process   
+32416                 2025-03-10             Automated Process   
+
+                                                geometry  
+45098  POLYGON ((295009.581 89208.958, 295010.375 892...  
+62699  POLYGON ((295023.88 89224.91, 295033.25 89223....  
+24664  POLYGON ((295014.117 89215.196, 295014.975 892...  
+27514  POLYGON ((295008.31 89227.16, 295014.45 89226....  
+37791  POLYGON ((295015.24 89224.86, 295015.43 89226....  
+...                                                  ...  
+11335  POLYGON ((294035.269 94717.512, 294042.03 9472...  
+12171  POLYGON ((294013.8 94720.65, 294014 94720.74, ...  
+44980  POLYGON ((294034.54 94723.46, 294039.79 94725....  
+26416  POLYGON ((294036.05 94725.4, 294034.35 94729.5...  
+32416  POLYGON ((294040.934 94747.195, 294043.111 947...  
+
+[69169 rows x 87 columns],                                        osid                  toid versiondate  \
+24048  57202087-5453-473f-b927-0b58b9e564fb  osgb1000002062528401  2022-08-26   
+59314  d87c4727-0467-40c3-b148-1fae6bef930c  osgb5000005272550976  2022-08-26   
+15541  38e4a6bd-c82d-4fe5-908f-df1497b7a199  osgb5000005272551019  2022-08-26   
+20661  4ad601b7-2d43-4ffd-a813-785bdfac9349  osgb5000005286435415  2022-08-26   
+22011  4fc5cd11-808d-4791-8676-b52213bce65b  osgb5000005272550999  2022-08-26   
+...                                     ...                   ...         ...   
+51531  bc828f11-d38e-4300-8ecd-5a8aac98d186  osgb1000002062462326  2022-08-26   
+65707  eecc7569-4d50-44bc-aa1c-6f77c1dffe81  osgb1000002062458756  2022-08-26   
+64558  ead20a24-91ad-4271-8819-b8676988290f  osgb1000002062462687  2022-08-26   
+66211  f0c593ff-066d-4e98-bc69-8d2626c57dbc  osgb1000002062474660  2022-08-26   
+26332  607e3468-450f-4391-9622-21c3390b73c3  osgb1000002062474963  2022-08-26   
+
+       versionavailablefromdate versionavailabletodate  \
+24048 2022-08-27 00:00:00+00:00                    NaT   
+59314 2022-08-27 00:00:00+00:00                    NaT   
+15541 2022-08-27 00:00:00+00:00                    NaT   
+20661 2022-08-27 00:00:00+00:00                    NaT   
+22011 2022-08-27 00:00:00+00:00                    NaT   
+...                         ...                    ...   
+51531 2022-08-27 00:00:00+00:00                    NaT   
+65707 2022-08-27 00:00:00+00:00                    NaT   
+64558 2022-08-27 00:00:00+00:00                    NaT   
+66211 2022-08-27 00:00:00+00:00                    NaT   
+26332 2022-08-27 00:00:00+00:00                    NaT   
+
+      firstdigitalcapturedate                           changetype  \
+24048              1970-01-01                                  New   
+59314              2020-11-17  Moved From A Different Feature Type   
+15541              2020-11-17  Moved From A Different Feature Type   
+20661              2021-09-13                                  New   
+22011              2020-11-17  Moved From A Different Feature Type   
+...                       ...                                  ...   
+51531              1988-12-09                                  New   
+65707              1988-12-09                                  New   
+64558              1988-12-09                                  New   
+66211              1989-06-28                                  New   
+26332              1989-06-28                                  New   
+
+       geometry_length geometry_evidencedate geometry_updatedate  \
+24048         5.254560            1970-01-01          1970-01-01   
+59314         8.897830            2020-11-16          2020-11-16   
+15541        10.000591            2020-11-16          2020-11-16   
+20661         9.427393            2021-09-10          2021-09-10   
+22011        10.000591            2020-11-16          2020-11-16   
+...                ...                   ...                 ...   
+51531         7.357387            1988-12-09          1988-12-09   
+65707         5.012235            1988-12-09          1988-12-09   
+64558         7.124181            1988-12-09          1988-12-09   
+66211         4.704253            2004-12-31          2004-12-31   
+26332         7.328893            2004-12-31          2004-12-31   
+
+       geometry_source      theme                 description  \
+24048  Ordnance Survey  Buildings  Building Internal Division   
+59314  Ordnance Survey  Buildings  Building Occupier Division   
+15541  Ordnance Survey  Buildings  Building Occupier Division   
+20661  Ordnance Survey  Buildings  Building Occupier Division   
+22011  Ordnance Survey  Buildings  Building Occupier Division   
+...                ...        ...                         ...   
+51531  Ordnance Survey  Buildings  Building Internal Division   
+65707  Ordnance Survey  Buildings   Overhanging Building Edge   
+64558  Ordnance Survey  Buildings  Building Internal Division   
+66211  Ordnance Survey  Buildings   Overhanging Building Edge   
+26332  Ordnance Survey  Buildings  Building Internal Division   
+
+      description_evidencedate description_updatedate description_source  \
+24048               1970-01-01             1970-01-01    Ordnance Survey   
+59314               2021-05-24             2021-05-24    Ordnance Survey   
+15541               2021-05-24             2021-05-24    Ordnance Survey   
+20661               2021-09-13             2021-09-13    Ordnance Survey   
+22011               2021-05-24             2021-05-24    Ordnance Survey   
+...                        ...                    ...                ...   
+51531               1988-12-09             1988-12-09    Ordnance Survey   
+65707               1988-12-09             1988-12-09    Ordnance Survey   
+64558               1988-12-09             1988-12-09    Ordnance Survey   
+66211               2004-12-31             2004-12-31    Ordnance Survey   
+26332               2004-12-31             2004-12-31    Ordnance Survey   
+
+       isobscured  physicallevel capturespecification  \
+24048       False  Surface Level                Urban   
+59314       False  Surface Level                Urban   
+15541       False  Surface Level                Urban   
+20661       False  Surface Level                Urban   
+22011       False  Surface Level                Urban   
+...           ...            ...                  ...   
+51531       False  Surface Level                Urban   
+65707       False        Level 1                Urban   
+64558       False  Surface Level                Urban   
+66211       False        Level 1                Rural   
+26332       False  Surface Level                Rural   
+
+                                                geometry  
+24048  LINESTRING (294981.68 89285.84, 294984.7 89281...  
+59314  LINESTRING (294957.868 89288.363, 294950.632 8...  
+15541  LINESTRING (294983.23 89297.088, 294975.076 89...  
+20661  LINESTRING (294935.88 89293.389, 294930.472 89...  
+22011  LINESTRING (294979.634 89302.152, 294971.48 89...  
+...                                                  ...  
+51531  LINESTRING (293128.6 94955.35, 293129.1 94955....  
+65707  LINESTRING (293102.85 94988.2, 293097.85 94988...  
+64558  LINESTRING (293097.85 94988.55, 293097.95 9498...  
+66211  LINESTRING (293125.05 95021.56, 293124.85 9501...  
+26332  LINESTRING (293125.05 95021.56, 293124.45 9502...  
+
+[69342 rows x 20 columns],                                        osid                  toid versiondate  \
+73630  c7f949ce-e1f7-425d-b6fa-8ddc11065214  osgb5000005158457941  2025-02-04   
+46871  7436b5c6-ff93-41cb-aeb1-c3c22acaf011  osgb5000005290891862  2025-02-04   
+46518  6fcc76f4-817e-46e4-92c7-6bd50bd9c52d  osgb5000005158459076  2025-02-04   
+56955  90474fb7-6565-4104-ba7b-21f7fe084140     osgb1000012378194  2025-02-04   
+74605  cd808371-63d1-49b0-993e-87397a2aef3d  osgb5000005158458489  2025-02-04   
+...                                     ...                   ...         ...   
+36329  433b3e7a-82eb-4a55-a494-656aced79419     osgb1000012325733  2025-02-04   
+15756  08173cf5-acc7-41cb-b4e6-1e0770ff06f7  osgb5000005159190484  2025-02-04   
+46894  6edc6d6a-cfc7-444f-b660-25e5e60ea3f8     osgb1000012325734  2025-02-04   
+18179  08995bad-9c5f-425a-ba19-b8394ef0bdee  osgb5000005242310816  2025-02-04   
+5452   3812ea4b-8350-4ece-ae1e-757ba9306511  osgb5000005159190437  2025-02-27   
+
+       versionavailablefromdate versionavailabletodate  \
+73630 2025-02-05 00:00:00+00:00                    NaT   
+46871 2025-02-05 00:00:00+00:00                    NaT   
+46518 2025-02-05 00:00:00+00:00                    NaT   
+56955 2025-02-05 00:00:00+00:00                    NaT   
+74605 2025-02-05 00:00:00+00:00                    NaT   
+...                         ...                    ...   
+36329 2025-02-05 00:00:00+00:00                    NaT   
+15756 2025-02-05 00:00:00+00:00                    NaT   
+46894 2025-02-05 00:00:00+00:00                    NaT   
+18179 2025-02-05 00:00:00+00:00                    NaT   
+5452  2025-02-28 00:00:00+00:00                    NaT   
+
+      firstdigitalcapturedate           changetype  geometry_area_m2  \
+73630              2015-07-15  Modified Attributes            20.297   
+46871              2021-12-19  Modified Attributes            16.914   
+46518              2015-07-15  Modified Attributes             8.207   
+56955              1970-01-01  Modified Attributes            54.607   
+74605              2015-07-15  Modified Attributes             8.505   
+...                       ...                  ...               ...   
+36329              1986-04-03  Modified Attributes            71.563   
+15756              2015-07-28  Modified Attributes             8.255   
+46894              1986-04-03  Modified Attributes           126.305   
+18179              2019-02-08  Modified Attributes            17.047   
+5452               2015-07-28  Modified Attributes             2.668   
+
+      geometry_evidencedate geometry_updatedate  ... nlud_orderdescription  \
+73630            2014-06-24          2015-05-25  ...           RESIDENTIAL   
+46871            2021-06-01          2021-12-18  ...           RESIDENTIAL   
+46518            2014-06-24          2015-05-26  ...           RESIDENTIAL   
+56955            1970-01-01          1970-01-01  ...           RESIDENTIAL   
+74605            2014-06-24          2015-05-26  ...           RESIDENTIAL   
+...                     ...                 ...  ...                   ...   
+36329            2014-06-24          2015-06-08  ...           RESIDENTIAL   
+15756            2014-06-24          2015-05-22  ...           RESIDENTIAL   
+46894            2018-06-27          2019-02-07  ...           RESIDENTIAL   
+18179            2018-06-27          2019-02-07  ...           RESIDENTIAL   
+5452             2014-06-24          2015-06-01  ...                  None   
+
+      nlud_groupdescription address_classificationcode  \
+73630             Dwellings                         RD   
+46871             Dwellings                         RD   
+46518             Dwellings                         RD   
+56955             Dwellings                         RD   
+74605             Dwellings                         RD   
+...                     ...                        ...   
+36329             Dwellings                         RD   
+15756             Dwellings                         RD   
+46894             Dwellings                         RD   
+18179             Dwellings                         RD   
+5452                   None                       None   
+
+      address_primarydescription address_secondarydescription  \
+73630                Residential                     Dwelling   
+46871                Residential                     Dwelling   
+46518                Residential                     Dwelling   
+56955                Residential                     Dwelling   
+74605                Residential                     Dwelling   
+...                          ...                          ...   
+36329                Residential                     Dwelling   
+15756                Residential                     Dwelling   
+46894                Residential                     Dwelling   
+18179                Residential                     Dwelling   
+5452                        None                         None   
+
+      lowertierlocalauthority_gsscode lowertierlocalauthority_count status  \
+73630                       E07000041                             1   None   
+46871                       E07000041                             1   None   
+46518                       E07000041                             1   None   
+56955                       E07000041                             1   None   
+74605                       E07000041                             1   None   
+...                               ...                           ...    ...   
+36329                       E07000041                             1   None   
+15756                       E07000041                             1   None   
+46894                       E07000041                             1   None   
+18179                       E07000041                             1   None   
+5452                        E07000041                             1   None   
+
+      status_updatedate                                           geometry  
+73630        2015-05-25  POLYGON ((295183.092 89167.971, 295184.746 891...  
+46871        2021-12-18  POLYGON ((295182.794 89180.43, 295184.809 8918...  
+46518        2015-05-26  POLYGON ((295196.803 89194.974, 295193.995 891...  
+56955        1970-01-01  POLYGON ((295187.87 89193.83, 295182.12 89197....  
+74605        2015-05-26  POLYGON ((295195.771 89199.412, 295196.232 892...  
+...                 ...                                                ...  
+36329        1986-04-03  POLYGON ((292157.9 94931.6, 292157.783 94929.3...  
+15756        2015-05-22  POLYGON ((292196.939 94933.451, 292194.856 949...  
+46894        1986-04-03  POLYGON ((292146.114 94943.369, 292146 94940.2...  
+18179        2019-02-07  POLYGON ((292165.957 94960.163, 292161.061 949...  
+5452         2015-06-01  POLYGON ((292242.7 94964.4, 292241.5 94965.05,...  
+
+[85480 rows x 55 columns]]
+2026-02-03 12:49:37,857 INFO Tool call_os_ngd returned result : ['Multiple search results have been found in multiple datasets. A summary of each is provided.\n            Artifacts generated are : [\'buildings_exeter_buildings_with_solar_panels\', \'buildingline_exeter_buildings_with_solar_panels\', \'buildingpart_exeter_buildings_with_solar_panels\'],\n            Descriptions are : ["A geopandas dataframe containing building data with filters and bbox applied for the query Search for buildings in the artifact \'filtered_exeter_area_polygon\' that have solar panels on roofs. using filters None.", "A geopandas dataframe containing building line data with filters and bbox applied for the query Search for buildings in the artifact \'filtered_exeter_area_polygon\' that have solar panels on roofs. using filters None.", "A geopandas dataframe containing building part data with filters and bbox applied for the query Search for buildings in the artifact \'filtered_exeter_area_polygon\' that have solar panels on roofs. using filters None."],\n            counts of records fetched are : [69169, 69342, 85480].\n            ', [<a2a.Artifact.Artifact object at 0x000001E7906F6950>, <a2a.Artifact.Artifact object at 0x000001E790812D90>, <a2a.Artifact.Artifact object at 0x000001E784292150>]]
+2026-02-03 12:49:41,447 INFO Calling tool send_message with args : {'target': 'data_analysis_agent', 'task_description': "Filter the artifacts 'buildings_exeter_buildings_with_solar_panels', 'buildingline_exeter_buildings_with_solar_panels', and 'buildingpart_exeter_buildings_with_solar_panels' to identify buildings with solar panels on roofs. Save the filtered results as 'filtered_solar_panel_buildings_exeter'. Focus on features related to solar panels on roofs."}
+2026-02-03 12:49:45,505 WARNING OFFLINE MODE
+2026-02-03 12:49:45,522 INFO Messages sent to agent data_analysis_agent : [{'role': 'user', 'content': "Filter the artifacts 'buildings_exeter_buildings_with_solar_panels', 'buildingline_exeter_buildings_with_solar_panels', and 'buildingpart_exeter_buildings_with_solar_panels' to identify buildings with solar panels on roofs. Save the filtered results as 'filtered_solar_panel_buildings_exeter'. Focus on features related to solar panels on roofs."}]
+2026-02-03 12:49:46,922 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['buildings_exeter_buildings_with_solar_panels', 'buildingline_exeter_buildings_with_solar_panels', 'buildingpart_exeter_buildings_with_solar_panels']}
+2026-02-03 12:49:48,222 INFO artifacts loaded for metadata generation : ['buildings_exeter_buildings_with_solar_panels', 'buildingline_exeter_buildings_with_solar_panels', 'buildingpart_exeter_buildings_with_solar_panels']
+2026-02-03 12:49:48,413 INFO Tool generate_metadata_for_artifacts returned result : ([['osid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'changetype', 'geometry_area_m2', 'geometry_updatedate', 'theme', 'description', 'description_updatedate', 'physicalstate', 'physicalstate_updatedate', 'buildingpartcount', 'isinsite', 'primarysiteid', 'containingsitecount', 'mainbuildingid', 'mainbuildingid_ismainbuilding', 'mainbuildingid_updatedate', 'buildinguse', 'buildinguse_oslandusetiera', 'buildinguse_addresscount_total', 'buildinguse_addresscount_residential', 'buildinguse_addresscount_commercial', 'buildinguse_addresscount_other', 'buildinguse_updatedate', 'connectivity', 'connectivity_count', 'connectivity_updatedate', 'constructionmaterial', 'constructionmaterial_evidencedate', 'constructionmaterial_updatedate', 'constructionmaterial_source', 'constructionmaterial_capturemethod', 'constructionmaterial_thirdpartyprovenance', 'buildingage_period', 'buildingage_year', 'buildingage_evidencedate', 'buildingage_updatedate', 'buildingage_source', 'buildingage_capturemethod', 'buildingage_thirdpartyprovenance', 'basementpresence', 'basementpresence_selfcontained', 'basementpresence_evidencedate', 'basementpresence_updatedate', 'basementpresence_source', 'basementpresence_capturemethod', 'basementpresence_thirdpartyprovenance', 'numberoffloors', 'numberoffloors_evidencedate', 'numberoffloors_updatedate', 'numberoffloors_source', 'numberoffloors_capturemethod', 'height_absolutemin_m', 'height_absoluteroofbase_m', 'height_absolutemax_m', 'height_relativeroofbase_m', 'height_relativemax_m', 'height_confidencelevel', 'height_evidencedate', 'height_updatedate', 'roofmaterial_primarymaterial', 'roofmaterial_solarpanelpresence', 'roofmaterial_greenroofpresence', 'roofmaterial_confidenceindicator', 'roofmaterial_evidencedate', 'roofmaterial_updatedate', 'roofmaterial_capturemethod', 'roofshapeaspect_shape', 'roofshapeaspect_areapitched_m2', 'roofshapeaspect_areaflat_m2', 'roofshapeaspect_areafacingnorth_m2', 'roofshapeaspect_areafacingnortheast_m2', 'roofshapeaspect_areafacingeast_m2', 'roofshapeaspect_areafacingsoutheast_m2', 'roofshapeaspect_areafacingsouth_m2', 'roofshapeaspect_areafacingsouthwest_m2', 'roofshapeaspect_areafacingwest_m2', 'roofshapeaspect_areafacingnorthwest_m2', 'roofshapeaspect_areaindeterminable_m2', 'roofshapeaspect_areatotal_m2', 'roofshapeaspect_confidenceindicator', 'roofshapeaspect_evidencedate', 'roofshapeaspect_updatedate', 'roofshapeaspect_capturemethod', 'geometry'], ['osid', 'toid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'firstdigitalcapturedate', 'changetype', 'geometry_length', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_source', 'theme', 'description', 'description_evidencedate', 'description_updatedate', 'description_source', 'isobscured', 'physicallevel', 'capturespecification', 'geometry'], ['osid', 'toid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'firstdigitalcapturedate', 'changetype', 'geometry_area_m2', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_capturemethod', 'theme', 'description', 'description_evidencedate', 'description_updatedate', 'description_capturemethod', 'oslandcovertiera', 'oslandcovertierb', 'oslandcover_evidencedate', 'oslandcover_updatedate', 'oslandcover_capturemethod', 'oslandusetiera', 'oslandusetierb', 'oslanduse_evidencedate', 'oslanduse_updatedate', 'oslanduse_capturemethod', 'height_absoluteroofbase_m', 'height_relativeroofbase_m', 'height_absolutemax_m', 'height_relativemax_m', 'height_absolutemin_m', 'height_confidencelevel', 'height_evidencedate', 'height_updatedate', 'associatedstructure', 'isobscured', 'physicallevel', 'capturespecification', 'containingsitecount', 'smallestsite_siteid', 'smallestsite_landusetiera', 'smallestsite_landusetierb', 'largestsite_landusetiera', 'largestsite_landusetierb', 'nlud_code', 'nlud_orderdescription', 'nlud_groupdescription', 'address_classificationcode', 'address_primarydescription', 'address_secondarydescription', 'lowertierlocalauthority_gsscode', 'lowertierlocalauthority_count', 'status', 'status_updatedate', 'geometry']], [[{'osid': '32ff414d-d1c8-454b-9b67-ac472217e4ce', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 18.438, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'Domestic Outbuilding', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1, 'isinsite': True, 'primarysiteid': 'ff52a58b-d8d7-4249-8088-8b3a18d19bd8', 'containingsitecount': 1, 'mainbuildingid': 'aea058f2-6a39-4829-ae6b-85c6863a250e', 'mainbuildingid_ismainbuilding': 'No', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Unknown', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 0, 'buildinguse_addresscount_residential': 0, 'buildinguse_addresscount_commercial': 0, 'buildinguse_addresscount_other': 0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'Standalone', 'connectivity_count': 0, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': None, 'constructionmaterial_evidencedate': NaT, 'constructionmaterial_updatedate': NaT, 'constructionmaterial_source': None, 'constructionmaterial_capturemethod': None, 'constructionmaterial_thirdpartyprovenance': None, 'buildingage_period': None, 'buildingage_year': nan, 'buildingage_evidencedate': NaT, 'buildingage_updatedate': NaT, 'buildingage_source': None, 'buildingage_capturemethod': None, 'buildingage_thirdpartyprovenance': None, 'basementpresence': None, 'basementpresence_selfcontained': None, 'basementpresence_evidencedate': NaT, 'basementpresence_updatedate': NaT, 'basementpresence_source': None, 'basementpresence_capturemethod': None, 'basementpresence_thirdpartyprovenance': None, 'numberoffloors': nan, 'numberoffloors_evidencedate': NaT, 'numberoffloors_updatedate': NaT, 'numberoffloors_source': None, 'numberoffloors_capturemethod': None, 'height_absolutemin_m': 7.8, 'height_absoluteroofbase_m': 11.3, 'height_absolutemax_m': 11.8, 'height_relativeroofbase_m': 3.5, 'height_relativemax_m': 4.0, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Waterproof Membrane Or Concrete', 'roofmaterial_solarpanelpresence': 'Not Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Flat', 'roofshapeaspect_areapitched_m2': 0.0, 'roofshapeaspect_areaflat_m2': 18.7, 'roofshapeaspect_areafacingnorth_m2': 0.0, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 0.0, 'roofshapeaspect_areafacingsouth_m2': 0.0, 'roofshapeaspect_areafacingsouthwest_m2': 0.0, 'roofshapeaspect_areafacingwest_m2': 0.0, 'roofshapeaspect_areafacingnorthwest_m2': 0.0, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 18.7, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((295009.581 89208.958, 295010.375 89208.789, 295010.916 89211.324,...>}, {'osid': 'b9a49c80-fecf-4308-a98d-cf90ea4ea2e4', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 99.338, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'End-Of-Terrace House', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1, 'isinsite': True, 'primarysiteid': '8a98c3ca-83de-48fb-93ad-81f4ab0bdedd', 'containingsitecount': 1, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': 'Yes', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Residential Accommodation', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 1, 'buildinguse_addresscount_residential': 1, 'buildinguse_addresscount_commercial': 0, 'buildinguse_addresscount_other': 0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'End-Connected', 'connectivity_count': 1, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': 'Brick Or Block Or Stone', 'constructionmaterial_evidencedate': Timestamp('2018-08-08 00:00:00'), 'constructionmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial_source': 'Verisk', 'constructionmaterial_capturemethod': 'Automated Process', 'constructionmaterial_thirdpartyprovenance': 'Infill Modelling', 'buildingage_period': '1945-1959', 'buildingage_year': nan, 'buildingage_evidencedate': Timestamp('2018-08-08 00:00:00'), 'buildingage_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingage_source': 'Verisk', 'buildingage_capturemethod': 'Remote Sensing Survey', 'buildingage_thirdpartyprovenance': 'Remote Sensed Manual Imagery Interpretation', 'basementpresence': 'Not Present', 'basementpresence_selfcontained': 'Not Present', 'basementpresence_evidencedate': Timestamp('2022-12-23 00:00:00'), 'basementpresence_updatedate': Timestamp('2025-03-10 00:00:00'), 'basementpresence_source': 'Verisk', 'basementpresence_capturemethod': 'Automated Process', 'basementpresence_thirdpartyprovenance': 'Infill Modelling', 'numberoffloors': 2.0, 'numberoffloors_evidencedate': Timestamp('2023-03-08 00:00:00'), 'numberoffloors_updatedate': Timestamp('2025-03-10 00:00:00'), 'numberoffloors_source': 'Ordnance Survey', 'numberoffloors_capturemethod': 'Automated Process', 'height_absolutemin_m': 9.2, 'height_absoluteroofbase_m': 15.0, 'height_absolutemax_m': 18.5, 'height_relativeroofbase_m': 5.8, 'height_relativemax_m': 9.3, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Tile Or Stone Or Slate', 'roofmaterial_solarpanelpresence': 'Not Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 123.2, 'roofshapeaspect_areaflat_m2': 5.5, 'roofshapeaspect_areafacingnorth_m2': 45.9, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 16.1, 'roofshapeaspect_areafacingsoutheast_m2': 9.8, 'roofshapeaspect_areafacingsouth_m2': 42.5, 'roofshapeaspect_areafacingsouthwest_m2': 8.9, 'roofshapeaspect_areafacingwest_m2': 0.0, 'roofshapeaspect_areafacingnorthwest_m2': 0.0, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 128.7, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((295023.88 89224.91, 295033.25 89223.55, 295034.451 89224.241, 295...>}, {'osid': '9dfb4b41-f53d-44c0-8a7a-5f7884375677', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 78.565, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'Mid-Terrace House', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 3, 'isinsite': True, 'primarysiteid': '9fc1c691-7d9e-48aa-8ee5-343dc9704a81', 'containingsitecount': 1, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': 'Yes', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Residential Accommodation', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 1, 'buildinguse_addresscount_residential': 1, 'buildinguse_addresscount_commercial': 0, 'buildinguse_addresscount_other': 0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'Multi-Connected', 'connectivity_count': 3, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': 'Brick Or Block Or Stone', 'constructionmaterial_evidencedate': Timestamp('2018-08-08 00:00:00'), 'constructionmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial_source': 'Verisk', 'constructionmaterial_capturemethod': 'Automated Process', 'constructionmaterial_thirdpartyprovenance': 'Infill Modelling', 'buildingage_period': '1945-1959', 'buildingage_year': nan, 'buildingage_evidencedate': Timestamp('2018-08-08 00:00:00'), 'buildingage_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingage_source': 'Verisk', 'buildingage_capturemethod': 'Remote Sensing Survey', 'buildingage_thirdpartyprovenance': 'Remote Sensed Manual Imagery Interpretation', 'basementpresence': 'Not Present', 'basementpresence_selfcontained': 'Not Present', 'basementpresence_evidencedate': Timestamp('2022-12-23 00:00:00'), 'basementpresence_updatedate': Timestamp('2025-03-10 00:00:00'), 'basementpresence_source': 'Verisk', 'basementpresence_capturemethod': 'Automated Process', 'basementpresence_thirdpartyprovenance': 'Infill Modelling', 'numberoffloors': 2.0, 'numberoffloors_evidencedate': Timestamp('2023-03-08 00:00:00'), 'numberoffloors_updatedate': Timestamp('2025-03-10 00:00:00'), 'numberoffloors_source': 'Ordnance Survey', 'numberoffloors_capturemethod': 'Automated Process', 'height_absolutemin_m': 9.4, 'height_absoluteroofbase_m': 15.5, 'height_absolutemax_m': 18.4, 'height_relativeroofbase_m': 6.1, 'height_relativemax_m': 9.0, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Tile Or Stone Or Slate', 'roofmaterial_solarpanelpresence': 'Not Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 96.2, 'roofshapeaspect_areaflat_m2': 7.3, 'roofshapeaspect_areafacingnorth_m2': 32.6, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 0.0, 'roofshapeaspect_areafacingsouth_m2': 52.9, 'roofshapeaspect_areafacingsouthwest_m2': 0.0, 'roofshapeaspect_areafacingwest_m2': 10.7, 'roofshapeaspect_areafacingnorthwest_m2': 0.0, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 103.5, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((295014.117 89215.196, 295014.975 89215.069, 295015.58 89219.16, 2...>}, {'osid': 'aea058f2-6a39-4829-ae6b-85c6863a250e', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 66.91, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'Mid-Terrace House', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1, 'isinsite': True, 'primarysiteid': 'ff52a58b-d8d7-4249-8088-8b3a18d19bd8', 'containingsitecount': 1, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': 'Yes', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Residential Accommodation', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 1, 'buildinguse_addresscount_residential': 1, 'buildinguse_addresscount_commercial': 0, 'buildinguse_addresscount_other': 0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'Multi-Connected', 'connectivity_count': 3, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': 'Brick Or Block Or Stone', 'constructionmaterial_evidencedate': Timestamp('2015-11-20 00:00:00'), 'constructionmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial_source': 'Verisk', 'constructionmaterial_capturemethod': 'Third Party Unknown', 'constructionmaterial_thirdpartyprovenance': 'Domestic Energy Performance Certificate (England And Wales)', 'buildingage_period': '1945-1959', 'buildingage_year': nan, 'buildingage_evidencedate': Timestamp('2018-08-08 00:00:00'), 'buildingage_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingage_source': 'Verisk', 'buildingage_capturemethod': 'Remote Sensing Survey', 'buildingage_thirdpartyprovenance': 'Remote Sensed Manual Imagery Interpretation', 'basementpresence': 'Not Present', 'basementpresence_selfcontained': 'Not Present', 'basementpresence_evidencedate': Timestamp('2022-12-23 00:00:00'), 'basementpresence_updatedate': Timestamp('2025-03-10 00:00:00'), 'basementpresence_source': 'Verisk', 'basementpresence_capturemethod': 'Automated Process', 'basementpresence_thirdpartyprovenance': 'Infill Modelling', 'numberoffloors': 2.0, 'numberoffloors_evidencedate': Timestamp('2023-03-08 00:00:00'), 'numberoffloors_updatedate': Timestamp('2025-03-10 00:00:00'), 'numberoffloors_source': 'Ordnance Survey', 'numberoffloors_capturemethod': 'Automated Process', 'height_absolutemin_m': 9.0, 'height_absoluteroofbase_m': 15.2, 'height_absolutemax_m': 18.5, 'height_relativeroofbase_m': 6.2, 'height_relativemax_m': 9.5, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Tile Or Stone Or Slate', 'roofmaterial_solarpanelpresence': 'Not Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 87.5, 'roofshapeaspect_areaflat_m2': 0.0, 'roofshapeaspect_areafacingnorth_m2': 32.4, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 0.0, 'roofshapeaspect_areafacingsouth_m2': 36.9, 'roofshapeaspect_areafacingsouthwest_m2': 0.0, 'roofshapeaspect_areafacingwest_m2': 18.2, 'roofshapeaspect_areafacingnorthwest_m2': 0.0, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 87.5, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((295008.31 89227.16, 295014.45 89226.25, 295015.43 89226.118, 2950...>}, {'osid': 'ef3285ad-8a1d-4d4d-aa50-333888085e10', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 7.858, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'Unknown Building', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1, 'isinsite': False, 'primarysiteid': None, 'containingsitecount': 0, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': None, 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Unknown', 'buildinguse_oslandusetiera': None, 'buildinguse_addresscount_total': 0, 'buildinguse_addresscount_residential': 0, 'buildinguse_addresscount_commercial': 0, 'buildinguse_addresscount_other': 0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'Multi-Connected', 'connectivity_count': 2, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': None, 'constructionmaterial_evidencedate': NaT, 'constructionmaterial_updatedate': NaT, 'constructionmaterial_source': None, 'constructionmaterial_capturemethod': None, 'constructionmaterial_thirdpartyprovenance': None, 'buildingage_period': None, 'buildingage_year': nan, 'buildingage_evidencedate': NaT, 'buildingage_updatedate': NaT, 'buildingage_source': None, 'buildingage_capturemethod': None, 'buildingage_thirdpartyprovenance': None, 'basementpresence': None, 'basementpresence_selfcontained': None, 'basementpresence_evidencedate': NaT, 'basementpresence_updatedate': NaT, 'basementpresence_source': None, 'basementpresence_capturemethod': None, 'basementpresence_thirdpartyprovenance': None, 'numberoffloors': nan, 'numberoffloors_evidencedate': NaT, 'numberoffloors_updatedate': NaT, 'numberoffloors_source': None, 'numberoffloors_capturemethod': None, 'height_absolutemin_m': nan, 'height_absoluteroofbase_m': nan, 'height_absolutemax_m': nan, 'height_relativeroofbase_m': nan, 'height_relativemax_m': nan, 'height_confidencelevel': None, 'height_evidencedate': NaT, 'height_updatedate': NaT, 'roofmaterial_primarymaterial': 'Tile Or Stone Or Slate', 'roofmaterial_solarpanelpresence': 'Not Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Insufficient Building Size', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 10.7, 'roofshapeaspect_areaflat_m2': 0.0, 'roofshapeaspect_areafacingnorth_m2': 0.0, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 0.0, 'roofshapeaspect_areafacingsouth_m2': 10.7, 'roofshapeaspect_areafacingsouthwest_m2': 0.0, 'roofshapeaspect_areafacingwest_m2': 0.0, 'roofshapeaspect_areafacingnorthwest_m2': 0.0, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 10.7, 'roofshapeaspect_confidenceindicator': 'Insufficient Building Size', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((295015.24 89224.86, 295015.43 89226.118, 295016.517 89225.972, 29...>}], [{'osid': '57202087-5453-473f-b927-0b58b9e564fb', 'toid': 'osgb1000002062528401', 'versiondate': Timestamp('2022-08-26 00:00:00'), 'versionavailablefromdate': Timestamp('2022-08-27 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('1970-01-01 00:00:00'), 'changetype': 'New', 'geometry_length': 5.25456, 'geometry_evidencedate': Timestamp('1970-01-01 00:00:00'), 'geometry_updatedate': Timestamp('1970-01-01 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Buildings', 'description': 'Building Internal Division', 'description_evidencedate': Timestamp('1970-01-01 00:00:00'), 'description_updatedate': Timestamp('1970-01-01 00:00:00'), 'description_source': 'Ordnance Survey', 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'geometry': <LINESTRING (294981.68 89285.84, 294984.7 89281.54)>}, {'osid': 'd87c4727-0467-40c3-b148-1fae6bef930c', 'toid': 'osgb5000005272550976', 'versiondate': Timestamp('2022-08-26 00:00:00'), 'versionavailablefromdate': Timestamp('2022-08-27 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2020-11-17 00:00:00'), 'changetype': 'Moved From A Different Feature Type', 'geometry_length': 8.89783, 'geometry_evidencedate': Timestamp('2020-11-16 00:00:00'), 'geometry_updatedate': Timestamp('2020-11-16 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Buildings', 'description': 'Building Occupier Division', 'description_evidencedate': Timestamp('2021-05-24 00:00:00'), 'description_updatedate': Timestamp('2021-05-24 00:00:00'), 'description_source': 'Ordnance Survey', 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'geometry': <LINESTRING (294957.868 89288.363, 294950.632 89283.185)>}, {'osid': '38e4a6bd-c82d-4fe5-908f-df1497b7a199', 'toid': 'osgb5000005272551019', 'versiondate': Timestamp('2022-08-26 00:00:00'), 'versionavailablefromdate': Timestamp('2022-08-27 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2020-11-17 00:00:00'), 'changetype': 'Moved From A Different Feature Type', 'geometry_length': 10.000591, 'geometry_evidencedate': Timestamp('2020-11-16 00:00:00'), 'geometry_updatedate': Timestamp('2020-11-16 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Buildings', 'description': 'Building Occupier Division', 'description_evidencedate': Timestamp('2021-05-24 00:00:00'), 'description_updatedate': Timestamp('2021-05-24 00:00:00'), 'description_source': 'Ordnance Survey', 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'geometry': <LINESTRING (294983.23 89297.088, 294975.076 89291.298)>}, {'osid': '4ad601b7-2d43-4ffd-a813-785bdfac9349', 'toid': 'osgb5000005286435415', 'versiondate': Timestamp('2022-08-26 00:00:00'), 'versionavailablefromdate': Timestamp('2022-08-27 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2021-09-13 00:00:00'), 'changetype': 'New', 'geometry_length': 9.427393, 'geometry_evidencedate': Timestamp('2021-09-10 00:00:00'), 'geometry_updatedate': Timestamp('2021-09-10 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Buildings', 'description': 'Building Occupier Division', 'description_evidencedate': Timestamp('2021-09-13 00:00:00'), 'description_updatedate': Timestamp('2021-09-13 00:00:00'), 'description_source': 'Ordnance Survey', 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'geometry': <LINESTRING (294935.88 89293.389, 294930.472 89301.111)>}, {'osid': '4fc5cd11-808d-4791-8676-b52213bce65b', 'toid': 'osgb5000005272550999', 'versiondate': Timestamp('2022-08-26 00:00:00'), 'versionavailablefromdate': Timestamp('2022-08-27 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2020-11-17 00:00:00'), 'changetype': 'Moved From A Different Feature Type', 'geometry_length': 10.000591, 'geometry_evidencedate': Timestamp('2020-11-16 00:00:00'), 'geometry_updatedate': Timestamp('2020-11-16 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Buildings', 'description': 'Building Occupier Division', 'description_evidencedate': Timestamp('2021-05-24 00:00:00'), 'description_updatedate': Timestamp('2021-05-24 00:00:00'), 'description_source': 'Ordnance Survey', 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'geometry': <LINESTRING (294979.634 89302.152, 294971.48 89296.362)>}], [{'osid': 'c7f949ce-e1f7-425d-b6fa-8ddc11065214', 'toid': 'osgb5000005158457941', 'versiondate': Timestamp('2025-02-04 00:00:00'), 'versionavailablefromdate': Timestamp('2025-02-05 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2015-07-15 00:00:00'), 'changetype': 'Modified Attributes', 'geometry_area_m2': 20.297, 'geometry_evidencedate': Timestamp('2014-06-24 00:00:00'), 'geometry_updatedate': Timestamp('2015-05-25 00:00:00'), 'geometry_capturemethod': 'Remote Sensing Survey', 'theme': 'Buildings', 'description': 'Building', 'description_evidencedate': Timestamp('2014-06-24 00:00:00'), 'description_updatedate': Timestamp('2015-05-25 00:00:00'), 'description_capturemethod': 'Remote Sensing Survey', 'oslandcovertiera': 'Constructed', 'oslandcovertierb': 'Building', 'oslandcover_evidencedate': Timestamp('2014-06-24 00:00:00'), 'oslandcover_updatedate': Timestamp('2015-05-25 00:00:00'), 'oslandcover_capturemethod': 'Remote Sensing Survey', 'oslandusetiera': 'Residential Accommodation', 'oslandusetierb': 'Private Residence', 'oslanduse_evidencedate': Timestamp('2014-06-24 00:00:00'), 'oslanduse_updatedate': Timestamp('2015-05-25 00:00:00'), 'oslanduse_capturemethod': 'Remote Sensing Survey', 'height_absoluteroofbase_m': nan, 'height_relativeroofbase_m': nan, 'height_absolutemax_m': nan, 'height_relativemax_m': nan, 'height_absolutemin_m': 7.9, 'height_confidencelevel': 'Incomplete', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-01-17 00:00:00'), 'associatedstructure': None, 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'containingsitecount': 1, 'smallestsite_siteid': '5af84224-d82a-47f0-b475-e4f94179f8e0', 'smallestsite_landusetiera': 'Residential Accommodation', 'smallestsite_landusetierb': 'Private Residence', 'largestsite_landusetiera': None, 'largestsite_landusetierb': None, 'nlud_code': 'U071', 'nlud_orderdescription': 'RESIDENTIAL', 'nlud_groupdescription': 'Dwellings', 'address_classificationcode': 'RD', 'address_primarydescription': 'Residential', 'address_secondarydescription': 'Dwelling', 'lowertierlocalauthority_gsscode': 'E07000041', 'lowertierlocalauthority_count': 1, 'status': None, 'status_updatedate': Timestamp('2015-05-25 00:00:00'), 'geometry': <POLYGON ((295183.092 89167.971, 295184.746 89171.889, 295189.143 89170.033,...>}, {'osid': '7436b5c6-ff93-41cb-aeb1-c3c22acaf011', 'toid': 'osgb5000005290891862', 'versiondate': Timestamp('2025-02-04 00:00:00'), 'versionavailablefromdate': Timestamp('2025-02-05 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2021-12-19 00:00:00'), 'changetype': 'Modified Attributes', 'geometry_area_m2': 16.914, 'geometry_evidencedate': Timestamp('2021-06-01 00:00:00'), 'geometry_updatedate': Timestamp('2021-12-18 00:00:00'), 'geometry_capturemethod': 'Remote Sensing Survey', 'theme': 'Buildings', 'description': 'Building', 'description_evidencedate': Timestamp('2021-06-01 00:00:00'), 'description_updatedate': Timestamp('2021-12-18 00:00:00'), 'description_capturemethod': 'Remote Sensing Survey', 'oslandcovertiera': 'Constructed', 'oslandcovertierb': 'Building', 'oslandcover_evidencedate': Timestamp('2021-06-01 00:00:00'), 'oslandcover_updatedate': Timestamp('2021-12-18 00:00:00'), 'oslandcover_capturemethod': 'Remote Sensing Survey', 'oslandusetiera': 'Residential Accommodation', 'oslandusetierb': 'Private Residence', 'oslanduse_evidencedate': Timestamp('2021-06-01 00:00:00'), 'oslanduse_updatedate': Timestamp('2021-12-18 00:00:00'), 'oslanduse_capturemethod': 'Remote Sensing Survey', 'height_absoluteroofbase_m': 10.5, 'height_relativeroofbase_m': 2.0, 'height_absolutemax_m': 11.5, 'height_relativemax_m': 3.0, 'height_absolutemin_m': 8.5, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-01-17 00:00:00'), 'associatedstructure': None, 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'containingsitecount': 1, 'smallestsite_siteid': 'c18c53df-0e48-4611-be86-f9d542de533c', 'smallestsite_landusetiera': 'Residential Accommodation', 'smallestsite_landusetierb': 'Private Residence', 'largestsite_landusetiera': None, 'largestsite_landusetierb': None, 'nlud_code': 'U071', 'nlud_orderdescription': 'RESIDENTIAL', 'nlud_groupdescription': 'Dwellings', 'address_classificationcode': 'RD', 'address_primarydescription': 'Residential', 'address_secondarydescription': 'Dwelling', 'lowertierlocalauthority_gsscode': 'E07000041', 'lowertierlocalauthority_count': 1, 'status': None, 'status_updatedate': Timestamp('2021-12-18 00:00:00'), 'geometry': <POLYGON ((295182.794 89180.43, 295184.809 89183.379, 295188.719 89180.709, ...>}, {'osid': '6fcc76f4-817e-46e4-92c7-6bd50bd9c52d', 'toid': 'osgb5000005158459076', 'versiondate': Timestamp('2025-02-04 00:00:00'), 'versionavailablefromdate': Timestamp('2025-02-05 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2015-07-15 00:00:00'), 'changetype': 'Modified Attributes', 'geometry_area_m2': 8.207, 'geometry_evidencedate': Timestamp('2014-06-24 00:00:00'), 'geometry_updatedate': Timestamp('2015-05-26 00:00:00'), 'geometry_capturemethod': 'Remote Sensing Survey', 'theme': 'Buildings', 'description': 'Building', 'description_evidencedate': Timestamp('2014-06-24 00:00:00'), 'description_updatedate': Timestamp('2015-05-26 00:00:00'), 'description_capturemethod': 'Remote Sensing Survey', 'oslandcovertiera': 'Constructed', 'oslandcovertierb': 'Building', 'oslandcover_evidencedate': Timestamp('2014-06-24 00:00:00'), 'oslandcover_updatedate': Timestamp('2015-05-26 00:00:00'), 'oslandcover_capturemethod': 'Remote Sensing Survey', 'oslandusetiera': 'Residential Accommodation', 'oslandusetierb': 'Private Residence', 'oslanduse_evidencedate': Timestamp('2014-06-24 00:00:00'), 'oslanduse_updatedate': Timestamp('2015-05-26 00:00:00'), 'oslanduse_capturemethod': 'Remote Sensing Survey', 'height_absoluteroofbase_m': nan, 'height_relativeroofbase_m': nan, 'height_absolutemax_m': nan, 'height_relativemax_m': nan, 'height_absolutemin_m': 8.2, 'height_confidencelevel': 'Incomplete', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-01-17 00:00:00'), 'associatedstructure': None, 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'containingsitecount': 1, 'smallestsite_siteid': '0e667685-f047-446a-bde6-beb6943f9052', 'smallestsite_landusetiera': 'Residential Accommodation', 'smallestsite_landusetierb': 'Private Residence', 'largestsite_landusetiera': None, 'largestsite_landusetierb': None, 'nlud_code': 'U071', 'nlud_orderdescription': 'RESIDENTIAL', 'nlud_groupdescription': 'Dwellings', 'address_classificationcode': 'RD', 'address_primarydescription': 'Residential', 'address_secondarydescription': 'Dwelling', 'lowertierlocalauthority_gsscode': 'E07000041', 'lowertierlocalauthority_count': 1, 'status': None, 'status_updatedate': Timestamp('2015-05-26 00:00:00'), 'geometry': <POLYGON ((295196.803 89194.974, 295193.995 89196.868, 295194.545 89197.682,...>}, {'osid': '90474fb7-6565-4104-ba7b-21f7fe084140', 'toid': 'osgb1000012378194', 'versiondate': Timestamp('2025-02-04 00:00:00'), 'versionavailablefromdate': Timestamp('2025-02-05 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('1970-01-01 00:00:00'), 'changetype': 'Modified Attributes', 'geometry_area_m2': 54.607, 'geometry_evidencedate': Timestamp('1970-01-01 00:00:00'), 'geometry_updatedate': Timestamp('1970-01-01 00:00:00'), 'geometry_capturemethod': 'Automated Process', 'theme': 'Buildings', 'description': 'Building', 'description_evidencedate': Timestamp('1970-01-01 00:00:00'), 'description_updatedate': Timestamp('1970-01-01 00:00:00'), 'description_capturemethod': 'Automated Process', 'oslandcovertiera': 'Constructed', 'oslandcovertierb': 'Building', 'oslandcover_evidencedate': Timestamp('1970-01-01 00:00:00'), 'oslandcover_updatedate': Timestamp('1970-01-01 00:00:00'), 'oslandcover_capturemethod': 'Automated Process', 'oslandusetiera': 'Residential Accommodation', 'oslandusetierb': 'Private Residence', 'oslanduse_evidencedate': Timestamp('1970-01-01 00:00:00'), 'oslanduse_updatedate': Timestamp('1970-01-01 00:00:00'), 'oslanduse_capturemethod': 'Automated Process', 'height_absoluteroofbase_m': 12.5, 'height_relativeroofbase_m': 3.7, 'height_absolutemax_m': 17.5, 'height_relativemax_m': 8.7, 'height_absolutemin_m': 8.8, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-01-17 00:00:00'), 'associatedstructure': None, 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'containingsitecount': 1, 'smallestsite_siteid': '0e667685-f047-446a-bde6-beb6943f9052', 'smallestsite_landusetiera': 'Residential Accommodation', 'smallestsite_landusetierb': 'Private Residence', 'largestsite_landusetiera': None, 'largestsite_landusetierb': None, 'nlud_code': 'U071', 'nlud_orderdescription': 'RESIDENTIAL', 'nlud_groupdescription': 'Dwellings', 'address_classificationcode': 'RD', 'address_primarydescription': 'Residential', 'address_secondarydescription': 'Dwelling', 'lowertierlocalauthority_gsscode': 'E07000041', 'lowertierlocalauthority_count': 1, 'status': None, 'status_updatedate': Timestamp('1970-01-01 00:00:00'), 'geometry': <POLYGON ((295187.87 89193.83, 295182.12 89197.72, 295185.7 89202.85, 295186...>}, {'osid': 'cd808371-63d1-49b0-993e-87397a2aef3d', 'toid': 'osgb5000005158458489', 'versiondate': Timestamp('2025-02-04 00:00:00'), 'versionavailablefromdate': Timestamp('2025-02-05 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2015-07-15 00:00:00'), 'changetype': 'Modified Attributes', 'geometry_area_m2': 8.505, 'geometry_evidencedate': Timestamp('2014-06-24 00:00:00'), 'geometry_updatedate': Timestamp('2015-05-26 00:00:00'), 'geometry_capturemethod': 'Remote Sensing Survey', 'theme': 'Buildings', 'description': 'Building', 'description_evidencedate': Timestamp('2014-06-24 00:00:00'), 'description_updatedate': Timestamp('2015-05-26 00:00:00'), 'description_capturemethod': 'Remote Sensing Survey', 'oslandcovertiera': 'Constructed', 'oslandcovertierb': 'Building', 'oslandcover_evidencedate': Timestamp('2014-06-24 00:00:00'), 'oslandcover_updatedate': Timestamp('2015-05-26 00:00:00'), 'oslandcover_capturemethod': 'Remote Sensing Survey', 'oslandusetiera': 'Residential Accommodation', 'oslandusetierb': 'Private Residence', 'oslanduse_evidencedate': Timestamp('2014-06-24 00:00:00'), 'oslanduse_updatedate': Timestamp('2015-05-26 00:00:00'), 'oslanduse_capturemethod': 'Remote Sensing Survey', 'height_absoluteroofbase_m': nan, 'height_relativeroofbase_m': nan, 'height_absolutemax_m': nan, 'height_relativemax_m': nan, 'height_absolutemin_m': 8.2, 'height_confidencelevel': 'Incomplete', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-01-17 00:00:00'), 'associatedstructure': None, 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Urban', 'containingsitecount': 1, 'smallestsite_siteid': 'd5dd5a0d-f4d8-441a-98b8-c197dac7a8ba', 'smallestsite_landusetiera': 'Residential Accommodation', 'smallestsite_landusetierb': 'Private Residence', 'largestsite_landusetiera': None, 'largestsite_landusetierb': None, 'nlud_code': 'U071', 'nlud_orderdescription': 'RESIDENTIAL', 'nlud_groupdescription': 'Dwellings', 'address_classificationcode': 'RD', 'address_primarydescription': 'Residential', 'address_secondarydescription': 'Dwelling', 'lowertierlocalauthority_gsscode': 'E07000041', 'lowertierlocalauthority_count': 1, 'status': None, 'status_updatedate': Timestamp('2015-05-26 00:00:00'), 'geometry': <POLYGON ((295195.771 89199.412, 295196.232 89200.095, 295199.015 89198.217,...>}]], ['buildings_exeter_buildings_with_solar_panels', 'buildingline_exeter_buildings_with_solar_panels', 'buildingpart_exeter_buildings_with_solar_panels'])
+2026-02-03 12:49:59,178 INFO Calling tool code_executor with args : {'code': 'def filter_solar_panel_buildings_exeter(data: list):\n    import pandas as pd\n    import geopandas as gpd\n    # Unpack the dataframes\n    buildings_gdf, buildingline_gdf, buildingpart_gdf = data\n\n    # For buildings, filter for solar panels on roofs\n    # The relevant column is \'roofmaterial_solarpanelpresence\' and should be \'Present\'\n    if \'roofmaterial_solarpanelpresence\' in buildings_gdf.columns:\n        filtered_buildings = buildings_gdf[buildings_gdf[\'roofmaterial_solarpanelpresence\'] == \'Present\']\n    else:\n        filtered_buildings = buildings_gdf.iloc[0:0]  # Empty GeoDataFrame if column not present\n\n    # For building parts, check if any part has solar panels on the roof\n    if \'roofmaterial_solarpanelpresence\' in buildingpart_gdf.columns:\n        filtered_buildingparts = buildingpart_gdf[buildingpart_gdf[\'roofmaterial_solarpanelpresence\'] == \'Present\']\n    else:\n        filtered_buildingparts = buildingpart_gdf.iloc[0:0]\n\n    # For building lines, there is no solar panel info, so skip\n    # Combine filtered results\n    filtered_combined = pd.concat([filtered_buildings, filtered_buildingparts], ignore_index=True)\n    if isinstance(filtered_combined, pd.DataFrame) and not isinstance(filtered_combined, gpd.GeoDataFrame):\n        # If concat lost geometry, convert back to GeoDataFrame\n        filtered_combined = gpd.GeoDataFrame(filtered_combined, geometry=\'geometry\', crs=buildings_gdf.crs)\n\n    summary = f"Filtered buildings and building parts with solar panels on roofs. Total entries: {len(filtered_combined)}."\n    artifact_name = \'filtered_solar_panel_buildings_exeter\'\n    artifact_description = \'GeoDataFrame of buildings and building parts in Exeter with solar panels present on roofs.\'\n    return [summary, artifact_name, artifact_description, filtered_combined]\n', 'artifact_names': ['buildings_exeter_buildings_with_solar_panels', 'buildingline_exeter_buildings_with_solar_panels', 'buildingpart_exeter_buildings_with_solar_panels']}
+2026-02-03 12:50:00,387 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_solar_panel_buildings_exeter(data: list):
+    import pandas as pd
+    import geopandas as gpd
+    # Unpack the dataframes
+    buildings_gdf, buildingline_gdf, buildingpart_gdf = data
+
+    # For buildings, filter for solar panels on roofs
+    # The relevant column is 'roofmaterial_solarpanelpresence' and should be 'Present'
+    if 'roofmaterial_solarpanelpresence' in buildings_gdf.columns:
+        filtered_buildings = buildings_gdf[buildings_gdf['roofmaterial_solarpanelpresence'] == 'Present']
+    else:
+        filtered_buildings = buildings_gdf.iloc[0:0]  # Empty GeoDataFrame if column not present
+
+    # For building parts, check if any part has solar panels on the roof
+    if 'roofmaterial_solarpanelpresence' in buildingpart_gdf.columns:
+        filtered_buildingparts = buildingpart_gdf[buildingpart_gdf['roofmaterial_solarpanelpresence'] == 'Present']
+    else:
+        filtered_buildingparts = buildingpart_gdf.iloc[0:0]
+
+    # For building lines, there is no solar panel info, so skip
+    # Combine filtered results
+    filtered_combined = pd.concat([filtered_buildings, filtered_buildingparts], ignore_index=True)
+    if isinstance(filtered_combined, pd.DataFrame) and not isinstance(filtered_combined, gpd.GeoDataFrame):
+        # If concat lost geometry, convert back to GeoDataFrame
+        filtered_combined = gpd.GeoDataFrame(filtered_combined, geometry='geometry', crs=buildings_gdf.crs)
+
+    summary = f"Filtered buildings and building parts with solar panels on roofs. Total entries: {len(filtered_combined)}."
+    artifact_name = 'filtered_solar_panel_buildings_exeter'
+    artifact_description = 'GeoDataFrame of buildings and building parts in Exeter with solar panels present on roofs.'
+    return [summary, artifact_name, artifact_description, filtered_combined]
+
+2026-02-03 12:50:00,387 INFO function name filter_solar_panel_buildings_exeter
+2026-02-03 12:50:00,417 INFO Output completed
+2026-02-03 12:50:00,639 INFO Tool code_executor returned result : ['Filtered buildings and building parts with solar panels on roofs. Total entries: 4468.', <a2a.Artifact.Artifact object at 0x000001E7969CF4D0>]
+2026-02-03 12:50:08,501 WARNING OFFLINE MODE
+2026-02-03 12:50:08,501 INFO Output from agent data_analysis_agent : Filtered buildings and building parts with solar panels on roofs. Total entries: 4468.
+Artifact name: filtered_solar_panel_buildings_exeter
+Description: GeoDataFrame of buildings and building parts in Exeter with solar panels present on roofs.
+2026-02-03 12:50:08,501 INFO Tool send_message returned result : ["Filtered buildings and building parts with solar panels on roofs. Total entries: 4468.\nArtifact name: filtered_solar_panel_buildings_exeter\nDescription: GeoDataFrame of buildings and building parts in Exeter with solar panels present on roofs.Addtionally some data artifacts have been generated with names  ['filtered_solar_panel_buildings_exeter'] and \n descriptions ['GeoDataFrame of buildings and building parts in Exeter with solar panels present on roofs.']", [<a2a.Artifact.Artifact object at 0x000001E7969CF4D0>]]
+2026-02-03 12:50:15,418 WARNING OFFLINE MODE
+2026-02-03 12:50:15,418 INFO Output from agent buildings : I have identified buildings in the 'filtered_exeter_area_polygon' that have solar panels on roofs. The filtered results are saved in the artifact named **'filtered_solar_panel_buildings_exeter'**. This GeoDataFrame contains 4,468 entries of buildings and building parts with solar panels.
+2026-02-03 12:50:15,421 INFO Tool send_message returned result : ["I have identified buildings in the 'filtered_exeter_area_polygon' that have solar panels on roofs. The filtered results are saved in the artifact named **'filtered_solar_panel_buildings_exeter'**. This GeoDataFrame contains 4,468 entries of buildings and building parts with solar panels.Addtionally some data artifacts have been generated with names  ['filtered_solar_panel_buildings_exeter'] and \n descriptions ['GeoDataFrame of buildings and building parts in Exeter with solar panels present on roofs.']", [<a2a.Artifact.Artifact object at 0x000001E7969CF4D0>]]
+2026-02-03 12:50:15,421 INFO Calling tool send_message with args : {'target': 'structures_agent', 'task_description': "Search for solar panel structures in the artifact 'filtered_exeter_area_polygon'."}
+2026-02-03 12:50:19,489 WARNING OFFLINE MODE
+2026-02-03 12:50:19,500 INFO Messages sent to agent structures_agent : [{'role': 'user', 'content': "Search for solar panel structures in the artifact 'filtered_exeter_area_polygon'."}]
+2026-02-03 12:50:21,680 INFO Calling tool call_os_ngd with args : {'filters': ['Made Sealed Surface Covered with Solar Panels', 'Made Unsealed Surface Covered with Solar Panels', 'Solar Panels', 'Solar Panels On Bare Earth Or Grass'], 'bbox': 'filtered_exeter_area_polygon', 'polygon_or_point': True, 'street_address': False, 'filename': 'solar_panel_structures_exeter'}
+2026-02-03 12:50:21,810 INFO NGD query result [                                   osid                  toid versiondate  \
+0  e0f4b3bf-87e4-41f2-bb78-a4c3f3eb1a2b  osgb5000005290985306  2025-07-17   
+
+   versionavailablefromdate versionavailabletodate firstdigitalcapturedate  \
+0 2025-07-18 00:00:00+00:00                    NaT              2021-12-21   
+
+            changetype  geometry_area_m2 geometry_evidencedate  \
+0  Modified Attributes         10393.775            2024-04-20   
+
+  geometry_updatedate  ...         nlud_orderdescription  \
+0          2024-10-15  ...  UTILITIES AND INFRASTRUCTURE   
+
+                nlud_groupdescription address_classificationcode  \
+0  Energy production and distribution                       None   
+
+  address_primarydescription address_secondarydescription  \
+0                       None                         None   
+
+  lowertierlocalauthority_gsscode lowertierlocalauthority_count status  \
+0                       E07000041                           1.0   None   
+
+  status_updatedate                                           geometry  
+0        2022-09-23  MULTIPOLYGON (((292540.062 90819.691, 292540.0...  
+
+[1 rows x 65 columns]]
+2026-02-03 12:50:21,818 INFO Tool call_os_ngd returned result : ['Multiple search results have been found in multiple datasets. A summary of each is provided.\n            Artifacts generated are : [\'solar_panel_structures_exeter\'],\n            Descriptions are : ["A geopandas dataframe containing structure data with filters and bbox applied for the query Search for solar panel structures in the artifact \'filtered_exeter_area_polygon\'. using filters [\'Made Sealed Surface Covered with Solar Panels\', \'Made Unsealed Surface Covered with Solar Panels\', \'Solar Panels\', \'Solar Panels On Bare Earth Or Grass\']. Further Name filtering is available for this"],\n            counts of records fetched are : [195].\n            ', [<a2a.Artifact.Artifact object at 0x000001E7906F6950>]]
+2026-02-03 12:50:23,722 INFO Calling tool send_message with args : {'target': 'data_analysis_agent', 'task_description': "Please analyze the dataset 'solar_panel_structures_exeter' to filter and summarize the solar panel structures. Save the filtered results as 'filtered_solar_panel_structures_exeter'."}
+2026-02-03 12:50:27,796 WARNING OFFLINE MODE
+2026-02-03 12:50:27,808 INFO Messages sent to agent data_analysis_agent : [{'role': 'user', 'content': "Please analyze the dataset 'solar_panel_structures_exeter' to filter and summarize the solar panel structures. Save the filtered results as 'filtered_solar_panel_structures_exeter'."}]
+2026-02-03 12:50:30,329 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['solar_panel_structures_exeter']}
+2026-02-03 12:50:30,340 INFO artifacts loaded for metadata generation : ['solar_panel_structures_exeter']
+2026-02-03 12:50:30,350 INFO Tool generate_metadata_for_artifacts returned result : ([['osid', 'toid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'firstdigitalcapturedate', 'changetype', 'geometry_area_m2', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_capturemethod', 'theme', 'description', 'description_evidencedate', 'description_updatedate', 'description_capturemethod', 'oslandcovertiera', 'oslandcovertierb', 'oslandcover_evidencedate', 'oslandcover_updatedate', 'oslandcover_capturemethod', 'oslandusetiera', 'oslandusetierb', 'oslanduse_evidencedate', 'oslanduse_updatedate', 'oslanduse_capturemethod', 'height_absoluteroofbase_m', 'height_relativeroofbase_m', 'height_absolutemax_m', 'height_relativemax_m', 'height_absolutemin_m', 'height_confidencelevel', 'height_evidencedate', 'height_updatedate', 'name1_text', 'name1_language', 'name1_evidencedate', 'name1_updatedate', 'name2_text', 'name2_language', 'name2_evidencedate', 'name2_updatedate', 'istidal', 'ishistoric', 'associatedstructure', 'isobscured', 'physicallevel', 'capturespecification', 'containingsitecount', 'smallestsite_siteid', 'smallestsite_landusetiera', 'smallestsite_landusetierb', 'largestsite_landusetiera', 'largestsite_landusetierb', 'nlud_code', 'nlud_orderdescription', 'nlud_groupdescription', 'address_classificationcode', 'address_primarydescription', 'address_secondarydescription', 'lowertierlocalauthority_gsscode', 'lowertierlocalauthority_count', 'status', 'status_updatedate', 'geometry']], [[{'osid': 'e0f4b3bf-87e4-41f2-bb78-a4c3f3eb1a2b', 'toid': 'osgb5000005290985306', 'versiondate': Timestamp('2025-07-17 00:00:00'), 'versionavailablefromdate': Timestamp('2025-07-18 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2021-12-21 00:00:00'), 'changetype': 'Modified Attributes', 'geometry_area_m2': 10393.775, 'geometry_evidencedate': Timestamp('2024-04-20 00:00:00'), 'geometry_updatedate': Timestamp('2024-10-15 00:00:00'), 'geometry_capturemethod': 'Remote Sensing Survey', 'theme': 'Structures', 'description': 'Solar Panels On Bare Earth Or Grass', 'description_evidencedate': Timestamp('2022-07-12 00:00:00'), 'description_updatedate': Timestamp('2022-09-23 00:00:00'), 'description_capturemethod': 'Remote Sensing Survey', 'oslandcovertiera': 'Made', 'oslandcovertierb': 'Bare Earth Or Grass,Solar Panels', 'oslandcover_evidencedate': Timestamp('2022-07-12 00:00:00'), 'oslandcover_updatedate': Timestamp('2022-09-23 00:00:00'), 'oslandcover_capturemethod': 'Remote Sensing Survey', 'oslandusetiera': 'Utility Or Environmental Protection', 'oslandusetierb': 'Energy Generation', 'oslanduse_evidencedate': Timestamp('2022-07-12 00:00:00'), 'oslanduse_updatedate': Timestamp('2022-09-23 00:00:00'), 'oslanduse_capturemethod': 'Remote Sensing Survey', 'height_absoluteroofbase_m': nan, 'height_relativeroofbase_m': nan, 'height_absolutemax_m': nan, 'height_relativemax_m': nan, 'height_absolutemin_m': nan, 'height_confidencelevel': None, 'height_evidencedate': NaT, 'height_updatedate': NaT, 'name1_text': None, 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'istidal': False, 'ishistoric': False, 'associatedstructure': None, 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Rural', 'containingsitecount': 0, 'smallestsite_siteid': None, 'smallestsite_landusetiera': None, 'smallestsite_landusetierb': None, 'largestsite_landusetiera': None, 'largestsite_landusetierb': None, 'nlud_code': 'U061', 'nlud_orderdescription': 'UTILITIES AND INFRASTRUCTURE', 'nlud_groupdescription': 'Energy production and distribution', 'address_classificationcode': None, 'address_primarydescription': None, 'address_secondarydescription': None, 'lowertierlocalauthority_gsscode': 'E07000041', 'lowertierlocalauthority_count': 1.0, 'status': None, 'status_updatedate': Timestamp('2022-09-23 00:00:00'), 'geometry': <MULTIPOLYGON (((292540.062 90819.691, 292540.07 90824.17, 292541.073 90824....>}]], ['solar_panel_structures_exeter'])
+2026-02-03 12:50:39,197 INFO Calling tool code_executor with args : {'code': 'def filter_and_summarize_solar_panel_structures(data: list):\n    import pandas as pd\n    import geopandas as gpd\n    \n    gdf = data[0]\n    # Filter for solar panel structures using multiple relevant columns\n    filtered = gdf[(gdf[\'description\'].str.contains(\'Solar Panel\', case=False, na=False)) |\n                   (gdf[\'oslandcovertierb\'].str.contains(\'Solar Panel\', case=False, na=False)) |\n                   (gdf[\'oslandusetierb\'].str.contains(\'Energy Generation\', case=False, na=False)) |\n                   (gdf[\'nlud_groupdescription\'].str.contains(\'Energy production\', case=False, na=False))]\n    \n    # Summarize\n    summary = {\n        \'total_structures\': len(filtered),\n        \'total_area_m2\': filtered[\'geometry_area_m2\'].sum(),\n        \'unique_descriptions\': filtered[\'description\'].unique().tolist(),\n        \'capture_methods\': filtered[\'geometry_capturemethod\'].unique().tolist(),\n        \'date_range\': [str(filtered[\'geometry_evidencedate\'].min()), str(filtered[\'geometry_evidencedate\'].max())]\n    }\n    \n    # Attach summary as attribute for output\n    filtered.attrs[\'summary\'] = summary\n    \n    return [\n        f"Filtered {len(filtered)} solar panel structures. Total area: {summary[\'total_area_m2\']} m2.",\n        \'filtered_solar_panel_structures_exeter\',\n        \'Filtered GeoDataFrame of solar panel structures in Exeter with summary statistics attached as attributes.\',\n        filtered\n    ]', 'artifact_names': ['solar_panel_structures_exeter']}
+2026-02-03 12:50:39,199 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_and_summarize_solar_panel_structures(data: list):
+    import pandas as pd
+    import geopandas as gpd
+    
+    gdf = data[0]
+    # Filter for solar panel structures using multiple relevant columns
+    filtered = gdf[(gdf['description'].str.contains('Solar Panel', case=False, na=False)) |
+                   (gdf['oslandcovertierb'].str.contains('Solar Panel', case=False, na=False)) |
+                   (gdf['oslandusetierb'].str.contains('Energy Generation', case=False, na=False)) |
+                   (gdf['nlud_groupdescription'].str.contains('Energy production', case=False, na=False))]
+    
+    # Summarize
+    summary = {
+        'total_structures': len(filtered),
+        'total_area_m2': filtered['geometry_area_m2'].sum(),
+        'unique_descriptions': filtered['description'].unique().tolist(),
+        'capture_methods': filtered['geometry_capturemethod'].unique().tolist(),
+        'date_range': [str(filtered['geometry_evidencedate'].min()), str(filtered['geometry_evidencedate'].max())]
+    }
+    
+    # Attach summary as attribute for output
+    filtered.attrs['summary'] = summary
+    
+    return [
+        f"Filtered {len(filtered)} solar panel structures. Total area: {summary['total_area_m2']} m2.",
+        'filtered_solar_panel_structures_exeter',
+        'Filtered GeoDataFrame of solar panel structures in Exeter with summary statistics attached as attributes.',
+        filtered
+    ]
+2026-02-03 12:50:39,199 INFO function name filter_and_summarize_solar_panel_structures
+2026-02-03 12:50:39,199 INFO Output completed
+2026-02-03 12:50:39,199 INFO Tool code_executor returned result : ['Filtered 1 solar panel structures. Total area: 10393.775 m2.', <a2a.Artifact.Artifact object at 0x000001E785FEF790>]
+2026-02-03 12:50:45,056 WARNING OFFLINE MODE
+2026-02-03 12:50:45,056 INFO Output from agent data_analysis_agent : Filtered 1 solar panel structure in Exeter. The total area covered by these structures is 10,393.78 m�. The filtered results have been saved as 'filtered_solar_panel_structures_exeter', which contains a GeoDataFrame of the relevant solar panel structures along with summary statistics.
+2026-02-03 12:50:45,056 INFO Tool send_message returned result : ["Filtered 1 solar panel structure in Exeter. The total area covered by these structures is 10,393.78 m�. The filtered results have been saved as 'filtered_solar_panel_structures_exeter', which contains a GeoDataFrame of the relevant solar panel structures along with summary statistics.Addtionally some data artifacts have been generated with names  ['filtered_solar_panel_structures_exeter'] and \n descriptions ['Filtered GeoDataFrame of solar panel structures in Exeter with summary statistics attached as attributes.']", [<a2a.Artifact.Artifact object at 0x000001E785FEF790>]]
+2026-02-03 12:50:51,485 WARNING OFFLINE MODE
+2026-02-03 12:50:51,485 INFO Output from agent structures_agent : I found and filtered solar panel structures in the 'filtered_exeter_area_polygon'. Here's the summary:
+
+- **Total Structures Found**: 1
+- **Total Area Covered**: 10,393.78 m�
+
+The filtered results are saved as 'filtered_solar_panel_structures_exeter'.
+2026-02-03 12:50:51,487 INFO Tool send_message returned result : ["I found and filtered solar panel structures in the 'filtered_exeter_area_polygon'. Here's the summary:\n\n- **Total Structures Found**: 1\n- **Total Area Covered**: 10,393.78 m�\n\nThe filtered results are saved as 'filtered_solar_panel_structures_exeter'.Addtionally some data artifacts have been generated with names  ['filtered_solar_panel_structures_exeter'] and \n descriptions ['Filtered GeoDataFrame of solar panel structures in Exeter with summary statistics attached as attributes.']", [<a2a.Artifact.Artifact object at 0x000001E785FEF790>]]
+2026-02-03 12:50:55,496 INFO Calling tool generate_metadata_for_all_artifacts with args : {}
+2026-02-03 12:50:56,649 INFO Tool generate_metadata_for_all_artifacts returned result : {'buildingline_exeter_buildings_with_solar_panels': "A geopandas dataframe containing building line data with filters and bbox applied for the query Search for buildings in the artifact 'filtered_exeter_area_polygon' that have solar panels on roofs. using filters None.", 'buildingpart_exeter_buildings_with_solar_panels': "A geopandas dataframe containing building part data with filters and bbox applied for the query Search for buildings in the artifact 'filtered_exeter_area_polygon' that have solar panels on roofs. using filters None.", 'buildings_exeter_buildings_with_solar_panels': "A geopandas dataframe containing building data with filters and bbox applied for the query Search for buildings in the artifact 'filtered_exeter_area_polygon' that have solar panels on roofs. using filters None.", 'exeter_area_polygon': 'A geopandas dataframe containing named area data with no filters applied for the query (so remember no search is performed here so spurious entities present) Find the area polygon for Exeter..', 'filtered_exeter_area_polygon': "GeoDataFrame containing only the area polygons whose name columns contain 'Exeter'.", 'filtered_solar_panel_buildings_exeter': 'GeoDataFrame of buildings and building parts in Exeter with solar panels present on roofs.', 'filtered_solar_panel_structures_exeter': 'Filtered GeoDataFrame of solar panel structures in Exeter with summary statistics attached as attributes.', 'solar_panel_structures_exeter': "A geopandas dataframe containing structure data with filters and bbox applied for the query Search for solar panel structures in the artifact 'filtered_exeter_area_polygon'. using filters ['Made Sealed Surface Covered with Solar Panels', 'Made Unsealed Surface Covered with Solar Panels', 'Solar Panels', 'Solar Panels On Bare Earth Or Grass']. Further Name filtering is available for this"}
+2026-02-03 12:51:01,328 INFO Calling tool send_message with args : {'target': 'plotting_agent', 'task_description': "Plot the buildings and building parts in Exeter with solar panels on roofs (artifact: 'filtered_solar_panel_buildings_exeter') and the solar panel structures in Exeter (artifact: 'filtered_solar_panel_structures_exeter') on the map of Exeter (artifact: 'filtered_exeter_area_polygon'). Provide a summary of the results."}
+2026-02-03 12:51:05,399 WARNING OFFLINE MODE
+2026-02-03 12:51:05,410 INFO Messages sent to agent plotting_agent : [{'role': 'user', 'content': "Plot the buildings and building parts in Exeter with solar panels on roofs (artifact: 'filtered_solar_panel_buildings_exeter') and the solar panel structures in Exeter (artifact: 'filtered_solar_panel_structures_exeter') on the map of Exeter (artifact: 'filtered_exeter_area_polygon'). Provide a summary of the results."}]
+2026-02-03 12:51:07,338 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['filtered_solar_panel_buildings_exeter', 'filtered_solar_panel_structures_exeter', 'filtered_exeter_area_polygon']}
+2026-02-03 12:51:07,387 INFO artifacts loaded for metadata generation : ['filtered_solar_panel_buildings_exeter', 'filtered_solar_panel_structures_exeter', 'filtered_exeter_area_polygon']
+2026-02-03 12:51:07,419 INFO Tool generate_metadata_for_artifacts returned result : ([['osid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'changetype', 'geometry_area_m2', 'geometry_updatedate', 'theme', 'description', 'description_updatedate', 'physicalstate', 'physicalstate_updatedate', 'buildingpartcount', 'isinsite', 'primarysiteid', 'containingsitecount', 'mainbuildingid', 'mainbuildingid_ismainbuilding', 'mainbuildingid_updatedate', 'buildinguse', 'buildinguse_oslandusetiera', 'buildinguse_addresscount_total', 'buildinguse_addresscount_residential', 'buildinguse_addresscount_commercial', 'buildinguse_addresscount_other', 'buildinguse_updatedate', 'connectivity', 'connectivity_count', 'connectivity_updatedate', 'constructionmaterial', 'constructionmaterial_evidencedate', 'constructionmaterial_updatedate', 'constructionmaterial_source', 'constructionmaterial_capturemethod', 'constructionmaterial_thirdpartyprovenance', 'buildingage_period', 'buildingage_year', 'buildingage_evidencedate', 'buildingage_updatedate', 'buildingage_source', 'buildingage_capturemethod', 'buildingage_thirdpartyprovenance', 'basementpresence', 'basementpresence_selfcontained', 'basementpresence_evidencedate', 'basementpresence_updatedate', 'basementpresence_source', 'basementpresence_capturemethod', 'basementpresence_thirdpartyprovenance', 'numberoffloors', 'numberoffloors_evidencedate', 'numberoffloors_updatedate', 'numberoffloors_source', 'numberoffloors_capturemethod', 'height_absolutemin_m', 'height_absoluteroofbase_m', 'height_absolutemax_m', 'height_relativeroofbase_m', 'height_relativemax_m', 'height_confidencelevel', 'height_evidencedate', 'height_updatedate', 'roofmaterial_primarymaterial', 'roofmaterial_solarpanelpresence', 'roofmaterial_greenroofpresence', 'roofmaterial_confidenceindicator', 'roofmaterial_evidencedate', 'roofmaterial_updatedate', 'roofmaterial_capturemethod', 'roofshapeaspect_shape', 'roofshapeaspect_areapitched_m2', 'roofshapeaspect_areaflat_m2', 'roofshapeaspect_areafacingnorth_m2', 'roofshapeaspect_areafacingnortheast_m2', 'roofshapeaspect_areafacingeast_m2', 'roofshapeaspect_areafacingsoutheast_m2', 'roofshapeaspect_areafacingsouth_m2', 'roofshapeaspect_areafacingsouthwest_m2', 'roofshapeaspect_areafacingwest_m2', 'roofshapeaspect_areafacingnorthwest_m2', 'roofshapeaspect_areaindeterminable_m2', 'roofshapeaspect_areatotal_m2', 'roofshapeaspect_confidenceindicator', 'roofshapeaspect_evidencedate', 'roofshapeaspect_updatedate', 'roofshapeaspect_capturemethod', 'geometry', 'toid', 'firstdigitalcapturedate', 'geometry_evidencedate', 'geometry_capturemethod', 'description_evidencedate', 'description_capturemethod', 'oslandcovertiera', 'oslandcovertierb', 'oslandcover_evidencedate', 'oslandcover_updatedate', 'oslandcover_capturemethod', 'oslandusetiera', 'oslandusetierb', 'oslanduse_evidencedate', 'oslanduse_updatedate', 'oslanduse_capturemethod', 'associatedstructure', 'isobscured', 'physicallevel', 'capturespecification', 'smallestsite_siteid', 'smallestsite_landusetiera', 'smallestsite_landusetierb', 'largestsite_landusetiera', 'largestsite_landusetierb', 'nlud_code', 'nlud_orderdescription', 'nlud_groupdescription', 'address_classificationcode', 'address_primarydescription', 'address_secondarydescription', 'lowertierlocalauthority_gsscode', 'lowertierlocalauthority_count', 'status', 'status_updatedate'], ['osid', 'toid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'firstdigitalcapturedate', 'changetype', 'geometry_area_m2', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_capturemethod', 'theme', 'description', 'description_evidencedate', 'description_updatedate', 'description_capturemethod', 'oslandcovertiera', 'oslandcovertierb', 'oslandcover_evidencedate', 'oslandcover_updatedate', 'oslandcover_capturemethod', 'oslandusetiera', 'oslandusetierb', 'oslanduse_evidencedate', 'oslanduse_updatedate', 'oslanduse_capturemethod', 'height_absoluteroofbase_m', 'height_relativeroofbase_m', 'height_absolutemax_m', 'height_relativemax_m', 'height_absolutemin_m', 'height_confidencelevel', 'height_evidencedate', 'height_updatedate', 'name1_text', 'name1_language', 'name1_evidencedate', 'name1_updatedate', 'name2_text', 'name2_language', 'name2_evidencedate', 'name2_updatedate', 'istidal', 'ishistoric', 'associatedstructure', 'isobscured', 'physicallevel', 'capturespecification', 'containingsitecount', 'smallestsite_siteid', 'smallestsite_landusetiera', 'smallestsite_landusetierb', 'largestsite_landusetiera', 'largestsite_landusetierb', 'nlud_code', 'nlud_orderdescription', 'nlud_groupdescription', 'address_classificationcode', 'address_primarydescription', 'address_secondarydescription', 'lowertierlocalauthority_gsscode', 'lowertierlocalauthority_count', 'status', 'status_updatedate', 'geometry'], ['osid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'changetype', 'geometry_area', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_source', 'theme', 'descriptiongroup', 'description', 'description_evidencedate', 'description_updatedate', 'description_source', 'extentdefinition', 'name1_text', 'name1_language', 'name1_evidencedate', 'name1_updatedate', 'name1_source', 'name2_text', 'name2_language', 'name2_evidencedate', 'name2_updatedate', 'name2_source', 'name3_text', 'name3_language', 'name3_evidencedate', 'name3_updatedate', 'name3_source', 'name4_text', 'name4_language', 'name4_evidencedate', 'name4_updatedate', 'name4_source', 'sameasdbpedia', 'sameasgeonames', 'sameasdbobih', 'height', 'geometry']], [[{'osid': 'a578be0a-7fff-4fbb-8ace-2cf755bbb53c', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 51.92, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'End-Of-Terrace House', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1.0, 'isinsite': True, 'primarysiteid': '96ca3bfc-31ef-49fe-909e-bdfeb1bb12a9', 'containingsitecount': 1, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': 'Yes', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Residential Accommodation', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 1.0, 'buildinguse_addresscount_residential': 1.0, 'buildinguse_addresscount_commercial': 0.0, 'buildinguse_addresscount_other': 0.0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'End-Connected', 'connectivity_count': 1.0, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': 'Brick Or Block Or Stone', 'constructionmaterial_evidencedate': Timestamp('2023-01-23 00:00:00'), 'constructionmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial_source': 'Verisk', 'constructionmaterial_capturemethod': 'Automated Process', 'constructionmaterial_thirdpartyprovenance': 'Infill Modelling', 'buildingage_period': '2020-2029', 'buildingage_year': 2021.0, 'buildingage_evidencedate': Timestamp('2021-09-13 00:00:00'), 'buildingage_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingage_source': 'Ordnance Survey', 'buildingage_capturemethod': 'Field Survey', 'buildingage_thirdpartyprovenance': None, 'basementpresence': 'Not Present', 'basementpresence_selfcontained': 'Not Present', 'basementpresence_evidencedate': Timestamp('2022-12-23 00:00:00'), 'basementpresence_updatedate': Timestamp('2025-03-10 00:00:00'), 'basementpresence_source': 'Verisk', 'basementpresence_capturemethod': 'Automated Process', 'basementpresence_thirdpartyprovenance': 'Infill Modelling', 'numberoffloors': 2.0, 'numberoffloors_evidencedate': Timestamp('2023-03-08 00:00:00'), 'numberoffloors_updatedate': Timestamp('2025-03-10 00:00:00'), 'numberoffloors_source': 'Ordnance Survey', 'numberoffloors_capturemethod': 'Automated Process', 'height_absolutemin_m': 11.0, 'height_absoluteroofbase_m': 15.6, 'height_absolutemax_m': 18.6, 'height_relativeroofbase_m': 4.6, 'height_relativemax_m': 7.6, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Tile Or Stone Or Slate', 'roofmaterial_solarpanelpresence': 'Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 59.8, 'roofshapeaspect_areaflat_m2': 0.0, 'roofshapeaspect_areafacingnorth_m2': 0.0, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 31.9, 'roofshapeaspect_areafacingsouth_m2': 0.0, 'roofshapeaspect_areafacingsouthwest_m2': 0.0, 'roofshapeaspect_areafacingwest_m2': 0.0, 'roofshapeaspect_areafacingnorthwest_m2': 27.9, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 59.8, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((294927.404 89298.963, 294930.134 89300.875, 294930.472 89301.111,...>, 'toid': nan, 'firstdigitalcapturedate': NaT, 'geometry_evidencedate': NaT, 'geometry_capturemethod': nan, 'description_evidencedate': NaT, 'description_capturemethod': nan, 'oslandcovertiera': nan, 'oslandcovertierb': nan, 'oslandcover_evidencedate': NaT, 'oslandcover_updatedate': NaT, 'oslandcover_capturemethod': nan, 'oslandusetiera': nan, 'oslandusetierb': nan, 'oslanduse_evidencedate': NaT, 'oslanduse_updatedate': NaT, 'oslanduse_capturemethod': nan, 'associatedstructure': nan, 'isobscured': nan, 'physicallevel': nan, 'capturespecification': nan, 'smallestsite_siteid': nan, 'smallestsite_landusetiera': nan, 'smallestsite_landusetierb': nan, 'largestsite_landusetiera': nan, 'largestsite_landusetierb': nan, 'nlud_code': nan, 'nlud_orderdescription': nan, 'nlud_groupdescription': nan, 'address_classificationcode': nan, 'address_primarydescription': nan, 'address_secondarydescription': nan, 'lowertierlocalauthority_gsscode': nan, 'lowertierlocalauthority_count': nan, 'status': nan, 'status_updatedate': NaT}, {'osid': 'c86c6a23-5ced-4dae-be17-94f33e02c66d', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 51.91, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'Mid-Terrace House', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1.0, 'isinsite': True, 'primarysiteid': '9aadac7f-b657-4d16-9e57-dc5fcae031e8', 'containingsitecount': 1, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': 'Yes', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Residential Accommodation', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 1.0, 'buildinguse_addresscount_residential': 1.0, 'buildinguse_addresscount_commercial': 0.0, 'buildinguse_addresscount_other': 0.0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'Multi-Connected', 'connectivity_count': 2.0, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': 'Brick Or Block Or Stone', 'constructionmaterial_evidencedate': Timestamp('2023-01-23 00:00:00'), 'constructionmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial_source': 'Verisk', 'constructionmaterial_capturemethod': 'Automated Process', 'constructionmaterial_thirdpartyprovenance': 'Infill Modelling', 'buildingage_period': '2020-2029', 'buildingage_year': 2021.0, 'buildingage_evidencedate': Timestamp('2021-09-13 00:00:00'), 'buildingage_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingage_source': 'Ordnance Survey', 'buildingage_capturemethod': 'Field Survey', 'buildingage_thirdpartyprovenance': None, 'basementpresence': 'Not Present', 'basementpresence_selfcontained': 'Not Present', 'basementpresence_evidencedate': Timestamp('2022-12-23 00:00:00'), 'basementpresence_updatedate': Timestamp('2025-03-10 00:00:00'), 'basementpresence_source': 'Verisk', 'basementpresence_capturemethod': 'Automated Process', 'basementpresence_thirdpartyprovenance': 'Infill Modelling', 'numberoffloors': 2.0, 'numberoffloors_evidencedate': Timestamp('2023-03-08 00:00:00'), 'numberoffloors_updatedate': Timestamp('2025-03-10 00:00:00'), 'numberoffloors_source': 'Ordnance Survey', 'numberoffloors_capturemethod': 'Automated Process', 'height_absolutemin_m': 11.0, 'height_absoluteroofbase_m': 15.9, 'height_absolutemax_m': 18.6, 'height_relativeroofbase_m': 4.9, 'height_relativemax_m': 7.6, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Tile Or Stone Or Slate', 'roofmaterial_solarpanelpresence': 'Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 59.9, 'roofshapeaspect_areaflat_m2': 0.0, 'roofshapeaspect_areafacingnorth_m2': 0.0, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 31.6, 'roofshapeaspect_areafacingsouth_m2': 0.0, 'roofshapeaspect_areafacingsouthwest_m2': 0.0, 'roofshapeaspect_areafacingwest_m2': 0.0, 'roofshapeaspect_areafacingnorthwest_m2': 28.3, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 59.9, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((294931.879 89302.097, 294931.975 89302.164, 294934.982 89304.27, ...>, 'toid': nan, 'firstdigitalcapturedate': NaT, 'geometry_evidencedate': NaT, 'geometry_capturemethod': nan, 'description_evidencedate': NaT, 'description_capturemethod': nan, 'oslandcovertiera': nan, 'oslandcovertierb': nan, 'oslandcover_evidencedate': NaT, 'oslandcover_updatedate': NaT, 'oslandcover_capturemethod': nan, 'oslandusetiera': nan, 'oslandusetierb': nan, 'oslanduse_evidencedate': NaT, 'oslanduse_updatedate': NaT, 'oslanduse_capturemethod': nan, 'associatedstructure': nan, 'isobscured': nan, 'physicallevel': nan, 'capturespecification': nan, 'smallestsite_siteid': nan, 'smallestsite_landusetiera': nan, 'smallestsite_landusetierb': nan, 'largestsite_landusetiera': nan, 'largestsite_landusetierb': nan, 'nlud_code': nan, 'nlud_orderdescription': nan, 'nlud_groupdescription': nan, 'address_classificationcode': nan, 'address_primarydescription': nan, 'address_secondarydescription': nan, 'lowertierlocalauthority_gsscode': nan, 'lowertierlocalauthority_count': nan, 'status': nan, 'status_updatedate': NaT}, {'osid': '5cc5cbef-f15d-4110-9493-25be6ea12946', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 51.91, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'Mid-Terrace House', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1.0, 'isinsite': True, 'primarysiteid': 'ba5d0dfa-ac93-4bf2-b956-45964c12283d', 'containingsitecount': 1, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': 'Yes', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Residential Accommodation', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 1.0, 'buildinguse_addresscount_residential': 1.0, 'buildinguse_addresscount_commercial': 0.0, 'buildinguse_addresscount_other': 0.0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'Multi-Connected', 'connectivity_count': 2.0, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': 'Brick Or Block Or Stone', 'constructionmaterial_evidencedate': Timestamp('2023-01-23 00:00:00'), 'constructionmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial_source': 'Verisk', 'constructionmaterial_capturemethod': 'Automated Process', 'constructionmaterial_thirdpartyprovenance': 'Infill Modelling', 'buildingage_period': '2020-2029', 'buildingage_year': 2021.0, 'buildingage_evidencedate': Timestamp('2021-09-13 00:00:00'), 'buildingage_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingage_source': 'Ordnance Survey', 'buildingage_capturemethod': 'Field Survey', 'buildingage_thirdpartyprovenance': None, 'basementpresence': 'Not Present', 'basementpresence_selfcontained': 'Not Present', 'basementpresence_evidencedate': Timestamp('2022-12-23 00:00:00'), 'basementpresence_updatedate': Timestamp('2025-03-10 00:00:00'), 'basementpresence_source': 'Verisk', 'basementpresence_capturemethod': 'Automated Process', 'basementpresence_thirdpartyprovenance': 'Infill Modelling', 'numberoffloors': 2.0, 'numberoffloors_evidencedate': Timestamp('2023-03-08 00:00:00'), 'numberoffloors_updatedate': Timestamp('2025-03-10 00:00:00'), 'numberoffloors_source': 'Ordnance Survey', 'numberoffloors_capturemethod': 'Automated Process', 'height_absolutemin_m': 11.0, 'height_absoluteroofbase_m': 15.9, 'height_absolutemax_m': 18.6, 'height_relativeroofbase_m': 4.9, 'height_relativemax_m': 7.6, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Tile Or Stone Or Slate', 'roofmaterial_solarpanelpresence': 'Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 58.9, 'roofshapeaspect_areaflat_m2': 0.0, 'roofshapeaspect_areafacingnorth_m2': 0.0, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 31.8, 'roofshapeaspect_areafacingsouth_m2': 0.0, 'roofshapeaspect_areafacingsouthwest_m2': 0.0, 'roofshapeaspect_areafacingwest_m2': 0.0, 'roofshapeaspect_areafacingnorthwest_m2': 27.1, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 58.9, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((294936.799 89305.542, 294937.989 89306.375, 294939.058 89307.123,...>, 'toid': nan, 'firstdigitalcapturedate': NaT, 'geometry_evidencedate': NaT, 'geometry_capturemethod': nan, 'description_evidencedate': NaT, 'description_capturemethod': nan, 'oslandcovertiera': nan, 'oslandcovertierb': nan, 'oslandcover_evidencedate': NaT, 'oslandcover_updatedate': NaT, 'oslandcover_capturemethod': nan, 'oslandusetiera': nan, 'oslandusetierb': nan, 'oslanduse_evidencedate': NaT, 'oslanduse_updatedate': NaT, 'oslanduse_capturemethod': nan, 'associatedstructure': nan, 'isobscured': nan, 'physicallevel': nan, 'capturespecification': nan, 'smallestsite_siteid': nan, 'smallestsite_landusetiera': nan, 'smallestsite_landusetierb': nan, 'largestsite_landusetiera': nan, 'largestsite_landusetierb': nan, 'nlud_code': nan, 'nlud_orderdescription': nan, 'nlud_groupdescription': nan, 'address_classificationcode': nan, 'address_primarydescription': nan, 'address_secondarydescription': nan, 'lowertierlocalauthority_gsscode': nan, 'lowertierlocalauthority_count': nan, 'status': nan, 'status_updatedate': NaT}, {'osid': '93d80cf9-5e7b-4c78-980f-c0acc04ed8a4', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 51.912, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'End-Of-Terrace House', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1.0, 'isinsite': True, 'primarysiteid': '46b06a55-2991-45e7-a259-2f58da11ae65', 'containingsitecount': 1, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': 'Yes', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Residential Accommodation', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 1.0, 'buildinguse_addresscount_residential': 1.0, 'buildinguse_addresscount_commercial': 0.0, 'buildinguse_addresscount_other': 0.0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'End-Connected', 'connectivity_count': 1.0, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': 'Brick Or Block Or Stone', 'constructionmaterial_evidencedate': Timestamp('2023-01-23 00:00:00'), 'constructionmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial_source': 'Verisk', 'constructionmaterial_capturemethod': 'Automated Process', 'constructionmaterial_thirdpartyprovenance': 'Infill Modelling', 'buildingage_period': '2020-2029', 'buildingage_year': 2021.0, 'buildingage_evidencedate': Timestamp('2021-09-13 00:00:00'), 'buildingage_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingage_source': 'Ordnance Survey', 'buildingage_capturemethod': 'Field Survey', 'buildingage_thirdpartyprovenance': None, 'basementpresence': 'Not Present', 'basementpresence_selfcontained': 'Not Present', 'basementpresence_evidencedate': Timestamp('2022-12-23 00:00:00'), 'basementpresence_updatedate': Timestamp('2025-03-10 00:00:00'), 'basementpresence_source': 'Verisk', 'basementpresence_capturemethod': 'Automated Process', 'basementpresence_thirdpartyprovenance': 'Infill Modelling', 'numberoffloors': 2.0, 'numberoffloors_evidencedate': Timestamp('2023-03-08 00:00:00'), 'numberoffloors_updatedate': Timestamp('2025-03-10 00:00:00'), 'numberoffloors_source': 'Ordnance Survey', 'numberoffloors_capturemethod': 'Automated Process', 'height_absolutemin_m': 10.9, 'height_absoluteroofbase_m': 15.9, 'height_absolutemax_m': 18.5, 'height_relativeroofbase_m': 5.0, 'height_relativemax_m': 7.6, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Tile Or Stone Or Slate', 'roofmaterial_solarpanelpresence': 'Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 59.8, 'roofshapeaspect_areaflat_m2': 0.0, 'roofshapeaspect_areafacingnorth_m2': 6.2, 'roofshapeaspect_areafacingnortheast_m2': 0.0, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 30.6, 'roofshapeaspect_areafacingsouth_m2': 0.0, 'roofshapeaspect_areafacingsouthwest_m2': 0.0, 'roofshapeaspect_areafacingwest_m2': 0.0, 'roofshapeaspect_areafacingnorthwest_m2': 23.0, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 59.8, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((294942.691 89309.668, 294944.004 89310.587, 294948.686 89303.9, 2...>, 'toid': nan, 'firstdigitalcapturedate': NaT, 'geometry_evidencedate': NaT, 'geometry_capturemethod': nan, 'description_evidencedate': NaT, 'description_capturemethod': nan, 'oslandcovertiera': nan, 'oslandcovertierb': nan, 'oslandcover_evidencedate': NaT, 'oslandcover_updatedate': NaT, 'oslandcover_capturemethod': nan, 'oslandusetiera': nan, 'oslandusetierb': nan, 'oslanduse_evidencedate': NaT, 'oslanduse_updatedate': NaT, 'oslanduse_capturemethod': nan, 'associatedstructure': nan, 'isobscured': nan, 'physicallevel': nan, 'capturespecification': nan, 'smallestsite_siteid': nan, 'smallestsite_landusetiera': nan, 'smallestsite_landusetierb': nan, 'largestsite_landusetiera': nan, 'largestsite_landusetierb': nan, 'nlud_code': nan, 'nlud_orderdescription': nan, 'nlud_groupdescription': nan, 'address_classificationcode': nan, 'address_primarydescription': nan, 'address_secondarydescription': nan, 'lowertierlocalauthority_gsscode': nan, 'lowertierlocalauthority_count': nan, 'status': nan, 'status_updatedate': NaT}, {'osid': '5b8bc540-b5d9-47bb-87bb-0d1c0a69bade', 'versiondate': Timestamp('2025-03-11 00:00:00'), 'versionavailablefromdate': Timestamp('2025-03-12 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 63.966, 'geometry_updatedate': Timestamp('2025-03-10 00:00:00'), 'theme': 'Buildings', 'description': 'Detached House', 'description_updatedate': Timestamp('2025-03-10 00:00:00'), 'physicalstate': 'Built', 'physicalstate_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingpartcount': 1.0, 'isinsite': True, 'primarysiteid': '5c32e7ff-e8eb-48a4-989d-68a49800f495', 'containingsitecount': 1, 'mainbuildingid': None, 'mainbuildingid_ismainbuilding': 'Yes', 'mainbuildingid_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildinguse': 'Residential Accommodation', 'buildinguse_oslandusetiera': 'Residential Accommodation', 'buildinguse_addresscount_total': 1.0, 'buildinguse_addresscount_residential': 1.0, 'buildinguse_addresscount_commercial': 0.0, 'buildinguse_addresscount_other': 0.0, 'buildinguse_updatedate': Timestamp('2025-03-10 00:00:00'), 'connectivity': 'Standalone', 'connectivity_count': 0.0, 'connectivity_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial': 'Brick Or Block Or Stone', 'constructionmaterial_evidencedate': Timestamp('2023-01-23 00:00:00'), 'constructionmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'constructionmaterial_source': 'Verisk', 'constructionmaterial_capturemethod': 'Automated Process', 'constructionmaterial_thirdpartyprovenance': 'Infill Modelling', 'buildingage_period': '2020-2029', 'buildingage_year': 2022.0, 'buildingage_evidencedate': Timestamp('2022-03-24 00:00:00'), 'buildingage_updatedate': Timestamp('2025-03-10 00:00:00'), 'buildingage_source': 'Ordnance Survey', 'buildingage_capturemethod': 'Field Survey', 'buildingage_thirdpartyprovenance': None, 'basementpresence': 'Not Present', 'basementpresence_selfcontained': 'Not Present', 'basementpresence_evidencedate': Timestamp('2022-12-23 00:00:00'), 'basementpresence_updatedate': Timestamp('2025-03-10 00:00:00'), 'basementpresence_source': 'Verisk', 'basementpresence_capturemethod': 'Automated Process', 'basementpresence_thirdpartyprovenance': 'Infill Modelling', 'numberoffloors': 1.0, 'numberoffloors_evidencedate': Timestamp('2023-03-08 00:00:00'), 'numberoffloors_updatedate': Timestamp('2025-03-10 00:00:00'), 'numberoffloors_source': 'Ordnance Survey', 'numberoffloors_capturemethod': 'Automated Process', 'height_absolutemin_m': 11.3, 'height_absoluteroofbase_m': 15.5, 'height_absolutemax_m': 18.4, 'height_relativeroofbase_m': 4.2, 'height_relativemax_m': 7.1, 'height_confidencelevel': 'Moderate', 'height_evidencedate': Timestamp('2024-04-20 00:00:00'), 'height_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_primarymaterial': 'Waterproof Membrane Or Concrete', 'roofmaterial_solarpanelpresence': 'Present', 'roofmaterial_greenroofpresence': 'Not Present', 'roofmaterial_confidenceindicator': 'Expected Data Output', 'roofmaterial_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofmaterial_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofmaterial_capturemethod': 'Automated Process', 'roofshapeaspect_shape': 'Pitched', 'roofshapeaspect_areapitched_m2': 73.4, 'roofshapeaspect_areaflat_m2': 0.0, 'roofshapeaspect_areafacingnorth_m2': 0.0, 'roofshapeaspect_areafacingnortheast_m2': 38.3, 'roofshapeaspect_areafacingeast_m2': 0.0, 'roofshapeaspect_areafacingsoutheast_m2': 0.0, 'roofshapeaspect_areafacingsouth_m2': 0.0, 'roofshapeaspect_areafacingsouthwest_m2': 35.1, 'roofshapeaspect_areafacingwest_m2': 0.0, 'roofshapeaspect_areafacingnorthwest_m2': 0.0, 'roofshapeaspect_areaindeterminable_m2': 0.0, 'roofshapeaspect_areatotal_m2': 73.4, 'roofshapeaspect_confidenceindicator': 'Expected Data Output', 'roofshapeaspect_evidencedate': Timestamp('2024-04-20 00:00:00'), 'roofshapeaspect_updatedate': Timestamp('2025-03-10 00:00:00'), 'roofshapeaspect_capturemethod': 'Automated Process', 'geometry': <POLYGON ((294795.057 89390.363, 294800.636 89387.253, 294796.495 89379.823,...>, 'toid': nan, 'firstdigitalcapturedate': NaT, 'geometry_evidencedate': NaT, 'geometry_capturemethod': nan, 'description_evidencedate': NaT, 'description_capturemethod': nan, 'oslandcovertiera': nan, 'oslandcovertierb': nan, 'oslandcover_evidencedate': NaT, 'oslandcover_updatedate': NaT, 'oslandcover_capturemethod': nan, 'oslandusetiera': nan, 'oslandusetierb': nan, 'oslanduse_evidencedate': NaT, 'oslanduse_updatedate': NaT, 'oslanduse_capturemethod': nan, 'associatedstructure': nan, 'isobscured': nan, 'physicallevel': nan, 'capturespecification': nan, 'smallestsite_siteid': nan, 'smallestsite_landusetiera': nan, 'smallestsite_landusetierb': nan, 'largestsite_landusetiera': nan, 'largestsite_landusetierb': nan, 'nlud_code': nan, 'nlud_orderdescription': nan, 'nlud_groupdescription': nan, 'address_classificationcode': nan, 'address_primarydescription': nan, 'address_secondarydescription': nan, 'lowertierlocalauthority_gsscode': nan, 'lowertierlocalauthority_count': nan, 'status': nan, 'status_updatedate': NaT}], [{'osid': 'e0f4b3bf-87e4-41f2-bb78-a4c3f3eb1a2b', 'toid': 'osgb5000005290985306', 'versiondate': Timestamp('2025-07-17 00:00:00'), 'versionavailablefromdate': Timestamp('2025-07-18 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'firstdigitalcapturedate': Timestamp('2021-12-21 00:00:00'), 'changetype': 'Modified Attributes', 'geometry_area_m2': 10393.775, 'geometry_evidencedate': Timestamp('2024-04-20 00:00:00'), 'geometry_updatedate': Timestamp('2024-10-15 00:00:00'), 'geometry_capturemethod': 'Remote Sensing Survey', 'theme': 'Structures', 'description': 'Solar Panels On Bare Earth Or Grass', 'description_evidencedate': Timestamp('2022-07-12 00:00:00'), 'description_updatedate': Timestamp('2022-09-23 00:00:00'), 'description_capturemethod': 'Remote Sensing Survey', 'oslandcovertiera': 'Made', 'oslandcovertierb': 'Bare Earth Or Grass,Solar Panels', 'oslandcover_evidencedate': Timestamp('2022-07-12 00:00:00'), 'oslandcover_updatedate': Timestamp('2022-09-23 00:00:00'), 'oslandcover_capturemethod': 'Remote Sensing Survey', 'oslandusetiera': 'Utility Or Environmental Protection', 'oslandusetierb': 'Energy Generation', 'oslanduse_evidencedate': Timestamp('2022-07-12 00:00:00'), 'oslanduse_updatedate': Timestamp('2022-09-23 00:00:00'), 'oslanduse_capturemethod': 'Remote Sensing Survey', 'height_absoluteroofbase_m': nan, 'height_relativeroofbase_m': nan, 'height_absolutemax_m': nan, 'height_relativemax_m': nan, 'height_absolutemin_m': nan, 'height_confidencelevel': None, 'height_evidencedate': NaT, 'height_updatedate': NaT, 'name1_text': None, 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'istidal': False, 'ishistoric': False, 'associatedstructure': None, 'isobscured': False, 'physicallevel': 'Surface Level', 'capturespecification': 'Rural', 'containingsitecount': 0, 'smallestsite_siteid': None, 'smallestsite_landusetiera': None, 'smallestsite_landusetierb': None, 'largestsite_landusetiera': None, 'largestsite_landusetierb': None, 'nlud_code': 'U061', 'nlud_orderdescription': 'UTILITIES AND INFRASTRUCTURE', 'nlud_groupdescription': 'Energy production and distribution', 'address_classificationcode': None, 'address_primarydescription': None, 'address_secondarydescription': None, 'lowertierlocalauthority_gsscode': 'E07000041', 'lowertierlocalauthority_count': 1.0, 'status': None, 'status_updatedate': Timestamp('2022-09-23 00:00:00'), 'geometry': <MULTIPOLYGON (((292540.062 90819.691, 292540.07 90824.17, 292541.073 90824....>}], [{'osid': 'eaeed505-6584-4fa0-b734-8491211c62a9', 'versiondate': Timestamp('2025-08-29 00:00:00'), 'versionavailablefromdate': Timestamp('2025-08-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'Modified Geometry And Attributes', 'geometry_area': 32082134.479725, 'geometry_evidencedate': Timestamp('2025-08-28 00:00:00'), 'geometry_updatedate': Timestamp('2025-08-28 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Settlement', 'description': 'City', 'description_evidencedate': Timestamp('2015-05-04 00:00:00'), 'description_updatedate': Timestamp('2015-05-04 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Exeter', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-04 00:00:00'), 'name1_updatedate': Timestamp('2015-05-04 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': 'https://sws.GeoNames.org/2649808', 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((295173.81 89150.11, 295192.057 89168.355, 295231.155 89233.516, 2...>}]], ['filtered_solar_panel_buildings_exeter', 'filtered_solar_panel_structures_exeter', 'filtered_exeter_area_polygon'])
+2026-02-03 12:51:20,448 INFO Calling tool code_executor with args : {'code': 'def plot_solar_panel_buildings_and_structures_exeter(data: list):\n    import geopandas as gpd\n    import folium\n    from shapely.geometry import mapping\n    \n    # Unpack the data\n    gdf_buildings = data[0].copy()\n    gdf_structures = data[1].copy()\n    gdf_exeter = data[2].copy()\n    \n    # Ensure all CRS are EPSG:4326 for folium\n    gdf_buildings = gdf_buildings.to_crs(epsg=4326)\n    gdf_structures = gdf_structures.to_crs(epsg=4326)\n    gdf_exeter = gdf_exeter.to_crs(epsg=4326)\n    \n    # Get centroid of Exeter for map initialization\n    exeter_centroid = gdf_exeter.geometry.centroid.iloc[0]\n    m = folium.Map(location=[exeter_centroid.y, exeter_centroid.x], zoom_start=12, tiles=\'cartodbpositron\')\n    \n    # Plot Exeter boundary\n    folium.GeoJson(\n        gdf_exeter.geometry,\n        name=\'Exeter Boundary\',\n        style_function=lambda x: {\'color\': \'black\', \'weight\': 2, \'fillOpacity\': 0.05}\n    ).add_to(m)\n    \n    # Plot buildings with solar panels\n    folium.GeoJson(\n        gdf_buildings.geometry,\n        name=\'Buildings with Solar Panels\',\n        style_function=lambda x: {\'color\': \'orange\', \'weight\': 1, \'fillColor\': \'orange\', \'fillOpacity\': 0.5},\n        tooltip=folium.GeoJsonTooltip(fields=[\'description\', \'roofmaterial_solarpanelpresence\'])\n    ).add_to(m)\n    \n    # Plot solar panel structures\n    folium.GeoJson(\n        gdf_structures.geometry,\n        name=\'Solar Panel Structures\',\n        style_function=lambda x: {\'color\': \'blue\', \'weight\': 2, \'fillColor\': \'blue\', \'fillOpacity\': 0.3},\n        tooltip=folium.GeoJsonTooltip(fields=[\'description\'])\n    ).add_to(m)\n    \n    folium.LayerControl().add_to(m)\n    \n    # Save map\n    map_filename = \'exeter_solar_panel_buildings_and_structures.html\'\n    m.save(map_filename)\n    \n    # Prepare summary\n    summary = f"There are {len(gdf_buildings)} buildings/building parts with solar panels on roofs and {len(gdf_structures)} solar panel structures in Exeter.\\n"\n    summary += "First 5 buildings:\\n" + str(gdf_buildings[[\'description\', \'roofmaterial_solarpanelpresence\']].head(5)) + "\\n"\n    summary += "First 5 solar panel structures:\\n" + str(gdf_structures[[\'description\']].head(5))\n    \n    return [summary, map_filename, "Folium map showing Exeter boundary, buildings/building parts with solar panels, and solar panel structures.", map_filename]\n', 'artifact_names': ['filtered_solar_panel_buildings_exeter', 'filtered_solar_panel_structures_exeter', 'filtered_exeter_area_polygon']}
+2026-02-03 12:51:20,469 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def plot_solar_panel_buildings_and_structures_exeter(data: list):
+    import geopandas as gpd
+    import folium
+    from shapely.geometry import mapping
+    
+    # Unpack the data
+    gdf_buildings = data[0].copy()
+    gdf_structures = data[1].copy()
+    gdf_exeter = data[2].copy()
+    
+    # Ensure all CRS are EPSG:4326 for folium
+    gdf_buildings = gdf_buildings.to_crs(epsg=4326)
+    gdf_structures = gdf_structures.to_crs(epsg=4326)
+    gdf_exeter = gdf_exeter.to_crs(epsg=4326)
+    
+    # Get centroid of Exeter for map initialization
+    exeter_centroid = gdf_exeter.geometry.centroid.iloc[0]
+    m = folium.Map(location=[exeter_centroid.y, exeter_centroid.x], zoom_start=12, tiles='cartodbpositron')
+    
+    # Plot Exeter boundary
+    folium.GeoJson(
+        gdf_exeter.geometry,
+        name='Exeter Boundary',
+        style_function=lambda x: {'color': 'black', 'weight': 2, 'fillOpacity': 0.05}
+    ).add_to(m)
+    
+    # Plot buildings with solar panels
+    folium.GeoJson(
+        gdf_buildings.geometry,
+        name='Buildings with Solar Panels',
+        style_function=lambda x: {'color': 'orange', 'weight': 1, 'fillColor': 'orange', 'fillOpacity': 0.5},
+        tooltip=folium.GeoJsonTooltip(fields=['description', 'roofmaterial_solarpanelpresence'])
+    ).add_to(m)
+    
+    # Plot solar panel structures
+    folium.GeoJson(
+        gdf_structures.geometry,
+        name='Solar Panel Structures',
+        style_function=lambda x: {'color': 'blue', 'weight': 2, 'fillColor': 'blue', 'fillOpacity': 0.3},
+        tooltip=folium.GeoJsonTooltip(fields=['description'])
+    ).add_to(m)
+    
+    folium.LayerControl().add_to(m)
+    
+    # Save map
+    map_filename = 'exeter_solar_panel_buildings_and_structures.html'
+    m.save(map_filename)
+    
+    # Prepare summary
+    summary = f"There are {len(gdf_buildings)} buildings/building parts with solar panels on roofs and {len(gdf_structures)} solar panel structures in Exeter.\n"
+    summary += "First 5 buildings:\n" + str(gdf_buildings[['description', 'roofmaterial_solarpanelpresence']].head(5)) + "\n"
+    summary += "First 5 solar panel structures:\n" + str(gdf_structures[['description']].head(5))
+    
+    return [summary, map_filename, "Folium map showing Exeter boundary, buildings/building parts with solar panels, and solar panel structures.", map_filename]
+
+2026-02-03 12:51:20,469 INFO function name plot_solar_panel_buildings_and_structures_exeter
+2026-02-03 12:51:21,980 ERROR ERROR EXECUTING CODE The field description is not available in the data. Choose from: ().
+Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 225, in code_executor
+    output = namespace[function_name](data=data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 49, in plot_solar_panel_buildings_and_structures_exeter
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\branca\element.py", line 232, in save
+    html = root.render(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\branca\element.py", line 409, in render
+    child.render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\elements.py", line 46, in render
+    super().render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\map.py", line 73, in render
+    super().render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\branca\element.py", line 740, in render
+    element.render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\features.py", line 871, in render
+    super().render()
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\map.py", line 137, in render
+    super().render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\map.py", line 73, in render
+    super().render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\branca\element.py", line 740, in render
+    element.render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\features.py", line 1236, in render
+    value in keys
+AssertionError: The field description is not available in the data. Choose from: ().
+2026-02-03 12:51:22,057 INFO Tool code_executor returned result : Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 225, in code_executor
+    output = namespace[function_name](data=data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 49, in plot_solar_panel_buildings_and_structures_exeter
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\branca\element.py", line 232, in save
+    html = root.render(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\branca\element.py", line 409, in render
+    child.render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\elements.py", line 46, in render
+    super().render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\map.py", line 73, in render
+    super().render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\branca\element.py", line 740, in render
+    element.render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\features.py", line 871, in render
+    super().render()
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\map.py", line 137, in render
+    super().render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\map.py", line 73, in render
+    super().render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\branca\element.py", line 740, in render
+    element.render(**kwargs)
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\folium\features.py", line 1236, in render
+    value in keys
+AssertionError: The field description is not available in the data. Choose from: ().
+
+2026-02-03 12:51:28,177 INFO Calling tool code_executor with args : {'code': 'def plot_solar_panel_buildings_and_structures_exeter(data: list):\n    import geopandas as gpd\n    import folium\n    \n    # Unpack the data\n    gdf_buildings = data[0].copy()\n    gdf_structures = data[1].copy()\n    gdf_exeter = data[2].copy()\n    \n    # Ensure all CRS are EPSG:4326 for folium\n    gdf_buildings = gdf_buildings.to_crs(epsg=4326)\n    gdf_structures = gdf_structures.to_crs(epsg=4326)\n    gdf_exeter = gdf_exeter.to_crs(epsg=4326)\n    \n    # Get centroid of Exeter for map initialization\n    exeter_centroid = gdf_exeter.geometry.centroid.iloc[0]\n    m = folium.Map(location=[exeter_centroid.y, exeter_centroid.x], zoom_start=12, tiles=\'cartodbpositron\')\n    \n    # Plot Exeter boundary\n    folium.GeoJson(\n        gdf_exeter.geometry,\n        name=\'Exeter Boundary\',\n        style_function=lambda x: {\'color\': \'black\', \'weight\': 2, \'fillOpacity\': 0.05}\n    ).add_to(m)\n    \n    # Plot buildings with solar panels\n    folium.GeoJson(\n        gdf_buildings.geometry,\n        name=\'Buildings with Solar Panels\',\n        style_function=lambda x: {\'color\': \'orange\', \'weight\': 1, \'fillColor\': \'orange\', \'fillOpacity\': 0.5}\n    ).add_to(m)\n    \n    # Plot solar panel structures\n    folium.GeoJson(\n        gdf_structures.geometry,\n        name=\'Solar Panel Structures\',\n        style_function=lambda x: {\'color\': \'blue\', \'weight\': 2, \'fillColor\': \'blue\', \'fillOpacity\': 0.3}\n    ).add_to(m)\n    \n    folium.LayerControl().add_to(m)\n    \n    # Save map\n    map_filename = \'exeter_solar_panel_buildings_and_structures.html\'\n    m.save(map_filename)\n    \n    # Prepare summary\n    summary = f"There are {len(gdf_buildings)} buildings/building parts with solar panels on roofs and {len(gdf_structures)} solar panel structures in Exeter.\\n"\n    summary += "First 5 buildings:\\n" + str(gdf_buildings.head(5)) + "\\n"\n    summary += "First 5 solar panel structures:\\n" + str(gdf_structures.head(5))\n    \n    return [summary, map_filename, "Folium map showing Exeter boundary, buildings/building parts with solar panels, and solar panel structures.", map_filename]\n', 'artifact_names': ['filtered_solar_panel_buildings_exeter', 'filtered_solar_panel_structures_exeter', 'filtered_exeter_area_polygon']}
+2026-02-03 12:51:28,209 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def plot_solar_panel_buildings_and_structures_exeter(data: list):
+    import geopandas as gpd
+    import folium
+    
+    # Unpack the data
+    gdf_buildings = data[0].copy()
+    gdf_structures = data[1].copy()
+    gdf_exeter = data[2].copy()
+    
+    # Ensure all CRS are EPSG:4326 for folium
+    gdf_buildings = gdf_buildings.to_crs(epsg=4326)
+    gdf_structures = gdf_structures.to_crs(epsg=4326)
+    gdf_exeter = gdf_exeter.to_crs(epsg=4326)
+    
+    # Get centroid of Exeter for map initialization
+    exeter_centroid = gdf_exeter.geometry.centroid.iloc[0]
+    m = folium.Map(location=[exeter_centroid.y, exeter_centroid.x], zoom_start=12, tiles='cartodbpositron')
+    
+    # Plot Exeter boundary
+    folium.GeoJson(
+        gdf_exeter.geometry,
+        name='Exeter Boundary',
+        style_function=lambda x: {'color': 'black', 'weight': 2, 'fillOpacity': 0.05}
+    ).add_to(m)
+    
+    # Plot buildings with solar panels
+    folium.GeoJson(
+        gdf_buildings.geometry,
+        name='Buildings with Solar Panels',
+        style_function=lambda x: {'color': 'orange', 'weight': 1, 'fillColor': 'orange', 'fillOpacity': 0.5}
+    ).add_to(m)
+    
+    # Plot solar panel structures
+    folium.GeoJson(
+        gdf_structures.geometry,
+        name='Solar Panel Structures',
+        style_function=lambda x: {'color': 'blue', 'weight': 2, 'fillColor': 'blue', 'fillOpacity': 0.3}
+    ).add_to(m)
+    
+    folium.LayerControl().add_to(m)
+    
+    # Save map
+    map_filename = 'exeter_solar_panel_buildings_and_structures.html'
+    m.save(map_filename)
+    
+    # Prepare summary
+    summary = f"There are {len(gdf_buildings)} buildings/building parts with solar panels on roofs and {len(gdf_structures)} solar panel structures in Exeter.\n"
+    summary += "First 5 buildings:\n" + str(gdf_buildings.head(5)) + "\n"
+    summary += "First 5 solar panel structures:\n" + str(gdf_structures.head(5))
+    
+    return [summary, map_filename, "Folium map showing Exeter boundary, buildings/building parts with solar panels, and solar panel structures.", map_filename]
+
+2026-02-03 12:51:28,209 INFO function name plot_solar_panel_buildings_and_structures_exeter
+2026-02-03 12:51:29,429 INFO Output completed
+2026-02-03 12:51:29,429 INFO Tool code_executor returned result : ['There are 4468 buildings/building parts with solar panels on roofs and 1 solar panel structures in Exeter.\nFirst 5 buildings:\n                                   osid versiondate  versionavailablefromdate  \\\n0  a578be0a-7fff-4fbb-8ace-2cf755bbb53c  2025-03-11 2025-03-12 00:00:00+00:00   \n1  c86c6a23-5ced-4dae-be17-94f33e02c66d  2025-03-11 2025-03-12 00:00:00+00:00   \n2  5cc5cbef-f15d-4110-9493-25be6ea12946  2025-03-11 2025-03-12 00:00:00+00:00   \n3  93d80cf9-5e7b-4c78-980f-c0acc04ed8a4  2025-03-11 2025-03-12 00:00:00+00:00   \n4  5b8bc540-b5d9-47bb-87bb-0d1c0a69bade  2025-03-11 2025-03-12 00:00:00+00:00   \n\n  versionavailabletodate changetype  geometry_area_m2 geometry_updatedate  \\\n0                    NaT        New            51.920          2025-03-10   \n1                    NaT        New            51.910          2025-03-10   \n2                    NaT        New            51.910          2025-03-10   \n3                    NaT        New            51.912          2025-03-10   \n4                    NaT        New            63.966          2025-03-10   \n\n       theme           description description_updatedate  ... nlud_code  \\\n0  Buildings  End-Of-Terrace House             2025-03-10  ...       NaN   \n1  Buildings     Mid-Terrace House             2025-03-10  ...       NaN   \n2  Buildings     Mid-Terrace House             2025-03-10  ...       NaN   \n3  Buildings  End-Of-Terrace House             2025-03-10  ...       NaN   \n4  Buildings        Detached House             2025-03-10  ...       NaN   \n\n  nlud_orderdescription  nlud_groupdescription address_classificationcode  \\\n0                   NaN                    NaN                        NaN   \n1                   NaN                    NaN                        NaN   \n2                   NaN                    NaN                        NaN   \n3                   NaN                    NaN                        NaN   \n4                   NaN                    NaN                        NaN   \n\n  address_primarydescription  address_secondarydescription  \\\n0                        NaN                           NaN   \n1                        NaN                           NaN   \n2                        NaN                           NaN   \n3                        NaN                           NaN   \n4                        NaN                           NaN   \n\n  lowertierlocalauthority_gsscode lowertierlocalauthority_count status  \\\n0                             NaN                           NaN    NaN   \n1                             NaN                           NaN    NaN   \n2                             NaN                           NaN    NaN   \n3                             NaN                           NaN    NaN   \n4                             NaN                           NaN    NaN   \n\n  status_updatedate  \n0               NaT  \n1               NaT  \n2               NaT  \n3               NaT  \n4               NaT  \n\n[5 rows x 122 columns]\nFirst 5 solar panel structures:\n                                   osid                  toid versiondate  \\\n0  e0f4b3bf-87e4-41f2-bb78-a4c3f3eb1a2b  osgb5000005290985306  2025-07-17   \n\n   versionavailablefromdate versionavailabletodate firstdigitalcapturedate  \\\n0 2025-07-18 00:00:00+00:00                    NaT              2021-12-21   \n\n            changetype  geometry_area_m2 geometry_evidencedate  \\\n0  Modified Attributes         10393.775            2024-04-20   \n\n  geometry_updatedate  ...         nlud_orderdescription  \\\n0          2024-10-15  ...  UTILITIES AND INFRASTRUCTURE   \n\n                nlud_groupdescription address_classificationcode  \\\n0  Energy production and distribution                       None   \n\n  address_primarydescription address_secondarydescription  \\\n0                       None                         None   \n\n  lowertierlocalauthority_gsscode lowertierlocalauthority_count status  \\\n0                       E07000041                           1.0   None   \n\n  status_updatedate                                           geometry  \n0        2022-09-23  MULTIPOLYGON (((-3.52322 50.70705, -3.52322 50...  \n\n[1 rows x 65 columns]', <a2a.Artifact.Artifact object at 0x000001E79CC2FF90>]
+2026-02-03 12:51:35,982 WARNING OFFLINE MODE
+2026-02-03 12:51:35,982 INFO Output from agent plotting_agent : There are 4,468 buildings/building parts with solar panels on roofs and 1 solar panel structure in Exeter.
+
+First 5 buildings:
+- End-Of-Terrace House
+- Mid-Terrace House
+- Mid-Terrace House
+- End-Of-Terrace House
+- Detached House
+
+First 5 solar panel structures:
+- Solar Panels On Bare Earth Or Grass
+
+An interactive map has been generated showing the Exeter boundary, all buildings/building parts with solar panels, and the solar panel structures.
+
+Artifact name: exeter_solar_panel_buildings_and_structures.html  
+Description: Folium map showing Exeter boundary, buildings/building parts with solar panels, and solar panel structures.  
+Artifact file: exeter_solar_panel_buildings_and_structures.html
+2026-02-03 12:51:35,982 INFO Tool send_message returned result : ["There are 4,468 buildings/building parts with solar panels on roofs and 1 solar panel structure in Exeter.\n\nFirst 5 buildings:\n- End-Of-Terrace House\n- Mid-Terrace House\n- Mid-Terrace House\n- End-Of-Terrace House\n- Detached House\n\nFirst 5 solar panel structures:\n- Solar Panels On Bare Earth Or Grass\n\nAn interactive map has been generated showing the Exeter boundary, all buildings/building parts with solar panels, and the solar panel structures.\n\nArtifact name: exeter_solar_panel_buildings_and_structures.html  \nDescription: Folium map showing Exeter boundary, buildings/building parts with solar panels, and solar panel structures.  \nArtifact file: exeter_solar_panel_buildings_and_structures.htmlAddtionally some data artifacts have been generated with names  ['exeter_solar_panel_buildings_and_structures.html'] and \n descriptions ['Folium map showing Exeter boundary, buildings/building parts with solar panels, and solar panel structures.']", [<a2a.Artifact.Artifact object at 0x000001E79CC2FF90>]]
+2026-02-03 12:51:43,817 WARNING OFFLINE MODE
+2026-02-03 12:51:43,817 INFO Output from agent host_agent : Here are the results for buildings in Exeter that already have solar panels on their roofs:
+
+- There are 4,468 buildings or building parts in Exeter with solar panels on their roofs. These include various types such as end-of-terrace houses, mid-terrace houses, and detached houses.
+- Additionally, there is 1 large solar panel structure in Exeter, categorized as "Solar Panels On Bare Earth Or Grass."
+
+An interactive map has been generated showing:
+- The Exeter boundary
+- All buildings/building parts with solar panels
+- The solar panel structure
+
+If you would like to view or download the map, let me know!

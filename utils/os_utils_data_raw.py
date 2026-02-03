@@ -325,7 +325,7 @@ def query_structure(bbox:str, filters:list, filename:str,query:str):
         1. gdf : GeoDataFrame of the queried structure features'''
     
     paths = [os.path.join(BASE_PATH,r"str_fts_structure\str_fts_structure.gpkg"),
-            os.path.join(BASE_PATH,r"str_fts_structure\str_fts_compoundstructure.gpkg")]
+            os.path.join(BASE_PATH,r"str_fts_compoundstructure\str_fts_compoundstructure.gpkg")]
     
     # Read the geopackage file into geopandas dataframe
     # Read the geopackage files into geopandas dataframes
@@ -347,8 +347,8 @@ def query_structure(bbox:str, filters:list, filename:str,query:str):
         gdf_list = gdf_filtered
 
     
-    gdf_attrs_list = [{"name":f"{filename}","description":f"A geopandas dataframe containing structure data with filters and bbox applied for the query {query} using filters {filters}. Further Name filtering is available for this","count":len(gdf)},
-                 {"name":f"{filename}","description":f"A geopandas dataframe containing compound structure data with filters and bbox applied for the query {query} using filters {filters}. Further Name filtering is available for this","count":len(gdf)}]
+    gdf_attrs_list = [{"name":f"{filename}","description":f"A geopandas dataframe containing structure data with filters and bbox applied for the query {query} using filters {filters}. Further Name filtering is available for this","count":len(gdf_list[0])},
+                 {"name":f"{filename}","description":f"A geopandas dataframe containing compound structure data with filters and bbox applied for the query {query} using filters {filters}. Further Name filtering is available for this","count":len(gdf_list[1])}]
     
     for index, gdf in enumerate(gdf_list):
         gdf.attrs = gdf_attrs_list[index]

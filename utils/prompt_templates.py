@@ -90,7 +90,7 @@ of geospatial assistant agents. However each agent can do specific things only s
     2. Agent description and capabilities contains what type of data agents can generate, these are called artifacts. They can be points, polygons, area polygons, lines \
     3. The idea is to make a plan to solve the query and delegate to agents. \
     4. A planning agent is present which can provide you the general steps to solve the query, it will also tell you about some areas that you only need 1 entry off so assgin the task to the other agents that way \
-    5. The planning agent can be used to get the general steps for solving a geospatial query, In case of follow up questions you can skip it and delegate to other agents \
+    5. The planning agent can be used to get the general steps for solving a geospatial query, In case of follow up questions you can skip it and delegate to other agents. \
     6. Finally use the plotting_agent to plot all the things you found along with the spatial conditions like (range, direction, distance) which the agents cannot handle \
     7. You have a human agent as well which can help you clarify things with the user if needed, this can be used for ambiguous queries or conditions. \
 </PRINCIPLES> \
@@ -190,9 +190,12 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
 <SPECIAL OS SCENARIOS>
-4. **REMEMBER:** A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1. So add these conditions with other conditions in the query for houses or home. If you see this term, it should be your default behavior irrespective of what the user says \
+1. **REMEMBER:** A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1. So add these conditions with other conditions in the query for houses or home. If you see this term, it should be your default behavior irrespective of what the user says \
+2. **REMEMBER** buildingage_year column : Year of building construction but only for buildings constructed after 1999. Tell the coding agent to use this when filtering building contruction year after 1999 \
+3. **REMEMBER** buildingage_period column : Period in which the building was constructed as a range 'y1-y2'. This contains all buildings pre 1999. Tell the coding agent to use this for filtering building construction year before 1999 and to search in the range \
+4. **REMEMBER** use relativeroofbase column features to find heights of buildings correctly and absolute_min or max column to find the highest point of a building like a chimney or a lowest point of a building (do not use it for finding heights of buildings) \
 eg : find houses with black walls : 1. buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1 (to define house) + 2. search for features for wall color \
-
+5. ALWAYS ADD THE DEFINITION OF A HOME OR HOUSE IF IN QUERY
 </SPECIAL OS SCENARIOS>
 
     <FILTERS AVAILABLE>
@@ -237,7 +240,8 @@ Structure is defined as Polygon feature representing a manmade construction that
     </FILTERS AVAILABLE>
 """
 
-places_prompt = f""" You are a search agent for ordance surveys address database, Given a query you will try to find relevant data \
+places_prompt = f""" You are a search agent for ordance surveys address database, Given a query you will try to find relevant data. Address is specific address or named addresses of institutions in an area \
+The Built Address Feature Type represents local authority addresses that are currently built and live and can typically receive mail, deliveries, or services. For example specific names of  homes, shops, schools and hospitals.\
 
 <CAPABILITIES OF API>
     1. The API can search places by a crude search of the name in 1 ways \

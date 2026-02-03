@@ -176,9 +176,39 @@ def generate_metadata_for_artifacts(**kwargs):
     artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if name+".pkl" in os.listdir(ARTIFACT_PATH)]
     logger = kwargs["logger"]
     logger.info(f"artifacts loaded for metadata generation : {[i.name for i in artifacts]}")
-    columns = [list(df.data.columns) for df in artifacts]
-    first_five_rows = [df.data.head() for df in artifacts]
-    filenames = [df.name for df in artifacts]  
+    metadata = []
+
+    for artifact in artifacts:
+        df = artifact.data
+
+        column_schema = []
+        for col in df.columns:
+            col_data = df[col]
+
+            column_schema.append({
+                "name": col,
+                "dtype": str(col_data.dtype),
+                "null_fraction": float(col_data.isna().mean()),
+                "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
+            })
+
+        artifact_metadata = {
+            "filename": artifact.name,
+            "dataset_summary": {
+                "num_rows": len(df),
+                "num_columns": len(df.columns)
+            },
+            "column_schema": column_schema,
+            "preview_rows": df.head(3).to_dict(orient="records"),
+            "usage_note": (
+                "Column schema is authoritative. "
+                "Do not infer column meaning from values alone."
+            )
+        }
+
+        metadata.append(artifact_metadata)
+
+    return metadata
     return columns,first_five_rows,filenames
 
 def generate_metadata_for_all_artifacts(**kwargs):
