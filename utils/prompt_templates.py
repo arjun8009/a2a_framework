@@ -187,9 +187,13 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
     1. Only mention 1 artifact name in the query.  \
     2. Filters are generic and named entities search require further analysis \
     3. Use of filters is optional for example if user wants all buildings with roof height>10 or with more than 1 feature then use all buildings without filters and then filter using coding agent to filter it further \
-    4. **REMEMBER:** A home or a house in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1. So add these conditions with other conditions in the query for houses or home. If you see this term, it should be your default behavior irrespective of what the user says \
-    5. eg: <description> home or house would lead to using the above conditions + filtering for description like black home would lead to searching for homes using the coding agent and then tell it to filter for color black \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
+
+<SPECIAL OS SCENARIOS>
+4. **REMEMBER:** A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1. So add these conditions with other conditions in the query for houses or home. If you see this term, it should be your default behavior irrespective of what the user says \
+eg : find houses with black walls : 1. buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1 (to define house) + 2. search for features for wall color \
+
+</SPECIAL OS SCENARIOS>
 
     <FILTERS AVAILABLE>
     {get_filterable_features("bld-fts-building-3")} + \n {get_filterable_features("bld-fts-buildingline")} \n {get_filterable_features("bld-fts-buildingpart")} 
@@ -229,7 +233,7 @@ Structure is defined as Polygon feature representing a manmade construction that
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
     <FILTERS AVAILABLE>
-    {get_filterable_features("str-fts-structure-1")} 
+    {get_filterable_features("str-fts-structure-1")} + \n {get_filterable_features("str-fts-compoundstructure")} 
     </FILTERS AVAILABLE>
 """
 
@@ -358,6 +362,10 @@ water_features_prompt = f""" You are a search agent for ordance surveys water fe
 1. Only mention 1 artifact name in the query.  \
 2. Filters are not available here and named entities search require further analysis \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
+
+<FILTERS AVAILABLE>
+    {get_filterable_features("wtr-fts-water-1")} + \n {get_filterable_features("wtr-fts-waterpoint-1")} 
+    </FILTERS AVAILABLE>
 """
 
 
@@ -472,6 +480,10 @@ land_use_features_prompt = f""" You are a search agent for ordance surveys land 
 1. Only mention 1 artifact name in the query.  \
 2. Filters are generic and named entities search require further analysis \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL> \
+
+    <SPECIAL OS SCENARIOS>
+        oslandusetierb is a useful column for searching and filtering. Tell the coding agent to include this further filtering along with the other choices coding agent makes.\
+    </SPECIAL OS SCENARIOS>
 
 <FILTERS AVAILABLE> \
     {get_filterable_features("lus-fts-site")} 

@@ -132,7 +132,7 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str,query:s
     return gdf
 
 
-def query_water_features(bbox:str, filename:str,query:str):
+def query_water_features(filters:list,bbox:str, filename:str,query:str):
     '''Utility function to query OS Data Hub Water API
     args:
         1. bbox : NGD Extent to limit the query
@@ -142,7 +142,8 @@ def query_water_features(bbox:str, filename:str,query:str):
         1. gdf : GeoDataFrame of the queried water features'''
     
     # Add paths to different water related geopackage files
-    paths = [os.path.join(BASE_PATH,r"wtr_fts_water\wtr_fts_water.gpkg")]
+    paths = [os.path.join(BASE_PATH,r"wtr_fts_water\wtr_fts_water.gpkg"),
+             os.path.join(BASE_PATH,r"wtr_fts_waterpoint\wtr_fts_waterpoint.gpkg")]
     
     # Read the geopackage files into geopandas dataframes
     gdf_list = [gpd.read_file(path) for path in paths]
@@ -153,12 +154,19 @@ def query_water_features(bbox:str, filename:str,query:str):
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
-    
-    
+    # Apply filters to each of the dataframes and concatenate the results of multiple filters
+    if filters and len(filters) > 0:
+        gdf_filtered = []
+        for gdf in gdf_list:
+            data_filtered = []
+            for filter in filters:
+                data_filtered.append(gdf[gdf["description"] == filter])
+            gdf_filtered.append(pd.concat(data_filtered, ignore_index=True))
+        gdf_list = gdf_filtered
     
     # Assign attributes to each GeoDataFrame
-    gdf_attrs_list =[{"name":f"waterpoint_{filename}",f"description":"A geopandas dataframe containing water point data with bbox applied for the query {query} with no filters applied for the query (so remember no search is performed here so spurious entities present).","count":len(gdf_list[0])},
-                     {"name":f"water_{filename}",f"description":"A geopandas dataframe containing water data with bbox applied for the query {query} with no filters applied for the query (so remember no search is performed here so spurious entities present).","count":len(gdf_list[1])}]
+    gdf_attrs_list =[{"name":f"waterpoint_{filename}",f"description":"A geopandas dataframe containing water point data with bbox applied for the query {query} with filters applied {filters}","count":len(gdf_list[0])},
+                     {"name":f"water_{filename}",f"description":"A geopandas dataframe containing water data with bbox applied for the query {query} with filters applied {filters}","count":len(gdf_list[1])}]
     
     gdf_attrs_list = [gdf_attrs_list[i] for i in range(len(gdf_list)) if not gdf_list[i].empty]
     gdf_list = [gdf for gdf in gdf_list if not gdf.empty]
@@ -316,28 +324,39 @@ def query_structure(bbox:str, filters:list, filename:str,query:str):
     output:
         1. gdf : GeoDataFrame of the queried structure features'''
     
-    path = os.path.join(BASE_PATH,r"str_fts_structure\str_fts_structure.gpkg")
+    paths = [os.path.join(BASE_PATH,r"str_fts_structure\str_fts_structure.gpkg"),
+            os.path.join(BASE_PATH,r"str_fts_structure\str_fts_compoundstructure.gpkg")]
     
     # Read the geopackage file into geopandas dataframe
-    gdf = gpd.read_file(path)
+    # Read the geopackage files into geopandas dataframes
+    gdf_list = [gpd.read_file(path) for path in paths]
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
-    gdf = gdf.set_crs(epsg=27700)
-
     if bbox:
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
-        gdf = gpd.clip(gdf, extent_polygon)
+        gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
     if filters and len(filters) > 0:
-        data_filtered = []
-        for filter in filters:
-            data_filtered.append(gdf[gdf["description"] == filter])
-        gdf = pd.concat(data_filtered, ignore_index=True)
-    
-    gdf.attrs = {"name":f"{filename}","description":f"A geopandas dataframe containing structure data with filters and bbox applied for the query {query} using filters {filters}. Further Name filtering is available for this","count":len(gdf)}
-    
-    if gdf.empty:
-        return None
+        gdf_filtered = []
+        for gdf in gdf_list:
+            data_filtered = []
+            for filter in filters:
+                data_filtered.append(gdf[gdf["description"] == filter])
+            gdf_filtered.append(pd.concat(data_filtered, ignore_index=True))
+        gdf_list = gdf_filtered
 
-    return gdf
+    
+    gdf_attrs_list = [{"name":f"{filename}","description":f"A geopandas dataframe containing structure data with filters and bbox applied for the query {query} using filters {filters}. Further Name filtering is available for this","count":len(gdf)},
+                 {"name":f"{filename}","description":f"A geopandas dataframe containing compound structure data with filters and bbox applied for the query {query} using filters {filters}. Further Name filtering is available for this","count":len(gdf)}]
+    
+    for index, gdf in enumerate(gdf_list):
+        gdf.attrs = gdf_attrs_list[index]
+    
+    # Return None if no dataframes are left after filtering
+    gdf_list = [gdf for gdf in gdf_list if not gdf.empty]
+    
+    if len(gdf_list) == 0:
+        return None
+    
+    return gdf_list
