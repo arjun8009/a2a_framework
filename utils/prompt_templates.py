@@ -37,6 +37,7 @@ generic_coding_agent_template = """You are a coding agent whose task is to gener
         5. stick to the code template provided and output format \
         6. Never return code but only the output as defined \
         7. Keep on making code and handle the errors do not return error as output \
+        8. <MOST IMPORTANT> Filtering using categorical columns is tricky, use all possible categories that are correct, do not leave categories that are correct but may seem less relevant </MOST IMPORTANT>
     <POLICIES> \
     
     <RESPONSE EXPECTATION> : \
@@ -190,11 +191,11 @@ buildings_prompt = f""" You are a search agent for ordance surveys buildings dat
 <CONSTRAINT FOR DATA ANALYSIS AGENT and NGD TOOL>
 
 <SPECIAL OS SCENARIOS>
-1. **REMEMBER:** A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1. So add these conditions with other conditions in the query for houses or home. If you see this term, it should be your default behavior irrespective of what the user says \
+1. **REMEMBER:** A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1. So add these conditions with other conditions and do not apply filters in the query for houses or home. If you see this term, it should be your default behavior irrespective of what the user says \
 2. **REMEMBER** buildingage_year column : Year of building construction but only for buildings constructed after 1999. Tell the coding agent to use this when filtering building contruction year after 1999 \
 3. **REMEMBER** buildingage_period column : Period in which the building was constructed as a range 'y1-y2'. This contains all buildings pre 1999. Tell the coding agent to use this for filtering building construction year before 1999 and to search in the range \
 4. **REMEMBER** use relativeroofbase column features to find heights of buildings correctly and absolute_min or max column to find the highest point of a building like a chimney or a lowest point of a building (do not use it for finding heights of buildings) \
-eg : find houses with black walls : 1. buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1 (to define house) + 2. search for features for wall color \
+eg : find houses with black walls : 1. all buildings with no filters 2. buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1 (to define house) using coding agent  3. search for features for wall color \
 5. ALWAYS ADD THE DEFINITION OF A HOME OR HOUSE IF IN QUERY
 </SPECIAL OS SCENARIOS>
 

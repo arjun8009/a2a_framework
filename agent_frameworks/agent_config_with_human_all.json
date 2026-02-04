@@ -63,7 +63,7 @@
             "agent_name":"buildings_agent",
             "version":"1.0.0",
             "agent_details":"building_agent_card",
-            "llm_name":"gpt-4o",
+            "llm_name":"gpt-4.1",
             "system_instruction":"buildings_prompt",
             "additional_args":{"parallel_tool_calls":false},
             "tools":["send_message","call_os_ngd"],
