@@ -1,0 +1,918 @@
+2026-02-06 13:22:00,663 INFO Agent host_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent planning_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent coding_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent plotting_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent address_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent named_area_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent buildings_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent water_features_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent water_network_agent Initialised
+2026-02-06 13:22:00,664 INFO Agent land_features_agent Initialised
+2026-02-06 13:22:00,665 INFO Agent land_use_features_agent Initialised
+2026-02-06 13:22:00,665 INFO Agent structures_agent Initialised
+2026-02-06 13:22:00,665 INFO Agent human Initialised
+2026-02-06 13:22:01,509 INFO sending message from human to host Show me all the canals in Exeter.?
+2026-02-06 13:22:05,587 INFO OFFLINE MODE
+2026-02-06 13:22:05,602 INFO Messages sent to agent host_agent : [{'role': 'user', 'content': 'Show me all the canals in Exeter.?'}]
+2026-02-06 13:22:07,336 INFO Calling tool send_message with args : {'target': 'planning_agent', 'task_description': 'Show me all the canals in Exeter.'}
+2026-02-06 13:22:11,434 WARNING OFFLINE MODE
+2026-02-06 13:22:11,450 INFO Messages sent to agent planning_agent : [{'role': 'user', 'content': 'Show me all the canals in Exeter.'}]
+2026-02-06 13:22:17,825 WARNING OFFLINE MODE
+2026-02-06 13:22:17,825 INFO Output from agent planning_agent : <Internal Thoughts> The area is Exeter, so there is 1 entry for Exeter. The entity to search for is canals, and I need to find all canals in Exeter as many entries as possible. <Thoughts> 
+
+output steps: ["Find Exeter 1 area", "Search for all canals in Exeter as many search results"]
+2026-02-06 13:22:17,827 INFO Tool send_message returned result : <Internal Thoughts> The area is Exeter, so there is 1 entry for Exeter. The entity to search for is canals, and I need to find all canals in Exeter as many entries as possible. <Thoughts> 
+
+output steps: ["Find Exeter 1 area", "Search for all canals in Exeter as many search results"]
+2026-02-06 13:22:19,707 INFO Calling tool send_message with args : {'target': 'named_area', 'task_description': 'Find the area polygon for Exeter.'}
+2026-02-06 13:22:23,774 WARNING OFFLINE MODE
+2026-02-06 13:22:23,787 INFO Messages sent to agent named_area : [{'role': 'user', 'content': 'Find the area polygon for Exeter.'}]
+2026-02-06 13:22:26,027 INFO Calling tool call_os_ngd with args : {'filters': None, 'bbox': None, 'polygon_or_point': True, 'street_address': None, 'filename': 'exeter_area_polygon'}
+2026-02-06 13:22:26,050 INFO NGD query result                                     osid versiondate  \
+0   63c1644f-ce63-4605-88c4-f4f63eca7464  2024-07-21   
+1   03f86278-b36a-4384-bc41-5935aa6c6dd3  2022-07-29   
+2   36f29f4a-0f86-411f-adfd-7a921cb3d154  2022-07-29   
+3   37e0c394-19d3-4e28-a534-73ccb42667b6  2022-07-29   
+4   5fb21b9b-e98f-4278-96c0-85a517b54909  2022-07-29   
+..                                   ...         ...   
+93  58db2138-8696-4d27-a741-a33d66bf2f47  2024-09-25   
+94  97259661-757f-40c8-ac70-5990a1b02a7d  2025-06-05   
+95  64338406-53ac-47af-8344-4e51eb3b5bd2  2025-06-19   
+96  eaeed505-6584-4fa0-b734-8491211c62a9  2025-08-29   
+97  dc813a6c-39c3-493b-ad98-9ded7c3bb80f  2025-10-29   
+
+    versionavailablefromdate versionavailabletodate  \
+0  2024-07-22 00:00:00+00:00                    NaT   
+1  2022-07-30 00:00:00+00:00                    NaT   
+2  2022-07-30 00:00:00+00:00                    NaT   
+3  2022-07-30 00:00:00+00:00                    NaT   
+4  2022-07-30 00:00:00+00:00                    NaT   
+..                       ...                    ...   
+93 2024-09-26 00:00:00+00:00                    NaT   
+94 2025-06-06 00:00:00+00:00                    NaT   
+95 2025-06-20 00:00:00+00:00                    NaT   
+96 2025-08-30 00:00:00+00:00                    NaT   
+97 2025-10-30 00:00:00+00:00                    NaT   
+
+                          changetype  geometry_area geometry_evidencedate  \
+0                                New   7.610553e+03            2024-07-20   
+1                                New   3.000016e+04            2021-07-27   
+2                                New   1.236117e+03            2014-11-19   
+3                                New   7.210933e+04            2014-11-19   
+4                                New   6.824504e+03            2018-04-30   
+..                               ...            ...                   ...   
+93  Modified Geometry And Attributes   1.549032e+06            2024-09-24   
+94  Modified Geometry And Attributes   1.159562e+06            2025-06-03   
+95  Modified Geometry And Attributes   4.633501e+05            2025-06-18   
+96  Modified Geometry And Attributes   3.208213e+07            2025-08-28   
+97  Modified Geometry And Attributes   1.540315e+06            2025-10-28   
+
+   geometry_updatedate  geometry_source               theme  ... name4_text  \
+0           2024-07-20  Ordnance Survey  Geographical Names  ...       None   
+1           2021-07-27  Ordnance Survey  Geographical Names  ...       None   
+2           2015-05-06  Ordnance Survey  Geographical Names  ...       None   
+3           2015-05-06  Ordnance Survey  Geographical Names  ...       None   
+4           2018-04-30  Ordnance Survey  Geographical Names  ...       None   
+..                 ...              ...                 ...  ...        ...   
+93          2024-09-24  Ordnance Survey  Geographical Names  ...       None   
+94          2025-06-03  Ordnance Survey  Geographical Names  ...       None   
+95          2025-06-18  Ordnance Survey  Geographical Names  ...       None   
+96          2025-08-28  Ordnance Survey  Geographical Names  ...       None   
+97          2025-10-28  Ordnance Survey  Geographical Names  ...       None   
+
+   name4_language name4_evidencedate name4_updatedate name4_source  \
+0            None                NaT              NaT         None   
+1            None                NaT              NaT         None   
+2            None                NaT              NaT         None   
+3            None                NaT              NaT         None   
+4            None                NaT              NaT         None   
+..            ...                ...              ...          ...   
+93           None                NaT              NaT         None   
+94           None                NaT              NaT         None   
+95           None                NaT              NaT         None   
+96           None                NaT              NaT         None   
+97           None                NaT              NaT         None   
+
+                                  sameasdbpedia  \
+0                                          None   
+1                                          None   
+2                                          None   
+3                                          None   
+4                                          None   
+..                                          ...   
+93                                         None   
+94                                         None   
+95                                         None   
+96                                         None   
+97  https://dbpedia.org/resource/Topsham,_Devon   
+
+                      sameasgeonames sameasdbobih height  \
+0                               None          NaN    NaN   
+1                               None          NaN  159.0   
+2                               None          NaN    NaN   
+3                               None          NaN    NaN   
+4                               None          NaN    NaN   
+..                               ...          ...    ...   
+93                              None          NaN    NaN   
+94  https://sws.GeoNames.org/2657436          NaN    NaN   
+95                              None          NaN    NaN   
+96  https://sws.GeoNames.org/2649808          NaN    NaN   
+97  https://sws.GeoNames.org/2635680          NaN    NaN   
+
+                                             geometry  
+0   POLYGON ((292747.589 94221.096, 292771.401 942...  
+1   POLYGON ((292461.36 95357.29, 292447.963 95407...  
+2   POLYGON ((291921.65 95445.35, 291893.75 95458....  
+3   POLYGON ((289548.37 94560.12, 289503.97 94498....  
+4   POLYGON ((292998.087 90964.701, 292982.339 909...  
+..                                                ...  
+93  POLYGON ((294272.65 94200.045, 294154.655 9406...  
+94  POLYGON ((291754.039 89509.807, 291821.805 893...  
+95  POLYGON ((290295.76 92873.674, 290057.23 92949...  
+96  POLYGON ((295173.81 89150.11, 295192.057 89168...  
+97  POLYGON ((296472.774 89603.429, 296467.29 8961...  
+
+[98 rows x 41 columns]
+2026-02-06 13:22:26,062 INFO Tool call_os_ngd returned result : ['Search results have been found. \n            Artifact generated is : exeter_area_polygon,\n            Description is : A geopandas dataframe containing named area data with no filters applied for the query (so remember no search is performed here so spurious entities present) Find the area polygon for Exeter..,\n            count of records fetched : 98.\n            ', <a2a.Artifact.Artifact object at 0x0000023CB4164590>]
+2026-02-06 13:22:27,966 INFO Calling tool send_message with args : {'target': 'data_analysis_agent', 'task_description': "Filter the artifact 'exeter_area_polygon' to find the specific area polygon for Exeter. Save the filtered results as 'filtered_exeter_area_polygon'."}
+2026-02-06 13:22:32,048 WARNING OFFLINE MODE
+2026-02-06 13:22:32,062 INFO Messages sent to agent data_analysis_agent : [{'role': 'user', 'content': "Filter the artifact 'exeter_area_polygon' to find the specific area polygon for Exeter. Save the filtered results as 'filtered_exeter_area_polygon'."}]
+2026-02-06 13:22:33,296 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['exeter_area_polygon']}
+2026-02-06 13:22:33,311 INFO artifacts loaded for metadata generation : ['exeter_area_polygon']
+2026-02-06 13:22:33,328 INFO Tool generate_metadata_for_artifacts returned result : [{'filename': 'exeter_area_polygon', 'dataset_summary': {'num_rows': 98, 'num_columns': 41}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['63c1644f-ce63-4605-88c4-f4f63eca7464', '03f86278-b36a-4384-bc41-5935aa6c6dd3', '36f29f4a-0f86-411f-adfd-7a921cb3d154', '37e0c394-19d3-4e28-a534-73ccb42667b6', '5fb21b9b-e98f-4278-96c0-85a517b54909', '03562b32-cd30-48f6-a679-2217d013d710', '04271bb6-866f-4696-917f-3aa96ba8b013', '0739d6ef-0aed-4c28-8855-ff7c7263fb62', '0a54d402-3bcc-4706-9dbd-df4603e7e89c', '0c66b08b-b238-4161-bc46-418450e3f2d8', '152789ea-b15e-46aa-800e-3be1544bdf52', '190e1528-dce5-4ef0-a463-91eb81b1a462', '196dab96-8f6e-4a93-8b01-96f502d66663', '1d130059-d1a7-45e3-af25-2fb09a575b36', '2c773dff-23e1-4dab-b254-99602870bea3', '32119480-f8ca-47c2-8836-2c587a66dccc', '339d04ff-01b2-49b6-a241-c44c32efd75d', '366e0d85-1620-457b-8cfc-6ac4b2457034', '45846c93-d43d-446e-a018-3665d7dcd819', '46336eab-56a2-4169-8039-b34e1f1a17cf']}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-07-21 00:00:00', '2022-07-29 00:00:00', '2025-05-08 00:00:00',
+ '2025-01-14 00:00:00', '2022-08-04 00:00:00', '2023-02-16 00:00:00',
+ '2023-05-23 00:00:00', '2023-06-05 00:00:00', '2023-06-22 00:00:00',
+ '2024-08-15 00:00:00', '2024-09-25 00:00:00', '2025-06-05 00:00:00',
+ '2025-06-19 00:00:00', '2025-08-29 00:00:00', '2025-10-29 00:00:00']
+Length: 15, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-07-22 00:00:00+00:00', '2022-07-30 00:00:00+00:00',
+ '2025-05-09 00:00:00+00:00', '2025-01-15 00:00:00+00:00',
+ '2022-08-05 00:00:00+00:00', '2023-02-17 00:00:00+00:00',
+ '2023-05-24 00:00:00+00:00', '2023-06-06 00:00:00+00:00',
+ '2023-06-23 00:00:00+00:00', '2024-08-16 00:00:00+00:00',
+ '2024-09-26 00:00:00+00:00', '2025-06-06 00:00:00+00:00',
+ '2025-06-20 00:00:00+00:00', '2025-08-30 00:00:00+00:00',
+ '2025-10-30 00:00:00+00:00']
+Length: 15, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['New', 'Modified Geometry And Attributes'], dtype=object)}, {'name': 'geometry_area', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': [7610.552765, 30000.159218, 1236.116748, 72109.331375, 6824.50407, 180501.893336, 28809.284033, 29.34558, 27.999616, 968262.597279, 354028.684261, 54960.69399, 86967.288715, 169362.471198, 3140390.422026, 16823.736954, 72.27525, 49.0, 1501.951499, 120340.993212]}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2021-07-27 00:00:00'), Timestamp('2014-11-19 00:00:00'), Timestamp('2018-04-30 00:00:00'), Timestamp('2011-09-01 00:00:00'), Timestamp('2017-01-21 00:00:00'), Timestamp('2021-10-01 00:00:00'), Timestamp('2018-04-27 00:00:00'), Timestamp('2019-02-25 00:00:00'), Timestamp('2018-07-03 00:00:00'), Timestamp('2025-05-07 00:00:00'), Timestamp('2021-10-28 00:00:00'), Timestamp('2015-01-07 00:00:00'), Timestamp('2018-05-01 00:00:00'), Timestamp('2022-03-24 00:00:00'), Timestamp('2014-12-10 00:00:00'), Timestamp('2025-01-13 00:00:00'), Timestamp('2021-04-19 00:00:00'), Timestamp('2014-11-30 00:00:00'), Timestamp('2023-02-15 00:00:00')]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2021-07-27 00:00:00'), Timestamp('2015-05-06 00:00:00'), Timestamp('2018-04-30 00:00:00'), Timestamp('2015-02-27 00:00:00'), Timestamp('2017-01-25 00:00:00'), Timestamp('2021-10-01 00:00:00'), Timestamp('2018-04-27 00:00:00'), Timestamp('2015-05-01 00:00:00'), Timestamp('2019-02-25 00:00:00'), Timestamp('2018-07-03 00:00:00'), Timestamp('2025-05-07 00:00:00'), Timestamp('2021-10-28 00:00:00'), Timestamp('2018-05-01 00:00:00'), Timestamp('2022-03-24 00:00:00'), Timestamp('2016-10-03 00:00:00'), Timestamp('2015-04-20 00:00:00'), Timestamp('2025-01-13 00:00:00'), Timestamp('2021-04-19 00:00:00'), Timestamp('2023-02-15 00:00:00')]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Geographical Names'], dtype=object)}, {'name': 'descriptiongroup', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Other Name', 'Landform Name', 'Land Name', 'Water Name',
+       'Settlement'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Named Other Geographic Area', 'Named Hill Or Mountain',
+       'Named Woodland Or Forest', 'Named Stretch Of Inland Water',
+       'Suburban Area', 'Part Of Settlement', 'Named Inland Water Marsh',
+       'Village', 'Named Tidal Land Cover', 'Named Area Of Railway Land',
+       'Named Other Land Cover', 'Named Valley', 'City', 'Town'],
+      dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2004-12-30 00:00:00'), Timestamp('2015-05-09 00:00:00'), Timestamp('2011-09-01 00:00:00'), Timestamp('2017-01-21 00:00:00'), Timestamp('2019-11-01 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2018-04-27 00:00:00'), Timestamp('2014-12-21 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2003-03-10 00:00:00'), Timestamp('2005-01-05 00:00:00'), Timestamp('2014-04-23 00:00:00'), Timestamp('2004-12-31 00:00:00'), Timestamp('2015-05-04 00:00:00'), Timestamp('2005-11-03 00:00:00'), Timestamp('2021-09-29 00:00:00'), Timestamp('2003-03-06 00:00:00'), Timestamp('2003-03-19 00:00:00'), Timestamp('2005-01-04 00:00:00')]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2004-12-30 00:00:00'), Timestamp('2015-05-09 00:00:00'), Timestamp('2015-02-27 00:00:00'), Timestamp('2017-01-25 00:00:00'), Timestamp('2019-11-01 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2018-04-27 00:00:00'), Timestamp('2014-12-21 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2003-03-10 00:00:00'), Timestamp('2005-01-05 00:00:00'), Timestamp('2014-04-23 00:00:00'), Timestamp('2004-12-31 00:00:00'), Timestamp('2015-05-04 00:00:00'), Timestamp('2005-11-03 00:00:00'), Timestamp('2021-09-29 00:00:00'), Timestamp('2003-03-06 00:00:00'), Timestamp('2003-03-19 00:00:00'), Timestamp('2005-01-04 00:00:00')]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'extentdefinition', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Manually Defined Complete', 'Auto-Generated Indication'],
+      dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['Pennsylvania Park', 'Roman Hill', 'Jubilee Copse', 'Bolsters Wood', 'Salmon Pool', 'Polsloe Priory', 'Polsloe Park', 'Wessex Estate', 'Salutary Mount', 'Stoke Woods', 'Exwick Wood', 'Lilly Copse', 'Red Cow Village', 'Clyst Heath', 'Heavitree', "Duck's Marsh", 'Middle Moor', 'The Knap', 'Grassway Plantation', 'Wonford']}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2004-12-30 00:00:00'), Timestamp('2015-05-09 00:00:00'), Timestamp('2011-09-01 00:00:00'), Timestamp('2017-01-21 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2008-11-17 00:00:00'), Timestamp('2015-05-04 00:00:00'), Timestamp('2003-03-10 00:00:00'), Timestamp('2005-01-05 00:00:00'), Timestamp('2014-04-23 00:00:00'), Timestamp('2004-12-31 00:00:00'), Timestamp('2005-11-03 00:00:00'), Timestamp('2008-02-28 00:00:00'), Timestamp('2003-03-06 00:00:00'), Timestamp('2003-03-19 00:00:00'), Timestamp('2002-08-29 00:00:00'), Timestamp('2005-01-04 00:00:00'), Timestamp('2003-03-18 00:00:00')]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-07-20 00:00:00', '2011-06-25 00:00:00', '2015-05-09 00:00:00',
+ '2015-02-27 00:00:00', '2017-01-25 00:00:00', '2015-05-04 00:00:00',
+ '2014-04-23 00:00:00', '2011-08-03 00:00:00', '2015-05-07 00:00:00',
+ '2016-10-03 00:00:00', '2015-04-20 00:00:00', '2022-08-03 00:00:00',
+ '2015-05-08 00:00:00', '2015-01-16 00:00:00']
+Length: 14, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 0.02040816326530612, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'sameasdbpedia', 'dtype': 'object', 'null_fraction': 0.9591836734693877, 'example_values': array(['https://dbpedia.org/resource/Exwick',
+       'https://dbpedia.org/resource/Pinhoe',
+       'https://dbpedia.org/resource/St_Thomas,_Exeter',
+       'https://dbpedia.org/resource/Topsham,_Devon'], dtype=object)}, {'name': 'sameasgeonames', 'dtype': 'object', 'null_fraction': 0.8979591836734694, 'example_values': array(['https://sws.GeoNames.org/6691884',
+       'https://sws.GeoNames.org/2652720',
+       'https://sws.GeoNames.org/2652240',
+       'https://sws.GeoNames.org/6691886',
+       'https://sws.GeoNames.org/2640277',
+       'https://sws.GeoNames.org/6691885',
+       'https://sws.GeoNames.org/6691883',
+       'https://sws.GeoNames.org/2657436',
+       'https://sws.GeoNames.org/2649808',
+       'https://sws.GeoNames.org/2635680'], dtype=object)}, {'name': 'sameasdbobih', 'dtype': 'float64', 'null_fraction': 0.9897959183673469, 'example_values': array([5417.])}, {'name': 'height', 'dtype': 'float64', 'null_fraction': 0.9183673469387755, 'example_values': array([159. , 125. ,  50. , 160. , 155. , 157. ,  59.4,  70. ])}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': [<POLYGON ((292747.589 94221.096, 292771.401 94249.671, 292776.958 94265.81, ...>, <POLYGON ((292461.36 95357.29, 292447.963 95407.29, 292411.36 95443.893, 292...>, <POLYGON ((291921.65 95445.35, 291893.75 95458.85, 291874.9 95468.35, 291859...>, <POLYGON ((289548.37 94560.12, 289503.97 94498.02, 289470.1 94447.92, 289461...>, <POLYGON ((292998.087 90964.701, 292982.339 90956.833, 292975.776 90945.017,...>, <POLYGON ((293859.012 93441.562, 294055.17 93479.901, 293944.282 93545.932, ...>, <POLYGON ((293350.52 93174.885, 293370.308 93047.053, 293387.7 93050.97, 293...>, <POLYGON ((291104.192 93428.316, 291106.313 93428.194, 291107.108 93441.984,...>, <POLYGON ((293647.44 92420.42, 293661.192 92417.797, 293661.567 92419.761, 2...>, <POLYGON ((291848.028 95918.188, 291871.311 95875.855, 291968.678 95806.005,...>, <POLYGON ((290266.915 94920.953, 290229.81 94925.67, 289988.59 94961.33, 289...>, <POLYGON ((292116.1 95829.57, 292111.72 95836.88, 292105.85 95848.04, 292102...>, <POLYGON ((291499.957 93342.357, 291447.701 93496.411, 291426.865 93543.441,...>, <POLYGON ((295515.271 91227.526, 295557.997 91219.998, 295568.303 91207.881,...>, <POLYGON ((294205.279 93256.415, 294118.137 93269.801, 294007.827 93248.867,...>, <POLYGON ((293006.719 90827.488, 293007.143 90802.511, 293009.259 90792.775,...>, <POLYGON ((295848.4 92135.655, 295848.4 92132.03, 295868.338 92132.03, 29586...>, <POLYGON ((289843.09 94340.64, 289843.09 94337.14, 289857.09 94337.14, 28985...>, <POLYGON ((291413.464 94325.433, 291384.977 94312.56, 291404.763 94268.777, ...>, <POLYGON ((294123.282 91671.579, 294183.941 91695.342, 294199.912 91724.183,...>]}], 'preview_rows': [{'osid': '63c1644f-ce63-4605-88c4-f4f63eca7464', 'versiondate': Timestamp('2024-07-21 00:00:00'), 'versionavailablefromdate': Timestamp('2024-07-22 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 7610.552765, 'geometry_evidencedate': Timestamp('2024-07-20 00:00:00'), 'geometry_updatedate': Timestamp('2024-07-20 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Other Name', 'description': 'Named Other Geographic Area', 'description_evidencedate': Timestamp('2024-07-20 00:00:00'), 'description_updatedate': Timestamp('2024-07-20 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Pennsylvania Park', 'name1_language': None, 'name1_evidencedate': Timestamp('2024-07-20 00:00:00'), 'name1_updatedate': Timestamp('2024-07-20 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((292747.589 94221.096, 292771.401 94249.671, 292776.958 94265.81, ...>}, {'osid': '03f86278-b36a-4384-bc41-5935aa6c6dd3', 'versiondate': Timestamp('2022-07-29 00:00:00'), 'versionavailablefromdate': Timestamp('2022-07-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 30000.159218, 'geometry_evidencedate': Timestamp('2021-07-27 00:00:00'), 'geometry_updatedate': Timestamp('2021-07-27 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Landform Name', 'description': 'Named Hill Or Mountain', 'description_evidencedate': Timestamp('2004-12-30 00:00:00'), 'description_updatedate': Timestamp('2004-12-30 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Auto-Generated Indication', 'name1_text': 'Roman Hill', 'name1_language': None, 'name1_evidencedate': Timestamp('2004-12-30 00:00:00'), 'name1_updatedate': Timestamp('2011-06-25 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': 159.0, 'geometry': <POLYGON ((292461.36 95357.29, 292447.963 95407.29, 292411.36 95443.893, 292...>}, {'osid': '36f29f4a-0f86-411f-adfd-7a921cb3d154', 'versiondate': Timestamp('2022-07-29 00:00:00'), 'versionavailablefromdate': Timestamp('2022-07-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 1236.116748, 'geometry_evidencedate': Timestamp('2014-11-19 00:00:00'), 'geometry_updatedate': Timestamp('2015-05-06 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Land Name', 'description': 'Named Woodland Or Forest', 'description_evidencedate': Timestamp('2015-05-09 00:00:00'), 'description_updatedate': Timestamp('2015-05-09 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Jubilee Copse', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-09 00:00:00'), 'name1_updatedate': Timestamp('2015-05-09 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((291921.65 95445.35, 291893.75 95458.85, 291874.9 95468.35, 291859...>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}]
+2026-02-06 13:22:38,876 INFO Calling tool code_executor with args : {'code': 'def filter_exeter_area_polygon(data: list):\n    gdf = data[0]\n    # Filter for Exeter using multiple relevant columns for accuracy\n    filtered = gdf[\n        (\n            (gdf[\'name1_text\'].str.lower() == \'exeter\') |\n            (gdf[\'name1_text\'].str.lower().str.contains(\'exeter\'))\n        ) & (\n            (gdf[\'descriptiongroup\'].isin([\'Settlement\', \'Part Of Settlement\'])) |\n            (gdf[\'description\'].isin([\'City\', \'Town\', \'Suburban Area\']))\n        )\n    ]\n    summary = f"Filtered to {len(filtered)} polygon(s) for Exeter area."\n    artifact_name = \'filtered_exeter_area_polygon\'\n    artifact_description = \'GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.\'\n    return [summary, artifact_name, artifact_description, filtered]\n\nfilter_exeter_area_polygon(data)', 'artifact_names': ['exeter_area_polygon']}
+2026-02-06 13:22:38,877 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_exeter_area_polygon(data: list):
+    gdf = data[0]
+    # Filter for Exeter using multiple relevant columns for accuracy
+    filtered = gdf[
+        (
+            (gdf['name1_text'].str.lower() == 'exeter') |
+            (gdf['name1_text'].str.lower().str.contains('exeter'))
+        ) & (
+            (gdf['descriptiongroup'].isin(['Settlement', 'Part Of Settlement'])) |
+            (gdf['description'].isin(['City', 'Town', 'Suburban Area']))
+        )
+    ]
+    summary = f"Filtered to {len(filtered)} polygon(s) for Exeter area."
+    artifact_name = 'filtered_exeter_area_polygon'
+    artifact_description = 'GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.'
+    return [summary, artifact_name, artifact_description, filtered]
+
+filter_exeter_area_polygon(data)
+2026-02-06 13:22:38,877 ERROR ERROR EXECUTING CODE name 'data' is not defined
+Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 250, in code_executor
+    exec(code,namespace)
+  File "<string>", line 20, in <module>
+NameError: name 'data' is not defined
+2026-02-06 13:22:38,878 INFO Tool code_executor returned result : Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 250, in code_executor
+    exec(code,namespace)
+  File "<string>", line 20, in <module>
+NameError: name 'data' is not defined
+
+2026-02-06 13:22:41,261 INFO Calling tool code_executor with args : {'code': 'def filter_exeter_area_polygon(data: list):\n    gdf = data[0]\n    # Filter for Exeter using multiple relevant columns for accuracy\n    filtered = gdf[\n        (\n            (gdf[\'name1_text\'].str.lower() == \'exeter\') |\n            (gdf[\'name1_text\'].str.lower().str.contains(\'exeter\'))\n        ) & (\n            (gdf[\'descriptiongroup\'].isin([\'Settlement\', \'Part Of Settlement\'])) |\n            (gdf[\'description\'].isin([\'City\', \'Town\', \'Suburban Area\']))\n        )\n    ]\n    summary = f"Filtered to {len(filtered)} polygon(s) for Exeter area."\n    artifact_name = \'filtered_exeter_area_polygon\'\n    artifact_description = \'GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.\'\n    return [summary, artifact_name, artifact_description, filtered]\n\n# Call the function with the provided data list\nfilter_exeter_area_polygon([exeter_area_polygon])', 'artifact_names': ['exeter_area_polygon']}
+2026-02-06 13:22:41,263 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_exeter_area_polygon(data: list):
+    gdf = data[0]
+    # Filter for Exeter using multiple relevant columns for accuracy
+    filtered = gdf[
+        (
+            (gdf['name1_text'].str.lower() == 'exeter') |
+            (gdf['name1_text'].str.lower().str.contains('exeter'))
+        ) & (
+            (gdf['descriptiongroup'].isin(['Settlement', 'Part Of Settlement'])) |
+            (gdf['description'].isin(['City', 'Town', 'Suburban Area']))
+        )
+    ]
+    summary = f"Filtered to {len(filtered)} polygon(s) for Exeter area."
+    artifact_name = 'filtered_exeter_area_polygon'
+    artifact_description = 'GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.'
+    return [summary, artifact_name, artifact_description, filtered]
+
+# Call the function with the provided data list
+filter_exeter_area_polygon([exeter_area_polygon])
+2026-02-06 13:22:41,263 ERROR ERROR EXECUTING CODE name 'exeter_area_polygon' is not defined
+Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 250, in code_executor
+    exec(code,namespace)
+  File "<string>", line 21, in <module>
+NameError: name 'exeter_area_polygon' is not defined
+2026-02-06 13:22:41,264 INFO Tool code_executor returned result : Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 250, in code_executor
+    exec(code,namespace)
+  File "<string>", line 21, in <module>
+NameError: name 'exeter_area_polygon' is not defined
+
+2026-02-06 13:22:43,505 INFO Calling tool code_executor with args : {'code': 'def filter_exeter_area_polygon(data: list):\n    gdf = data[0]\n    # Filter for Exeter using multiple relevant columns for accuracy\n    filtered = gdf[\n        (\n            (gdf[\'name1_text\'].str.lower() == \'exeter\') |\n            (gdf[\'name1_text\'].str.lower().str.contains(\'exeter\'))\n        ) & (\n            (gdf[\'descriptiongroup\'].isin([\'Settlement\', \'Part Of Settlement\'])) |\n            (gdf[\'description\'].isin([\'City\', \'Town\', \'Suburban Area\']))\n        )\n    ]\n    summary = f"Filtered to {len(filtered)} polygon(s) for Exeter area."\n    artifact_name = \'filtered_exeter_area_polygon\'\n    artifact_description = \'GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.\'\n    return [summary, artifact_name, artifact_description, filtered]\n', 'artifact_names': ['exeter_area_polygon']}
+2026-02-06 13:22:43,506 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_exeter_area_polygon(data: list):
+    gdf = data[0]
+    # Filter for Exeter using multiple relevant columns for accuracy
+    filtered = gdf[
+        (
+            (gdf['name1_text'].str.lower() == 'exeter') |
+            (gdf['name1_text'].str.lower().str.contains('exeter'))
+        ) & (
+            (gdf['descriptiongroup'].isin(['Settlement', 'Part Of Settlement'])) |
+            (gdf['description'].isin(['City', 'Town', 'Suburban Area']))
+        )
+    ]
+    summary = f"Filtered to {len(filtered)} polygon(s) for Exeter area."
+    artifact_name = 'filtered_exeter_area_polygon'
+    artifact_description = 'GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.'
+    return [summary, artifact_name, artifact_description, filtered]
+
+2026-02-06 13:22:43,507 INFO function name filter_exeter_area_polygon
+2026-02-06 13:22:43,511 INFO Output completed
+2026-02-06 13:22:43,515 INFO Tool code_executor returned result : ['Filtered to 1 polygon(s) for Exeter area.', <a2a.Artifact.Artifact object at 0x0000023CA8B4F510>]
+2026-02-06 13:22:49,273 WARNING OFFLINE MODE
+2026-02-06 13:22:49,274 INFO Output from agent data_analysis_agent : Filtered to 1 polygon for the Exeter area. 
+
+A new artifact named 'filtered_exeter_area_polygon' has been created, containing only the polygon(s) representing the Exeter area, filtered using the name and settlement/city/town/suburban area attributes. If you need further analysis or visualization of this area, let me know!
+2026-02-06 13:22:49,276 INFO Tool send_message returned result : ["Filtered to 1 polygon for the Exeter area. \n\nA new artifact named 'filtered_exeter_area_polygon' has been created, containing only the polygon(s) representing the Exeter area, filtered using the name and settlement/city/town/suburban area attributes. If you need further analysis or visualization of this area, let me know!Addtionally some data artifacts have been generated with names  ['filtered_exeter_area_polygon'] and \n descriptions ['GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.']", [<a2a.Artifact.Artifact object at 0x0000023CA8B4F510>]]
+2026-02-06 13:22:55,156 WARNING OFFLINE MODE
+2026-02-06 13:22:55,156 INFO Output from agent named_area : The specific area polygon for Exeter has been filtered and saved as 'filtered_exeter_area_polygon'. If you need further analysis or visualization, feel free to ask!
+2026-02-06 13:22:55,158 INFO Tool send_message returned result : ["The specific area polygon for Exeter has been filtered and saved as 'filtered_exeter_area_polygon'. If you need further analysis or visualization, feel free to ask!Addtionally some data artifacts have been generated with names  ['filtered_exeter_area_polygon'] and \n descriptions ['GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.']", [<a2a.Artifact.Artifact object at 0x0000023CA8B4F510>]]
+2026-02-06 13:22:55,158 INFO Calling tool generate_metadata_for_all_artifacts with args : {}
+2026-02-06 13:22:55,171 INFO Tool generate_metadata_for_all_artifacts returned result : {'exeter_area_polygon': 'A geopandas dataframe containing named area data with no filters applied for the query (so remember no search is performed here so spurious entities present) Find the area polygon for Exeter..', 'filtered_exeter_area_polygon': 'GeoDataFrame containing only the polygon(s) representing the Exeter area, filtered using name and settlement/city/town/suburban area attributes.'}
+2026-02-06 13:22:57,169 INFO Calling tool send_message with args : {'target': 'water_network', 'task_description': "Search for all canals within the area defined by 'filtered_exeter_area_polygon'."}
+2026-02-06 13:23:01,283 WARNING OFFLINE MODE
+2026-02-06 13:23:01,295 INFO Messages sent to agent water_network : [{'role': 'user', 'content': "Search for all canals within the area defined by 'filtered_exeter_area_polygon'."}]
+2026-02-06 13:23:02,725 INFO Calling tool call_os_ngd with args : {'filters': ['canals'], 'bbox': 'filtered_exeter_area_polygon', 'polygon_or_point': True, 'street_address': False, 'filename': 'exeter_canals_data'}
+2026-02-06 13:23:02,818 INFO NGD query result [                                    osid versiondate  \
+1   1f94bc54-3f40-42b6-bb00-e4a17dba59a3  2025-10-23   
+7   5fb21b9b-e98f-4278-96c0-85a517b54909  2025-10-23   
+9   158c6134-7137-4c93-b2f7-90e2eaa7b21d  2025-10-23   
+6   32208c57-28d8-4ba6-9d50-1c8284c09b4b  2025-10-23   
+4   7e21a426-3897-420d-9e6d-ed994375a362  2025-10-23   
+2   531f01a2-a9f0-4ceb-b961-737fa2663b9f  2025-10-23   
+11  cce8a8ce-08ae-405f-b529-03e8ecb1a087  2025-10-23   
+5   80b3ef5f-e874-40c3-83ed-711caad02e6b  2025-10-23   
+14  bbaa76a4-b41c-4451-845a-085527bf9407  2025-10-23   
+15  9f7b0cec-9451-4c58-9102-ee945d9a08cc  2025-10-23   
+13  e11b343e-dad9-49d8-92cc-2c3e220a07ed  2025-10-23   
+
+    versionavailablefromdate versionavailabletodate  \
+1  2025-10-24 00:00:00+00:00                    NaT   
+7  2025-10-24 00:00:00+00:00                    NaT   
+9  2025-10-24 00:00:00+00:00                    NaT   
+6  2025-10-24 00:00:00+00:00                    NaT   
+4  2025-10-24 00:00:00+00:00                    NaT   
+2  2025-10-24 00:00:00+00:00                    NaT   
+11 2025-10-24 00:00:00+00:00                    NaT   
+5  2025-10-24 00:00:00+00:00                    NaT   
+14 2025-10-24 00:00:00+00:00                    NaT   
+15 2025-10-24 00:00:00+00:00                    NaT   
+13 2025-10-24 00:00:00+00:00                    NaT   
+
+                          changetype  geometry_length geometry_evidencedate  \
+1   Modified Geometry And Attributes      8280.967199            2025-05-15   
+7   Modified Geometry And Attributes       120.112107            2018-04-30   
+9   Modified Geometry And Attributes      3072.658067            2024-04-24   
+6   Modified Geometry And Attributes       664.996421            2024-04-25   
+4   Modified Geometry And Attributes      3303.240981            2025-05-15   
+2   Modified Geometry And Attributes      6278.512067            2025-04-05   
+11  Modified Geometry And Attributes      4942.289836            2025-09-04   
+5   Modified Geometry And Attributes     12573.716931            2025-04-29   
+14  Modified Geometry And Attributes      1810.857736            2024-12-27   
+15  Modified Geometry And Attributes      1284.060541            2024-04-25   
+13  Modified Geometry And Attributes    132001.141019            2025-08-03   
+
+   geometry_updatedate  geometry_source  theme  ... name1_language  \
+1           2025-05-17  Ordnance Survey  Water  ...           None   
+7           2018-04-30  Ordnance Survey  Water  ...           None   
+9           2024-04-25  Ordnance Survey  Water  ...           None   
+6           2024-04-25  Ordnance Survey  Water  ...           None   
+4           2025-05-15  Ordnance Survey  Water  ...           None   
+2           2025-04-07  Ordnance Survey  Water  ...           None   
+11          2025-09-04  Ordnance Survey  Water  ...           None   
+5           2025-05-01  Ordnance Survey  Water  ...           None   
+14          2024-12-27  Ordnance Survey  Water  ...           None   
+15          2024-04-25  Ordnance Survey  Water  ...           None   
+13          2025-08-06  Ordnance Survey  Water  ...           None   
+
+   name1_evidencedate name1_updatedate name1_source name2_text name2_language  \
+1          2015-05-02       2015-05-02         None       None           None   
+7          2015-05-09       2015-05-09         None       None           None   
+9          2015-05-02       2015-05-02         None       None           None   
+6          2008-02-28       2011-06-25         None       None           None   
+4          2004-12-31       2011-06-25         None       None           None   
+2          2008-03-04       2011-06-25         None       None           None   
+11         2008-02-25       2011-06-25         None       None           None   
+5          2009-09-02       2011-06-25         None       None           None   
+14         2008-02-25       2011-06-25         None       None           None   
+15         2005-01-27       2011-06-25         None       None           None   
+13         2010-06-07       2011-06-25         None       None           None   
+
+   name2_evidencedate name2_updatedate name2_source  \
+1                 NaT              NaT         None   
+7                 NaT              NaT         None   
+9                 NaT              NaT         None   
+6                 NaT              NaT         None   
+4                 NaT              NaT         None   
+2                 NaT              NaT         None   
+11                NaT              NaT         None   
+5                 NaT              NaT         None   
+14                NaT              NaT         None   
+15                NaT              NaT         None   
+13                NaT              NaT         None   
+
+                                             geometry  
+1   MULTILINESTRING ((292279.457 91678.131, 292278...  
+7   LINESTRING (293026.604 90919.892, 293030.086 9...  
+9   MULTILINESTRING ((293773.123 90400.053, 293774...  
+6   MULTILINESTRING ((291486.924 92438.439, 291496...  
+4   MULTILINESTRING ((293207.196 95022.305, 293224...  
+2   MULTILINESTRING ((295169.306 94605.964, 295169...  
+11  MULTILINESTRING ((292872.939 89237.751, 292886...  
+5   MULTILINESTRING ((291339.992 90361.731, 291359...  
+14  MULTILINESTRING ((291000.656 93398.104, 291019...  
+15  LINESTRING (290746.995 94083.409, 290753.427 9...  
+13  MULTILINESTRING ((291046.889 93576.623, 291041...  
+
+[11 rows x 25 columns],                                       osid                  toid versiondate  \
+305   211cb96a-b437-47c8-ade2-5f1d2c47d909  osgb5000005149214510  2025-10-10   
+841   c87b11a2-d95c-47dc-92fd-6715aac77683  osgb5000005244532726  2025-10-10   
+459   55ae29ee-ff0d-4ba7-8161-c4ec63ccae0f  osgb5000005147859627  2025-10-10   
+418   43d5f645-adb9-4893-8829-760a97a911b0  osgb5000005253493240  2025-10-10   
+903   e1d9e198-b694-4fa6-b2aa-eb14d0b0b2c6  osgb5000005288251184  2025-10-10   
+...                                    ...                   ...         ...   
+1016  9b9960e0-c42f-47c7-a0d7-14380bfcd622  osgb5000005334179265  2025-10-10   
+278   13d9dd6f-8754-409d-af3e-9f6f41caf3fb  osgb5000005334179267  2025-10-10   
+882   dbf530df-bdb4-42d5-96d2-0834fb17d073  osgb5000005334179268  2025-10-10   
+746   ac5d1667-c628-472b-9327-fa4a377d1f74  osgb5000005334179272  2025-10-10   
+971   f4f3eb85-0d44-4aae-ade3-76a641d3a92e  osgb5000005201528193  2025-10-10   
+
+      versionavailablefromdate versionavailabletodate changetype  \
+305  2025-10-11 00:00:00+00:00                    NaT        New   
+841  2025-10-11 00:00:00+00:00                    NaT        New   
+459  2025-10-11 00:00:00+00:00                    NaT        New   
+418  2025-10-11 00:00:00+00:00                    NaT        New   
+903  2025-10-11 00:00:00+00:00                    NaT        New   
+...                        ...                    ...        ...   
+1016 2025-10-11 00:00:00+00:00                    NaT        New   
+278  2025-10-11 00:00:00+00:00                    NaT        New   
+882  2025-10-11 00:00:00+00:00                    NaT        New   
+746  2025-10-11 00:00:00+00:00                    NaT        New   
+971  2025-10-11 00:00:00+00:00                    NaT        New   
+
+      geometry_length_m geometry_evidencedate geometry_updatedate  \
+305              74.092            2013-11-26          2013-11-26   
+841              17.635            2019-03-19          2019-03-19   
+459             112.307            2020-05-29          2020-05-29   
+418             164.462            2018-07-09          2019-10-14   
+903             283.405            2021-10-20          2021-10-20   
+...                 ...                   ...                 ...   
+1016            118.633            2024-04-24          2024-04-24   
+278               2.779            2024-04-24          2024-04-24   
+882             222.786            2024-04-24          2024-04-24   
+746             145.029            2024-04-24          2024-04-24   
+971              40.736            2018-06-27          2019-02-12   
+
+                  geometry_source  ... namesecondary1_text  \
+305          Ordnance Survey Line  ...                None   
+841          Ordnance Survey Area  ...                None   
+459          Ordnance Survey Area  ...                None   
+418   National Authority Inferred  ...                None   
+903          Ordnance Survey Line  ...                None   
+...                           ...  ...                 ...   
+1016         Ordnance Survey Line  ...                None   
+278      Ordnance Survey Inferred  ...                None   
+882          Ordnance Survey Line  ...                None   
+746          Ordnance Survey Line  ...                None   
+971      Ordnance Survey Inferred  ...                None   
+
+     namesecondary1_language namesecondary2_text namesecondary2_language  \
+305                     None                None                    None   
+841                     None                None                    None   
+459                     None                None                    None   
+418                     None                None                    None   
+903                     None                None                    None   
+...                      ...                 ...                     ...   
+1016                    None                None                    None   
+278                     None                None                    None   
+882                     None                None                    None   
+746                     None                None                    None   
+971                     None                None                    None   
+
+     nametertiaryid nametertiary1_text nametertiary1_language  \
+305            None               None                   None   
+841            None               None                   None   
+459            None               None                   None   
+418            None               None                   None   
+903            None               None                   None   
+...             ...                ...                    ...   
+1016           None               None                   None   
+278            None               None                   None   
+882            None               None                   None   
+746            None               None                   None   
+971            None               None                   None   
+
+     nametertiary2_text nametertiary2_language  \
+305                None                   None   
+841                None                   None   
+459                None                   None   
+418                None                   None   
+903                None                   None   
+...                 ...                    ...   
+1016               None                   None   
+278                None                   None   
+882                None                   None   
+746                None                   None   
+971                None                   None   
+
+                                               geometry  
+305   LINESTRING Z (293422.124 89203.86 3.608, 29342...  
+841   LINESTRING Z (293420.646 89216.331 3.095, 2934...  
+459   LINESTRING Z (293412.421 89276.656 2.775, 2934...  
+418   GEOMETRYCOLLECTION Z (LINESTRING Z (295393.797...  
+903   GEOMETRYCOLLECTION Z (LINESTRING Z (295627.516...  
+...                                                 ...  
+1016  LINESTRING Z (292007.96 94769.45 68.029, 29200...  
+278   LINESTRING Z (291890 94774.3 57.978, 291887.25...  
+882   LINESTRING Z (292242.7 94778.53 96.485, 292242...  
+746   LINESTRING Z (291813.3 94770.85 50.875, 291812...  
+971   LINESTRING Z (290939.549 95389.792 12.511, 290...  
+
+[430 rows x 50 columns]]
+2026-02-06 13:23:02,834 INFO Tool call_os_ngd returned result : ['Multiple search results have been found in multiple datasets. A summary of each is provided.\n            Artifacts generated are : [\'waterlinkset_exeter_canals_data\', \'waterlink_exeter_canals_data\'],\n            Descriptions are : ["A geopandas dataframe containing water link set data with bbox applied for the query Search for all canals within the area defined by \'filtered_exeter_area_polygon\'. with no filters applied for the query (so remember no search is performed here so spurious entities present).", "A geopandas dataframe containing water link data with bbox applied for the query Search for all canals within the area defined by \'filtered_exeter_area_polygon\'. with no filters applied for the query (so remember no search is performed here so spurious entities present)."],\n            counts of records fetched are : [11, 430].\n            ', [<a2a.Artifact.Artifact object at 0x0000023C8D8D0650>, <a2a.Artifact.Artifact object at 0x0000023CF3519D50>]]
+2026-02-06 13:23:05,649 INFO Calling tool send_message with args : {'target': 'data_analysis_agent', 'task_description': "Filter the artifacts 'waterlinkset_exeter_canals_data' and 'waterlink_exeter_canals_data' to identify only the relevant canal data. Save the filtered results as 'filtered_exeter_canals_data'."}
+2026-02-06 13:23:09,730 WARNING OFFLINE MODE
+2026-02-06 13:23:09,742 INFO Messages sent to agent data_analysis_agent : [{'role': 'user', 'content': "Filter the artifacts 'waterlinkset_exeter_canals_data' and 'waterlink_exeter_canals_data' to identify only the relevant canal data. Save the filtered results as 'filtered_exeter_canals_data'."}]
+2026-02-06 13:23:11,090 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['waterlinkset_exeter_canals_data', 'waterlink_exeter_canals_data']}
+2026-02-06 13:23:11,121 INFO artifacts loaded for metadata generation : ['waterlinkset_exeter_canals_data', 'waterlink_exeter_canals_data']
+2026-02-06 13:23:11,151 INFO Tool generate_metadata_for_artifacts returned result : [{'filename': 'waterlinkset_exeter_canals_data', 'dataset_summary': {'num_rows': 11, 'num_columns': 25}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['1f94bc54-3f40-42b6-bb00-e4a17dba59a3',
+       '5fb21b9b-e98f-4278-96c0-85a517b54909',
+       '158c6134-7137-4c93-b2f7-90e2eaa7b21d',
+       '32208c57-28d8-4ba6-9d50-1c8284c09b4b',
+       '7e21a426-3897-420d-9e6d-ed994375a362',
+       '531f01a2-a9f0-4ceb-b961-737fa2663b9f',
+       'cce8a8ce-08ae-405f-b529-03e8ecb1a087',
+       '80b3ef5f-e874-40c3-83ed-711caad02e6b',
+       'bbaa76a4-b41c-4451-845a-085527bf9407',
+       '9f7b0cec-9451-4c58-9102-ee945d9a08cc',
+       'e11b343e-dad9-49d8-92cc-2c3e220a07ed'], dtype=object)}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-10-23 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-10-24 00:00:00+00:00']
+Length: 1, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Modified Geometry And Attributes'], dtype=object)}, {'name': 'geometry_length', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': array([8.28096720e+03, 1.20112107e+02, 3.07265807e+03, 6.64996421e+02,
+       3.30324098e+03, 6.27851207e+03, 4.94228984e+03, 1.25737169e+04,
+       1.81085774e+03, 1.28406054e+03, 1.32001141e+05])}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-05-15 00:00:00', '2018-04-30 00:00:00', '2024-04-24 00:00:00',
+ '2024-04-25 00:00:00', '2025-04-05 00:00:00', '2025-09-04 00:00:00',
+ '2025-04-29 00:00:00', '2024-12-27 00:00:00', '2025-08-03 00:00:00']
+Length: 9, dtype: datetime64[ms]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-05-17 00:00:00', '2018-04-30 00:00:00', '2024-04-25 00:00:00',
+ '2025-05-15 00:00:00', '2025-04-07 00:00:00', '2025-09-04 00:00:00',
+ '2025-05-01 00:00:00', '2024-12-27 00:00:00', '2025-08-06 00:00:00']
+Length: 9, dtype: datetime64[ms]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Water'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Named Canal', 'Named Stretch Of Inland Water',
+       'Named Watercourse'], dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-02 00:00:00', '2015-05-09 00:00:00', '2010-03-29 00:00:00',
+ '2010-06-25 00:00:00', '2010-07-21 00:00:00', '2010-06-18 00:00:00',
+ '2010-07-16 00:00:00', '2006-02-03 00:00:00', '2010-12-01 00:00:00']
+Length: 9, dtype: datetime64[ms]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-02 00:00:00', '2015-05-09 00:00:00', '2010-03-29 00:00:00',
+ '2010-06-25 00:00:00', '2010-07-21 00:00:00', '2010-06-18 00:00:00',
+ '2010-07-16 00:00:00', '2006-02-03 00:00:00', '2010-12-01 00:00:00']
+Length: 9, dtype: datetime64[ms]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Exeter Canal', 'Salmon Pool', 'Northbrook', 'Higher Leat',
+       'Mincinglake Stream', 'Pin Brook', 'Matford Brook', 'Alphin Brook',
+       'Taddiforde Brook', 'Exwick Leat', 'River Exe'], dtype=object)}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-02 00:00:00', '2015-05-09 00:00:00', '2008-02-28 00:00:00',
+ '2004-12-31 00:00:00', '2008-03-04 00:00:00', '2008-02-25 00:00:00',
+ '2009-09-02 00:00:00', '2005-01-27 00:00:00', '2010-06-07 00:00:00']
+Length: 9, dtype: datetime64[ms]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-02 00:00:00', '2015-05-09 00:00:00', '2011-06-25 00:00:00']
+Length: 3, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': <GeometryArray>
+[<MULTILINESTRING ((292279.457 91678.131, 292278.423 91683.476, 292277.848 91...>,
+                        <LINESTRING (293026.604 90919.892, 293030.086 90923.313)>,
+ <MULTILINESTRING ((293773.123 90400.053, 293774.491 90401.852, 293778.072 90...>,
+ <MULTILINESTRING ((291486.924 92438.439, 291496.464 92420.514, 291517.183 92...>,
+ <MULTILINESTRING ((293207.196 95022.305, 293224 95002.1), (293224 95002.1, 2...>,
+ <MULTILINESTRING ((295169.306 94605.964, 295169.7 94605.35, 295170.4 94604.0...>,
+ <MULTILINESTRING ((292872.939 89237.751, 292886.313 89244.463), (292886.313 ...>,
+ <MULTILINESTRING ((291339.992 90361.731, 291359.216 90352.186, 291360.824 90...>,
+ <MULTILINESTRING ((291000.656 93398.104, 291019.808 93404.173, 291303.488 93...>,
+ <LINESTRING (290746.995 94083.409, 290753.427 94050.278, 290759.924 94030.75...>,
+ <MULTILINESTRING ((291046.889 93576.623, 291041.081 93536.975, 291039.72 935...>]
+Length: 11, dtype: geometry}], 'preview_rows': [{'osid': '1f94bc54-3f40-42b6-bb00-e4a17dba59a3', 'versiondate': Timestamp('2025-10-23 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-24 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'Modified Geometry And Attributes', 'geometry_length': 8280.967199, 'geometry_evidencedate': Timestamp('2025-05-15 00:00:00'), 'geometry_updatedate': Timestamp('2025-05-17 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Water', 'description': 'Named Canal', 'description_evidencedate': Timestamp('2015-05-02 00:00:00'), 'description_updatedate': Timestamp('2015-05-02 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': 'Exeter Canal', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-02 00:00:00'), 'name1_updatedate': Timestamp('2015-05-02 00:00:00'), 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'geometry': <MULTILINESTRING ((292279.457 91678.131, 292278.423 91683.476, 292277.848 91...>}, {'osid': '5fb21b9b-e98f-4278-96c0-85a517b54909', 'versiondate': Timestamp('2025-10-23 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-24 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'Modified Geometry And Attributes', 'geometry_length': 120.112107, 'geometry_evidencedate': Timestamp('2018-04-30 00:00:00'), 'geometry_updatedate': Timestamp('2018-04-30 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Water', 'description': 'Named Stretch Of Inland Water', 'description_evidencedate': Timestamp('2015-05-09 00:00:00'), 'description_updatedate': Timestamp('2015-05-09 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': 'Salmon Pool', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-09 00:00:00'), 'name1_updatedate': Timestamp('2015-05-09 00:00:00'), 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'geometry': <LINESTRING (293026.604 90919.892, 293030.086 90923.313)>}, {'osid': '158c6134-7137-4c93-b2f7-90e2eaa7b21d', 'versiondate': Timestamp('2025-10-23 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-24 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'Modified Geometry And Attributes', 'geometry_length': 3072.658067, 'geometry_evidencedate': Timestamp('2024-04-24 00:00:00'), 'geometry_updatedate': Timestamp('2024-04-25 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Water', 'description': 'Named Watercourse', 'description_evidencedate': Timestamp('2015-05-02 00:00:00'), 'description_updatedate': Timestamp('2015-05-02 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': 'Northbrook', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-02 00:00:00'), 'name1_updatedate': Timestamp('2015-05-02 00:00:00'), 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'geometry': <MULTILINESTRING ((293773.123 90400.053, 293774.491 90401.852, 293778.072 90...>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}, {'filename': 'waterlink_exeter_canals_data', 'dataset_summary': {'num_rows': 430, 'num_columns': 50}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['211cb96a-b437-47c8-ade2-5f1d2c47d909', 'c87b11a2-d95c-47dc-92fd-6715aac77683', '55ae29ee-ff0d-4ba7-8161-c4ec63ccae0f', '43d5f645-adb9-4893-8829-760a97a911b0', 'e1d9e198-b694-4fa6-b2aa-eb14d0b0b2c6', 'cca3b3fb-1d41-400b-a65b-0b1c034a0ad0', '14302327-aca8-4cb3-9bb5-6749e00bce0e', '01c2fa2a-8071-44a0-ad80-674236ef3840', 'f5f15404-aa1a-47a2-ba28-8617c971ece5', 'fe62eb3f-41d1-445b-8d0f-9ee54c674915', '39139cff-1c6b-4b64-af6f-778e517cd7a1', '4b010934-a4c9-4d49-9035-cd21654bf8d0', 'dc741af5-d154-4109-8e3d-0fff0778ec2a', '6ee48ddb-70c6-496b-8bf3-736876513790', '9e958da8-65a7-497c-b81f-759bf16a5bb5', '7843aa11-b53c-406f-9113-0abe2ebcb6f1', 'c892029f-6c02-445a-b7e1-42013c66d560', '11bf77e8-c1c7-467e-90ce-523e5d8b449c', '5c8ad756-7803-4e20-bc1d-17ff592e82d6', '7516cdd8-be40-4132-b13d-c456893593aa']}, {'name': 'toid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['osgb5000005149214510', 'osgb5000005244532726', 'osgb5000005147859627', 'osgb5000005253493240', 'osgb5000005288251184', 'osgb5000005172387001', 'osgb5000005149515048', 'osgb5000005288251183', 'osgb5000005147660806', 'osgb5000005288251185', 'osgb5000005146636992', 'osgb5000005144172491', 'osgb5000005344182873', 'osgb5000005344182878', 'osgb5000005183021177', 'osgb5000005145870164', 'osgb5000005148277571', 'osgb5000005241631734', 'osgb5000005147232309', 'osgb5000005149055861']}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-10-10 00:00:00', '2025-10-27 00:00:00']
+Length: 2, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-10-11 00:00:00+00:00', '2025-10-28 00:00:00+00:00']
+Length: 2, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['New', 'Modified Attributes'], dtype=object)}, {'name': 'geometry_length_m', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': [74.092, 17.635, 112.307, 164.462, 283.405, 5.004, 58.685, 13.593, 141.637, 125.177, 5.464, 42.039, 1.674, 34.3, 21.428, 227.826, 184.51, 75.987, 108.127, 35.66]}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2013-11-26 00:00:00'), Timestamp('2019-03-19 00:00:00'), Timestamp('2020-05-29 00:00:00'), Timestamp('2018-07-09 00:00:00'), Timestamp('2021-10-20 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2024-04-20 00:00:00'), Timestamp('2025-03-02 00:00:00'), Timestamp('2016-11-28 00:00:00'), Timestamp('2023-11-27 00:00:00'), Timestamp('2018-06-27 00:00:00'), Timestamp('2025-04-15 00:00:00'), Timestamp('2014-06-24 00:00:00'), Timestamp('2021-06-01 00:00:00'), Timestamp('2025-05-16 00:00:00'), Timestamp('2025-04-04 00:00:00'), Timestamp('2017-03-02 00:00:00'), Timestamp('2024-11-28 00:00:00'), Timestamp('2019-07-01 00:00:00'), Timestamp('2024-04-23 00:00:00')]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2013-11-26 00:00:00'), Timestamp('2019-03-19 00:00:00'), Timestamp('2020-05-29 00:00:00'), Timestamp('2019-10-14 00:00:00'), Timestamp('2021-10-20 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2024-10-07 00:00:00'), Timestamp('2025-03-02 00:00:00'), Timestamp('2018-03-09 00:00:00'), Timestamp('2023-11-27 00:00:00'), Timestamp('2019-01-22 00:00:00'), Timestamp('2025-04-21 00:00:00'), Timestamp('2018-03-08 00:00:00'), Timestamp('2018-03-14 00:00:00'), Timestamp('2015-11-24 00:00:00'), Timestamp('2015-11-16 00:00:00'), Timestamp('2021-12-21 00:00:00'), Timestamp('2025-05-16 00:00:00'), Timestamp('2015-09-17 00:00:00'), Timestamp('2015-06-26 00:00:00')]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey Line', 'Ordnance Survey Area',
+       'National Authority Inferred', 'Ordnance Survey Inferred'],
+      dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Water'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Watercourse', 'Drain', 'Leat', 'Still Water', 'Canal'],
+      dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2013-11-26 00:00:00'), Timestamp('2019-03-19 00:00:00'), Timestamp('2018-07-09 00:00:00'), Timestamp('2021-10-20 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2016-11-28 00:00:00'), Timestamp('2025-03-02 00:00:00'), Timestamp('2016-06-07 00:00:00'), Timestamp('2018-06-27 00:00:00'), Timestamp('2023-11-27 00:00:00'), Timestamp('2014-06-24 00:00:00'), Timestamp('2017-07-29 00:00:00'), Timestamp('2019-02-13 00:00:00'), Timestamp('2025-05-16 00:00:00'), Timestamp('2024-04-20 00:00:00'), Timestamp('2025-04-04 00:00:00'), Timestamp('2017-03-02 00:00:00'), Timestamp('2024-04-23 00:00:00'), Timestamp('2024-11-28 00:00:00'), Timestamp('2021-08-31 00:00:00')]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2013-11-26 00:00:00'), Timestamp('2019-03-19 00:00:00'), Timestamp('2019-10-14 00:00:00'), Timestamp('2021-10-20 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2018-03-09 00:00:00'), Timestamp('2025-03-02 00:00:00'), Timestamp('2016-06-07 00:00:00'), Timestamp('2019-01-22 00:00:00'), Timestamp('2023-11-27 00:00:00'), Timestamp('2018-03-14 00:00:00'), Timestamp('2015-11-24 00:00:00'), Timestamp('2017-07-29 00:00:00'), Timestamp('2019-02-13 00:00:00'), Timestamp('2015-06-10 00:00:00'), Timestamp('2025-05-16 00:00:00'), Timestamp('2015-06-26 00:00:00'), Timestamp('2024-10-04 00:00:00'), Timestamp('2025-04-04 00:00:00'), Timestamp('2017-03-02 00:00:00')]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'primacy', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['1', '2'], dtype=object)}, {'name': 'watertype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Inland', 'Tidal'], dtype=object)}, {'name': 'physicallevel', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Surface Level', 'Underground'], dtype=object)}, {'name': 'physicalcontainment', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Inapplicable', 'In Culvert', 'In Natural Subterranean Passage',
+       'In Tunnel'], dtype=object)}, {'name': 'flowdirection', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['In Direction', 'Unknown'], dtype=object)}, {'name': 'permanence', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Permanent', 'Intermittent'], dtype=object)}, {'name': 'capturespecification', 'dtype': 'object', 'null_fraction': 0.30930232558139537, 'example_values': array(['Rural', 'Urban'], dtype=object)}, {'name': 'levelofdetail', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Local', 'District', 'Regional', 'National'], dtype=object)}, {'name': 'catchmentname', 'dtype': 'object', 'null_fraction': 0.002325581395348837, 'example_values': array(['Exe'], dtype=object)}, {'name': 'catchmentid', 'dtype': 'object', 'null_fraction': 0.002325581395348837, 'example_values': array(['7066'], dtype=object)}, {'name': 'width_average', 'dtype': 'float64', 'null_fraction': 0.30930232558139537, 'example_values': [0.4, 1.7, 2.9, 1.0, 2.0, 1.3, 12.7, 0.6, 0.8, 8.1, 7.4, 6.5, 5.6, 3.7, 2.2, 3.6, 1.6, 2.4, 1.2, 1.5]}, {'name': 'width_minimum', 'dtype': 'float64', 'null_fraction': 0.6255813953488372, 'example_values': [1.7, 2.2, 2.0, 1.0, 4.0, 5.1, 6.2, 3.6, 3.7, 3.3, 1.6, 0.7, 1.8, 1.5, 1.3, 0.8, 0.9, 1.9, 2.1, 1.2]}, {'name': 'width_maximum', 'dtype': 'float64', 'null_fraction': 0.6255813953488372, 'example_values': [1.7, 6.4, 2.0, 54.0, 10.3, 10.5, 14.1, 7.7, 3.7, 2.4, 3.8, 3.6, 1.6, 2.7, 4.7, 4.1, 3.2, 3.0, 8.0, 5.1]}, {'name': 'width_derivationmethod', 'dtype': 'object', 'null_fraction': 0.30930232558139537, 'example_values': array(['Modelled From Network', 'Calculated From Polygon',
+       'Default Value For Geographic Region'], dtype=object)}, {'name': 'width_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2013-11-26 00:00:00'), Timestamp('2013-06-08 00:00:00'), Timestamp('2021-12-20 00:00:00'), Timestamp('2018-07-09 00:00:00'), Timestamp('2021-10-20 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2014-06-24 00:00:00'), Timestamp('2024-04-20 00:00:00'), Timestamp('2025-03-02 00:00:00'), Timestamp('2003-08-27 00:00:00'), Timestamp('2016-11-28 00:00:00'), Timestamp('2023-11-27 00:00:00'), Timestamp('2018-06-27 00:00:00'), Timestamp('2025-04-15 00:00:00'), Timestamp('2019-09-14 00:00:00'), Timestamp('2005-01-04 00:00:00'), Timestamp('2021-06-01 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2025-05-16 00:00:00'), Timestamp('2004-12-30 00:00:00')]}, {'name': 'width_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-10-08 00:00:00', '2025-10-27 00:00:00']
+Length: 2, dtype: datetime64[ms]}, {'name': 'gradient', 'dtype': 'float64', 'null_fraction': 0.1813953488372093, 'example_values': [10.73, 0.23, 2.21, 0.54, 1.18, 1.6, 8.35, 2.47, 3.19, 22.33, 0.0, 2.15, 3.55, 11.95, 8.84, 2.62, 0.06, 19.77, 0.62, 1.16]}, {'name': 'startnode', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['a485c2d3-9fb3-4bdb-80c4-a6215c118330', 'a2da658d-ea65-4063-be04-fb22a5e22366', '86c72f17-c298-49ca-b162-7253fe3cb0ec', '57058c10-af8d-41ef-9656-f3486ac18a97', 'ab11af4b-7a1e-4397-87ba-a2db2cdb7a1e', '644ec4db-26f6-4bea-b579-a27481a8f638', '3d2df731-7d44-409d-aa8d-c3848f2ff844', 'aed99757-c878-4958-acdd-a81fec22ca9e', 'd8eeee07-2518-4e61-bc55-c8634ca77ca7', 'b73f049e-ac41-47e2-8694-057abba869b9', '5aa1e899-4b0c-48a3-ae8f-2ec9e43cd4d8', '70c135a6-fe51-459f-8d6f-f6ec2902ba42', '59ecb723-4b3a-4b02-a7f8-7dea2e5f507c', '14bd7e8a-868e-4d7d-989e-5db5dd412716', 'd650620a-2822-4f46-a17d-b14a64c0cd9d', 'dcfe1962-b8ee-41fd-a67a-0677aa97ff13', '12dc702c-2491-439c-bc90-baed4820c526', '679f72b8-6264-4e2b-8286-d86aa7cebeb3', '32cc1da7-fc6e-45f6-922a-41e89c9037a0', '27c6c0ff-4eb3-4e97-8524-0c30bc366043']}, {'name': 'endnode', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['a2da658d-ea65-4063-be04-fb22a5e22366', 'cbb7dc9d-9031-4c15-8653-8ba5bfec55f6', '30472b54-68d4-40bf-988a-ead204ec00a4', '1f7e4768-ab22-4c7d-bdbc-8d5af3f60336', '57058c10-af8d-41ef-9656-f3486ac18a97', '3d2df731-7d44-409d-aa8d-c3848f2ff844', 'd8eeee07-2518-4e61-bc55-c8634ca77ca7', 'ab11af4b-7a1e-4397-87ba-a2db2cdb7a1e', '8ef44119-05f3-44c6-b695-fe33f2805089', 'aed99757-c878-4958-acdd-a81fec22ca9e', 'ab596857-593b-4376-93a1-cd0a27fb07c4', 'cdcfc715-a354-4740-bdb9-553df0a00b68', '70c135a6-fe51-459f-8d6f-f6ec2902ba42', '59ecb723-4b3a-4b02-a7f8-7dea2e5f507c', '6bc9241e-e1b4-48d1-ab09-886ede37c2b5', '0d94b71f-da85-47d4-baa1-51179e466aa9', '32cc1da7-fc6e-45f6-922a-41e89c9037a0', '8fe8057e-de53-4a46-b093-15f9af662025', '2ad897aa-20ef-4c94-bca3-b29ac45228be', '864d767e-8094-483c-aaa3-cac14645879d']}, {'name': 'nameid', 'dtype': 'object', 'null_fraction': 0.686046511627907, 'example_values': array(['cce8a8ce-08ae-405f-b529-03e8ecb1a087',
+       'e11b343e-dad9-49d8-92cc-2c3e220a07ed',
+       '531f01a2-a9f0-4ceb-b961-737fa2663b9f',
+       '158c6134-7137-4c93-b2f7-90e2eaa7b21d',
+       '7e21a426-3897-420d-9e6d-ed994375a362',
+       '80b3ef5f-e874-40c3-83ed-711caad02e6b',
+       '32208c57-28d8-4ba6-9d50-1c8284c09b4b',
+       'bbaa76a4-b41c-4451-845a-085527bf9407',
+       '1f94bc54-3f40-42b6-bb00-e4a17dba59a3',
+       '9f7b0cec-9451-4c58-9102-ee945d9a08cc'], dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.686046511627907, 'example_values': array(['Matford Brook', 'River Exe', 'Pin Brook', 'Northbrook',
+       'Mincinglake Stream', 'Alphin Brook', 'Higher Leat',
+       'Taddiforde Brook', 'Exeter Canal', 'Exwick Leat'], dtype=object)}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'namesecondaryid', 'dtype': 'object', 'null_fraction': 0.9976744186046511, 'example_values': array(['5fb21b9b-e98f-4278-96c0-85a517b54909'], dtype=object)}, {'name': 'namesecondary1_text', 'dtype': 'object', 'null_fraction': 0.9976744186046511, 'example_values': array(['Salmon Pool'], dtype=object)}, {'name': 'namesecondary1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'namesecondary2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'namesecondary2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiaryid', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiary1_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiary1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiary2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiary2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': [<LINESTRING Z (293422.124 89203.86 3.608, 293421.8 89207.01 3.479, 293421.43...>, <LINESTRING Z (293420.646 89216.331 3.095, 293427.589 89216.269 3.214)>, <LINESTRING Z (293412.421 89276.656 2.775, 293414.777 89277.039 2.751)>, <GEOMETRYCOLLECTION Z (LINESTRING Z (295393.797 89303.715 7.254, 295317.86 8...>, <GEOMETRYCOLLECTION Z (LINESTRING Z (295627.516 89465.513 9.38, 295627.442 8...>, <LINESTRING Z (295308.55 89398.65 11.346, 295308.8 89398.9 11.35, 295310.35 ...>, <LINESTRING Z (295312.251 89402.016 11.389, 295313.85 89403.5 11.407, 295315...>, <LINESTRING Z (295650.857 89479.864 9.686, 295639.2 89472.873 9.525)>, <LINESTRING Z (295356.35 89440.72 11.788, 295356.6 89440.95 11.79, 295358.9 ...>, <GEOMETRYCOLLECTION Z (LINESTRING Z (295668.396 89593.695 11.694, 295667.205...>, <LINESTRING Z (294673.25 89363.25 2.149, 294673.17 89362.536 2.089)>, <LINESTRING Z (294505.25 89499.58 2.844, 294504.167 89491.889 2.735)>, <LINESTRING Z (294506.6 89500.57 2.719, 294505.25 89499.58 2.844)>, <LINESTRING Z (294509.55 89534.46 3.813, 294509.3 89533.35 3.766, 294509.1 8...>, <LINESTRING Z (294309.29 89638.067 8.442, 294301.675 89637.388 6.925, 294298...>, <LINESTRING Z (294172.923 89687.314 -0.5, 294180.989 89683.457 -0.5)>, <LINESTRING Z (294349.3 90018.45 11.32, 294348.65 90018.1 11.351, 294347.9 9...>, <LINESTRING Z (294828.922 90114.051 21.051, 294843.188 90103.283 21.095, 294...>, <LINESTRING Z (294166.38 89997.51 7.363, 294154.366 89997.538 6.935, 294140....>, <LINESTRING Z (294065.27 90028.97 3.76, 294065 90028.7 3.729, 294064.5 90028...>]}], 'preview_rows': [{'osid': '211cb96a-b437-47c8-ade2-5f1d2c47d909', 'toid': 'osgb5000005149214510', 'versiondate': Timestamp('2025-10-10 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-11 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_length_m': 74.092, 'geometry_evidencedate': Timestamp('2013-11-26 00:00:00'), 'geometry_updatedate': Timestamp('2013-11-26 00:00:00'), 'geometry_source': 'Ordnance Survey Line', 'theme': 'Water', 'description': 'Watercourse', 'description_evidencedate': Timestamp('2013-11-26 00:00:00'), 'description_updatedate': Timestamp('2013-11-26 00:00:00'), 'description_source': 'Ordnance Survey', 'primacy': '1', 'watertype': 'Inland', 'physicallevel': 'Surface Level', 'physicalcontainment': 'Inapplicable', 'flowdirection': 'In Direction', 'permanence': 'Permanent', 'capturespecification': 'Rural', 'levelofdetail': 'Local', 'catchmentname': 'Exe', 'catchmentid': '7066', 'width_average': 0.4, 'width_minimum': nan, 'width_maximum': nan, 'width_derivationmethod': 'Modelled From Network', 'width_evidencedate': Timestamp('2013-11-26 00:00:00'), 'width_updatedate': Timestamp('2025-10-08 00:00:00'), 'gradient': 10.73, 'startnode': 'a485c2d3-9fb3-4bdb-80c4-a6215c118330', 'endnode': 'a2da658d-ea65-4063-be04-fb22a5e22366', 'nameid': None, 'name1_text': None, 'name1_language': None, 'name2_text': None, 'name2_language': None, 'namesecondaryid': None, 'namesecondary1_text': None, 'namesecondary1_language': None, 'namesecondary2_text': None, 'namesecondary2_language': None, 'nametertiaryid': None, 'nametertiary1_text': None, 'nametertiary1_language': None, 'nametertiary2_text': None, 'nametertiary2_language': None, 'geometry': <LINESTRING Z (293422.124 89203.86 3.608, 293421.8 89207.01 3.479, 293421.43...>}, {'osid': 'c87b11a2-d95c-47dc-92fd-6715aac77683', 'toid': 'osgb5000005244532726', 'versiondate': Timestamp('2025-10-10 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-11 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_length_m': 17.635, 'geometry_evidencedate': Timestamp('2019-03-19 00:00:00'), 'geometry_updatedate': Timestamp('2019-03-19 00:00:00'), 'geometry_source': 'Ordnance Survey Area', 'theme': 'Water', 'description': 'Watercourse', 'description_evidencedate': Timestamp('2019-03-19 00:00:00'), 'description_updatedate': Timestamp('2019-03-19 00:00:00'), 'description_source': 'Ordnance Survey', 'primacy': '1', 'watertype': 'Inland', 'physicallevel': 'Surface Level', 'physicalcontainment': 'Inapplicable', 'flowdirection': 'In Direction', 'permanence': 'Permanent', 'capturespecification': 'Rural', 'levelofdetail': 'District', 'catchmentname': 'Exe', 'catchmentid': '7066', 'width_average': 1.7, 'width_minimum': 1.7, 'width_maximum': 1.7, 'width_derivationmethod': 'Calculated From Polygon', 'width_evidencedate': Timestamp('2013-06-08 00:00:00'), 'width_updatedate': Timestamp('2025-10-08 00:00:00'), 'gradient': nan, 'startnode': 'a2da658d-ea65-4063-be04-fb22a5e22366', 'endnode': 'cbb7dc9d-9031-4c15-8653-8ba5bfec55f6', 'nameid': 'cce8a8ce-08ae-405f-b529-03e8ecb1a087', 'name1_text': 'Matford Brook', 'name1_language': None, 'name2_text': None, 'name2_language': None, 'namesecondaryid': None, 'namesecondary1_text': None, 'namesecondary1_language': None, 'namesecondary2_text': None, 'namesecondary2_language': None, 'nametertiaryid': None, 'nametertiary1_text': None, 'nametertiary1_language': None, 'nametertiary2_text': None, 'nametertiary2_language': None, 'geometry': <LINESTRING Z (293420.646 89216.331 3.095, 293427.589 89216.269 3.214)>}, {'osid': '55ae29ee-ff0d-4ba7-8161-c4ec63ccae0f', 'toid': 'osgb5000005147859627', 'versiondate': Timestamp('2025-10-10 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-11 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_length_m': 112.307, 'geometry_evidencedate': Timestamp('2020-05-29 00:00:00'), 'geometry_updatedate': Timestamp('2020-05-29 00:00:00'), 'geometry_source': 'Ordnance Survey Area', 'theme': 'Water', 'description': 'Watercourse', 'description_evidencedate': Timestamp('2013-11-26 00:00:00'), 'description_updatedate': Timestamp('2013-11-26 00:00:00'), 'description_source': 'Ordnance Survey', 'primacy': '1', 'watertype': 'Inland', 'physicallevel': 'Surface Level', 'physicalcontainment': 'Inapplicable', 'flowdirection': 'In Direction', 'permanence': 'Permanent', 'capturespecification': 'Rural', 'levelofdetail': 'Local', 'catchmentname': 'Exe', 'catchmentid': '7066', 'width_average': 2.9, 'width_minimum': 2.2, 'width_maximum': 6.4, 'width_derivationmethod': 'Calculated From Polygon', 'width_evidencedate': Timestamp('2021-12-20 00:00:00'), 'width_updatedate': Timestamp('2025-10-08 00:00:00'), 'gradient': 0.23, 'startnode': '86c72f17-c298-49ca-b162-7253fe3cb0ec', 'endnode': '30472b54-68d4-40bf-988a-ead204ec00a4', 'nameid': None, 'name1_text': None, 'name1_language': None, 'name2_text': None, 'name2_language': None, 'namesecondaryid': None, 'namesecondary1_text': None, 'namesecondary1_language': None, 'namesecondary2_text': None, 'namesecondary2_language': None, 'nametertiaryid': None, 'nametertiary1_text': None, 'nametertiary1_language': None, 'nametertiary2_text': None, 'nametertiary2_language': None, 'geometry': <LINESTRING Z (293412.421 89276.656 2.775, 293414.777 89277.039 2.751)>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}]
+2026-02-06 13:23:20,684 INFO Calling tool code_executor with args : {'code': 'def filter_exeter_canals_data(data: list):\n    import geopandas as gpd\n    # Unpack the two input GeoDataFrames\n    gdf1, gdf2 = data\n    # For waterlinkset_exeter_canals_data: filter where description is \'Named Canal\' or name1_text is \'Exeter Canal\'\n    mask1 = (\n        (gdf1[\'description\'] == \'Named Canal\') |\n        (gdf1[\'name1_text\'] == \'Exeter Canal\')\n    )\n    filtered1 = gdf1[mask1]\n    # For waterlink_exeter_canals_data: filter where description is \'Canal\' or name1_text is \'Exeter Canal\'\n    mask2 = (\n        (gdf2[\'description\'] == \'Canal\') |\n        (gdf2[\'name1_text\'] == \'Exeter Canal\')\n    )\n    filtered2 = gdf2[mask2]\n    # Combine the filtered results\n    filtered_combined = gpd.GeoDataFrame(pd.concat([filtered1, filtered2], ignore_index=True), crs=gdf1.crs)\n    summary = f"Filtered canal data from both sources. Total entries: {len(filtered_combined)}. Columns: {list(filtered_combined.columns)}."\n    artifact_name = \'filtered_exeter_canals_data\'\n    artifact_description = \'GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.\'\n    return [summary, artifact_name, artifact_description, filtered_combined]\n', 'artifact_names': ['waterlinkset_exeter_canals_data', 'waterlink_exeter_canals_data']}
+2026-02-06 13:23:20,688 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_exeter_canals_data(data: list):
+    import geopandas as gpd
+    # Unpack the two input GeoDataFrames
+    gdf1, gdf2 = data
+    # For waterlinkset_exeter_canals_data: filter where description is 'Named Canal' or name1_text is 'Exeter Canal'
+    mask1 = (
+        (gdf1['description'] == 'Named Canal') |
+        (gdf1['name1_text'] == 'Exeter Canal')
+    )
+    filtered1 = gdf1[mask1]
+    # For waterlink_exeter_canals_data: filter where description is 'Canal' or name1_text is 'Exeter Canal'
+    mask2 = (
+        (gdf2['description'] == 'Canal') |
+        (gdf2['name1_text'] == 'Exeter Canal')
+    )
+    filtered2 = gdf2[mask2]
+    # Combine the filtered results
+    filtered_combined = gpd.GeoDataFrame(pd.concat([filtered1, filtered2], ignore_index=True), crs=gdf1.crs)
+    summary = f"Filtered canal data from both sources. Total entries: {len(filtered_combined)}. Columns: {list(filtered_combined.columns)}."
+    artifact_name = 'filtered_exeter_canals_data'
+    artifact_description = 'GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.'
+    return [summary, artifact_name, artifact_description, filtered_combined]
+
+2026-02-06 13:23:20,688 INFO function name filter_exeter_canals_data
+2026-02-06 13:23:20,690 ERROR ERROR EXECUTING CODE name 'pd' is not defined
+Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 253, in code_executor
+    output = namespace[function_name](data=data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 20, in filter_exeter_canals_data
+NameError: name 'pd' is not defined
+2026-02-06 13:23:20,690 INFO Tool code_executor returned result : Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 253, in code_executor
+    output = namespace[function_name](data=data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 20, in filter_exeter_canals_data
+NameError: name 'pd' is not defined
+
+2026-02-06 13:23:26,832 INFO Calling tool code_executor with args : {'code': 'def filter_exeter_canals_data(data: list):\n    import geopandas as gpd\n    import pandas as pd\n    # Unpack the two input GeoDataFrames\n    gdf1, gdf2 = data\n    # For waterlinkset_exeter_canals_data: filter where description is \'Named Canal\' or name1_text is \'Exeter Canal\'\n    mask1 = (\n        (gdf1[\'description\'] == \'Named Canal\') |\n        (gdf1[\'name1_text\'] == \'Exeter Canal\')\n    )\n    filtered1 = gdf1[mask1]\n    # For waterlink_exeter_canals_data: filter where description is \'Canal\' or name1_text is \'Exeter Canal\'\n    mask2 = (\n        (gdf2[\'description\'] == \'Canal\') |\n        (gdf2[\'name1_text\'] == \'Exeter Canal\')\n    )\n    filtered2 = gdf2[mask2]\n    # Combine the filtered results\n    filtered_combined = gpd.GeoDataFrame(pd.concat([filtered1, filtered2], ignore_index=True), crs=gdf1.crs)\n    summary = f"Filtered canal data from both sources. Total entries: {len(filtered_combined)}. Columns: {list(filtered_combined.columns)}."\n    artifact_name = \'filtered_exeter_canals_data\'\n    artifact_description = \'GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.\'\n    return [summary, artifact_name, artifact_description, filtered_combined]\n', 'artifact_names': ['waterlinkset_exeter_canals_data', 'waterlink_exeter_canals_data']}
+2026-02-06 13:23:26,834 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_exeter_canals_data(data: list):
+    import geopandas as gpd
+    import pandas as pd
+    # Unpack the two input GeoDataFrames
+    gdf1, gdf2 = data
+    # For waterlinkset_exeter_canals_data: filter where description is 'Named Canal' or name1_text is 'Exeter Canal'
+    mask1 = (
+        (gdf1['description'] == 'Named Canal') |
+        (gdf1['name1_text'] == 'Exeter Canal')
+    )
+    filtered1 = gdf1[mask1]
+    # For waterlink_exeter_canals_data: filter where description is 'Canal' or name1_text is 'Exeter Canal'
+    mask2 = (
+        (gdf2['description'] == 'Canal') |
+        (gdf2['name1_text'] == 'Exeter Canal')
+    )
+    filtered2 = gdf2[mask2]
+    # Combine the filtered results
+    filtered_combined = gpd.GeoDataFrame(pd.concat([filtered1, filtered2], ignore_index=True), crs=gdf1.crs)
+    summary = f"Filtered canal data from both sources. Total entries: {len(filtered_combined)}. Columns: {list(filtered_combined.columns)}."
+    artifact_name = 'filtered_exeter_canals_data'
+    artifact_description = 'GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.'
+    return [summary, artifact_name, artifact_description, filtered_combined]
+
+2026-02-06 13:23:26,835 INFO function name filter_exeter_canals_data
+2026-02-06 13:23:26,838 ERROR ERROR EXECUTING CODE Cannot determine common CRS for concatenation inputs, got ['OSGB36 / British National Grid', 'OSGB36 / British National Grid + ODN height']. Use `to_crs()` to transform geometries to the same CRS before merging.
+Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 253, in code_executor
+    output = namespace[function_name](data=data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 21, in filter_exeter_canals_data
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\pandas\core\reshape\concat.py", line 395, in concat
+    return op.get_result()
+           ^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\pandas\core\reshape\concat.py", line 684, in get_result
+    new_data = concatenate_managers(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\pandas\core\internals\concat.py", line 180, in concatenate_managers
+    values = concat_compat(vals, axis=0, ea_compat_axis=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\pandas\core\dtypes\concat.py", line 83, in concat_compat
+    return obj._concat_same_type(to_concat_eas)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\geopandas\array.py", line 1755, in _concat_same_type
+    return GeometryArray(data, crs=_get_common_crs(to_concat))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\geopandas\array.py", line 1853, in _get_common_crs
+    raise ValueError(
+ValueError: Cannot determine common CRS for concatenation inputs, got ['OSGB36 / British National Grid', 'OSGB36 / British National Grid + ODN height']. Use `to_crs()` to transform geometries to the same CRS before merging.
+2026-02-06 13:23:26,879 INFO Tool code_executor returned result : Traceback (most recent call last):
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\utils\tools.py", line 253, in code_executor
+    output = namespace[function_name](data=data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 21, in filter_exeter_canals_data
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\pandas\core\reshape\concat.py", line 395, in concat
+    return op.get_result()
+           ^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\pandas\core\reshape\concat.py", line 684, in get_result
+    new_data = concatenate_managers(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\pandas\core\internals\concat.py", line 180, in concatenate_managers
+    values = concat_compat(vals, axis=0, ea_compat_axis=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\pandas\core\dtypes\concat.py", line 83, in concat_compat
+    return obj._concat_same_type(to_concat_eas)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\geopandas\array.py", line 1755, in _concat_same_type
+    return GeometryArray(data, crs=_get_common_crs(to_concat))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\osvenv\Lib\site-packages\geopandas\array.py", line 1853, in _get_common_crs
+    raise ValueError(
+ValueError: Cannot determine common CRS for concatenation inputs, got ['OSGB36 / British National Grid', 'OSGB36 / British National Grid + ODN height']. Use `to_crs()` to transform geometries to the same CRS before merging.
+
+2026-02-06 13:23:34,399 INFO Calling tool code_executor with args : {'code': 'def filter_exeter_canals_data(data: list):\n    import geopandas as gpd\n    import pandas as pd\n    # Unpack the two input GeoDataFrames\n    gdf1, gdf2 = data\n    # For waterlinkset_exeter_canals_data: filter where description is \'Named Canal\' or name1_text is \'Exeter Canal\'\n    mask1 = (\n        (gdf1[\'description\'] == \'Named Canal\') |\n        (gdf1[\'name1_text\'] == \'Exeter Canal\')\n    )\n    filtered1 = gdf1[mask1]\n    # For waterlink_exeter_canals_data: filter where description is \'Canal\' or name1_text is \'Exeter Canal\'\n    mask2 = (\n        (gdf2[\'description\'] == \'Canal\') |\n        (gdf2[\'name1_text\'] == \'Exeter Canal\')\n    )\n    filtered2 = gdf2[mask2]\n    # Reproject filtered2 to match filtered1\'s CRS if needed\n    if filtered1.crs != filtered2.crs:\n        filtered2 = filtered2.to_crs(filtered1.crs)\n    # Combine the filtered results\n    filtered_combined = gpd.GeoDataFrame(pd.concat([filtered1, filtered2], ignore_index=True), crs=filtered1.crs)\n    summary = f"Filtered canal data from both sources. Total entries: {len(filtered_combined)}. Columns: {list(filtered_combined.columns)}."\n    artifact_name = \'filtered_exeter_canals_data\'\n    artifact_description = \'GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.\'\n    return [summary, artifact_name, artifact_description, filtered_combined]\n', 'artifact_names': ['waterlinkset_exeter_canals_data', 'waterlink_exeter_canals_data']}
+2026-02-06 13:23:34,402 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_exeter_canals_data(data: list):
+    import geopandas as gpd
+    import pandas as pd
+    # Unpack the two input GeoDataFrames
+    gdf1, gdf2 = data
+    # For waterlinkset_exeter_canals_data: filter where description is 'Named Canal' or name1_text is 'Exeter Canal'
+    mask1 = (
+        (gdf1['description'] == 'Named Canal') |
+        (gdf1['name1_text'] == 'Exeter Canal')
+    )
+    filtered1 = gdf1[mask1]
+    # For waterlink_exeter_canals_data: filter where description is 'Canal' or name1_text is 'Exeter Canal'
+    mask2 = (
+        (gdf2['description'] == 'Canal') |
+        (gdf2['name1_text'] == 'Exeter Canal')
+    )
+    filtered2 = gdf2[mask2]
+    # Reproject filtered2 to match filtered1's CRS if needed
+    if filtered1.crs != filtered2.crs:
+        filtered2 = filtered2.to_crs(filtered1.crs)
+    # Combine the filtered results
+    filtered_combined = gpd.GeoDataFrame(pd.concat([filtered1, filtered2], ignore_index=True), crs=filtered1.crs)
+    summary = f"Filtered canal data from both sources. Total entries: {len(filtered_combined)}. Columns: {list(filtered_combined.columns)}."
+    artifact_name = 'filtered_exeter_canals_data'
+    artifact_description = 'GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.'
+    return [summary, artifact_name, artifact_description, filtered_combined]
+
+2026-02-06 13:23:34,402 INFO function name filter_exeter_canals_data
+2026-02-06 13:23:34,414 INFO Output completed
+2026-02-06 13:23:34,417 INFO Tool code_executor returned result : ["Filtered canal data from both sources. Total entries: 6. Columns: ['osid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'changetype', 'geometry_length', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_source', 'theme', 'description', 'description_evidencedate', 'description_updatedate', 'description_source', 'name1_text', 'name1_language', 'name1_evidencedate', 'name1_updatedate', 'name1_source', 'name2_text', 'name2_language', 'name2_evidencedate', 'name2_updatedate', 'name2_source', 'geometry', 'toid', 'geometry_length_m', 'primacy', 'watertype', 'physicallevel', 'physicalcontainment', 'flowdirection', 'permanence', 'capturespecification', 'levelofdetail', 'catchmentname', 'catchmentid', 'width_average', 'width_minimum', 'width_maximum', 'width_derivationmethod', 'width_evidencedate', 'width_updatedate', 'gradient', 'startnode', 'endnode', 'nameid', 'namesecondaryid', 'namesecondary1_text', 'namesecondary1_language', 'namesecondary2_text', 'namesecondary2_language', 'nametertiaryid', 'nametertiary1_text', 'nametertiary1_language', 'nametertiary2_text', 'nametertiary2_language'].", <a2a.Artifact.Artifact object at 0x0000023CC11EF190>]
+2026-02-06 13:23:46,037 WARNING OFFLINE MODE
+2026-02-06 13:23:46,037 INFO Output from agent data_analysis_agent : Filtered canal data from both sources. Total entries: 6. Columns: ['osid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'changetype', 'geometry_length', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_source', 'theme', 'description', 'description_evidencedate', 'description_updatedate', 'description_source', 'name1_text', 'name1_language', 'name1_evidencedate', 'name1_updatedate', 'name1_source', 'name2_text', 'name2_language', 'name2_evidencedate', 'name2_updatedate', 'name2_source', 'geometry', 'toid', 'geometry_length_m', 'primacy', 'watertype', 'physicallevel', 'physicalcontainment', 'flowdirection', 'permanence', 'capturespecification', 'levelofdetail', 'catchmentname', 'catchmentid', 'width_average', 'width_minimum', 'width_maximum', 'width_derivationmethod', 'width_evidencedate', 'width_updatedate', 'gradient', 'startnode', 'endnode', 'nameid', 'namesecondaryid', 'namesecondary1_text', 'namesecondary1_language', 'namesecondary2_text', 'namesecondary2_language', 'nametertiaryid', 'nametertiary1_text', 'nametertiary1_language', 'nametertiary2_text', 'nametertiary2_language'].
+
+An artifact has been generated with the name: filtered_exeter_canals_data and the description: GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.
+2026-02-06 13:23:46,038 INFO Tool send_message returned result : ["Filtered canal data from both sources. Total entries: 6. Columns: ['osid', 'versiondate', 'versionavailablefromdate', 'versionavailabletodate', 'changetype', 'geometry_length', 'geometry_evidencedate', 'geometry_updatedate', 'geometry_source', 'theme', 'description', 'description_evidencedate', 'description_updatedate', 'description_source', 'name1_text', 'name1_language', 'name1_evidencedate', 'name1_updatedate', 'name1_source', 'name2_text', 'name2_language', 'name2_evidencedate', 'name2_updatedate', 'name2_source', 'geometry', 'toid', 'geometry_length_m', 'primacy', 'watertype', 'physicallevel', 'physicalcontainment', 'flowdirection', 'permanence', 'capturespecification', 'levelofdetail', 'catchmentname', 'catchmentid', 'width_average', 'width_minimum', 'width_maximum', 'width_derivationmethod', 'width_evidencedate', 'width_updatedate', 'gradient', 'startnode', 'endnode', 'nameid', 'namesecondaryid', 'namesecondary1_text', 'namesecondary1_language', 'namesecondary2_text', 'namesecondary2_language', 'nametertiaryid', 'nametertiary1_text', 'nametertiary1_language', 'nametertiary2_text', 'nametertiary2_language'].\n\nAn artifact has been generated with the name: filtered_exeter_canals_data and the description: GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.Addtionally some data artifacts have been generated with names  ['filtered_exeter_canals_data'] and \n descriptions ['GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.']", [<a2a.Artifact.Artifact object at 0x0000023CC11EF190>]]
+2026-02-06 13:23:52,030 WARNING OFFLINE MODE
+2026-02-06 13:23:52,030 INFO Output from agent water_network : The search for canals within the 'filtered_exeter_area_polygon' has been completed. The relevant canal data has been filtered and saved as:
+
+- **Artifact Name:** `filtered_exeter_canals_data`
+- **Description:** GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.
+
+If you need further analysis or details, feel free to ask!
+2026-02-06 13:23:52,031 INFO Tool send_message returned result : ["The search for canals within the 'filtered_exeter_area_polygon' has been completed. The relevant canal data has been filtered and saved as:\n\n- **Artifact Name:** `filtered_exeter_canals_data`\n- **Description:** GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.\n\nIf you need further analysis or details, feel free to ask!Addtionally some data artifacts have been generated with names  ['filtered_exeter_canals_data'] and \n descriptions ['GeoDataFrame containing only the relevant canal data from both input datasets, filtered by canal-related description and name.']", [<a2a.Artifact.Artifact object at 0x0000023CC11EF190>]]
+2026-02-06 13:23:53,511 INFO Calling tool send_message with args : {'target': 'plotting_agent', 'task_description': "Plot all the canals in Exeter using the artifact 'filtered_exeter_canals_data' and overlay the Exeter area boundary from 'filtered_exeter_area_polygon'."}
+2026-02-06 13:23:57,606 WARNING OFFLINE MODE
+2026-02-06 13:23:57,622 INFO Messages sent to agent plotting_agent : [{'role': 'user', 'content': "Plot all the canals in Exeter using the artifact 'filtered_exeter_canals_data' and overlay the Exeter area boundary from 'filtered_exeter_area_polygon'."}]
+2026-02-06 13:24:02,323 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['filtered_exeter_canals_data', 'filtered_exeter_area_polygon']}
+2026-02-06 13:24:02,340 INFO artifacts loaded for metadata generation : ['filtered_exeter_canals_data', 'filtered_exeter_area_polygon']
+2026-02-06 13:24:02,364 INFO Tool generate_metadata_for_artifacts returned result : [{'filename': 'filtered_exeter_canals_data', 'dataset_summary': {'num_rows': 6, 'num_columns': 57}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['1f94bc54-3f40-42b6-bb00-e4a17dba59a3',
+       'ffe9f494-88bf-43fb-8728-619e2faa3435',
+       'b8d52a6d-e670-40f5-9e50-a153076c4d74',
+       'cad55405-1ddc-4e25-8bbb-53280897844c',
+       '688ccd73-1830-4bc1-9b99-4c41640222ba',
+       '688f6779-d50e-49da-a36b-cc5467c4d264'], dtype=object)}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-10-23 00:00:00', '2025-10-10 00:00:00']
+Length: 2, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-10-24 00:00:00+00:00', '2025-10-11 00:00:00+00:00']
+Length: 2, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Modified Geometry And Attributes', 'New'], dtype=object)}, {'name': 'geometry_length', 'dtype': 'float64', 'null_fraction': 0.8333333333333334, 'example_values': array([8280.967199])}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-05-15 00:00:00', '2019-09-14 00:00:00', '2020-05-29 00:00:00']
+Length: 3, dtype: datetime64[ms]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-05-17 00:00:00', '2019-11-15 00:00:00', '2020-05-29 00:00:00',
+ '2025-05-15 00:00:00']
+Length: 4, dtype: datetime64[ms]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey', 'Ordnance Survey Area'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Water'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Named Canal', 'Canal', 'Watercourse'], dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-02 00:00:00', '2013-11-26 00:00:00', '2017-04-27 00:00:00',
+ '2025-05-15 00:00:00']
+Length: 4, dtype: datetime64[ms]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-02 00:00:00', '2013-11-26 00:00:00', '2017-04-27 00:00:00',
+ '2025-05-15 00:00:00']
+Length: 4, dtype: datetime64[ms]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Exeter Canal', 'River Exe'], dtype=object)}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.8333333333333334, 'example_values': <DatetimeArray>
+['2015-05-02 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.8333333333333334, 'example_values': <DatetimeArray>
+['2015-05-02 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': <GeometryArray>
+[<MULTILINESTRING ((292279.457 91678.131, 292278.423 91683.476, 292277.848 91...>,
+ <LINESTRING Z (292282.877 91659.822 4.585, 292281.352 91656.023 4.033, 29228...>,
+              <LINESTRING Z (292382.519 91674.158 1.1, 292376.612 91665.199 1.1)>,
+ <LINESTRING Z (292279.457 91678.131 4.878, 292279.846 91676.12 5.362, 292280...>,
+ <LINESTRING Z (292302.088 91769.191 1.148, 292286.816 91754.123 1.219, 29228...>,
+ <LINESTRING Z (292071.853 91925.176 6.195, 292130.847 91870.742 3.838, 29218...>]
+Length: 6, dtype: geometry}, {'name': 'toid', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['osgb5000005146620838', 'osgb5000005148382300',
+       'osgb5000005346538993', 'osgb5000005265212299',
+       'osgb5000005145825157'], dtype=object)}, {'name': 'geometry_length_m', 'dtype': 'float64', 'null_fraction': 0.16666666666666666, 'example_values': array([1846.551,  174.202,   18.632,  100.341,  351.358])}, {'name': 'primacy', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['1', '2'], dtype=object)}, {'name': 'watertype', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Inland'], dtype=object)}, {'name': 'physicallevel', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Surface Level'], dtype=object)}, {'name': 'physicalcontainment', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Inapplicable'], dtype=object)}, {'name': 'flowdirection', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['In Direction'], dtype=object)}, {'name': 'permanence', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Permanent'], dtype=object)}, {'name': 'capturespecification', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Rural', 'Urban'], dtype=object)}, {'name': 'levelofdetail', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Local'], dtype=object)}, {'name': 'catchmentname', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Exe'], dtype=object)}, {'name': 'catchmentid', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['7066'], dtype=object)}, {'name': 'width_average', 'dtype': 'float64', 'null_fraction': 0.16666666666666666, 'example_values': array([21. , 36.7, 18.1, 20.4, 28.3])}, {'name': 'width_minimum', 'dtype': 'float64', 'null_fraction': 0.16666666666666666, 'example_values': array([13. , 29.3, 18.1,  9.9,  9.3])}, {'name': 'width_maximum', 'dtype': 'float64', 'null_fraction': 0.16666666666666666, 'example_values': array([27.7, 41.8, 18.1, 41. , 44.9])}, {'name': 'width_derivationmethod', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['Calculated From Polygon'], dtype=object)}, {'name': 'width_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.16666666666666666, 'example_values': <DatetimeArray>
+['2024-04-20 00:00:00', '2023-03-07 00:00:00']
+Length: 2, dtype: datetime64[ms]}, {'name': 'width_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.16666666666666666, 'example_values': <DatetimeArray>
+['2025-10-08 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'gradient', 'dtype': 'float64', 'null_fraction': 0.6666666666666666, 'example_values': array([1.57, 0.46])}, {'name': 'startnode', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['23ae3809-97e3-4b7e-8788-a2401200e29e',
+       'c07d8fa4-e83d-457e-b515-d2e807945cb2',
+       '123a9a51-a2db-4c22-98d1-378a26d1da28',
+       '6bc545fd-9246-40ef-bad6-9c760230dacc',
+       '4fe35944-de5e-47ea-a3fe-dd47b23f9158'], dtype=object)}, {'name': 'endnode', 'dtype': 'object', 'null_fraction': 0.16666666666666666, 'example_values': array(['0ee9e712-957f-49da-b636-14b9d417cb95',
+       '57552258-254c-45ea-a0bb-22ac82a324b3',
+       '23ae3809-97e3-4b7e-8788-a2401200e29e',
+       '123a9a51-a2db-4c22-98d1-378a26d1da28'], dtype=object)}, {'name': 'nameid', 'dtype': 'object', 'null_fraction': 0.3333333333333333, 'example_values': array(['1f94bc54-3f40-42b6-bb00-e4a17dba59a3',
+       'e11b343e-dad9-49d8-92cc-2c3e220a07ed'], dtype=object)}, {'name': 'namesecondaryid', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'namesecondary1_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'namesecondary1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'namesecondary2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'namesecondary2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiaryid', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiary1_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiary1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiary2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'nametertiary2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}], 'preview_rows': [{'osid': '1f94bc54-3f40-42b6-bb00-e4a17dba59a3', 'versiondate': Timestamp('2025-10-23 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-24 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'Modified Geometry And Attributes', 'geometry_length': 8280.967199, 'geometry_evidencedate': Timestamp('2025-05-15 00:00:00'), 'geometry_updatedate': Timestamp('2025-05-17 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Water', 'description': 'Named Canal', 'description_evidencedate': Timestamp('2015-05-02 00:00:00'), 'description_updatedate': Timestamp('2015-05-02 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': 'Exeter Canal', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-02 00:00:00'), 'name1_updatedate': Timestamp('2015-05-02 00:00:00'), 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'geometry': <MULTILINESTRING ((292279.457 91678.131, 292278.423 91683.476, 292277.848 91...>, 'toid': nan, 'geometry_length_m': nan, 'primacy': nan, 'watertype': nan, 'physicallevel': nan, 'physicalcontainment': nan, 'flowdirection': nan, 'permanence': nan, 'capturespecification': nan, 'levelofdetail': nan, 'catchmentname': nan, 'catchmentid': nan, 'width_average': nan, 'width_minimum': nan, 'width_maximum': nan, 'width_derivationmethod': nan, 'width_evidencedate': NaT, 'width_updatedate': NaT, 'gradient': nan, 'startnode': nan, 'endnode': nan, 'nameid': nan, 'namesecondaryid': nan, 'namesecondary1_text': nan, 'namesecondary1_language': nan, 'namesecondary2_text': nan, 'namesecondary2_language': nan, 'nametertiaryid': nan, 'nametertiary1_text': nan, 'nametertiary1_language': nan, 'nametertiary2_text': nan, 'nametertiary2_language': nan}, {'osid': 'ffe9f494-88bf-43fb-8728-619e2faa3435', 'versiondate': Timestamp('2025-10-10 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-11 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_length': nan, 'geometry_evidencedate': Timestamp('2019-09-14 00:00:00'), 'geometry_updatedate': Timestamp('2019-11-15 00:00:00'), 'geometry_source': 'Ordnance Survey Area', 'theme': 'Water', 'description': 'Canal', 'description_evidencedate': Timestamp('2013-11-26 00:00:00'), 'description_updatedate': Timestamp('2013-11-26 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': 'Exeter Canal', 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name1_source': nan, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': nan, 'geometry': <LINESTRING Z (292282.877 91659.822 4.585, 292281.352 91656.023 4.033, 29228...>, 'toid': 'osgb5000005146620838', 'geometry_length_m': 1846.551, 'primacy': '1', 'watertype': 'Inland', 'physicallevel': 'Surface Level', 'physicalcontainment': 'Inapplicable', 'flowdirection': 'In Direction', 'permanence': 'Permanent', 'capturespecification': 'Rural', 'levelofdetail': 'Local', 'catchmentname': 'Exe', 'catchmentid': '7066', 'width_average': 21.0, 'width_minimum': 13.0, 'width_maximum': 27.7, 'width_derivationmethod': 'Calculated From Polygon', 'width_evidencedate': Timestamp('2024-04-20 00:00:00'), 'width_updatedate': Timestamp('2025-10-08 00:00:00'), 'gradient': nan, 'startnode': '23ae3809-97e3-4b7e-8788-a2401200e29e', 'endnode': '0ee9e712-957f-49da-b636-14b9d417cb95', 'nameid': '1f94bc54-3f40-42b6-bb00-e4a17dba59a3', 'namesecondaryid': None, 'namesecondary1_text': None, 'namesecondary1_language': None, 'namesecondary2_text': None, 'namesecondary2_language': None, 'nametertiaryid': None, 'nametertiary1_text': None, 'nametertiary1_language': None, 'nametertiary2_text': None, 'nametertiary2_language': None}, {'osid': 'b8d52a6d-e670-40f5-9e50-a153076c4d74', 'versiondate': Timestamp('2025-10-10 00:00:00'), 'versionavailablefromdate': Timestamp('2025-10-11 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_length': nan, 'geometry_evidencedate': Timestamp('2020-05-29 00:00:00'), 'geometry_updatedate': Timestamp('2020-05-29 00:00:00'), 'geometry_source': 'Ordnance Survey Area', 'theme': 'Water', 'description': 'Canal', 'description_evidencedate': Timestamp('2017-04-27 00:00:00'), 'description_updatedate': Timestamp('2017-04-27 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': 'River Exe', 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name1_source': nan, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': nan, 'geometry': <LINESTRING Z (292382.519 91674.158 1.1, 292376.612 91665.199 1.1)>, 'toid': 'osgb5000005148382300', 'geometry_length_m': 174.202, 'primacy': '2', 'watertype': 'Inland', 'physicallevel': 'Surface Level', 'physicalcontainment': 'Inapplicable', 'flowdirection': 'In Direction', 'permanence': 'Permanent', 'capturespecification': 'Urban', 'levelofdetail': 'Local', 'catchmentname': 'Exe', 'catchmentid': '7066', 'width_average': 36.7, 'width_minimum': 29.3, 'width_maximum': 41.8, 'width_derivationmethod': 'Calculated From Polygon', 'width_evidencedate': Timestamp('2023-03-07 00:00:00'), 'width_updatedate': Timestamp('2025-10-08 00:00:00'), 'gradient': nan, 'startnode': 'c07d8fa4-e83d-457e-b515-d2e807945cb2', 'endnode': '57552258-254c-45ea-a0bb-22ac82a324b3', 'nameid': 'e11b343e-dad9-49d8-92cc-2c3e220a07ed', 'namesecondaryid': None, 'namesecondary1_text': None, 'namesecondary1_language': None, 'namesecondary2_text': None, 'namesecondary2_language': None, 'nametertiaryid': None, 'nametertiary1_text': None, 'nametertiary1_language': None, 'nametertiary2_text': None, 'nametertiary2_language': None}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}, {'filename': 'filtered_exeter_area_polygon', 'dataset_summary': {'num_rows': 1, 'num_columns': 41}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['eaeed505-6584-4fa0-b734-8491211c62a9'], dtype=object)}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-29 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-30 00:00:00+00:00']
+Length: 1, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Modified Geometry And Attributes'], dtype=object)}, {'name': 'geometry_area', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': array([32082134.479725])}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-28 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-28 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Geographical Names'], dtype=object)}, {'name': 'descriptiongroup', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Settlement'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['City'], dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'extentdefinition', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Manually Defined Complete'], dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Exeter'], dtype=object)}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'sameasdbpedia', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'sameasgeonames', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['https://sws.GeoNames.org/2649808'], dtype=object)}, {'name': 'sameasdbobih', 'dtype': 'float64', 'null_fraction': 1.0, 'example_values': array([], dtype=float64)}, {'name': 'height', 'dtype': 'float64', 'null_fraction': 1.0, 'example_values': array([], dtype=float64)}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': <GeometryArray>
+[<POLYGON ((295173.81 89150.11, 295192.057 89168.355, 295231.155 89233.516, 2...>]
+Length: 1, dtype: geometry}], 'preview_rows': [{'osid': 'eaeed505-6584-4fa0-b734-8491211c62a9', 'versiondate': Timestamp('2025-08-29 00:00:00'), 'versionavailablefromdate': Timestamp('2025-08-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'Modified Geometry And Attributes', 'geometry_area': 32082134.479725, 'geometry_evidencedate': Timestamp('2025-08-28 00:00:00'), 'geometry_updatedate': Timestamp('2025-08-28 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Settlement', 'description': 'City', 'description_evidencedate': Timestamp('2015-05-04 00:00:00'), 'description_updatedate': Timestamp('2015-05-04 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Exeter', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-04 00:00:00'), 'name1_updatedate': Timestamp('2015-05-04 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': 'https://sws.GeoNames.org/2649808', 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((295173.81 89150.11, 295192.057 89168.355, 295231.155 89233.516, 2...>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}]
+2026-02-06 13:24:14,280 INFO Calling tool code_executor with args : {'code': 'def plot_exeter_canals_with_boundary(data: list):\n    import geopandas as gpd\n    import folium\n    from folium import GeoJson\n    import os\n    # Unpack data\n    canals_gdf = data[0].copy()\n    exeter_area_gdf = data[1].copy()\n\n    # Ensure CRS is EPSG:4326 for folium\n    if canals_gdf.crs is not None and canals_gdf.crs.to_epsg() != 4326:\n        canals_gdf = canals_gdf.to_crs(epsg=4326)\n    if exeter_area_gdf.crs is not None and exeter_area_gdf.crs.to_epsg() != 4326:\n        exeter_area_gdf = exeter_area_gdf.to_crs(epsg=4326)\n\n    # Filter for canals in Exeter using multiple columns for quality\n    # Use \'description\' for \'Canal\' or \'Named Canal\' and \'name1_text\' for \'Exeter Canal\'\n    canal_mask = (\n        (canals_gdf[\'description\'].isin([\'Canal\', \'Named Canal\'])) &\n        (canals_gdf[\'name1_text\'].str.contains(\'Exeter\', case=False, na=False))\n    )\n    exeter_canals = canals_gdf[canal_mask]\n\n    # Get centroid of Exeter area for map centering\n    exeter_centroid = exeter_area_gdf.geometry.iloc[0].centroid\n    m = folium.Map(location=[exeter_centroid.y, exeter_centroid.x], zoom_start=13, tiles=\'cartodbpositron\')\n\n    # Plot Exeter area boundary\n    folium.GeoJson(\n        exeter_area_gdf.geometry.iloc[0],\n        name=\'Exeter Area\',\n        style_function=lambda x: {\'color\': \'blue\', \'weight\': 2, \'fillOpacity\': 0.05}\n    ).add_to(m)\n\n    # Plot canals\n    for _, row in exeter_canals.iterrows():\n        folium.GeoJson(\n            row[\'geometry\'],\n            name=row.get(\'name1_text\', \'Canal\'),\n            style_function=lambda x: {\'color\': \'green\', \'weight\': 4}\n        ).add_to(m)\n\n    folium.LayerControl().add_to(m)\n\n    # Save map\n    map_filename = \'exeter_canals_with_boundary.html\'\n    m.save(map_filename)\n\n    # Prepare summary\n    summary_rows = exeter_canals[[\'name1_text\', \'description\', \'geometry_length\', \'geometry_length_m\']].head(5)\n    summary = f"Plotted {len(exeter_canals)} Exeter canal features over the Exeter area boundary. First 5: {summary_rows.to_dict(orient=\'records\')}"\n    artifact_name = \'exeter_canals_with_boundary_map\'\n    artifact_description = \'Folium map showing all Exeter canals (filtered by description and name1_text) overlaid with the Exeter area boundary.\'\n    return [summary, artifact_name, artifact_description, map_filename]\n', 'artifact_names': ['filtered_exeter_canals_data', 'filtered_exeter_area_polygon']}
+2026-02-06 13:24:14,282 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def plot_exeter_canals_with_boundary(data: list):
+    import geopandas as gpd
+    import folium
+    from folium import GeoJson
+    import os
+    # Unpack data
+    canals_gdf = data[0].copy()
+    exeter_area_gdf = data[1].copy()
+
+    # Ensure CRS is EPSG:4326 for folium
+    if canals_gdf.crs is not None and canals_gdf.crs.to_epsg() != 4326:
+        canals_gdf = canals_gdf.to_crs(epsg=4326)
+    if exeter_area_gdf.crs is not None and exeter_area_gdf.crs.to_epsg() != 4326:
+        exeter_area_gdf = exeter_area_gdf.to_crs(epsg=4326)
+
+    # Filter for canals in Exeter using multiple columns for quality
+    # Use 'description' for 'Canal' or 'Named Canal' and 'name1_text' for 'Exeter Canal'
+    canal_mask = (
+        (canals_gdf['description'].isin(['Canal', 'Named Canal'])) &
+        (canals_gdf['name1_text'].str.contains('Exeter', case=False, na=False))
+    )
+    exeter_canals = canals_gdf[canal_mask]
+
+    # Get centroid of Exeter area for map centering
+    exeter_centroid = exeter_area_gdf.geometry.iloc[0].centroid
+    m = folium.Map(location=[exeter_centroid.y, exeter_centroid.x], zoom_start=13, tiles='cartodbpositron')
+
+    # Plot Exeter area boundary
+    folium.GeoJson(
+        exeter_area_gdf.geometry.iloc[0],
+        name='Exeter Area',
+        style_function=lambda x: {'color': 'blue', 'weight': 2, 'fillOpacity': 0.05}
+    ).add_to(m)
+
+    # Plot canals
+    for _, row in exeter_canals.iterrows():
+        folium.GeoJson(
+            row['geometry'],
+            name=row.get('name1_text', 'Canal'),
+            style_function=lambda x: {'color': 'green', 'weight': 4}
+        ).add_to(m)
+
+    folium.LayerControl().add_to(m)
+
+    # Save map
+    map_filename = 'exeter_canals_with_boundary.html'
+    m.save(map_filename)
+
+    # Prepare summary
+    summary_rows = exeter_canals[['name1_text', 'description', 'geometry_length', 'geometry_length_m']].head(5)
+    summary = f"Plotted {len(exeter_canals)} Exeter canal features over the Exeter area boundary. First 5: {summary_rows.to_dict(orient='records')}"
+    artifact_name = 'exeter_canals_with_boundary_map'
+    artifact_description = 'Folium map showing all Exeter canals (filtered by description and name1_text) overlaid with the Exeter area boundary.'
+    return [summary, artifact_name, artifact_description, map_filename]
+
+2026-02-06 13:24:14,282 INFO function name plot_exeter_canals_with_boundary
+2026-02-06 13:24:14,296 INFO Output completed
+2026-02-06 13:24:14,297 INFO Tool code_executor returned result : ["Plotted 3 Exeter canal features over the Exeter area boundary. First 5: [{'name1_text': 'Exeter Canal', 'description': 'Named Canal', 'geometry_length': 8280.967199, 'geometry_length_m': nan}, {'name1_text': 'Exeter Canal', 'description': 'Canal', 'geometry_length': nan, 'geometry_length_m': 1846.551}, {'name1_text': 'Exeter Canal', 'description': 'Canal', 'geometry_length': nan, 'geometry_length_m': 18.632}]", <a2a.Artifact.Artifact object at 0x0000023CA8B4F510>]
+2026-02-06 13:24:23,435 WARNING OFFLINE MODE
+2026-02-06 13:24:23,435 INFO Output from agent plotting_agent : Plotted 3 Exeter canal features over the Exeter area boundary. First 5: [{'name1_text': 'Exeter Canal', 'description': 'Named Canal', 'geometry_length': 8280.967199, 'geometry_length_m': nan}, {'name1_text': 'Exeter Canal', 'description': 'Canal', 'geometry_length': nan, 'geometry_length_m': 1846.551}, {'name1_text': 'Exeter Canal', 'description': 'Canal', 'geometry_length': nan, 'geometry_length_m': 18.632}]
+
+Artifact name: exeter_canals_with_boundary_map
+
+Artifact description: Folium map showing all Exeter canals (filtered by description and name1_text) overlaid with the Exeter area boundary.
+
+Artifact data: exeter_canals_with_boundary.html
+2026-02-06 13:24:23,437 INFO Tool send_message returned result : ["Plotted 3 Exeter canal features over the Exeter area boundary. First 5: [{'name1_text': 'Exeter Canal', 'description': 'Named Canal', 'geometry_length': 8280.967199, 'geometry_length_m': nan}, {'name1_text': 'Exeter Canal', 'description': 'Canal', 'geometry_length': nan, 'geometry_length_m': 1846.551}, {'name1_text': 'Exeter Canal', 'description': 'Canal', 'geometry_length': nan, 'geometry_length_m': 18.632}]\n\nArtifact name: exeter_canals_with_boundary_map\n\nArtifact description: Folium map showing all Exeter canals (filtered by description and name1_text) overlaid with the Exeter area boundary.\n\nArtifact data: exeter_canals_with_boundary.htmlAddtionally some data artifacts have been generated with names  ['exeter_canals_with_boundary_map'] and \n descriptions ['Folium map showing all Exeter canals (filtered by description and name1_text) overlaid with the Exeter area boundary.']", [<a2a.Artifact.Artifact object at 0x0000023CA8B4F510>]]
+2026-02-06 13:24:32,777 WARNING OFFLINE MODE
+2026-02-06 13:24:32,777 INFO Output from agent host_agent : All the canals in Exeter have been found and plotted. The map includes:
+
+- All canal features in Exeter (from the water network database)
+- The Exeter area boundary for context
+
+Summary of results:
+- 3 canal features were found, all named "Exeter Canal" with varying lengths.
+
+If you would like to view the map or need further details about the canals (such as their attributes or a list), please let me know!

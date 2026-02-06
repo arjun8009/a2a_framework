@@ -1,0 +1,608 @@
+2026-02-06 11:53:49,998 INFO Agent host_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent planning_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent coding_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent plotting_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent address_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent named_area_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent buildings_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent water_features_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent water_network_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent land_features_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent land_use_features_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent structures_agent Initialised
+2026-02-06 11:53:49,998 INFO Agent human Initialised
+2026-02-06 11:53:51,297 INFO sending message from human to host Show me all the bridges and types of bridges in Exeter.
+2026-02-06 11:53:55,355 INFO OFFLINE MODE
+2026-02-06 11:53:55,363 INFO Messages sent to agent host_agent : [{'role': 'user', 'content': 'Show me all the bridges and types of bridges in Exeter.'}]
+2026-02-06 11:54:00,150 INFO Calling tool send_message with args : {'target': 'planning_agent', 'task_description': 'User wants to see all bridges and their types in Exeter. Provide the general steps to solve this geospatial query.'}
+2026-02-06 11:54:04,238 WARNING OFFLINE MODE
+2026-02-06 11:54:04,247 INFO Messages sent to agent planning_agent : [{'role': 'user', 'content': 'User wants to see all bridges and their types in Exeter. Provide the general steps to solve this geospatial query.'}]
+2026-02-06 11:54:10,883 WARNING OFFLINE MODE
+2026-02-06 11:54:10,883 INFO Output from agent planning_agent : <Internal Thoughts> The area is Exeter, so there will be 1 entry for Exeter. The entities to search for are bridges, and we need to find all types of bridges in Exeter. 
+
+<Thoughts> 
+output steps: ["Find Exeter 1 area", "Search for all bridges in Exeter as many search results", "Identify and categorize the types of bridges found in Exeter"]
+2026-02-06 11:54:10,883 INFO Tool send_message returned result : <Internal Thoughts> The area is Exeter, so there will be 1 entry for Exeter. The entities to search for are bridges, and we need to find all types of bridges in Exeter. 
+
+<Thoughts> 
+output steps: ["Find Exeter 1 area", "Search for all bridges in Exeter as many search results", "Identify and categorize the types of bridges found in Exeter"]
+2026-02-06 11:54:16,063 INFO Calling tool generate_metadata_for_all_artifacts with args : {}
+2026-02-06 11:54:16,063 INFO Tool generate_metadata_for_all_artifacts returned result : {}
+2026-02-06 11:54:16,063 INFO Calling tool send_message with args : {'target': 'named_area', 'task_description': 'Find the area polygon for Exeter.'}
+2026-02-06 11:54:20,135 WARNING OFFLINE MODE
+2026-02-06 11:54:20,151 INFO Messages sent to agent named_area : [{'role': 'user', 'content': 'Find the area polygon for Exeter.'}]
+2026-02-06 11:54:24,938 INFO Calling tool call_os_ngd with args : {'filters': None, 'bbox': None, 'polygon_or_point': True, 'street_address': None, 'filename': 'exeter_area_polygon'}
+2026-02-06 11:54:24,965 INFO NGD query result                                     osid versiondate  \
+0   63c1644f-ce63-4605-88c4-f4f63eca7464  2024-07-21   
+1   03f86278-b36a-4384-bc41-5935aa6c6dd3  2022-07-29   
+2   36f29f4a-0f86-411f-adfd-7a921cb3d154  2022-07-29   
+3   37e0c394-19d3-4e28-a534-73ccb42667b6  2022-07-29   
+4   5fb21b9b-e98f-4278-96c0-85a517b54909  2022-07-29   
+..                                   ...         ...   
+93  58db2138-8696-4d27-a741-a33d66bf2f47  2024-09-25   
+94  97259661-757f-40c8-ac70-5990a1b02a7d  2025-06-05   
+95  64338406-53ac-47af-8344-4e51eb3b5bd2  2025-06-19   
+96  eaeed505-6584-4fa0-b734-8491211c62a9  2025-08-29   
+97  dc813a6c-39c3-493b-ad98-9ded7c3bb80f  2025-10-29   
+
+    versionavailablefromdate versionavailabletodate  \
+0  2024-07-22 00:00:00+00:00                    NaT   
+1  2022-07-30 00:00:00+00:00                    NaT   
+2  2022-07-30 00:00:00+00:00                    NaT   
+3  2022-07-30 00:00:00+00:00                    NaT   
+4  2022-07-30 00:00:00+00:00                    NaT   
+..                       ...                    ...   
+93 2024-09-26 00:00:00+00:00                    NaT   
+94 2025-06-06 00:00:00+00:00                    NaT   
+95 2025-06-20 00:00:00+00:00                    NaT   
+96 2025-08-30 00:00:00+00:00                    NaT   
+97 2025-10-30 00:00:00+00:00                    NaT   
+
+                          changetype  geometry_area geometry_evidencedate  \
+0                                New   7.610553e+03            2024-07-20   
+1                                New   3.000016e+04            2021-07-27   
+2                                New   1.236117e+03            2014-11-19   
+3                                New   7.210933e+04            2014-11-19   
+4                                New   6.824504e+03            2018-04-30   
+..                               ...            ...                   ...   
+93  Modified Geometry And Attributes   1.549032e+06            2024-09-24   
+94  Modified Geometry And Attributes   1.159562e+06            2025-06-03   
+95  Modified Geometry And Attributes   4.633501e+05            2025-06-18   
+96  Modified Geometry And Attributes   3.208213e+07            2025-08-28   
+97  Modified Geometry And Attributes   1.540315e+06            2025-10-28   
+
+   geometry_updatedate  geometry_source               theme  ... name4_text  \
+0           2024-07-20  Ordnance Survey  Geographical Names  ...       None   
+1           2021-07-27  Ordnance Survey  Geographical Names  ...       None   
+2           2015-05-06  Ordnance Survey  Geographical Names  ...       None   
+3           2015-05-06  Ordnance Survey  Geographical Names  ...       None   
+4           2018-04-30  Ordnance Survey  Geographical Names  ...       None   
+..                 ...              ...                 ...  ...        ...   
+93          2024-09-24  Ordnance Survey  Geographical Names  ...       None   
+94          2025-06-03  Ordnance Survey  Geographical Names  ...       None   
+95          2025-06-18  Ordnance Survey  Geographical Names  ...       None   
+96          2025-08-28  Ordnance Survey  Geographical Names  ...       None   
+97          2025-10-28  Ordnance Survey  Geographical Names  ...       None   
+
+   name4_language name4_evidencedate name4_updatedate name4_source  \
+0            None                NaT              NaT         None   
+1            None                NaT              NaT         None   
+2            None                NaT              NaT         None   
+3            None                NaT              NaT         None   
+4            None                NaT              NaT         None   
+..            ...                ...              ...          ...   
+93           None                NaT              NaT         None   
+94           None                NaT              NaT         None   
+95           None                NaT              NaT         None   
+96           None                NaT              NaT         None   
+97           None                NaT              NaT         None   
+
+                                  sameasdbpedia  \
+0                                          None   
+1                                          None   
+2                                          None   
+3                                          None   
+4                                          None   
+..                                          ...   
+93                                         None   
+94                                         None   
+95                                         None   
+96                                         None   
+97  https://dbpedia.org/resource/Topsham,_Devon   
+
+                      sameasgeonames sameasdbobih height  \
+0                               None          NaN    NaN   
+1                               None          NaN  159.0   
+2                               None          NaN    NaN   
+3                               None          NaN    NaN   
+4                               None          NaN    NaN   
+..                               ...          ...    ...   
+93                              None          NaN    NaN   
+94  https://sws.GeoNames.org/2657436          NaN    NaN   
+95                              None          NaN    NaN   
+96  https://sws.GeoNames.org/2649808          NaN    NaN   
+97  https://sws.GeoNames.org/2635680          NaN    NaN   
+
+                                             geometry  
+0   POLYGON ((292747.589 94221.096, 292771.401 942...  
+1   POLYGON ((292461.36 95357.29, 292447.963 95407...  
+2   POLYGON ((291921.65 95445.35, 291893.75 95458....  
+3   POLYGON ((289548.37 94560.12, 289503.97 94498....  
+4   POLYGON ((292998.087 90964.701, 292982.339 909...  
+..                                                ...  
+93  POLYGON ((294272.65 94200.045, 294154.655 9406...  
+94  POLYGON ((291754.039 89509.807, 291821.805 893...  
+95  POLYGON ((290295.76 92873.674, 290057.23 92949...  
+96  POLYGON ((295173.81 89150.11, 295192.057 89168...  
+97  POLYGON ((296472.774 89603.429, 296467.29 8961...  
+
+[98 rows x 41 columns]
+2026-02-06 11:54:24,977 INFO Tool call_os_ngd returned result : ['Search results have been found. \n            Artifact generated is : exeter_area_polygon,\n            Description is : A geopandas dataframe containing named area data with no filters applied for the query (so remember no search is performed here so spurious entities present) Find the area polygon for Exeter..,\n            count of records fetched : 98.\n            ', <a2a.Artifact.Artifact object at 0x0000023C99C6BA50>]
+2026-02-06 11:54:29,879 INFO Calling tool send_message with args : {'target': 'data_analysis_agent', 'task_description': "Filter the artifact 'exeter_area_polygon' to find the specific polygon for Exeter. Save the filtered results as 'filtered_exeter_area_polygon'."}
+2026-02-06 11:54:33,930 WARNING OFFLINE MODE
+2026-02-06 11:54:33,938 INFO Messages sent to agent data_analysis_agent : [{'role': 'user', 'content': "Filter the artifact 'exeter_area_polygon' to find the specific polygon for Exeter. Save the filtered results as 'filtered_exeter_area_polygon'."}]
+2026-02-06 11:54:35,396 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['exeter_area_polygon']}
+2026-02-06 11:54:35,412 INFO artifacts loaded for metadata generation : ['exeter_area_polygon']
+2026-02-06 11:54:35,436 INFO Tool generate_metadata_for_artifacts returned result : [{'filename': 'exeter_area_polygon', 'dataset_summary': {'num_rows': 98, 'num_columns': 41}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['63c1644f-ce63-4605-88c4-f4f63eca7464', '03f86278-b36a-4384-bc41-5935aa6c6dd3', '36f29f4a-0f86-411f-adfd-7a921cb3d154', '37e0c394-19d3-4e28-a534-73ccb42667b6', '5fb21b9b-e98f-4278-96c0-85a517b54909', '03562b32-cd30-48f6-a679-2217d013d710', '04271bb6-866f-4696-917f-3aa96ba8b013', '0739d6ef-0aed-4c28-8855-ff7c7263fb62', '0a54d402-3bcc-4706-9dbd-df4603e7e89c', '0c66b08b-b238-4161-bc46-418450e3f2d8', '152789ea-b15e-46aa-800e-3be1544bdf52', '190e1528-dce5-4ef0-a463-91eb81b1a462', '196dab96-8f6e-4a93-8b01-96f502d66663', '1d130059-d1a7-45e3-af25-2fb09a575b36', '2c773dff-23e1-4dab-b254-99602870bea3', '32119480-f8ca-47c2-8836-2c587a66dccc', '339d04ff-01b2-49b6-a241-c44c32efd75d', '366e0d85-1620-457b-8cfc-6ac4b2457034', '45846c93-d43d-446e-a018-3665d7dcd819', '46336eab-56a2-4169-8039-b34e1f1a17cf']}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-07-21 00:00:00', '2022-07-29 00:00:00', '2025-05-08 00:00:00',
+ '2025-01-14 00:00:00', '2022-08-04 00:00:00', '2023-02-16 00:00:00',
+ '2023-05-23 00:00:00', '2023-06-05 00:00:00', '2023-06-22 00:00:00',
+ '2024-08-15 00:00:00', '2024-09-25 00:00:00', '2025-06-05 00:00:00',
+ '2025-06-19 00:00:00', '2025-08-29 00:00:00', '2025-10-29 00:00:00']
+Length: 15, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-07-22 00:00:00+00:00', '2022-07-30 00:00:00+00:00',
+ '2025-05-09 00:00:00+00:00', '2025-01-15 00:00:00+00:00',
+ '2022-08-05 00:00:00+00:00', '2023-02-17 00:00:00+00:00',
+ '2023-05-24 00:00:00+00:00', '2023-06-06 00:00:00+00:00',
+ '2023-06-23 00:00:00+00:00', '2024-08-16 00:00:00+00:00',
+ '2024-09-26 00:00:00+00:00', '2025-06-06 00:00:00+00:00',
+ '2025-06-20 00:00:00+00:00', '2025-08-30 00:00:00+00:00',
+ '2025-10-30 00:00:00+00:00']
+Length: 15, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['New', 'Modified Geometry And Attributes'], dtype=object)}, {'name': 'geometry_area', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': [7610.552765, 30000.159218, 1236.116748, 72109.331375, 6824.50407, 180501.893336, 28809.284033, 29.34558, 27.999616, 968262.597279, 354028.684261, 54960.69399, 86967.288715, 169362.471198, 3140390.422026, 16823.736954, 72.27525, 49.0, 1501.951499, 120340.993212]}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2021-07-27 00:00:00'), Timestamp('2014-11-19 00:00:00'), Timestamp('2018-04-30 00:00:00'), Timestamp('2011-09-01 00:00:00'), Timestamp('2017-01-21 00:00:00'), Timestamp('2021-10-01 00:00:00'), Timestamp('2018-04-27 00:00:00'), Timestamp('2019-02-25 00:00:00'), Timestamp('2018-07-03 00:00:00'), Timestamp('2025-05-07 00:00:00'), Timestamp('2021-10-28 00:00:00'), Timestamp('2015-01-07 00:00:00'), Timestamp('2018-05-01 00:00:00'), Timestamp('2022-03-24 00:00:00'), Timestamp('2014-12-10 00:00:00'), Timestamp('2025-01-13 00:00:00'), Timestamp('2021-04-19 00:00:00'), Timestamp('2014-11-30 00:00:00'), Timestamp('2023-02-15 00:00:00')]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2021-07-27 00:00:00'), Timestamp('2015-05-06 00:00:00'), Timestamp('2018-04-30 00:00:00'), Timestamp('2015-02-27 00:00:00'), Timestamp('2017-01-25 00:00:00'), Timestamp('2021-10-01 00:00:00'), Timestamp('2018-04-27 00:00:00'), Timestamp('2015-05-01 00:00:00'), Timestamp('2019-02-25 00:00:00'), Timestamp('2018-07-03 00:00:00'), Timestamp('2025-05-07 00:00:00'), Timestamp('2021-10-28 00:00:00'), Timestamp('2018-05-01 00:00:00'), Timestamp('2022-03-24 00:00:00'), Timestamp('2016-10-03 00:00:00'), Timestamp('2015-04-20 00:00:00'), Timestamp('2025-01-13 00:00:00'), Timestamp('2021-04-19 00:00:00'), Timestamp('2023-02-15 00:00:00')]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Geographical Names'], dtype=object)}, {'name': 'descriptiongroup', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Other Name', 'Landform Name', 'Land Name', 'Water Name',
+       'Settlement'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Named Other Geographic Area', 'Named Hill Or Mountain',
+       'Named Woodland Or Forest', 'Named Stretch Of Inland Water',
+       'Suburban Area', 'Part Of Settlement', 'Named Inland Water Marsh',
+       'Village', 'Named Tidal Land Cover', 'Named Area Of Railway Land',
+       'Named Other Land Cover', 'Named Valley', 'City', 'Town'],
+      dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2004-12-30 00:00:00'), Timestamp('2015-05-09 00:00:00'), Timestamp('2011-09-01 00:00:00'), Timestamp('2017-01-21 00:00:00'), Timestamp('2019-11-01 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2018-04-27 00:00:00'), Timestamp('2014-12-21 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2003-03-10 00:00:00'), Timestamp('2005-01-05 00:00:00'), Timestamp('2014-04-23 00:00:00'), Timestamp('2004-12-31 00:00:00'), Timestamp('2015-05-04 00:00:00'), Timestamp('2005-11-03 00:00:00'), Timestamp('2021-09-29 00:00:00'), Timestamp('2003-03-06 00:00:00'), Timestamp('2003-03-19 00:00:00'), Timestamp('2005-01-04 00:00:00')]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2004-12-30 00:00:00'), Timestamp('2015-05-09 00:00:00'), Timestamp('2015-02-27 00:00:00'), Timestamp('2017-01-25 00:00:00'), Timestamp('2019-11-01 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2018-04-27 00:00:00'), Timestamp('2014-12-21 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2003-03-10 00:00:00'), Timestamp('2005-01-05 00:00:00'), Timestamp('2014-04-23 00:00:00'), Timestamp('2004-12-31 00:00:00'), Timestamp('2015-05-04 00:00:00'), Timestamp('2005-11-03 00:00:00'), Timestamp('2021-09-29 00:00:00'), Timestamp('2003-03-06 00:00:00'), Timestamp('2003-03-19 00:00:00'), Timestamp('2005-01-04 00:00:00')]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'extentdefinition', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Manually Defined Complete', 'Auto-Generated Indication'],
+      dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['Pennsylvania Park', 'Roman Hill', 'Jubilee Copse', 'Bolsters Wood', 'Salmon Pool', 'Polsloe Priory', 'Polsloe Park', 'Wessex Estate', 'Salutary Mount', 'Stoke Woods', 'Exwick Wood', 'Lilly Copse', 'Red Cow Village', 'Clyst Heath', 'Heavitree', "Duck's Marsh", 'Middle Moor', 'The Knap', 'Grassway Plantation', 'Wonford']}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2024-07-20 00:00:00'), Timestamp('2004-12-30 00:00:00'), Timestamp('2015-05-09 00:00:00'), Timestamp('2011-09-01 00:00:00'), Timestamp('2017-01-21 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2008-11-17 00:00:00'), Timestamp('2015-05-04 00:00:00'), Timestamp('2003-03-10 00:00:00'), Timestamp('2005-01-05 00:00:00'), Timestamp('2014-04-23 00:00:00'), Timestamp('2004-12-31 00:00:00'), Timestamp('2005-11-03 00:00:00'), Timestamp('2008-02-28 00:00:00'), Timestamp('2003-03-06 00:00:00'), Timestamp('2003-03-19 00:00:00'), Timestamp('2002-08-29 00:00:00'), Timestamp('2005-01-04 00:00:00'), Timestamp('2003-03-18 00:00:00')]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-07-20 00:00:00', '2011-06-25 00:00:00', '2015-05-09 00:00:00',
+ '2015-02-27 00:00:00', '2017-01-25 00:00:00', '2015-05-04 00:00:00',
+ '2014-04-23 00:00:00', '2011-08-03 00:00:00', '2015-05-07 00:00:00',
+ '2016-10-03 00:00:00', '2015-04-20 00:00:00', '2022-08-03 00:00:00',
+ '2015-05-08 00:00:00', '2015-01-16 00:00:00']
+Length: 14, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 0.02040816326530612, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'sameasdbpedia', 'dtype': 'object', 'null_fraction': 0.9591836734693877, 'example_values': array(['https://dbpedia.org/resource/Exwick',
+       'https://dbpedia.org/resource/Pinhoe',
+       'https://dbpedia.org/resource/St_Thomas,_Exeter',
+       'https://dbpedia.org/resource/Topsham,_Devon'], dtype=object)}, {'name': 'sameasgeonames', 'dtype': 'object', 'null_fraction': 0.8979591836734694, 'example_values': array(['https://sws.GeoNames.org/6691884',
+       'https://sws.GeoNames.org/2652720',
+       'https://sws.GeoNames.org/2652240',
+       'https://sws.GeoNames.org/6691886',
+       'https://sws.GeoNames.org/2640277',
+       'https://sws.GeoNames.org/6691885',
+       'https://sws.GeoNames.org/6691883',
+       'https://sws.GeoNames.org/2657436',
+       'https://sws.GeoNames.org/2649808',
+       'https://sws.GeoNames.org/2635680'], dtype=object)}, {'name': 'sameasdbobih', 'dtype': 'float64', 'null_fraction': 0.9897959183673469, 'example_values': array([5417.])}, {'name': 'height', 'dtype': 'float64', 'null_fraction': 0.9183673469387755, 'example_values': array([159. , 125. ,  50. , 160. , 155. , 157. ,  59.4,  70. ])}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': [<POLYGON ((292747.589 94221.096, 292771.401 94249.671, 292776.958 94265.81, ...>, <POLYGON ((292461.36 95357.29, 292447.963 95407.29, 292411.36 95443.893, 292...>, <POLYGON ((291921.65 95445.35, 291893.75 95458.85, 291874.9 95468.35, 291859...>, <POLYGON ((289548.37 94560.12, 289503.97 94498.02, 289470.1 94447.92, 289461...>, <POLYGON ((292998.087 90964.701, 292982.339 90956.833, 292975.776 90945.017,...>, <POLYGON ((293859.012 93441.562, 294055.17 93479.901, 293944.282 93545.932, ...>, <POLYGON ((293350.52 93174.885, 293370.308 93047.053, 293387.7 93050.97, 293...>, <POLYGON ((291104.192 93428.316, 291106.313 93428.194, 291107.108 93441.984,...>, <POLYGON ((293647.44 92420.42, 293661.192 92417.797, 293661.567 92419.761, 2...>, <POLYGON ((291848.028 95918.188, 291871.311 95875.855, 291968.678 95806.005,...>, <POLYGON ((290266.915 94920.953, 290229.81 94925.67, 289988.59 94961.33, 289...>, <POLYGON ((292116.1 95829.57, 292111.72 95836.88, 292105.85 95848.04, 292102...>, <POLYGON ((291499.957 93342.357, 291447.701 93496.411, 291426.865 93543.441,...>, <POLYGON ((295515.271 91227.526, 295557.997 91219.998, 295568.303 91207.881,...>, <POLYGON ((294205.279 93256.415, 294118.137 93269.801, 294007.827 93248.867,...>, <POLYGON ((293006.719 90827.488, 293007.143 90802.511, 293009.259 90792.775,...>, <POLYGON ((295848.4 92135.655, 295848.4 92132.03, 295868.338 92132.03, 29586...>, <POLYGON ((289843.09 94340.64, 289843.09 94337.14, 289857.09 94337.14, 28985...>, <POLYGON ((291413.464 94325.433, 291384.977 94312.56, 291404.763 94268.777, ...>, <POLYGON ((294123.282 91671.579, 294183.941 91695.342, 294199.912 91724.183,...>]}], 'preview_rows': [{'osid': '63c1644f-ce63-4605-88c4-f4f63eca7464', 'versiondate': Timestamp('2024-07-21 00:00:00'), 'versionavailablefromdate': Timestamp('2024-07-22 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 7610.552765, 'geometry_evidencedate': Timestamp('2024-07-20 00:00:00'), 'geometry_updatedate': Timestamp('2024-07-20 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Other Name', 'description': 'Named Other Geographic Area', 'description_evidencedate': Timestamp('2024-07-20 00:00:00'), 'description_updatedate': Timestamp('2024-07-20 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Pennsylvania Park', 'name1_language': None, 'name1_evidencedate': Timestamp('2024-07-20 00:00:00'), 'name1_updatedate': Timestamp('2024-07-20 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((292747.589 94221.096, 292771.401 94249.671, 292776.958 94265.81, ...>}, {'osid': '03f86278-b36a-4384-bc41-5935aa6c6dd3', 'versiondate': Timestamp('2022-07-29 00:00:00'), 'versionavailablefromdate': Timestamp('2022-07-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 30000.159218, 'geometry_evidencedate': Timestamp('2021-07-27 00:00:00'), 'geometry_updatedate': Timestamp('2021-07-27 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Landform Name', 'description': 'Named Hill Or Mountain', 'description_evidencedate': Timestamp('2004-12-30 00:00:00'), 'description_updatedate': Timestamp('2004-12-30 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Auto-Generated Indication', 'name1_text': 'Roman Hill', 'name1_language': None, 'name1_evidencedate': Timestamp('2004-12-30 00:00:00'), 'name1_updatedate': Timestamp('2011-06-25 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': 159.0, 'geometry': <POLYGON ((292461.36 95357.29, 292447.963 95407.29, 292411.36 95443.893, 292...>}, {'osid': '36f29f4a-0f86-411f-adfd-7a921cb3d154', 'versiondate': Timestamp('2022-07-29 00:00:00'), 'versionavailablefromdate': Timestamp('2022-07-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area': 1236.116748, 'geometry_evidencedate': Timestamp('2014-11-19 00:00:00'), 'geometry_updatedate': Timestamp('2015-05-06 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Land Name', 'description': 'Named Woodland Or Forest', 'description_evidencedate': Timestamp('2015-05-09 00:00:00'), 'description_updatedate': Timestamp('2015-05-09 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Jubilee Copse', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-09 00:00:00'), 'name1_updatedate': Timestamp('2015-05-09 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': None, 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((291921.65 95445.35, 291893.75 95458.85, 291874.9 95468.35, 291859...>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}]
+2026-02-06 11:54:43,407 INFO Calling tool code_executor with args : {'code': 'def filter_exeter_area_polygon(data: list):\n    gdf = data[0]\n    # Filter for Exeter using multiple relevant columns\n    filtered = gdf[((gdf[\'name1_text\'].str.lower() == \'exeter\') |\n                    (gdf[\'description\'].str.lower().isin([\'city\', \'town\', \'suburban area\', \'part of settlement\', \'village\'])) |\n                    (gdf[\'descriptiongroup\'].str.lower() == \'settlement\')) &\n                   (gdf[\'name1_text\'].str.lower().str.contains(\'exeter\'))]\n    summary = f"Filtered to {len(filtered)} polygon(s) for Exeter."\n    artifact_name = \'filtered_exeter_area_polygon\'\n    artifact_description = \'Polygon(s) from exeter_area_polygon filtered to represent the area of Exeter, using name and settlement-related columns.\'\n    return [summary, artifact_name, artifact_description, filtered]\n', 'artifact_names': ['exeter_area_polygon']}
+2026-02-06 11:54:43,407 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_exeter_area_polygon(data: list):
+    gdf = data[0]
+    # Filter for Exeter using multiple relevant columns
+    filtered = gdf[((gdf['name1_text'].str.lower() == 'exeter') |
+                    (gdf['description'].str.lower().isin(['city', 'town', 'suburban area', 'part of settlement', 'village'])) |
+                    (gdf['descriptiongroup'].str.lower() == 'settlement')) &
+                   (gdf['name1_text'].str.lower().str.contains('exeter'))]
+    summary = f"Filtered to {len(filtered)} polygon(s) for Exeter."
+    artifact_name = 'filtered_exeter_area_polygon'
+    artifact_description = 'Polygon(s) from exeter_area_polygon filtered to represent the area of Exeter, using name and settlement-related columns.'
+    return [summary, artifact_name, artifact_description, filtered]
+
+2026-02-06 11:54:43,407 INFO function name filter_exeter_area_polygon
+2026-02-06 11:54:43,407 INFO Output completed
+2026-02-06 11:54:43,416 INFO Tool code_executor returned result : ['Filtered to 1 polygon(s) for Exeter.', <a2a.Artifact.Artifact object at 0x0000023CB8D39B90>]
+2026-02-06 11:54:49,327 WARNING OFFLINE MODE
+2026-02-06 11:54:49,327 INFO Output from agent data_analysis_agent : Filtered to 1 polygon for Exeter. The artifact 'filtered_exeter_area_polygon' contains the polygon(s) from 'exeter_area_polygon' that represent the area of Exeter, using both the name and settlement-related columns for accurate filtering.
+2026-02-06 11:54:49,327 INFO Tool send_message returned result : ["Filtered to 1 polygon for Exeter. The artifact 'filtered_exeter_area_polygon' contains the polygon(s) from 'exeter_area_polygon' that represent the area of Exeter, using both the name and settlement-related columns for accurate filtering.Addtionally some data artifacts have been generated with names  ['filtered_exeter_area_polygon'] and \n descriptions ['Polygon(s) from exeter_area_polygon filtered to represent the area of Exeter, using name and settlement-related columns.']", [<a2a.Artifact.Artifact object at 0x0000023CB8D39B90>]]
+2026-02-06 11:54:56,097 WARNING OFFLINE MODE
+2026-02-06 11:54:56,097 INFO Output from agent named_area : The specific polygon for Exeter has been filtered and saved as 'filtered_exeter_area_polygon'.
+2026-02-06 11:54:56,097 INFO Tool send_message returned result : ["The specific polygon for Exeter has been filtered and saved as 'filtered_exeter_area_polygon'.Addtionally some data artifacts have been generated with names  ['filtered_exeter_area_polygon'] and \n descriptions ['Polygon(s) from exeter_area_polygon filtered to represent the area of Exeter, using name and settlement-related columns.']", [<a2a.Artifact.Artifact object at 0x0000023CB8D39B90>]]
+2026-02-06 11:54:58,311 INFO Calling tool send_message with args : {'target': 'structures_agent', 'task_description': "Search for all bridges and their types within the artifact 'filtered_exeter_area_polygon'."}
+2026-02-06 11:55:02,386 WARNING OFFLINE MODE
+2026-02-06 11:55:02,402 INFO Messages sent to agent structures_agent : [{'role': 'user', 'content': "Search for all bridges and their types within the artifact 'filtered_exeter_area_polygon'."}]
+2026-02-06 11:55:05,874 INFO Calling tool call_os_ngd with args : {'filters': ['Bridge', 'Footbridge', 'Lift Bridge', 'Swing Bridge', 'Transporter Bridge'], 'bbox': 'filtered_exeter_area_polygon', 'polygon_or_point': True, 'street_address': False, 'filename': 'exeter_bridges'}
+2026-02-06 11:55:06,098 INFO NGD query result [                                     osid versiondate  \
+0    a14d2cd1-c099-4115-b9c4-27cd16864a0e  2024-08-19   
+1    77cd88bb-5ee7-45ea-9824-ebee6c49e65e  2024-08-19   
+2    0d6acce7-5bc5-4aa6-9635-0dc207c85bc3  2024-08-19   
+3    e3d70435-8e0d-41ee-ac31-d66570063c49  2024-08-19   
+4    f14905d1-1dfe-461d-be4d-3460a2e35fc1  2024-10-16   
+..                                    ...         ...   
+177  fa3088dd-9261-4b9c-abff-ae612ad8205d  2024-08-19   
+178  798b3bd4-3035-42ff-9e6b-7529fc5cdda8  2024-08-19   
+179  476906c3-2326-4761-a9ce-c0043bd67ece  2024-08-19   
+180  3e62ed0c-927f-40e7-bcd5-ebeaef266153  2024-08-19   
+181  d0017c33-e3aa-46b1-a561-677106b8e083  2024-08-19   
+
+     versionavailablefromdate versionavailabletodate           changetype  \
+0   2024-08-20 00:00:00+00:00                    NaT                  New   
+1   2024-08-20 00:00:00+00:00                    NaT                  New   
+2   2024-08-20 00:00:00+00:00                    NaT                  New   
+3   2024-08-20 00:00:00+00:00                    NaT                  New   
+4   2024-10-17 00:00:00+00:00                    NaT  Modified Attributes   
+..                        ...                    ...                  ...   
+177 2024-08-20 00:00:00+00:00                    NaT                  New   
+178 2024-08-20 00:00:00+00:00                    NaT                  New   
+179 2024-08-20 00:00:00+00:00                    NaT                  New   
+180 2024-08-20 00:00:00+00:00                    NaT                  New   
+181 2024-08-20 00:00:00+00:00                    NaT                  New   
+
+     geometry_area_m2 geometry_evidencedate geometry_updatedate  \
+0             331.787            2014-06-24          2015-06-19   
+1             596.710            2023-10-05          2023-10-05   
+2             348.530            2017-05-16          2017-05-16   
+3             921.840            2022-04-13          2022-04-13   
+4            1288.883            2018-09-07          2018-09-07   
+..                ...                   ...                 ...   
+177            22.974            2022-01-11          2022-01-11   
+178             8.754            2014-06-24          2015-05-28   
+179            11.081            2014-06-24          2015-05-28   
+180            35.723            2019-03-08          2019-03-08   
+181            37.200            2019-09-14          2019-11-06   
+
+     geometry_source       theme  ... name4_text name4_language  \
+0    Ordnance Survey  Structures  ...       None           None   
+1    Ordnance Survey  Structures  ...       None           None   
+2    Ordnance Survey  Structures  ...       None           None   
+3    Ordnance Survey  Structures  ...       None           None   
+4    Ordnance Survey  Structures  ...       None           None   
+..               ...         ...  ...        ...            ...   
+177  Ordnance Survey  Structures  ...       None           None   
+178  Ordnance Survey  Structures  ...       None           None   
+179  Ordnance Survey  Structures  ...       None           None   
+180  Ordnance Survey  Structures  ...       None           None   
+181  Ordnance Survey  Structures  ...       None           None   
+
+    name4_evidencedate name4_updatedate name4_source operationalstatus  \
+0                  NaT              NaT         None            Active   
+1                  NaT              NaT         None            Active   
+2                  NaT              NaT         None            Active   
+3                  NaT              NaT         None            Active   
+4                  NaT              NaT         None            Active   
+..                 ...              ...          ...               ...   
+177                NaT              NaT         None            Active   
+178                NaT              NaT         None            Active   
+179                NaT              NaT         None            Active   
+180                NaT              NaT         None            Active   
+181                NaT              NaT         None            Active   
+
+    capturespecification networkover networkunder  \
+0                  Urban        Road        Water   
+1                  Urban        Path         Road   
+2                  Rural     Railway         Road   
+3                  Urban        Road        Water   
+4                  Urban        Road     Multiple   
+..                   ...         ...          ...   
+177                Urban        Path         None   
+178                Urban        Path         None   
+179                Urban        Path         None   
+180                Urban        Path        Water   
+181                Urban        None        Canal   
+
+                                              geometry  
+0    POLYGON ((292954.277 89539.497, 292973.546 895...  
+1    POLYGON ((296035.97 91015.49, 296031.67 91033....  
+2    POLYGON ((296075.509 91033.838, 296074.58 9105...  
+3    POLYGON ((295627.703 89823.737, 295626.94 8982...  
+4    POLYGON ((295177.45 90748.75, 295178.25 90751....  
+..                                                 ...  
+177  POLYGON ((292275.782 94268.593, 292273.215 942...  
+178  POLYGON ((292030.94 94319.21, 292032.612 94314...  
+179  POLYGON ((292065.778 94332.126, 292063.976 943...  
+180  POLYGON ((292255.9 91662.45, 292255.6 91662.6,...  
+181  POLYGON ((292286.91 91679.64, 292284.453 91679...  
+
+[182 rows x 39 columns]]
+2026-02-06 11:55:06,113 INFO Tool call_os_ngd returned result : ['Multiple search results have been found in multiple datasets. A summary of each is provided.\n            Artifacts generated are : [\'exeter_bridges\'],\n            Descriptions are : ["A geopandas dataframe containing compound structure data with filters and bbox applied for the query Search for all bridges and their types within the artifact \'filtered_exeter_area_polygon\'. using filters [\'Bridge\', \'Footbridge\', \'Lift Bridge\', \'Swing Bridge\', \'Transporter Bridge\']. Further Name filtering is available for this"],\n            counts of records fetched are : [182].\n            ', [<a2a.Artifact.Artifact object at 0x0000023C98410110>]]
+2026-02-06 11:55:08,646 INFO Calling tool send_message with args : {'target': 'data_analysis_agent', 'task_description': "Please analyze the dataset 'exeter_bridges' to identify and list all types of bridges found within the 'filtered_exeter_area_polygon'. Save the filtered results as 'filtered_exeter_bridges'."}
+2026-02-06 11:55:12,732 WARNING OFFLINE MODE
+2026-02-06 11:55:12,748 INFO Messages sent to agent data_analysis_agent : [{'role': 'user', 'content': "Please analyze the dataset 'exeter_bridges' to identify and list all types of bridges found within the 'filtered_exeter_area_polygon'. Save the filtered results as 'filtered_exeter_bridges'."}]
+2026-02-06 11:55:14,021 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['exeter_bridges', 'filtered_exeter_area_polygon']}
+2026-02-06 11:55:14,061 INFO artifacts loaded for metadata generation : ['exeter_bridges', 'filtered_exeter_area_polygon']
+2026-02-06 11:55:14,126 INFO Tool generate_metadata_for_artifacts returned result : [{'filename': 'exeter_bridges', 'dataset_summary': {'num_rows': 182, 'num_columns': 39}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['a14d2cd1-c099-4115-b9c4-27cd16864a0e', '77cd88bb-5ee7-45ea-9824-ebee6c49e65e', '0d6acce7-5bc5-4aa6-9635-0dc207c85bc3', 'e3d70435-8e0d-41ee-ac31-d66570063c49', 'f14905d1-1dfe-461d-be4d-3460a2e35fc1', '7a49ac3d-eab9-4dd1-a3cf-f1ef71b789ae', '1ebcae82-1d09-4af8-85bd-fb67b063287f', 'c86e5079-f609-4a9d-a3a4-7de949926a68', '46825b4c-b271-4e3b-a2fe-b54631f55b44', '9d1ab9af-725d-4fe3-b219-3aa084b0074c', 'cf1256fb-08ed-4916-8c4a-3a12706ea1c8', 'f8b6bc08-64d9-4511-b7af-ddd3118da478', 'e5505658-26a7-4c17-ade0-abcb712ca893', '413948f6-388d-4490-bcb1-2f257702a81f', 'dc9d0b7c-3627-46e2-8a9e-6ccc2a8f8c23', '2842e8e1-5749-4a8f-abe1-5dcc2f4e0072', 'cdfe6105-2e93-4f44-88b0-e41d3098483f', 'cf0b7b76-62d0-4d84-82ac-a7aa4daf0d96', '93cee8de-88ac-4866-9c81-be69ea308fc6', '2853db89-f1b1-44d6-8551-c7053ef0789e']}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-08-19 00:00:00', '2024-10-16 00:00:00', '2024-08-30 00:00:00',
+ '2024-10-22 00:00:00', '2024-11-01 00:00:00', '2024-09-19 00:00:00']
+Length: 6, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-08-20 00:00:00+00:00', '2024-10-17 00:00:00+00:00',
+ '2024-08-31 00:00:00+00:00', '2024-10-23 00:00:00+00:00',
+ '2024-11-02 00:00:00+00:00', '2024-09-20 00:00:00+00:00']
+Length: 6, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['New', 'Modified Attributes', 'Modified Geometry And Attributes'],
+      dtype=object)}, {'name': 'geometry_area_m2', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': [331.787, 596.71, 348.53, 921.84, 1288.883, 231.948, 10.9, 9.003, 12.687, 105.241, 117.391, 373.87, 320.035, 82.521, 77.112, 61.966, 652.633, 127.477, 70.036, 60.604]}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2014-06-24 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2017-05-16 00:00:00'), Timestamp('2022-04-13 00:00:00'), Timestamp('2018-09-07 00:00:00'), Timestamp('2013-06-08 00:00:00'), Timestamp('2018-06-27 00:00:00'), Timestamp('2016-10-06 00:00:00'), Timestamp('2018-05-24 00:00:00'), Timestamp('2020-05-18 00:00:00'), Timestamp('2018-07-09 00:00:00'), Timestamp('2019-09-14 00:00:00'), Timestamp('2014-08-13 00:00:00'), Timestamp('2023-05-30 00:00:00'), Timestamp('2019-03-22 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2014-12-02 00:00:00'), Timestamp('2024-04-20 00:00:00'), Timestamp('2024-09-03 00:00:00'), Timestamp('2017-02-22 00:00:00')]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2015-06-19 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2017-05-16 00:00:00'), Timestamp('2022-04-13 00:00:00'), Timestamp('2018-09-07 00:00:00'), Timestamp('2014-04-15 00:00:00'), Timestamp('2014-04-11 00:00:00'), Timestamp('2015-11-24 00:00:00'), Timestamp('2019-02-14 00:00:00'), Timestamp('2016-10-06 00:00:00'), Timestamp('2018-05-24 00:00:00'), Timestamp('2020-05-18 00:00:00'), Timestamp('2019-09-20 00:00:00'), Timestamp('2019-11-13 00:00:00'), Timestamp('2014-08-13 00:00:00'), Timestamp('2023-05-30 00:00:00'), Timestamp('2014-05-22 00:00:00'), Timestamp('2019-11-11 00:00:00'), Timestamp('2019-03-23 00:00:00'), Timestamp('2019-11-07 00:00:00')]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Structures'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Bridge', 'Footbridge', 'Swing Bridge'], dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2015-01-22 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2013-06-08 00:00:00'), Timestamp('2019-03-20 00:00:00'), Timestamp('2018-09-07 00:00:00'), Timestamp('2014-06-24 00:00:00'), Timestamp('2018-06-27 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2004-02-18 00:00:00'), Timestamp('2017-02-07 00:00:00'), Timestamp('2017-01-23 00:00:00'), Timestamp('2018-07-09 00:00:00'), Timestamp('2014-11-14 00:00:00'), Timestamp('2014-08-13 00:00:00'), Timestamp('2017-03-31 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2017-01-20 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2014-12-02 00:00:00'), Timestamp('2019-09-18 00:00:00')]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2015-01-22 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2013-11-29 00:00:00'), Timestamp('2019-03-20 00:00:00'), Timestamp('2018-09-07 00:00:00'), Timestamp('2014-04-12 00:00:00'), Timestamp('2014-04-11 00:00:00'), Timestamp('2015-11-16 00:00:00'), Timestamp('2019-02-14 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2004-02-18 00:00:00'), Timestamp('2017-02-07 00:00:00'), Timestamp('2017-01-23 00:00:00'), Timestamp('2019-09-20 00:00:00'), Timestamp('2014-11-14 00:00:00'), Timestamp('2014-08-13 00:00:00'), Timestamp('2017-03-31 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2017-01-20 00:00:00'), Timestamp('2016-01-20 00:00:00')]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.9285714285714286, 'example_values': array(['Woodwater Bridge', 'Gallows Bridge', 'Alphington Bridge',
+       'Exeter City Suspension Bridge', 'Exe Bridge South', 'Quay Bridge',
+       'Exe Bridge North', 'Chancel Bridge', 'Polsloe Bridge',
+       'Cricklepit Bridge', 'Millers Crossing', 'Redhayes Bridge',
+       'Swing-Bridge'], dtype=object)}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.9285714285714286, 'example_values': <DatetimeArray>
+['2003-03-20 00:00:00', '2003-03-07 00:00:00', '2017-03-31 00:00:00',
+ '2003-02-27 00:00:00', '2003-03-19 00:00:00', '2003-03-10 00:00:00',
+ '2019-09-14 00:00:00', '2013-06-08 00:00:00']
+Length: 8, dtype: datetime64[ms]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.9285714285714286, 'example_values': <DatetimeArray>
+['2011-06-25 00:00:00', '2017-03-31 00:00:00', '2019-11-12 00:00:00',
+ '2014-02-03 00:00:00', '2019-11-06 00:00:00']
+Length: 5, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 0.9285714285714286, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'operationalstatus', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Active', 'Inactive'], dtype=object)}, {'name': 'capturespecification', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Urban', 'Rural'], dtype=object)}, {'name': 'networkover', 'dtype': 'object', 'null_fraction': 0.21428571428571427, 'example_values': array(['Road', 'Path', 'Railway', 'Multiple'], dtype=object)}, {'name': 'networkunder', 'dtype': 'object', 'null_fraction': 0.24725274725274726, 'example_values': array(['Water', 'Road', 'Multiple', 'Railway', 'Path', 'Canal'],
+      dtype=object)}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': [<POLYGON ((292954.277 89539.497, 292973.546 89540.149, 292976.254 89540.241,...>, <POLYGON ((296035.97 91015.49, 296031.67 91033.02, 296029.01 91043.88, 29602...>, <POLYGON ((296075.509 91033.838, 296074.58 91051.98, 296074.18 91061.89, 296...>, <POLYGON ((295627.703 89823.737, 295626.94 89824.437, 295622.113 89828.647, ...>, <POLYGON ((295177.45 90748.75, 295178.25 90751.6, 295179.75 90756.7, 295180....>, <POLYGON ((292857.69 90233.94, 292872.51 90215.11, 292858.95 90216.41, 29285...>, <POLYGON ((293855.3 90320.69, 293856.3 90321.19, 293857.5 90321.59, 293857.5...>, <POLYGON ((293863.7 90322.99, 293865.088 90323.072, 293865.393 90322.018, 29...>, <POLYGON ((294190.25 91104.25, 294186.85 91106.2, 294188.43 91109.05, 294191...>, <POLYGON ((294458.23 91495.08, 294451.1 91499.45, 294452.402 91501.268, 2944...>, <POLYGON ((294633.61 91793.87, 294632.35 91794.25, 294627.86 91795.63, 29462...>, <POLYGON ((295647.75 92500.9, 295648.5 92501, 295648.75 92500, 295649.3 9249...>, <POLYGON ((296065.9 91725.7, 296060.341 91728.332, 296059.835 91728.572, 296...>, <POLYGON ((295871.56 92568.69, 295871.06 92569.3, 295869.95 92570.65, 295868...>, <POLYGON ((292513.173 89779.68, 292512.51 89780.49, 292511.35 89781.83, 2925...>, <POLYGON ((292843.84 90251.86, 292830.79 90253.6, 292827.06 90258.51, 292838...>, <POLYGON ((292401.692 90284.026, 292409.734 90287.235, 292411.35 90287.88, 2...>, <POLYGON ((292609.71 90592.21, 292610.34 90592.54, 292617.32 90596.66, 29261...>, <POLYGON ((292597.17 90635.67, 292598.67 90633.14, 292600.19 90630.07, 29259...>, <POLYGON ((292563.23 90701.11, 292564.08 90699.64, 292565.06 90697.73, 29256...>]}], 'preview_rows': [{'osid': 'a14d2cd1-c099-4115-b9c4-27cd16864a0e', 'versiondate': Timestamp('2024-08-19 00:00:00'), 'versionavailablefromdate': Timestamp('2024-08-20 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 331.787, 'geometry_evidencedate': Timestamp('2014-06-24 00:00:00'), 'geometry_updatedate': Timestamp('2015-06-19 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Structures', 'description': 'Bridge', 'description_evidencedate': Timestamp('2015-01-22 00:00:00'), 'description_updatedate': Timestamp('2015-01-22 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': None, 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'operationalstatus': 'Active', 'capturespecification': 'Urban', 'networkover': 'Road', 'networkunder': 'Water', 'geometry': <POLYGON ((292954.277 89539.497, 292973.546 89540.149, 292976.254 89540.241,...>}, {'osid': '77cd88bb-5ee7-45ea-9824-ebee6c49e65e', 'versiondate': Timestamp('2024-08-19 00:00:00'), 'versionavailablefromdate': Timestamp('2024-08-20 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 596.71, 'geometry_evidencedate': Timestamp('2023-10-05 00:00:00'), 'geometry_updatedate': Timestamp('2023-10-05 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Structures', 'description': 'Bridge', 'description_evidencedate': Timestamp('2023-10-05 00:00:00'), 'description_updatedate': Timestamp('2023-10-05 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': None, 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'operationalstatus': 'Active', 'capturespecification': 'Urban', 'networkover': 'Path', 'networkunder': 'Road', 'geometry': <POLYGON ((296035.97 91015.49, 296031.67 91033.02, 296029.01 91043.88, 29602...>}, {'osid': '0d6acce7-5bc5-4aa6-9635-0dc207c85bc3', 'versiondate': Timestamp('2024-08-19 00:00:00'), 'versionavailablefromdate': Timestamp('2024-08-20 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 348.53, 'geometry_evidencedate': Timestamp('2017-05-16 00:00:00'), 'geometry_updatedate': Timestamp('2017-05-16 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Structures', 'description': 'Bridge', 'description_evidencedate': Timestamp('2013-06-08 00:00:00'), 'description_updatedate': Timestamp('2013-11-29 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': None, 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'operationalstatus': 'Active', 'capturespecification': 'Rural', 'networkover': 'Railway', 'networkunder': 'Road', 'geometry': <POLYGON ((296075.509 91033.838, 296074.58 91051.98, 296074.18 91061.89, 296...>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}, {'filename': 'filtered_exeter_area_polygon', 'dataset_summary': {'num_rows': 1, 'num_columns': 41}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['eaeed505-6584-4fa0-b734-8491211c62a9'], dtype=object)}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-29 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-30 00:00:00+00:00']
+Length: 1, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Modified Geometry And Attributes'], dtype=object)}, {'name': 'geometry_area', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': array([32082134.479725])}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-28 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-28 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Geographical Names'], dtype=object)}, {'name': 'descriptiongroup', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Settlement'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['City'], dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'extentdefinition', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Manually Defined Complete'], dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Exeter'], dtype=object)}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'sameasdbpedia', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'sameasgeonames', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['https://sws.GeoNames.org/2649808'], dtype=object)}, {'name': 'sameasdbobih', 'dtype': 'float64', 'null_fraction': 1.0, 'example_values': array([], dtype=float64)}, {'name': 'height', 'dtype': 'float64', 'null_fraction': 1.0, 'example_values': array([], dtype=float64)}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': <GeometryArray>
+[<POLYGON ((295173.81 89150.11, 295192.057 89168.355, 295231.155 89233.516, 2...>]
+Length: 1, dtype: geometry}], 'preview_rows': [{'osid': 'eaeed505-6584-4fa0-b734-8491211c62a9', 'versiondate': Timestamp('2025-08-29 00:00:00'), 'versionavailablefromdate': Timestamp('2025-08-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'Modified Geometry And Attributes', 'geometry_area': 32082134.479725, 'geometry_evidencedate': Timestamp('2025-08-28 00:00:00'), 'geometry_updatedate': Timestamp('2025-08-28 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Settlement', 'description': 'City', 'description_evidencedate': Timestamp('2015-05-04 00:00:00'), 'description_updatedate': Timestamp('2015-05-04 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Exeter', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-04 00:00:00'), 'name1_updatedate': Timestamp('2015-05-04 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': 'https://sws.GeoNames.org/2649808', 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((295173.81 89150.11, 295192.057 89168.355, 295231.155 89233.516, 2...>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}]
+2026-02-06 11:55:20,334 INFO Calling tool code_executor with args : {'code': 'def filter_and_list_bridge_types(data: list):\n    import geopandas as gpd\n    # exeter_bridges = data[0], filtered_exeter_area_polygon = data[1]\n    bridges = data[0]\n    area = data[1]\n    # Spatial filter: bridges within the area polygon\n    filtered = bridges[bridges.geometry.within(area.geometry.iloc[0])].copy()\n    # List all unique bridge types in the filtered set\n    bridge_types = filtered[\'description\'].dropna().unique().tolist()\n    # Save filtered results as \'filtered_exeter_bridges\'\n    return [\n        f"Filtered {len(filtered)} bridges within the Exeter area. Bridge types found: {bridge_types}",\n        \'filtered_exeter_bridges\',\n        \'GeoDataFrame of bridges within the filtered Exeter area polygon, including all attributes and geometry. Also includes the types of bridges found in the area in the description column.\',\n        filtered\n    ]', 'artifact_names': ['exeter_bridges', 'filtered_exeter_area_polygon']}
+2026-02-06 11:55:20,334 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def filter_and_list_bridge_types(data: list):
+    import geopandas as gpd
+    # exeter_bridges = data[0], filtered_exeter_area_polygon = data[1]
+    bridges = data[0]
+    area = data[1]
+    # Spatial filter: bridges within the area polygon
+    filtered = bridges[bridges.geometry.within(area.geometry.iloc[0])].copy()
+    # List all unique bridge types in the filtered set
+    bridge_types = filtered['description'].dropna().unique().tolist()
+    # Save filtered results as 'filtered_exeter_bridges'
+    return [
+        f"Filtered {len(filtered)} bridges within the Exeter area. Bridge types found: {bridge_types}",
+        'filtered_exeter_bridges',
+        'GeoDataFrame of bridges within the filtered Exeter area polygon, including all attributes and geometry. Also includes the types of bridges found in the area in the description column.',
+        filtered
+    ]
+2026-02-06 11:55:20,334 INFO function name filter_and_list_bridge_types
+2026-02-06 11:55:20,343 INFO Output completed
+2026-02-06 11:55:20,343 INFO Tool code_executor returned result : ["Filtered 175 bridges within the Exeter area. Bridge types found: ['Bridge', 'Footbridge', 'Swing Bridge']", <a2a.Artifact.Artifact object at 0x0000023CC914F5D0>]
+2026-02-06 11:55:30,992 WARNING OFFLINE MODE
+2026-02-06 11:55:30,992 INFO Output from agent data_analysis_agent : Filtered 175 bridges within the Exeter area. Bridge types found: Bridge, Footbridge, and Swing Bridge.
+
+A GeoDataFrame artifact named 'filtered_exeter_bridges' has been created, containing all attributes and geometry for bridges within the filtered Exeter area polygon, along with the types of bridges found in the area listed in the 'description' column.
+2026-02-06 11:55:30,992 INFO Tool send_message returned result : ["Filtered 175 bridges within the Exeter area. Bridge types found: Bridge, Footbridge, and Swing Bridge.\n\nA GeoDataFrame artifact named 'filtered_exeter_bridges' has been created, containing all attributes and geometry for bridges within the filtered Exeter area polygon, along with the types of bridges found in the area listed in the 'description' column.Addtionally some data artifacts have been generated with names  ['filtered_exeter_bridges'] and \n descriptions ['GeoDataFrame of bridges within the filtered Exeter area polygon, including all attributes and geometry. Also includes the types of bridges found in the area in the description column.']", [<a2a.Artifact.Artifact object at 0x0000023CC914F5D0>]]
+2026-02-06 11:55:37,534 WARNING OFFLINE MODE
+2026-02-06 11:55:37,534 INFO Output from agent structures_agent : I found 175 bridges within the 'filtered_exeter_area_polygon'. The types of bridges identified are:
+
+- Bridge
+- Footbridge
+- Swing Bridge
+
+The filtered results have been saved as 'filtered_exeter_bridges'.
+2026-02-06 11:55:37,534 INFO Tool send_message returned result : ["I found 175 bridges within the 'filtered_exeter_area_polygon'. The types of bridges identified are:\n\n- Bridge\n- Footbridge\n- Swing Bridge\n\nThe filtered results have been saved as 'filtered_exeter_bridges'.Addtionally some data artifacts have been generated with names  ['filtered_exeter_bridges'] and \n descriptions ['GeoDataFrame of bridges within the filtered Exeter area polygon, including all attributes and geometry. Also includes the types of bridges found in the area in the description column.']", [<a2a.Artifact.Artifact object at 0x0000023CC914F5D0>]]
+2026-02-06 11:55:37,534 INFO Calling tool send_message with args : {'target': 'land_features', 'task_description': "Search for all bridges and their types within the artifact 'filtered_exeter_area_polygon'."}
+2026-02-06 11:55:41,609 WARNING OFFLINE MODE
+2026-02-06 11:55:41,625 INFO Messages sent to agent land_features : [{'role': 'user', 'content': "Search for all bridges and their types within the artifact 'filtered_exeter_area_polygon'."}]
+2026-02-06 11:55:47,571 WARNING OFFLINE MODE
+2026-02-06 11:55:47,571 INFO Output from agent land_features : I cannot solve this query as it involves searching for features associated with structures, specifically bridges, which are not part of the land features database.
+2026-02-06 11:55:47,571 INFO Tool send_message returned result : I cannot solve this query as it involves searching for features associated with structures, specifically bridges, which are not part of the land features database.
+2026-02-06 11:55:47,571 INFO Calling tool send_message with args : {'target': 'water_network', 'task_description': "Search for all bridges and their types within the artifact 'filtered_exeter_area_polygon'."}
+2026-02-06 11:55:51,643 WARNING OFFLINE MODE
+2026-02-06 11:55:51,667 INFO Messages sent to agent water_network : [{'role': 'user', 'content': "Search for all bridges and their types within the artifact 'filtered_exeter_area_polygon'."}]
+2026-02-06 11:55:57,880 WARNING OFFLINE MODE
+2026-02-06 11:55:57,880 INFO Output from agent water_network : I cannot assist with searching for bridges and their types. My capabilities are focused on water network features like rivers, streams, lakes, lochs, drains, and canals. If you have any queries related to these, feel free to ask!
+2026-02-06 11:55:57,880 INFO Tool send_message returned result : I cannot assist with searching for bridges and their types. My capabilities are focused on water network features like rivers, streams, lakes, lochs, drains, and canals. If you have any queries related to these, feel free to ask!
+2026-02-06 11:56:02,357 INFO Calling tool send_message with args : {'target': 'plotting_agent', 'task_description': "Plot all bridges and their types from the artifact 'filtered_exeter_bridges' within the area of 'filtered_exeter_area_polygon'. Include a legend or labels to distinguish bridge types (Bridge, Footbridge, Swing Bridge)."}
+2026-02-06 11:56:06,409 WARNING OFFLINE MODE
+2026-02-06 11:56:06,425 INFO Messages sent to agent plotting_agent : [{'role': 'user', 'content': "Plot all bridges and their types from the artifact 'filtered_exeter_bridges' within the area of 'filtered_exeter_area_polygon'. Include a legend or labels to distinguish bridge types (Bridge, Footbridge, Swing Bridge)."}]
+2026-02-06 11:56:10,940 INFO Calling tool generate_metadata_for_artifacts with args : {'artifact_names': ['filtered_exeter_bridges', 'filtered_exeter_area_polygon']}
+2026-02-06 11:56:10,964 INFO artifacts loaded for metadata generation : ['filtered_exeter_bridges', 'filtered_exeter_area_polygon']
+2026-02-06 11:56:11,001 INFO Tool generate_metadata_for_artifacts returned result : [{'filename': 'filtered_exeter_bridges', 'dataset_summary': {'num_rows': 175, 'num_columns': 39}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': ['a14d2cd1-c099-4115-b9c4-27cd16864a0e', '77cd88bb-5ee7-45ea-9824-ebee6c49e65e', 'e3d70435-8e0d-41ee-ac31-d66570063c49', 'f14905d1-1dfe-461d-be4d-3460a2e35fc1', '7a49ac3d-eab9-4dd1-a3cf-f1ef71b789ae', '1ebcae82-1d09-4af8-85bd-fb67b063287f', 'c86e5079-f609-4a9d-a3a4-7de949926a68', '46825b4c-b271-4e3b-a2fe-b54631f55b44', '9d1ab9af-725d-4fe3-b219-3aa084b0074c', 'cf1256fb-08ed-4916-8c4a-3a12706ea1c8', 'f8b6bc08-64d9-4511-b7af-ddd3118da478', 'e5505658-26a7-4c17-ade0-abcb712ca893', '413948f6-388d-4490-bcb1-2f257702a81f', 'dc9d0b7c-3627-46e2-8a9e-6ccc2a8f8c23', '2842e8e1-5749-4a8f-abe1-5dcc2f4e0072', 'cdfe6105-2e93-4f44-88b0-e41d3098483f', 'cf0b7b76-62d0-4d84-82ac-a7aa4daf0d96', '93cee8de-88ac-4866-9c81-be69ea308fc6', '2853db89-f1b1-44d6-8551-c7053ef0789e', 'ec4090cd-d602-43d8-a19a-61a3619725e1']}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-08-19 00:00:00', '2024-10-16 00:00:00', '2024-08-30 00:00:00',
+ '2024-10-22 00:00:00', '2024-11-01 00:00:00', '2024-09-19 00:00:00']
+Length: 6, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2024-08-20 00:00:00+00:00', '2024-10-17 00:00:00+00:00',
+ '2024-08-31 00:00:00+00:00', '2024-10-23 00:00:00+00:00',
+ '2024-11-02 00:00:00+00:00', '2024-09-20 00:00:00+00:00']
+Length: 6, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['New', 'Modified Attributes', 'Modified Geometry And Attributes'],
+      dtype=object)}, {'name': 'geometry_area_m2', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': [331.787, 596.71, 921.84, 1288.883, 231.948, 10.9, 9.003, 12.687, 105.241, 117.391, 373.87, 320.035, 82.521, 77.112, 61.966, 652.633, 127.477, 70.036, 60.604, 372.482]}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2014-06-24 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2022-04-13 00:00:00'), Timestamp('2018-09-07 00:00:00'), Timestamp('2013-06-08 00:00:00'), Timestamp('2018-06-27 00:00:00'), Timestamp('2016-10-06 00:00:00'), Timestamp('2018-05-24 00:00:00'), Timestamp('2020-05-18 00:00:00'), Timestamp('2018-07-09 00:00:00'), Timestamp('2019-09-14 00:00:00'), Timestamp('2014-08-13 00:00:00'), Timestamp('2023-05-30 00:00:00'), Timestamp('2019-03-22 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2014-12-02 00:00:00'), Timestamp('2024-04-20 00:00:00'), Timestamp('2024-09-03 00:00:00'), Timestamp('2017-02-22 00:00:00'), Timestamp('2017-04-10 00:00:00')]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2015-06-19 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2022-04-13 00:00:00'), Timestamp('2018-09-07 00:00:00'), Timestamp('2014-04-15 00:00:00'), Timestamp('2014-04-11 00:00:00'), Timestamp('2015-11-24 00:00:00'), Timestamp('2019-02-14 00:00:00'), Timestamp('2016-10-06 00:00:00'), Timestamp('2018-05-24 00:00:00'), Timestamp('2020-05-18 00:00:00'), Timestamp('2019-09-20 00:00:00'), Timestamp('2019-11-13 00:00:00'), Timestamp('2014-08-13 00:00:00'), Timestamp('2023-05-30 00:00:00'), Timestamp('2019-11-11 00:00:00'), Timestamp('2019-03-23 00:00:00'), Timestamp('2019-11-07 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2014-12-02 00:00:00')]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Structures'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Bridge', 'Footbridge', 'Swing Bridge'], dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2015-01-22 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2019-03-20 00:00:00'), Timestamp('2018-09-07 00:00:00'), Timestamp('2013-06-08 00:00:00'), Timestamp('2014-06-24 00:00:00'), Timestamp('2018-06-27 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2004-02-18 00:00:00'), Timestamp('2017-02-07 00:00:00'), Timestamp('2017-01-23 00:00:00'), Timestamp('2018-07-09 00:00:00'), Timestamp('2014-11-14 00:00:00'), Timestamp('2014-08-13 00:00:00'), Timestamp('2017-03-31 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2017-01-20 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2014-12-02 00:00:00'), Timestamp('2019-09-18 00:00:00')]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': [Timestamp('2015-01-22 00:00:00'), Timestamp('2023-10-05 00:00:00'), Timestamp('2019-03-20 00:00:00'), Timestamp('2018-09-07 00:00:00'), Timestamp('2014-04-12 00:00:00'), Timestamp('2014-04-11 00:00:00'), Timestamp('2015-11-16 00:00:00'), Timestamp('2019-02-14 00:00:00'), Timestamp('2004-02-20 00:00:00'), Timestamp('2004-02-18 00:00:00'), Timestamp('2017-02-07 00:00:00'), Timestamp('2017-01-23 00:00:00'), Timestamp('2019-09-20 00:00:00'), Timestamp('2014-11-14 00:00:00'), Timestamp('2014-08-13 00:00:00'), Timestamp('2017-03-31 00:00:00'), Timestamp('2004-02-19 00:00:00'), Timestamp('2017-01-20 00:00:00'), Timestamp('2016-01-20 00:00:00'), Timestamp('2014-12-02 00:00:00')]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.9314285714285714, 'example_values': array(['Woodwater Bridge', 'Gallows Bridge', 'Alphington Bridge',
+       'Exeter City Suspension Bridge', 'Exe Bridge South', 'Quay Bridge',
+       'Exe Bridge North', 'Chancel Bridge', 'Polsloe Bridge',
+       'Cricklepit Bridge', 'Millers Crossing', 'Swing-Bridge'],
+      dtype=object)}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.9314285714285714, 'example_values': <DatetimeArray>
+['2003-03-20 00:00:00', '2003-03-07 00:00:00', '2017-03-31 00:00:00',
+ '2003-02-27 00:00:00', '2003-03-19 00:00:00', '2003-03-10 00:00:00',
+ '2019-09-14 00:00:00']
+Length: 7, dtype: datetime64[ms]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.9314285714285714, 'example_values': <DatetimeArray>
+['2011-06-25 00:00:00', '2017-03-31 00:00:00', '2019-11-12 00:00:00',
+ '2019-11-06 00:00:00']
+Length: 4, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 0.9314285714285714, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'operationalstatus', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Active', 'Inactive'], dtype=object)}, {'name': 'capturespecification', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Urban', 'Rural'], dtype=object)}, {'name': 'networkover', 'dtype': 'object', 'null_fraction': 0.21714285714285714, 'example_values': array(['Road', 'Path', 'Railway', 'Multiple'], dtype=object)}, {'name': 'networkunder', 'dtype': 'object', 'null_fraction': 0.2571428571428571, 'example_values': array(['Water', 'Road', 'Multiple', 'Railway', 'Path', 'Canal'],
+      dtype=object)}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': [<POLYGON ((292954.277 89539.497, 292973.546 89540.149, 292976.254 89540.241,...>, <POLYGON ((296035.97 91015.49, 296031.67 91033.02, 296029.01 91043.88, 29602...>, <POLYGON ((295627.703 89823.737, 295626.94 89824.437, 295622.113 89828.647, ...>, <POLYGON ((295177.45 90748.75, 295178.25 90751.6, 295179.75 90756.7, 295180....>, <POLYGON ((292857.69 90233.94, 292872.51 90215.11, 292858.95 90216.41, 29285...>, <POLYGON ((293855.3 90320.69, 293856.3 90321.19, 293857.5 90321.59, 293857.5...>, <POLYGON ((293863.7 90322.99, 293865.088 90323.072, 293865.393 90322.018, 29...>, <POLYGON ((294190.25 91104.25, 294186.85 91106.2, 294188.43 91109.05, 294191...>, <POLYGON ((294458.23 91495.08, 294451.1 91499.45, 294452.402 91501.268, 2944...>, <POLYGON ((294633.61 91793.87, 294632.35 91794.25, 294627.86 91795.63, 29462...>, <POLYGON ((295647.75 92500.9, 295648.5 92501, 295648.75 92500, 295649.3 9249...>, <POLYGON ((296065.9 91725.7, 296060.341 91728.332, 296059.835 91728.572, 296...>, <POLYGON ((295871.56 92568.69, 295871.06 92569.3, 295869.95 92570.65, 295868...>, <POLYGON ((292513.173 89779.68, 292512.51 89780.49, 292511.35 89781.83, 2925...>, <POLYGON ((292843.84 90251.86, 292830.79 90253.6, 292827.06 90258.51, 292838...>, <POLYGON ((292401.692 90284.026, 292409.734 90287.235, 292411.35 90287.88, 2...>, <POLYGON ((292609.71 90592.21, 292610.34 90592.54, 292617.32 90596.66, 29261...>, <POLYGON ((292597.17 90635.67, 292598.67 90633.14, 292600.19 90630.07, 29259...>, <POLYGON ((292563.23 90701.11, 292564.08 90699.64, 292565.06 90697.73, 29256...>, <POLYGON ((291773.9 90270.5, 291773.3 90273, 291772.35 90276.9, 291772.05 90...>]}], 'preview_rows': [{'osid': 'a14d2cd1-c099-4115-b9c4-27cd16864a0e', 'versiondate': Timestamp('2024-08-19 00:00:00'), 'versionavailablefromdate': Timestamp('2024-08-20 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 331.787, 'geometry_evidencedate': Timestamp('2014-06-24 00:00:00'), 'geometry_updatedate': Timestamp('2015-06-19 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Structures', 'description': 'Bridge', 'description_evidencedate': Timestamp('2015-01-22 00:00:00'), 'description_updatedate': Timestamp('2015-01-22 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': None, 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'operationalstatus': 'Active', 'capturespecification': 'Urban', 'networkover': 'Road', 'networkunder': 'Water', 'geometry': <POLYGON ((292954.277 89539.497, 292973.546 89540.149, 292976.254 89540.241,...>}, {'osid': '77cd88bb-5ee7-45ea-9824-ebee6c49e65e', 'versiondate': Timestamp('2024-08-19 00:00:00'), 'versionavailablefromdate': Timestamp('2024-08-20 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 596.71, 'geometry_evidencedate': Timestamp('2023-10-05 00:00:00'), 'geometry_updatedate': Timestamp('2023-10-05 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Structures', 'description': 'Bridge', 'description_evidencedate': Timestamp('2023-10-05 00:00:00'), 'description_updatedate': Timestamp('2023-10-05 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': None, 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'operationalstatus': 'Active', 'capturespecification': 'Urban', 'networkover': 'Path', 'networkunder': 'Road', 'geometry': <POLYGON ((296035.97 91015.49, 296031.67 91033.02, 296029.01 91043.88, 29602...>}, {'osid': 'e3d70435-8e0d-41ee-ac31-d66570063c49', 'versiondate': Timestamp('2024-08-19 00:00:00'), 'versionavailablefromdate': Timestamp('2024-08-20 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'New', 'geometry_area_m2': 921.84, 'geometry_evidencedate': Timestamp('2022-04-13 00:00:00'), 'geometry_updatedate': Timestamp('2022-04-13 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Structures', 'description': 'Bridge', 'description_evidencedate': Timestamp('2019-03-20 00:00:00'), 'description_updatedate': Timestamp('2019-03-20 00:00:00'), 'description_source': 'Ordnance Survey', 'name1_text': None, 'name1_language': None, 'name1_evidencedate': NaT, 'name1_updatedate': NaT, 'name1_source': None, 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'operationalstatus': 'Active', 'capturespecification': 'Urban', 'networkover': 'Road', 'networkunder': 'Water', 'geometry': <POLYGON ((295627.703 89823.737, 295626.94 89824.437, 295622.113 89828.647, ...>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}, {'filename': 'filtered_exeter_area_polygon', 'dataset_summary': {'num_rows': 1, 'num_columns': 41}, 'column_schema': [{'name': 'osid', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['eaeed505-6584-4fa0-b734-8491211c62a9'], dtype=object)}, {'name': 'versiondate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-29 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'versionavailablefromdate', 'dtype': 'datetime64[ms, UTC]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-30 00:00:00+00:00']
+Length: 1, dtype: datetime64[ms, UTC]}, {'name': 'versionavailabletodate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'changetype', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Modified Geometry And Attributes'], dtype=object)}, {'name': 'geometry_area', 'dtype': 'float64', 'null_fraction': 0.0, 'example_values': array([32082134.479725])}, {'name': 'geometry_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-28 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'geometry_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2025-08-28 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'geometry_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'theme', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Geographical Names'], dtype=object)}, {'name': 'descriptiongroup', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Settlement'], dtype=object)}, {'name': 'description', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['City'], dtype=object)}, {'name': 'description_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'description_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'description_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'extentdefinition', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Manually Defined Complete'], dtype=object)}, {'name': 'name1_text', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Exeter'], dtype=object)}, {'name': 'name1_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name1_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'name1_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 0.0, 'example_values': <DatetimeArray>
+['2015-05-04 00:00:00']
+Length: 1, dtype: datetime64[ms]}, {'name': 'name1_source', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['Ordnance Survey'], dtype=object)}, {'name': 'name2_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name2_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name2_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name3_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name3_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_text', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_language', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'name4_evidencedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_updatedate', 'dtype': 'datetime64[ms]', 'null_fraction': 1.0, 'example_values': <DatetimeArray>
+[]
+Length: 0, dtype: datetime64[ms]}, {'name': 'name4_source', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'sameasdbpedia', 'dtype': 'object', 'null_fraction': 1.0, 'example_values': array([], dtype=object)}, {'name': 'sameasgeonames', 'dtype': 'object', 'null_fraction': 0.0, 'example_values': array(['https://sws.GeoNames.org/2649808'], dtype=object)}, {'name': 'sameasdbobih', 'dtype': 'float64', 'null_fraction': 1.0, 'example_values': array([], dtype=float64)}, {'name': 'height', 'dtype': 'float64', 'null_fraction': 1.0, 'example_values': array([], dtype=float64)}, {'name': 'geometry', 'dtype': 'geometry', 'null_fraction': 0.0, 'example_values': <GeometryArray>
+[<POLYGON ((295173.81 89150.11, 295192.057 89168.355, 295231.155 89233.516, 2...>]
+Length: 1, dtype: geometry}], 'preview_rows': [{'osid': 'eaeed505-6584-4fa0-b734-8491211c62a9', 'versiondate': Timestamp('2025-08-29 00:00:00'), 'versionavailablefromdate': Timestamp('2025-08-30 00:00:00+0000', tz='UTC'), 'versionavailabletodate': NaT, 'changetype': 'Modified Geometry And Attributes', 'geometry_area': 32082134.479725, 'geometry_evidencedate': Timestamp('2025-08-28 00:00:00'), 'geometry_updatedate': Timestamp('2025-08-28 00:00:00'), 'geometry_source': 'Ordnance Survey', 'theme': 'Geographical Names', 'descriptiongroup': 'Settlement', 'description': 'City', 'description_evidencedate': Timestamp('2015-05-04 00:00:00'), 'description_updatedate': Timestamp('2015-05-04 00:00:00'), 'description_source': 'Ordnance Survey', 'extentdefinition': 'Manually Defined Complete', 'name1_text': 'Exeter', 'name1_language': None, 'name1_evidencedate': Timestamp('2015-05-04 00:00:00'), 'name1_updatedate': Timestamp('2015-05-04 00:00:00'), 'name1_source': 'Ordnance Survey', 'name2_text': None, 'name2_language': None, 'name2_evidencedate': NaT, 'name2_updatedate': NaT, 'name2_source': None, 'name3_text': None, 'name3_language': None, 'name3_evidencedate': NaT, 'name3_updatedate': NaT, 'name3_source': None, 'name4_text': None, 'name4_language': None, 'name4_evidencedate': NaT, 'name4_updatedate': NaT, 'name4_source': None, 'sameasdbpedia': None, 'sameasgeonames': 'https://sws.GeoNames.org/2649808', 'sameasdbobih': nan, 'height': nan, 'geometry': <POLYGON ((295173.81 89150.11, 295192.057 89168.355, 295231.155 89233.516, 2...>}], 'usage_note': 'Column schema is authoritative. Do not infer column meaning from values alone.'}]
+2026-02-06 11:56:35,700 INFO Calling tool code_executor with args : {'code': 'def plot_bridges_by_type_in_area(data: list):\n    import geopandas as gpd\n    import folium\n    from shapely.geometry import mapping\n    import branca\n    \n    # Unpack data\n    bridges = data[0].copy()\n    area = data[1].copy()\n    \n    # Ensure CRS is the same and convert to EPSG:4326 for folium\n    if bridges.crs != area.crs:\n        bridges = bridges.set_crs(area.crs, allow_override=True)\n    if bridges.crs != \'EPSG:4326\':\n        bridges = bridges.to_crs(\'EPSG:4326\')\n        area = area.to_crs(\'EPSG:4326\')\n    \n    # Filter bridges within the area polygon\n    area_poly = area.iloc[0].geometry\n    bridges_in_area = bridges[bridges.intersects(area_poly)]\n    \n    # Only keep relevant bridge types\n    bridge_types = [\'Bridge\', \'Footbridge\', \'Swing Bridge\']\n    bridges_in_area = bridges_in_area[bridges_in_area[\'description\'].isin(bridge_types)]\n    \n    # Color mapping for bridge types\n    color_dict = {\'Bridge\': \'blue\', \'Footbridge\': \'green\', \'Swing Bridge\': \'red\'}\n    \n    # Create folium map centered on area\n    centroid = area_poly.centroid\n    m = folium.Map(location=[centroid.y, centroid.x], zoom_start=13, tiles=\'cartodbpositron\')\n    \n    # Add area polygon\n    folium.GeoJson(\n        mapping(area_poly),\n        name=\'Exeter Area\',\n        style_function=lambda x: {\'fillColor\': \'gray\', \'color\': \'black\', \'weight\': 2, \'fillOpacity\': 0.1}\n    ).add_to(m)\n    \n    # Add bridges by type\n    for btype in bridge_types:\n        sub = bridges_in_area[bridges_in_area[\'description\'] == btype]\n        for idx, row in sub.iterrows():\n            name = row[\'name1_text\'] if row[\'name1_text\'] else btype\n            folium.GeoJson(\n                mapping(row[\'geometry\']),\n                name=f"{btype}",\n                style_function=lambda x, color=color_dict[btype]: {\'color\': color, \'weight\': 4, \'fillOpacity\': 0.5},\n                tooltip=folium.Tooltip(f"{name} ({btype})")\n            ).add_to(m)\n    \n    # Add legend\n    legend_html = \'\'\'\n     <div style="position: fixed; \n     bottom: 50px; left: 50px; width: 180px; height: 110px; \n     border:2px solid grey; z-index:9999; font-size:14px; background-color:white;">\n     &nbsp;<b>Bridge Types</b><br>\n     &nbsp;<span style=\'color:blue;\'>&#9632;</span> Bridge<br>\n     &nbsp;<span style=\'color:green;\'>&#9632;</span> Footbridge<br>\n     &nbsp;<span style=\'color:red;\'>&#9632;</span> Swing Bridge<br>\n     </div>\n     \'\'\'\n    m.get_root().html.add_child(branca.element.Element(legend_html))\n    \n    # Save map\n    map_filename = \'exeter_bridges_by_type_map.html\'\n    m.save(map_filename)\n    \n    # Prepare summary\n    summary = f"Plotted {len(bridges_in_area)} bridges in Exeter area. First 5:\\n" + str(bridges_in_area[[\'name1_text\',\'description\']].head(5))\n    artifact_name = \'exeter_bridges_by_type_map\'\n    artifact_description = \'Folium map showing all bridges (Bridge, Footbridge, Swing Bridge) in Exeter area, colored by type with legend.\'\n    return [summary, artifact_name, artifact_description, map_filename]\n', 'artifact_names': ['filtered_exeter_bridges', 'filtered_exeter_area_polygon']}
+2026-02-06 11:56:35,708 INFO Executing code import matplotlib
+matplotlib.use('Agg')
+def plot_bridges_by_type_in_area(data: list):
+    import geopandas as gpd
+    import folium
+    from shapely.geometry import mapping
+    import branca
+    
+    # Unpack data
+    bridges = data[0].copy()
+    area = data[1].copy()
+    
+    # Ensure CRS is the same and convert to EPSG:4326 for folium
+    if bridges.crs != area.crs:
+        bridges = bridges.set_crs(area.crs, allow_override=True)
+    if bridges.crs != 'EPSG:4326':
+        bridges = bridges.to_crs('EPSG:4326')
+        area = area.to_crs('EPSG:4326')
+    
+    # Filter bridges within the area polygon
+    area_poly = area.iloc[0].geometry
+    bridges_in_area = bridges[bridges.intersects(area_poly)]
+    
+    # Only keep relevant bridge types
+    bridge_types = ['Bridge', 'Footbridge', 'Swing Bridge']
+    bridges_in_area = bridges_in_area[bridges_in_area['description'].isin(bridge_types)]
+    
+    # Color mapping for bridge types
+    color_dict = {'Bridge': 'blue', 'Footbridge': 'green', 'Swing Bridge': 'red'}
+    
+    # Create folium map centered on area
+    centroid = area_poly.centroid
+    m = folium.Map(location=[centroid.y, centroid.x], zoom_start=13, tiles='cartodbpositron')
+    
+    # Add area polygon
+    folium.GeoJson(
+        mapping(area_poly),
+        name='Exeter Area',
+        style_function=lambda x: {'fillColor': 'gray', 'color': 'black', 'weight': 2, 'fillOpacity': 0.1}
+    ).add_to(m)
+    
+    # Add bridges by type
+    for btype in bridge_types:
+        sub = bridges_in_area[bridges_in_area['description'] == btype]
+        for idx, row in sub.iterrows():
+            name = row['name1_text'] if row['name1_text'] else btype
+            folium.GeoJson(
+                mapping(row['geometry']),
+                name=f"{btype}",
+                style_function=lambda x, color=color_dict[btype]: {'color': color, 'weight': 4, 'fillOpacity': 0.5},
+                tooltip=folium.Tooltip(f"{name} ({btype})")
+            ).add_to(m)
+    
+    # Add legend
+    legend_html = '''
+     <div style="position: fixed; 
+     bottom: 50px; left: 50px; width: 180px; height: 110px; 
+     border:2px solid grey; z-index:9999; font-size:14px; background-color:white;">
+     &nbsp;<b>Bridge Types</b><br>
+     &nbsp;<span style='color:blue;'>&#9632;</span> Bridge<br>
+     &nbsp;<span style='color:green;'>&#9632;</span> Footbridge<br>
+     &nbsp;<span style='color:red;'>&#9632;</span> Swing Bridge<br>
+     </div>
+     '''
+    m.get_root().html.add_child(branca.element.Element(legend_html))
+    
+    # Save map
+    map_filename = 'exeter_bridges_by_type_map.html'
+    m.save(map_filename)
+    
+    # Prepare summary
+    summary = f"Plotted {len(bridges_in_area)} bridges in Exeter area. First 5:\n" + str(bridges_in_area[['name1_text','description']].head(5))
+    artifact_name = 'exeter_bridges_by_type_map'
+    artifact_description = 'Folium map showing all bridges (Bridge, Footbridge, Swing Bridge) in Exeter area, colored by type with legend.'
+    return [summary, artifact_name, artifact_description, map_filename]
+
+2026-02-06 11:56:35,708 INFO function name plot_bridges_by_type_in_area
+2026-02-06 11:56:35,960 INFO Output completed
+2026-02-06 11:56:35,968 INFO Tool code_executor returned result : ['Plotted 175 bridges in Exeter area. First 5:\n  name1_text description\n0       None      Bridge\n1       None      Bridge\n3       None      Bridge\n4       None      Bridge\n5       None      Bridge', <a2a.Artifact.Artifact object at 0x0000023C9A1C0050>]
+2026-02-06 11:56:44,980 WARNING OFFLINE MODE
+2026-02-06 11:56:44,980 INFO Output from agent plotting_agent : ['Plotted 175 bridges in Exeter area. First 5:\n  name1_text description\n0       None      Bridge\n1       None      Bridge\n3       None      Bridge\n4       None      Bridge\n5       None      Bridge', 'exeter_bridges_by_type_map', 'Folium map showing all bridges (Bridge, Footbridge, Swing Bridge) in Exeter area, colored by type with legend.', 'exeter_bridges_by_type_map.html']
+2026-02-06 11:56:44,983 INFO Tool send_message returned result : ["['Plotted 175 bridges in Exeter area. First 5:\\n  name1_text description\\n0       None      Bridge\\n1       None      Bridge\\n3       None      Bridge\\n4       None      Bridge\\n5       None      Bridge', 'exeter_bridges_by_type_map', 'Folium map showing all bridges (Bridge, Footbridge, Swing Bridge) in Exeter area, colored by type with legend.', 'exeter_bridges_by_type_map.html']Addtionally some data artifacts have been generated with names  ['exeter_bridges_by_type_map'] and \n descriptions ['Folium map showing all bridges (Bridge, Footbridge, Swing Bridge) in Exeter area, colored by type with legend.']", [<a2a.Artifact.Artifact object at 0x0000023C9A1C0050>]]
+2026-02-06 11:56:52,556 WARNING OFFLINE MODE
+2026-02-06 11:56:52,556 INFO Output from agent host_agent : Here is the result for your query about bridges in Exeter:
+
+- All bridges within the Exeter area have been identified and mapped.
+- The types of bridges found are:
+  - Bridge
+  - Footbridge
+  - Swing Bridge
+
+A map has been generated showing all 175 bridges in Exeter, with each type of bridge color-coded and a legend included for easy identification.
+
+If you would like to view or download the map, let me know! If you need more details about specific bridges or want to filter by type, I can assist further.
