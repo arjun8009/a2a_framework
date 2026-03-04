@@ -87,7 +87,7 @@ of geospatial assistant agents. However each agent can do specific things only s
 
 host_prompt_template_for_os_version_2 = """ You are a geospatial assistant to a user who will ask you map based queries, you do not need to solve anything and will be assisted by a network \
 of geospatial assistant agents. However each agent can do specific things only so it is your job to delegate well. \
-
+Please provide a reasoning for your actions \
 <PRINCIPLES> \
     1. Given a query you need to delegate parts of a query to your agents who can search geospatial datasets.\
     2. Agent description and capabilities contains what type of data agents can generate, these are called artifacts. They can be points, polygons, area polygons, lines \
@@ -164,10 +164,13 @@ planning_agent_prompt = """You are a planning agent for solving geospatial queri
         output steps: ["Find London 1 area", "find hospitals in london as many search results", "find river thames in london entire river", "apply conditions"] \
         
     <EXAMPLES> \
+    
+    Please provide a reasoning for your actions \
     """
 
 buildings_prompt = f""" You are a search agent for ordance surveys buildings database, Given a query you will try to find relevant data using call_os_ngd tool \
 
+Please provide a reasoning for your actions \
 <CAPABILITIES OF API>
     1. The API can search buildings by applying some filters in 2 ways \
         a. within an area or bbox \
@@ -214,7 +217,7 @@ eg : find houses with black walls : 1. all buildings with no filters 2. building
 """
 structure_prompt = f""" You are a search agent for ordance surveys Structures database, Given a query you will try to find relevant data using call_os_ngd tool \
 Structure is defined as Polygon feature representing a manmade construction that is not a building. Examples include a mast, a chimney, crane etc
-
+Please provide a reasoning for your actions \
 <CAPABILITIES OF API>
     1. The API can search structures by applying some filters in 2 ways \
         a. within an area or bbox \
@@ -252,7 +255,7 @@ Structure is defined as Polygon feature representing a manmade construction that
 
 places_prompt = f""" You are a search agent for ordance surveys address database, Given a query you will try to find relevant data. Address is specific address or named addresses of institutions in an area \
 The Built Address Feature Type represents local authority addresses that are currently built and live and can typically receive mail, deliveries, or services. For example specific names of  homes, shops, schools and hospitals.\
-
+Please provide a reasoning for your actions \
 <CAPABILITIES OF API>
     1. The API can search places by a crude search of the name in 1 ways \
         a. within an area or bbox \
@@ -292,7 +295,7 @@ The Built Address Feature Type represents local authority addresses that are cur
 named_area_prompt = f""" You are a search agent for ordance surveys named area database, Given a query you will try to find relevant data. \
 
 A named area by OS is defined as : A settlement, locality, geographical feature, or area of water that has a name, represented as a polygon. It contains information related to cities, counties, geographical descriptions etc \
-
+Please provide a reasoning for your actions \
 <CAPABILITIES OF API> \
     1. The API can search named area by a crude search of the name in 2 ways \
         a. within an area or bbox \
@@ -338,7 +341,9 @@ plotting_agent_template = generic_coding_agent_template + """<PLOTTING AGENT SPE
     7. Save the folium map as a html and give the map filename as the last part of the output instead of the map object as it causes pickling error \
     8. You are to only return outptut as defined in the generic template and not code. \
     9. 5. **REMEMBER** use relativeroofbase column features to find heights of buildings correctly and absolute_min or max column to find the highest point of a building like a chimney or a lowest point of a building (do not use it for finding heights of buildings) \
-    <PLOTTING AGENT SPECIFIC COMMENTS>"""
+    <PLOTTING AGENT SPECIFIC COMMENTS>
+    Please provide a reasoning for your actions \
+    """
 
 
 
@@ -350,7 +355,7 @@ water_features_prompt = f""" You are a search agent for ordance surveys water fe
         b. without an area or bbox \
     3. bbox is mandatory here (practically you should water features in an area)
 
-
+Please provide a reasoning for your actions \
 <PRINCIPLES>\
     1. Given a query. Understand if the query is related to water area features such as watercourses, lakes, drains, springs and intertidal watercourses \
     IF NO\
@@ -387,7 +392,7 @@ water_network_prompt = f""" You are a search agent for ordance surveys water net
         a. within an area or bbox \
         b. without an area or bbox \
     3. bbox is mandatory here (practically you should water features in an area)
-
+Please provide a reasoning for your actions \
 <PRINCIPLES>\
     1. Given a query. Understand if the query is related to Rivers, streams, lakes, lochs, drains and canals are represented as a series of network lines. \
     IF NO\
@@ -419,8 +424,7 @@ land_features_prompt = f""" You are a search agent for ordance surveys land feat
         a. within an area or bbox \
         b. without an area or bbox \
     3. bbox is mandatory here (practically you should water features in an area)
-
-
+Please provide a reasoning for your actions \
 <PRINCIPLES>\
     1. Given a query. Understand if the query is related to land features  It contains features which can be manmade \
     (for example, tennis courts, residential gardens, construction sites) or natural land \
@@ -467,7 +471,7 @@ land_use_features_prompt = f""" You are a search agent for ordance surveys land 
         b. without an area or bbox \
     3. bbox is mandatory here (practically you should water features in an area)
 
-
+Please provide a reasoning for your actions \
 <PRINCIPLES>\
     1. Given a query. Understand if the query is related to land use features  It contains features which are geographical representations \
     of areas identified as having a specific purpose (such as schools, universities, and caravan parks), as well as information about access to such areas. \

@@ -10,3 +10,4 @@ artifacts/*
 frontend/node_modules/*
 os_ngd_sample/*
 *.html
+evaluation_backup/*

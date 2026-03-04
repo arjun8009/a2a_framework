@@ -73,7 +73,7 @@ class Agent():
                     return messages[-1]["output"],None
                 attempts = attempts + 1
                 output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
-
+        self.logger.info(f"Final output of the agent is : {output}")
         if hasattr(output,"output_text"):
             return output.output_text,artifacts
         else:
