@@ -5,7 +5,7 @@ from utils.registry import registry
 import logging
 
 class OSAgentsInitializer():
-    def __init__(self, config, logging_filename = "log"):
+    def __init__(self, config, logging_filename = "log", diff_dir = None):
         '''
         This class accepts a dictionary of agent configurations and initializes OS agents accordingly.
         args:
@@ -19,15 +19,25 @@ class OSAgentsInitializer():
         '''
         self.agent_dict = config
         self.logging_filename = logging_filename
-    
-        self.logger = logging.getLogger(f"evaluation/evaluation_logs/{self.logging_filename}")
-        self.logger.setLevel(logging.INFO)
-        self.logger.handlers.clear()
-        filehandler = logging.FileHandler(f"evaluation/evaluation_logs/{self.logging_filename}.log",mode="w")
-        filehandler.setLevel(logging.INFO)
-        formatter = logging.Formatter("%(asctime)s %(levelname)s %(message)s")
-        filehandler.setFormatter(formatter)
-        self.logger.addHandler(filehandler)
+        if diff_dir is not None:
+            self.logger = logging.getLogger(f"evaluation/{diff_dir}/{self.logging_filename}")
+            self.logger.setLevel(logging.INFO)
+            self.logger.handlers.clear()
+            filehandler = logging.FileHandler(f"evaluation/{diff_dir}/{self.logging_filename}.log",mode="w")
+            filehandler.setLevel(logging.INFO)
+            formatter = logging.Formatter("%(asctime)s %(levelname)s %(message)s")
+            filehandler.setFormatter(formatter)
+            self.logger.addHandler(filehandler)
+        else:
+            self.logger = logging.getLogger(f"evaluation/evaluation_logs/{self.logging_filename}")
+            self.logger.setLevel(logging.INFO)
+            self.logger.handlers.clear()
+            filehandler = logging.FileHandler(f"evaluation/evaluation_logs/{self.logging_filename}.log",mode="w")
+            filehandler.setLevel(logging.INFO)
+            formatter = logging.Formatter("%(asctime)s %(levelname)s %(message)s")
+            filehandler.setFormatter(formatter)
+            self.logger.addHandler(filehandler)
+            
         
         # Prevent propagation to root logger
         self.logger.propagate = False
