@@ -15,10 +15,11 @@ import os
 import inspect
 import requests
 import traceback
+from pathlib import Path
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
 
-ARTIFACT_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\artifacts"
+ARTIFACT_PATH = Path.home() / "Ordnance_Survey" / "artifacts" #r"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/artifacts"
 
 
 
@@ -48,7 +49,10 @@ def call_os_ngd(**kwargs):
         result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args and k!="logger") })
     except Exception as e:
         logger.exception("Exception in call os ngd",e)
-        return "There was an error while calling NGD. Most probable cause is wrong artifact name for bbox parameter. Try a few times with the correct artifact names."
+        if isinstance(e,TypeError):
+            return str(e)
+        else:
+            return "There was an error while calling NGD. Most probable cause is wrong artifact name for bbox parameter. Try a few times with the correct artifact names."
 
     if not isinstance(result,list):
         logger.info("NGD query result %s",result)

@@ -88,7 +88,13 @@ def run_llm(model_name:str, messages: list, schema:object, tools:object, additio
     # also checks if it is a reasoning model or not. As thinking models do not accept temperature and max_tokens
     
     isthinking = False
-    if model_name.startswith("gpt") or model_name.startswith("o"):
+    print(f"Model chosen {model_name}")
+    if model_name.startswith("Qwen"):
+        
+        llm_instance = OpenAI(base_url="http://localhost:8000/v1", api_key="dummy")
+        model_name = llm_instance.models.list().data[0].id
+
+    elif model_name.startswith("gpt") or model_name.startswith("o"):
         llm_instance = OpenAI()
         isthinking = True if model_name.startswith("o") or model_name=="gpt-5" else False
     

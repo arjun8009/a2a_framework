@@ -80,7 +80,7 @@ os_ngd_tool_description = {
                     "items":{
                         "type":"string"
                     },
-                    "description":"A list of predefined filters provided"
+                    "description":"A list of predefined filters provided or null if the database does not accept filters, see prompt to decide"
                 },
                 "bbox":{
                     "type":["string","null"],

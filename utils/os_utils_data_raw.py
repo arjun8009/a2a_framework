@@ -7,11 +7,13 @@ import pandas as pd
 import joblib
 import pyproj
 import warnings
+from pathlib import Path
+import ast
 
 warnings.filterwarnings("ignore")
 
-BASE_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\os_ngd_sample"
-ARTIFACT_PATH = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\artifacts"
+BASE_PATH = Path.home() / "Ordnance_Survey" / "os_ngd_sample" #r"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/os_ngd_sample"
+ARTIFACT_PATH = Path.home() / "Ordnance_Survey" / "artifacts"
 
 def query_address(filters:list, bbox:str, street_address:bool, filename:str, query:str):
     '''Utility function to query OS Data Hub Address API
@@ -23,18 +25,18 @@ def query_address(filters:list, bbox:str, street_address:bool, filename:str, que
         1. gdf : GeoDataFrame of the queried addresses'''
     
     if not street_address:
-        paths = [ os.path.join(BASE_PATH,r"add_gb_builtaddress\add_gb_builtaddress.gpkg"),
-                  os.path.join(BASE_PATH,r"add_gb_historicaddress\add_gb_historicaddress.gpkg"),
-                  os.path.join(BASE_PATH,r"add_gb_nonaddressableobject\add_gb_nonaddressableobject.gpkg")
+        paths = [ os.path.join(BASE_PATH,r"add_gb_builtaddress/add_gb_builtaddress.gpkg"),
+                  os.path.join(BASE_PATH,r"add_gb_historicaddress/add_gb_historicaddress.gpkg"),
+                  os.path.join(BASE_PATH,r"add_gb_nonaddressableobject/add_gb_nonaddressableobject.gpkg")
                   ]
     else:
-        paths = [ os.path.join(BASE_PATH,r"add_gb_streetaddress\add_gb_streetaddress.gpkg")]
+        paths = [ os.path.join(BASE_PATH,r"add_gb_streetaddress/add_gb_streetaddress.gpkg")]
     
     gdf_list = [gpd.read_file(path) for path in paths]
     gdf = pd.concat(gdf_list, ignore_index=True)
     gdf = gdf.set_crs(epsg=27700)
 
-    if bbox:
+    if bbox and bbox != 'None':
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf = gpd.clip(gdf, extent_polygon)
@@ -64,21 +66,27 @@ def query_buildings(filters:list, bbox:str, filename:str, query:str):
         1. gdf : GeoDataFrame of the queried buildings'''
     
     # Add paths to different building related geopackage files
-    paths = [ os.path.join(BASE_PATH,r"bld_fts_building\bld_fts_building.gpkg"),
-              os.path.join(BASE_PATH,r"bld_fts_buildingline\bld_fts_buildingline.gpkg"),
-              os.path.join(BASE_PATH,r"bld_fts_buildingpart\bld_fts_buildingpart.gpkg")]
+    paths = [ os.path.join(BASE_PATH,r"bld_fts_building/bld_fts_building.gpkg"),
+              os.path.join(BASE_PATH,r"bld_fts_buildingline/bld_fts_buildingline.gpkg"),
+              os.path.join(BASE_PATH,r"bld_fts_buildingpart/bld_fts_buildingpart.gpkg")]
     
     # Read the geopackage files into geopandas dataframes
     gdf_list = [gpd.read_file(path) for path in paths]
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
-    if bbox:
+    if bbox and bbox != 'None':
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
     # Apply filters to each of the dataframes and concatenate the results of multiple filters
     gdf_filtered = []
+    if not isinstance(filters,list):
+        try:
+            filters = ast.literal_eval(filters)
+        except Exception as e:
+            raise TypeError("Filters need to be a list")
+        
     if filters and len(filters) > 0:
         for gdf in gdf_list:
             gdf_temp = []
@@ -114,16 +122,17 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str,query:s
         1. gdf : GeoDataFrame of the queried named areas'''
     
     # Determine the path to the named area geopackage file based on whether polygon or point data is requested
-    if polygon_or_point:
-        path = os.path.join(BASE_PATH,r"gnm_fts_namedarea\gnm_fts_namedarea.gpkg")
+    if polygon_or_point and polygon_or_point == "True":
+        path = os.path.join(BASE_PATH,r"gnm_fts_namedarea/gnm_fts_namedarea.gpkg")
     else:
-        path = os.path.join(BASE_PATH,r"gnm_fts_namedarea\gnm_fts_namedareapoint.gpkg")
+        path = os.path.join(BASE_PATH,r"gnm_fts_namedarea/gnm_fts_namedareapoint.gpkg")
 
     # Read the geopackage file into a geopandas dataframe and set the coordinate reference system to EPSG:27700 (British National Grid) and apply bbox if provided
     gdf = gpd.read_file(path)
     gdf = gdf.set_crs(epsg=27700)
+    print("bbox is ",bbox, type(bbox), polygon_or_point, type(polygon_or_point))
 
-    if bbox:
+    if bbox and bbox != 'None':
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf = gpd.clip(gdf, extent_polygon)
@@ -142,19 +151,25 @@ def query_water_features(filters:list,bbox:str, filename:str,query:str):
         1. gdf : GeoDataFrame of the queried water features'''
     
     # Add paths to different water related geopackage files
-    paths = [os.path.join(BASE_PATH,r"wtr_fts_water\wtr_fts_water.gpkg"),
-             os.path.join(BASE_PATH,r"wtr_fts_waterpoint\wtr_fts_waterpoint.gpkg")]
+    paths = [os.path.join(BASE_PATH,r"wtr_fts_water/wtr_fts_water.gpkg"),
+             os.path.join(BASE_PATH,r"wtr_fts_waterpoint/wtr_fts_waterpoint.gpkg")]
     
     # Read the geopackage files into geopandas dataframes
     gdf_list = [gpd.read_file(path) for path in paths]
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
-    if bbox:
+    if bbox and bbox != 'None':
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
     # Apply filters to each of the dataframes and concatenate the results of multiple filters
+    if not isinstance(filters,list):
+        try:
+            filters = ast.literal_eval(filters)
+        except Exception as e:
+            raise TypeError("Filters need to be a list")
+    
     if filters and len(filters) > 0:
         gdf_filtered = []
         for gdf in gdf_list:
@@ -190,14 +205,14 @@ def query_water_network(bbox:str, filename:str,query:str):
         1. gdf : GeoDataFrame of the queried water network features'''
     
     # Add paths to different water network related geopackage files
-    paths = [ os.path.join(BASE_PATH,r"wtr_ntwk_waterlinkset\wtr_ntwk_waterlinkset.gpkg"),
-              os.path.join(BASE_PATH,r"wtr_ntwk_waterlink\wtr_ntwk_waterlink.gpkg")]
+    paths = [ os.path.join(BASE_PATH,r"wtr_ntwk_waterlinkset/wtr_ntwk_waterlinkset.gpkg"),
+              os.path.join(BASE_PATH,r"wtr_ntwk_waterlink/wtr_ntwk_waterlink.gpkg")]
     
     # Read the geopackage files into geopandas dataframes
     gdf_list = [gpd.read_file(path) for path in paths]
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
-    if bbox:
+    if bbox and bbox != 'None':
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
@@ -228,20 +243,26 @@ def query_land_features(bbox:str, filters:list, filename:str,query:str):
         1. gdf : GeoDataFrame of the queried land features
     '''
     # Add paths to different land related geopackage files
-    paths = [ os.path.join(BASE_PATH,r"lnd_fts_land\lnd_fts_land.gpkg"),
-              os.path.join(BASE_PATH,r"lnd_fts_landpoint\lnd_fts_landpoint.gpkg"),
-              os.path.join(BASE_PATH,r"lnd_fts_landform\lnd_fts_landform.gpkg"),
-              os.path.join(BASE_PATH,r"lnd_fts_landformline\lnd_fts_landformline.gpkg"),
-              os.path.join(BASE_PATH,r"lnd_fts_landformpoint\lnd_fts_landformpoint.gpkg")]
+    paths = [ os.path.join(BASE_PATH,r"lnd_fts_land/lnd_fts_land.gpkg"),
+              os.path.join(BASE_PATH,r"lnd_fts_landpoint/lnd_fts_landpoint.gpkg"),
+              os.path.join(BASE_PATH,r"lnd_fts_landform/lnd_fts_landform.gpkg"),
+              os.path.join(BASE_PATH,r"lnd_fts_landformline/lnd_fts_landformline.gpkg"),
+              os.path.join(BASE_PATH,r"lnd_fts_landformpoint/lnd_fts_landformpoint.gpkg")]
     
     # Read the geopackage files into geopandas dataframes
     gdf_list = [gpd.read_file(path) for path in paths]
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
-    if bbox:
+    if bbox and bbox != 'None':
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
+    
+    if not isinstance(filters,list):
+        try:
+            filters = ast.literal_eval(filters)
+        except Exception as e:
+            raise TypeError("Filters need to be a list")
     
     if filters and len(filters) > 0:
         gdf_filtered = []
@@ -281,17 +302,23 @@ def query_land_use(bbox:str,filters:list,filename:str,query:str):
     output:
         1. gdf : GeoDataFrame of the queried land features
     '''
-    paths = [ os.path.join(BASE_PATH,r"lus_fts_site\lus_fts_site.gpkg")]
+    paths = [ os.path.join(BASE_PATH,r"lus_fts_site/lus_fts_site.gpkg")]
     
     # Read the geopackage files into geopandas dataframes
     gdf_list = [gpd.read_file(path) for path in paths]
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
-    if bbox:
+    if bbox and bbox != 'None':
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
+    if not isinstance(filters,list):
+        try:
+            filters = ast.literal_eval(filters)
+        except Exception as e:
+            raise TypeError("Filters need to be a list")
+        
     if filters and len(filters) > 0:
         gdf_filtered = []
         for gdf in gdf_list:
@@ -324,19 +351,25 @@ def query_structure(bbox:str, filters:list, filename:str,query:str):
     output:
         1. gdf : GeoDataFrame of the queried structure features'''
     
-    paths = [os.path.join(BASE_PATH,r"str_fts_structure\str_fts_structure.gpkg"),
-            os.path.join(BASE_PATH,r"str_fts_compoundstructure\str_fts_compoundstructure.gpkg")]
+    paths = [os.path.join(BASE_PATH,r"str_fts_structure/str_fts_structure.gpkg"),
+            os.path.join(BASE_PATH,r"str_fts_compoundstructure/str_fts_compoundstructure.gpkg")]
     
     # Read the geopackage file into geopandas dataframe
     # Read the geopackage files into geopandas dataframes
     gdf_list = [gpd.read_file(path) for path in paths]
 
     # Set the coordinate reference system to EPSG:27700 (British National Grid) nad apply bbox if provided
-    if bbox:
+    if bbox and bbox != 'None':
         entent_polygon_file = joblib.load(os.path.join(ARTIFACT_PATH,f"{bbox}.pkl"))
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
+    if not isinstance(filters,list):
+        try:
+            filters = ast.literal_eval(filters)
+        except Exception as e:
+            raise TypeError("Filters need to be a list")
+        
     if filters and len(filters) > 0:
         gdf_filtered = []
         for gdf in gdf_list:
