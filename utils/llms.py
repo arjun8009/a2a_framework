@@ -65,7 +65,7 @@ def create_compatible_prompt_template(llm_instance,messages:list,isthinking:bool
 # Function to run an llm instance can be a langchain instance or an openai instance. Will return output in different formats : structured, messages and tools.
 # Note tools can only be used for openai llms
 
-def run_llm(model_name:str, messages: list, schema:object, tools:object, additional_args={"temperature":0,"max_tokens":2048, "parallel_tool_calls":True}):
+def run_llm(model_name:str, messages: list, schema:object, tools:object, port=None, additional_args={"temperature":0,"max_tokens":2048, "parallel_tool_calls":True}):
     ''' Run the LLM instance with the given prompt.
     Args:
         model name : Name of a model from a choice of approved models current llama3.2, gpt-4 variants and thinking models o1-o3 models
@@ -91,9 +91,14 @@ def run_llm(model_name:str, messages: list, schema:object, tools:object, additio
     print(f"Model chosen {model_name}")
     if model_name.startswith("Qwen"):
         
-        llm_instance = OpenAI(base_url="http://localhost:8000/v1", api_key="dummy")
-        model_name = llm_instance.models.list().data[0].id
+        llm_instance = OpenAI(base_url=f"http://localhost:{port}/v1", api_key="dummy")
 
+        model_name = llm_instance.models.list().data[0].id
+    elif model_name.startswith("Devstral"):
+
+        llm_instance = OpenAI(base_url=f"http://localhost:{port}/v1", api_key="dummy")
+        model_name = llm_instance.models.list().data[0].id
+        
     elif model_name.startswith("gpt") or model_name.startswith("o"):
         llm_instance = OpenAI()
         isthinking = True if model_name.startswith("o") or model_name=="gpt-5" else False

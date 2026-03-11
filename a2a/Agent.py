@@ -9,7 +9,7 @@ class Agent():
 
     def __init__(self, agent_details:AgentCard, llm_name:str, schema:BaseModel=None, 
                  tools:dict=None, tool_definitions:list=None, additional_args:dict=None, 
-                 available_agents=None, artifacts_req:Artifact = None, system_instruction:str=None,logger=None):
+                 available_agents=None, port=None, artifacts_req:Artifact = None, system_instruction:str=None,logger=None):
         
         ''' Default agent is defined here. It contains an identity of the agent and assigns an llm to control the agent
         args:
@@ -36,7 +36,7 @@ class Agent():
         self.available_agents = available_agents
         self.artifacts_req = artifacts_req
         self.system_instruction = system_instruction
-        
+        self.port = port
         if logger is None:
             logging.basicConfig(f"evaluation/evaluation_logs/{self.logging_filename}.log",format="%(asctime)s" "%(levelname)s %(message)s",filemode='w')
             self.logger = logging.getLogger()
@@ -59,7 +59,7 @@ class Agent():
         if self.artifacts_req:
             messages[-1]["content"] = messages[-1]["content"] + f"\n The data artifacts provided to you are : {[i.name for i in self.artifacts_req]} with descriptions {[i.description for i in self.artifacts_req]}"
 
-        output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
+        output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions,port=self.port)
         artifacts = None
         attempts = 0
         query = messages[-1]["content"]
@@ -72,7 +72,7 @@ class Agent():
                 if "<HUMAN>" in messages[-1]["output"]:
                     return messages[-1]["output"],None
                 attempts = attempts + 1
-                output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions)
+                output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions,port=self.port)
         self.logger.info(f"Final output of the agent is : {output}")
         if hasattr(output,"output_text"):
             return output.output_text,artifacts

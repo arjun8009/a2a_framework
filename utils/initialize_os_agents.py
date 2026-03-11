@@ -59,6 +59,7 @@ class OSAgentsInitializer():
             return registry["Agent"](
                 agent_details=registry[agentconfig["agent_details"]],
                 llm_name=agentconfig["llm_name"],
+                port = None if agentconfig.get("port",None) is None else agentconfig.get("port"),
                 tools={tool_name:registry[tool_name] for tool_name in agentconfig.get("tools",[])},
                 tool_definitions=[registry[tool_def] for tool_def in agentconfig.get("tool_definitions",[])],
                 schema=registry[agentconfig.get("schema",None)] if agentconfig.get("schema",None) is not None else None,

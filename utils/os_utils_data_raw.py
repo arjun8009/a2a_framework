@@ -81,13 +81,13 @@ def query_buildings(filters:list, bbox:str, filename:str, query:str):
     
     # Apply filters to each of the dataframes and concatenate the results of multiple filters
     gdf_filtered = []
-    if not isinstance(filters,list):
+    if filters is not None and filters !="None" and not isinstance(filters,list):
         try:
             filters = ast.literal_eval(filters)
         except Exception as e:
             raise TypeError("Filters need to be a list")
         
-    if filters and len(filters) > 0:
+    if isinstance(filters,list) and len(filters) > 0:
         for gdf in gdf_list:
             gdf_temp = []
             for filter in filters:
@@ -164,7 +164,7 @@ def query_water_features(filters:list,bbox:str, filename:str,query:str):
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
     # Apply filters to each of the dataframes and concatenate the results of multiple filters
-    if not isinstance(filters,list):
+    if filters is not None and filters !="None" and not isinstance(filters,list):
         try:
             filters = ast.literal_eval(filters)
         except Exception as e:
@@ -258,7 +258,7 @@ def query_land_features(bbox:str, filters:list, filename:str,query:str):
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
-    if not isinstance(filters,list):
+    if filters is not None and filters !="None" and not isinstance(filters,list):
         try:
             filters = ast.literal_eval(filters)
         except Exception as e:
@@ -313,7 +313,7 @@ def query_land_use(bbox:str,filters:list,filename:str,query:str):
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
-    if not isinstance(filters,list):
+    if filters is not None and filters !="None" and not isinstance(filters,list):
         try:
             filters = ast.literal_eval(filters)
         except Exception as e:
@@ -364,7 +364,7 @@ def query_structure(bbox:str, filters:list, filename:str,query:str):
         extent_polygon = entent_polygon_file.data.to_crs(epsg=27700)
         gdf_list = [gpd.clip(gdf, extent_polygon) for gdf in gdf_list]
     
-    if not isinstance(filters,list):
+    if filters is not None and filters !="None" and not isinstance(filters,list):
         try:
             filters = ast.literal_eval(filters)
         except Exception as e:
