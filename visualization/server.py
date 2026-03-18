@@ -69,8 +69,10 @@ def human_reply():
 def pause_execution():
     data = request.get_json()
     if data["code"]:
+        # For code tool name and db name is diff
         reply = tool_breakpoint(data["agent_name"],data["tool_name"],data["database_name"],data["tool_args"],data["table"])
     else:
+        # For normal tool name and db name is same as tool name
         reply = tool_breakpoint(data["agent_name"], data["tool_name"],data["tool_name"],data["tool_args"],None)
     return {"status": "ok", "reply": reply},200
     
@@ -82,6 +84,7 @@ def format_arguments(agent_name, database_name, tool_args, code_table):
         table = code_table
     
     print("tool args received", tool_args)
+    # Here we use db name as for non code tool name and db name is same
     return {"agent_name":agent_name,"database_name":database_name, "table":table, "tool_args":tool_args}
 
 

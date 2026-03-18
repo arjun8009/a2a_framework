@@ -20,12 +20,13 @@ from pathlib import Path
 import time
 import threading
 from flask_socketio import SocketIO
+from utils.pause_execution import pause_tool_execution
 
 
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
 
-ARTIFACT_PATH = Path.cwd() / "artifacts" #r"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/artifacts"
+ARTIFACT_PATH = Path.cwd() / "artifacts"
 
 
 # New function with raw data
@@ -51,15 +52,10 @@ def call_os_ngd(**kwargs):
     logger = kwargs["logger"]
 
     tool_args = {k:v for k,v in kwargs.items() if k!="ngd_name" and k!="logger"}
-    try:
-        suggestion = requests.post("http://localhost:5000/pause_execution",json={"agent_name":kwargs["ngd_name"], "tool_name":"call_os_ngd", "tool_args":tool_args,"code":False})
-
-        suggestion = suggestion.json()
-        if suggestion["reply"] is not None:
-            return f"The Human  agent actively interrupted the tool call with these suggestions. \
-                The Human suggestions are :  {suggestion['reply']}"
-    except Exception as e:
-        logger.info("Tool not inspected")
+    suggestion  = pause_tool_execution(kwargs["ngd_name"],"call_os_ngd",tool_args,code_true=False)
+    if suggestion is not None:
+        return f"The Human  agent actively interrupted the tool call with these suggestions. \
+            The Human suggestions are :  {suggestion}"
     
     
     try:
@@ -297,35 +293,12 @@ def code_executor(**kwargs):
         # We are assuming that the output of the coding agent will be  a list of 4 things [summary of output, artifact name, artifact description, artifact data ], None if no artifact
         if isinstance(output,list):
 
-            try:
-                columns,conditions,plotting = explain_code(code)
-                if all(isinstance(i, list) for i in columns) and all(isinstance(i, list) for i in conditions):
-                    columns_flat = []
-                    conditions_flat = []
-                    database_flat = []
-                    for idx, (c,cd) in enumerate(zip(columns,conditions)):
-                        columns_flat.extend(c)
-                        conditions_flat.extend(cd)
-                        database_flat.extend(artifact_names[idx]*len(c))
-
-                    code_interaction = {"agent_name":"coding_agent" if not plotting else "plotting_agent", "database_name":"and".join(artifact_names), "tool_name":"code_executor",
-                                        "table":{"columns":columns_flat,"conditions":conditions_flat},"pause":False, 
-                                        "tool_args":{columns_flat[i]:conditions_flat[i] for i in range(len(conditions_flat))}, "code":True}
-                    
-                    suggestion = requests.post("http://localhost:5000/pause_execution",json=code_interaction)
-                else:
-                        code_interaction = {"agent_name":"coding_agent" if not plotting else "plotting_agent", "database_name":artifact_names,
-                                            "tool_name":"code_executor","table":{"columns":columns,"conditions":conditions},"pause":False, 
-                                        "tool_args":{columns[i]:conditions[i] for i in range(len(conditions_flat))}, "code":True}
-                    
-                        suggestion = requests.post("http://localhost:5000/pause_execution",json=code_interaction)
-
-                suggestion = suggestion.json()
-                if suggestion["reply"] is not None:
-                    return f"The Human  agent actively interrupted the tool call with these suggestions. \
-                        The Human suggestions are :  {suggestion['reply']}"
-            except Exception as e:
-                logger.info("Tool not inspected")
+            suggestion = pause_tool_execution("coding_agent","code_executor",{"code":code,"artifact_names":artifact_names},code_true=True)
+            if suggestion is not None:
+                return f"The Human  agent actively interrupted the tool call with these suggestions. \
+                        The Human suggestions are :  {suggestion}"
+                
+            
             
             # if a valid artifact is returned we will save it to the artifacts folder so that it can be used later
             if output[1] is not None and output[2] is not None and output[3] is not None:
