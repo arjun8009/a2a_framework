@@ -64,7 +64,7 @@ class OSAgentsInitializer():
                 tool_definitions=[registry[tool_def] for tool_def in agentconfig.get("tool_definitions",[])],
                 schema=registry[agentconfig.get("schema",None)] if agentconfig.get("schema",None) is not None else None,
                 additional_args=agentconfig.get("additional_args",None),
-                system_instruction=registry[agentconfig.get("system_instruction",None)],
+                system_instruction=registry[agentconfig.get("system_instruction",None)] +  "\n" + (registry[agentconfig["additional_prompts"]] if agentconfig.get("additional_prompts") else "") ,
                 available_agents=None,
                 logger = self.logger
             )
@@ -80,7 +80,9 @@ class OSAgentsInitializer():
             # Available agents can be received from the agent config and we are using the preinitialized agents to get the instance of the agent and its details.
         for agents in self.agent_dict:
             if agents.get("available_agents",None):
-                initialized_agents[agents["agent_name"]].system_instruction = registry[agents.get("system_instruction")] + f"""\n <AVAILABLE AGENTS> {[initialized_agents[i].agent_identity for i in agents["available_agents"]]} <AVAILABLE AGENTS>"""
+                initialized_agents[agents["agent_name"]].system_instruction = registry[agents.get("system_instruction")] + \
+                "\n" + (registry[agents["additional_prompts"]] if agents.get("additional_prompts") else "") + \
+                f"""\n <AVAILABLE AGENTS> {[initialized_agents[i].agent_identity for i in agents["available_agents"]]} <AVAILABLE AGENTS>""" 
 
         for agents in self.agent_dict:
             if agents.get("available_agents",None):

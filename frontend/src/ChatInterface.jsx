@@ -28,7 +28,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import styled from "@emotion/styled";
-
+import { io } from "socket.io-client";
 
 
 
@@ -53,8 +53,43 @@ export default function ChatUI(){
     const messagesEndRef = React.useRef(null);
     const [isButtonDisabled, setButtonDisabled] = useState(true);
     const buttonref = useRef()
+    const [awaitingHuman, setAwaitingHuman]   = useState(false);
+    const [humanQuery, setHumanQuery]         = useState("");
+    const [humanInput, setHumanInput]         = useState("");
 
+    useEffect(() => {
+        const socket = io("http://localhost:5000", { transports: ["websocket"] });
 
+        socket.on("human_input_required", ({ query }) => {
+            // The /receive-data fetch is still open and blocking.
+            // Show a second input box for the human to reply.
+            setHumanQuery(query);
+            setMessages(prev => [...prev, {"role": "assistant", "content": query}])
+            setAwaitingHuman(true);
+            setLoading(false); // re-enable UI so user can type
+            setButtonDisabled(false);
+        });
+
+        return () => socket.disconnect();
+    }, []);
+
+    const handleHumanReply = async () => {
+        if (!humanInput.trim()) return;
+        setMessages(prev => [...prev, {"role": "user", "content": humanInput}])
+        setAwaitingHuman(false);
+        setLoading(true);
+          
+        // This POST unblocks the waiting /receive-data thread on the backend.
+        // The original handleSend fetch will then resolve with the final response.
+        await fetch("http://localhost:5000/human-reply", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ content: humanInput }),
+        });
+
+        setHumanInput("");
+        setButtonDisabled(true)
+    };
 
 
     const handleSend = async() =>{
@@ -64,7 +99,7 @@ export default function ChatUI(){
         const updated_messages = [...messages,message]
 
         // update the messages
-        setMessages(updated_messages)
+        setMessages(prev => [...prev, message])
         setInput("") // set input to empty
         setLoading(true) 
         try{
@@ -84,11 +119,12 @@ export default function ChatUI(){
                 console.log("Result",result)
 
                 if(result.length==1){
-                    setMessages([...updated_messages,result[0]])
+                    setMessages(prev => [...prev, result[0]])
                 }
                 else{
 
-                    setMessages([...updated_messages,result[0],result[1]])
+                    
+                    setMessages(prev => [...prev, result[0],result[1]])
                     setArtifacts(result[1])
                 }   
             }else{
@@ -123,6 +159,16 @@ export default function ChatUI(){
     }
   };
 
+  const handleHumanInputChange = (event) => {
+    setHumanInput(event.target.value);
+    const text = event.target.value
+    if(text.length > 0){
+      setButtonDisabled(false)
+    }else{
+      setButtonDisabled(true)
+    }
+  };
+
   // support send functionality
   const handelkeypress = (event) => {
     if(event.key=='Enter'){
@@ -130,8 +176,15 @@ export default function ChatUI(){
     }
   };
   
+  const handleHumanKeypress = (event) => {
+    if(event.key=='Enter'){
+      buttonref.current.click();
+    }
+  };
+  
 
     return (
+  
   <Box sx={{
     height: "100%",        
     width: "100%",     
@@ -173,7 +226,22 @@ export default function ChatUI(){
         borderColor: "divider",
       }}
     >
-      <TextField
+      {awaitingHuman ? (<TextField
+        size="small"
+        fullWidth
+        placeholder="Type a message"
+        variant="outlined"
+        value={humanInput}
+        onKeyDown={handleHumanKeypress}
+        onChange={handleHumanInputChange}
+        InputProps={{
+          endAdornment: (
+            <IconButton onClick={handleHumanReply} disabled={isButtonDisabled} ref={buttonref} edge="end">
+              <SendIcon />
+            </IconButton>
+          ),
+        }}
+      />): (<TextField
         size="small"
         fullWidth
         placeholder="Type a message"
@@ -188,7 +256,8 @@ export default function ChatUI(){
             </IconButton>
           ),
         }}
-      />
+      />)}
+      
     </Box>
   </Box>
 );}

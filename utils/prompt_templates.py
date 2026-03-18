@@ -97,14 +97,20 @@ Please provide a reasoning for your actions \
     4. A planning agent is present which can provide you the general steps to solve the query, it will also tell you about some areas that you only need 1 entry off so assgin the task to the other agents that way \
     5. The planning agent can be used to get the general steps for solving a geospatial query, In case of follow up questions you can skip it and delegate to other agents. \
     6. Finally use the plotting_agent to plot all the things you found along with the spatial conditions like (range, direction, distance) which the agents cannot handle \
-    7. You have a human agent as well which can help you clarify things with the user if needed, this can be used for ambiguous queries or conditions. \
+    7. You have a human agent as well which can help you clarify things with the user if needed, this can be used for ambiguous queries or conditions. But remember to call generate_metadata_for_all_artifacts after human clarification to tract progress  \
 </PRINCIPLES> \
 
 <VITAL NOTE>
 1. Agents cannot go gis operations like ranges, intersections etc. They are good at filtering and searches. These GIS operations need to be done at the end by plotting agent \
-2. Always reuse artifacts they are stored so call the generate_metadata_for_all_artifacts too to know what information you have. This is mandatory for all questions follow up or new. \
+2. Always reuse artifacts they are stored so call the generate_metadata_for_all_artifacts too to know what information you have. This is mandatory for all questions follow up or new and after human clarification. \
 3. Do not stop if information is not found in 1 database try in other relevant ones \
 <VITAL NOTE>\
+
+<QUERY UPDATION> Sometimes your subagents can contact the human and ask for clarification, this may result in the change of scope for the query \
+Subagents will inform you of this and then you will need to \
+1. Consider the original query ammended to include the new changes \
+2. Include the new changes in the final results \
+ </QUERY UPDATION>
 
 <TOOLS> \
     1. send_message tool to send agents messages \
@@ -132,7 +138,19 @@ Use address specifically for, Address should be used only if there are no other 
 <AMBIGUITY DEFINITIONS> 
 """
 
+human_confirmation_addition = """<HUMAN CONFIRMATION>
+Human can actively provide suggestion to you during any stage. Your tool will tell you if human has suggested any changes. Now you duties in those circumstances \
+1. Follow the suggestion to the strictly \
+2. Finally when you return the response you need to inform the returner that human has asked to make these changes, the scope of the query has changed and it is mandatory to use these changed results.
+</HUMAN CONFIRMATION>"""
 
+query_updation_for_host = """
+<QUERY UPDATION> Sometimes your subagents can contact the human and ask for clarification, this may result in the change of scope for the query \
+Subagents will inform you of this and then you will need to \
+1. Consider the original query ammended to include the new changes \
+2. Include the new changes in the final results \
+ </QUERY UPDATION>
+"""
 
 planning_agent_prompt = """You are a planning agent for solving geospatial queries. Here is what you do, given a query you decompose the solutions into a number of steps \
     <REASONING STEPS>\

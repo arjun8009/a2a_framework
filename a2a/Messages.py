@@ -10,7 +10,7 @@ class Messages():
     def __init__(self, messages : list, task_id:str):
         self.messages = messages
         self.task_id = task_id
-        self.filepath = Path.home() / "Ordnance_Survey" / "message_store" #r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\message_store"
+        self.filepath = Path.cwd() / "message_store" #r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\message_store"
     
     def get_relevant_files(self):
         '''Function to get all relevant files corresponding to the source and target agents in the task id'''

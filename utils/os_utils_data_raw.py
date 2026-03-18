@@ -12,8 +12,9 @@ import ast
 
 warnings.filterwarnings("ignore")
 
-BASE_PATH = Path.home() / "Ordnance_Survey" / "os_ngd_sample" #r"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/os_ngd_sample"
-ARTIFACT_PATH = Path.home() / "Ordnance_Survey" / "artifacts"
+BASE_PATH = Path.cwd() / "os_ngd_sample" #r"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/os_ngd_sample"
+ARTIFACT_PATH = Path.cwd() / "artifacts"
+
 
 def query_address(filters:list, bbox:str, street_address:bool, filename:str, query:str):
     '''Utility function to query OS Data Hub Address API
@@ -98,9 +99,9 @@ def query_buildings(filters:list, bbox:str, filename:str, query:str):
 
     
     # Assign attributes to each GeoDataFrame
-    gdf_attrs_list =[{"name":f"buildings_{filename}","description":f"A geopandas dataframe containing building data with filters and bbox applied for the query {query} using filters {filters}.","count":len(gdf_list[0])},
-                     {"name":f"buildingline_{filename}","description":f"A geopandas dataframe containing building line data with filters and bbox applied for the query {query} using filters {filters}.","count":len(gdf_list[1])},
-                     {"name":f"buildingpart_{filename}","description":f"A geopandas dataframe containing building part data with filters and bbox applied for the query {query} using filters {filters}.","count":len(gdf_list[2])}]
+    gdf_attrs_list =[{"name":f"buildings_{filename}","description":f"A geopandas dataframe containing building data with filters and bbox applied for the query {query} using filters {filters}.","count":len(gdf_filtered[0])},
+                     {"name":f"buildingline_{filename}","description":f"A geopandas dataframe containing building line data with filters and bbox applied for the query {query} using filters {filters}.","count":len(gdf_filtered[1])},
+                     {"name":f"buildingpart_{filename}","description":f"A geopandas dataframe containing building part data with filters and bbox applied for the query {query} using filters {filters}.","count":len(gdf_filtered[2])}]
     
     gdf_list = [gdf for gdf in gdf_filtered if not gdf.empty]
     gdf_attrs_list = [gdf_attrs_list[i] for i in range(len(gdf_filtered)) if not gdf_filtered[i].empty]
@@ -122,7 +123,7 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str,query:s
         1. gdf : GeoDataFrame of the queried named areas'''
     
     # Determine the path to the named area geopackage file based on whether polygon or point data is requested
-    if polygon_or_point and polygon_or_point == "True":
+    if polygon_or_point == True or polygon_or_point == "True":
         path = os.path.join(BASE_PATH,r"gnm_fts_namedarea/gnm_fts_namedarea.gpkg")
     else:
         path = os.path.join(BASE_PATH,r"gnm_fts_namedarea/gnm_fts_namedareapoint.gpkg")

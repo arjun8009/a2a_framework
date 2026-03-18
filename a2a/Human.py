@@ -22,10 +22,11 @@ class Human():
         
         print("Messages for human to process:", messages[-1]["content"])
         try:
-            status = requests.get("http://localhost:5000/Health")
-            if status.status_code == 200:
-                return f'<HUMAN AGENT>The agent wants help for the following query : \n query : {messages[-1]["content"]}',None
+           response = requests.post("http://localhost:5000/human_send", json={"query":messages[-1]["content"]})
+           print("RESPONSE FROM HUMAN", str(response.content))
+           return str(response.content),None
         except Exception as e:
+            
             print("OFFLINE MODE : Please provide your response to the following query:")
             output = input("Please provide your response:")
             return output,None

@@ -14,13 +14,18 @@ import joblib
 import os
 import inspect
 import requests
+from utils.code_explainer import explain_code
 import traceback
 from pathlib import Path
+import time
+import threading
+from flask_socketio import SocketIO
+
+
 
 ''' Default place for adding tool. From OS NGD to other useful tools'''
 
-ARTIFACT_PATH = Path.home() / "Ordnance_Survey" / "artifacts" #r"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/artifacts"
-
+ARTIFACT_PATH = Path.cwd() / "artifacts" #r"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/artifacts"
 
 
 # New function with raw data
@@ -44,6 +49,18 @@ def call_os_ngd(**kwargs):
     
     args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
     logger = kwargs["logger"]
+
+    tool_args = {k:v for k,v in kwargs.items() if k!="ngd_name" and k!="logger"}
+    try:
+        suggestion = requests.post("http://localhost:5000/pause_execution",json={"agent_name":kwargs["ngd_name"], "tool_name":"call_os_ngd", "tool_args":tool_args,"code":False})
+
+        suggestion = suggestion.json()
+        if suggestion["reply"] is not None:
+            return f"The Human  agent actively interrupted the tool call with these suggestions. \
+                The Human suggestions are :  {suggestion['reply']}"
+    except Exception as e:
+        logger.info("Tool not inspected")
+    
     
     try:
         result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args and k!="logger") })
@@ -176,7 +193,17 @@ def generate_metadata_for_artifacts(**kwargs):
         2. first_five_rows : A list of dataframes containing first five rows of each artifac
         3. filenames : filename of each artifact'''
     
-
+    os_specific_scenarios = {
+        "buildingage_year" : "Year of building construction but only for buildings constructed after 1999. Tell the coding agent to use this when filtering building contruction year after 1999",
+        "buildingage_period" : "Period in which the building was constructed as a range 'y1-y2'. This contains all buildings pre 1999. Tell the coding agent to use this for filtering building construction year before 1999 and to search in the range",
+        "height_relativeroofbase_m" : "features to find heights of buildings correctly ",
+        "height_absolutemin_m":"Absolute_min to find the lowest point of a building (do not use it for finding heights of buildings)",
+        "height_absolutemax_m":"absoluate_max column to find the highest point of a building like a chimney (do not use it for finding heights of buildings)",
+        "basementpresence_selfcontained":"Indicates if the basement contains a self-contained flat and basement_presence indicates a basement is present or not",
+        "buildinguse_addresscount_residential" : "A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1",
+        "buildinguse_addresscount_total": "A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1",
+        "oslandcovertierb" : "a very useful column and should be included in analysis."
+    }
     artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if name+".pkl" in os.listdir(ARTIFACT_PATH)]
     logger = kwargs["logger"]
     logger.info(f"artifacts loaded for metadata generation : {[i.name for i in artifacts]}")
@@ -189,12 +216,23 @@ def generate_metadata_for_artifacts(**kwargs):
         for col in df.columns:
             col_data = df[col]
 
-            column_schema.append({
-                "name": col,
-                "dtype": str(col_data.dtype),
-                "null_fraction": float(col_data.isna().mean()),
-                "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
-            })
+            if col in os_specific_scenarios.keys():
+                column_schema.append({
+                    "name": col,
+                    "special_description" : os_specific_scenarios[col],
+                    "dtype": str(col_data.dtype),
+                    "null_fraction": float(col_data.isna().mean()),
+                    "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
+                })
+            else:
+                column_schema.append({
+                    "name": col,
+                    "dtype": str(col_data.dtype),
+                    "null_fraction": float(col_data.isna().mean()),
+                    "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
+                })
+
+            
 
         artifact_metadata = {
             "filename": artifact.name,
@@ -213,7 +251,6 @@ def generate_metadata_for_artifacts(**kwargs):
         metadata.append(artifact_metadata)
 
     return metadata
-    return columns,first_five_rows,filenames
 
 def generate_metadata_for_all_artifacts(**kwargs):
 
@@ -229,6 +266,7 @@ def generate_metadata_for_all_artifacts(**kwargs):
     artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}")) for name in os.listdir(ARTIFACT_PATH)]
     metadata = {i.name:i.description for i in artifacts}
     return metadata
+
 
 
 
@@ -259,6 +297,36 @@ def code_executor(**kwargs):
         # We are assuming that the output of the coding agent will be  a list of 4 things [summary of output, artifact name, artifact description, artifact data ], None if no artifact
         if isinstance(output,list):
 
+            try:
+                columns,conditions,plotting = explain_code(code)
+                if all(isinstance(i, list) for i in columns) and all(isinstance(i, list) for i in conditions):
+                    columns_flat = []
+                    conditions_flat = []
+                    database_flat = []
+                    for idx, (c,cd) in enumerate(zip(columns,conditions)):
+                        columns_flat.extend(c)
+                        conditions_flat.extend(cd)
+                        database_flat.extend(artifact_names[idx]*len(c))
+
+                    code_interaction = {"agent_name":"coding_agent" if not plotting else "plotting_agent", "database_name":"and".join(artifact_names), "tool_name":"code_executor",
+                                        "table":{"columns":columns_flat,"conditions":conditions_flat},"pause":False, 
+                                        "tool_args":{columns_flat[i]:conditions_flat[i] for i in range(len(conditions_flat))}, "code":True}
+                    
+                    suggestion = requests.post("http://localhost:5000/pause_execution",json=code_interaction)
+                else:
+                        code_interaction = {"agent_name":"coding_agent" if not plotting else "plotting_agent", "database_name":artifact_names,
+                                            "tool_name":"code_executor","table":{"columns":columns,"conditions":conditions},"pause":False, 
+                                        "tool_args":{columns[i]:conditions[i] for i in range(len(conditions_flat))}, "code":True}
+                    
+                        suggestion = requests.post("http://localhost:5000/pause_execution",json=code_interaction)
+
+                suggestion = suggestion.json()
+                if suggestion["reply"] is not None:
+                    return f"The Human  agent actively interrupted the tool call with these suggestions. \
+                        The Human suggestions are :  {suggestion['reply']}"
+            except Exception as e:
+                logger.info("Tool not inspected")
+            
             # if a valid artifact is returned we will save it to the artifacts folder so that it can be used later
             if output[1] is not None and output[2] is not None and output[3] is not None:
                 artifact = Artifact(name=output[1],description=output[2],data=output[3])
@@ -286,6 +354,7 @@ def human_send_message(message:str, target_agent:list):
     output:
         The updated task
     '''
+
     logger = target_agent[0].logger
     try:
         logger.info(f"sending message from human to host {message}")

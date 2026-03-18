@@ -44,6 +44,8 @@ registry = {
     "generate_metadata_for_all_artifacts":generate_metadata_for_all_artifacts,
     "host_prompt_template_for_os_version_2":host_prompt_template_for_os_version_2,
     "host_prompt_template_for_os":host_prompt_template_for_os,
+    "human_confirmation_addition":human_confirmation_addition,
+    "query_updation_for_host":query_updation_for_host,
     "host_agent_card":host_agent_card,
     "send_message_definitions":send_message_definitions,
     "os_ngd_tool_description":os_ngd_tool_description,

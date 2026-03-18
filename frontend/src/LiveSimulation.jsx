@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import AgentGraphLive from "./AgentGraphLive";
 import ChatbotCard from "./ChatbotCard";
+import CodeAgentPanel from './CodeAgentPanel';
 
 export default function LiveSimulation(){
 
@@ -60,10 +61,12 @@ export default function LiveSimulation(){
                     value={choice}
                     label="Select Configuration"
                     onChange={handleChange}
-                    >
+                    >   
                     <MenuItem value="agent_config_with_human">Agent Config With Human</MenuItem>
                     <MenuItem value="agent_config">Agent Config</MenuItem>
                     <MenuItem value="agent_config_with_human_updated">Agent Config With Human Updated</MenuItem>
+                    <MenuItem value="agent_config_with_human_confirmation">Agent Config With Human Confirmation</MenuItem>
+
                     </Select>
             </FormControl>
 
@@ -92,15 +95,21 @@ export default function LiveSimulation(){
             </Box>
 
             {/* Right Panel - AgentGraphLive */}
-            <Box
-                sx={{
-                flex: 1,
-                height: "100%",
-                overflow: "auto",
-                }}
-            >
-                <AgentGraphLive />
-            </Box>
+           <Box sx={{ flex: 1, height: "100%", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+ 
+                    {/* Top-right — Agent graph */}
+                    <Box sx={{ flex: 1, minHeight: 0, overflow: "auto", borderBottom: "1px solid", borderColor: "divider" }}>
+                        <AgentGraphLive />
+                    </Box>
+ 
+                    {/* Bottom-right — DB call panel */}
+                    <Box sx={{ flex: 1, minHeight: 0, overflow: "hidden", display: "flex", flexDirection:"column"}}>
+                        <CodeAgentPanel />
+                    </Box>
+ 
+ 
+            </Box> 
+            
             </Box>
             
         </Box>
