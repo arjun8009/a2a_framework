@@ -15,11 +15,43 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import ArtifactWindow from "./ArtifactWindow";
+import PauseConfig from "./PauseConfig";
+
 
 export default function ChatbotCard() {
 
   const [open,setOpen] = useState(false)
   const [data,setData] = useState([])
+  const [pause,setPause] = useState(null)
+  const [pauseopen, setPauseOpen] = useState(false)
+
+  const handlePauseOpen = ()=>{
+    getPausePayload()
+    setPauseOpen(true)
+  }
+
+  const handlePauseClose = ()=>{
+    setPauseOpen(false)
+  }
+
+  const getPausePayload = async() =>{
+    const url  = "http://localhost:5000/get-config-data"
+    try{
+      const response = await fetch(url,{
+        method:"POST",
+        headers:{
+          "Content-Type":'application/json'
+        }
+      });
+      if(response.ok){
+        const data = await response.json()
+        setPause(data["data"])
+      }
+    }catch{
+        setPause(null)
+    }
+  }
+
 
   const getArtifacts = async() =>{
     const url = "http://localhost:5000/get-artifacts"
@@ -77,13 +109,24 @@ export default function ChatbotCard() {
           />
         ]}
         action = {
-          <Button
-          variant="outlined"
-          sx={{ color: "white", fontSize: { xs: "10px", sm: "12px", md: "14px" } }}
-          onClick={handleOpen}
-          >
-            Aritfacts
-          </Button>
+          <Box sx = {{display:"flex", gap:1}}>
+            <Button
+            variant="outlined"
+            sx={{ color: "white", fontSize: { xs: "10px", sm: "12px", md: "14px" } }}
+            onClick={handleOpen}
+            >
+              Aritfacts
+            </Button>
+
+            <Button
+            variant="outlined"
+            sx={{ color: "white", fontSize: { xs: "10px", sm: "12px", md: "14px" } }}
+            onClick={handlePauseOpen}
+            >
+              Pause config
+            </Button>
+
+          </Box>
         }
       />
 
@@ -104,6 +147,7 @@ export default function ChatbotCard() {
       </Typography>
     </Card>
     {open && (<ArtifactWindow data={data} open={open} onClose={handleClose}/>)}
+    {pauseopen &&(<PauseConfig data={pause} open={pauseopen} onClose={handlePauseClose}/>)}
     </>
   );
 }

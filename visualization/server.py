@@ -11,12 +11,11 @@ from utils.initialize_os_agents import OSAgentsInitializer
 from utils.tools import human_send_message
 from utils.keys import set_api_keys
 import threading
+import traceback
 set_api_keys()
 
-_human_event = threading.Event()
-_human_reply = None
-
-_pause_config = {"buildings":"call_os_ngd", "coding_agent":"code_executor"}
+config_file = None
+_pause_config = None
 _pause_event = threading.Event()
 _pause_reply = None
 
@@ -34,36 +33,38 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 def health_check():
     return {"status":"success"},200
 
-
-@app.route("/human_send", methods=['POST'])
-def send_human_query():
-    global _human_reply, _human_event
-    _human_event.clear()
-    _human_reply = None
-    
+@app.route("/set-pause-config", methods=['POST'])
+def set_pause_config():
+    global _pause_config
     data = request.get_json()
-    query = data["query"]
+    choice = data["choice"]
+    if choice == 1 or choice == "1":
+        _pause_config = data["data"]
+    else:
+        _pause_config = {"all_tools":data["data"]}
+    return {"status":"success"},200
 
-    socketio.emit("human_input_required", {"query": query})
-    
-    got_reply = _human_event.wait(timeout=300)
-    if not got_reply:
-        return "Timeout — no human response received.", None
 
-    return _human_reply
 
-@app.route("/human-reply", methods=["POST"])
-def human_reply():
-    global _human_reply, _human_event
+@app.route("/get-config-data",methods=['POST'])
+def get_config_data():
+    try:
+        config = None
+        if "human_confirmation" in config_file:
+            with open(f"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/agent_frameworks/{config_file}.json","rb") as file:
+                config = json.load(file)
+            agent_tools_mapping = {i["agent_name"]:i["tools"] for i in config if i.get("tools",None)}
+            tools = [i["tools"] for i in config if i.get("tools",None)]
+            tools = list(set([k for j in tools for k in j]))
+            payload = {"data":[{"agent":agent_tools_mapping},{"tools":tools}]}
+            return payload
+        else:
+            return {"data":None}
+    except Exception as e:
+        print(traceback.format_exc())
+        return {"data":None}
 
-    data = request.get_json()
-    if not data or "content" not in data:
-        return {"error": "Missing content"}, 400
 
-    _human_reply = data["content"]
-    _human_event.set()  # unblocks human_send_message above
-
-    return {"status": "ok"}, 200
 
 @app.route("/pause_execution", methods=['POST'])
 def pause_execution():
@@ -91,8 +92,12 @@ def format_arguments(agent_name, database_name, tool_args, code_table):
 
 def tool_breakpoint(agent_name:str, tool_name:str, database_name:str, tool_args:object, code_table:dict):
     global _pause_reply, _pause_event
+
+    if _pause_config.get("all_tools",None):
+        tools_to_pause = _pause_config.get("all_tools",[])
+    else:
+        tools_to_pause = _pause_config.get("agent_name",[])
     
-    tools_to_pause = _pause_config.get(agent_name,[])
     arguments = format_arguments(agent_name,database_name,tool_args,code_table)
     
     if tool_name not in tools_to_pause:
@@ -132,9 +137,11 @@ def resume_execution():
 def initialise_config():
     global agents
     global agent_archiecture
+    global config_file
     choice = request.get_json()
     print("Choice",choice)
     choice = choice["choice"]
+    config_file = choice
     config = None
     with open(f"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/agent_frameworks/{choice}.json","rb") as file:
         config = json.load(file)
