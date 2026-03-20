@@ -94,10 +94,12 @@ def format_arguments(agent_name, database_name, tool_args, code_table):
 def tool_breakpoint(agent_name:str, tool_name:str, database_name:str, tool_args:object, code_table:dict):
     global _pause_reply, _pause_event
 
-    if _pause_config.get("all_tools",None):
-        tools_to_pause = _pause_config.get("all_tools",[])
-    else:
-        tools_to_pause = _pause_config.get(agent_name,[])
+    tools_to_pause = []
+    if _pause_config:
+        if _pause_config.get("all_tools",None):
+            tools_to_pause = _pause_config.get("all_tools",[])
+        else:
+            tools_to_pause = _pause_config.get(agent_name,[])
     
     print("tools to pause", tools_to_pause)
     arguments = format_arguments(agent_name,database_name,tool_args,code_table)
