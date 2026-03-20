@@ -1,6 +1,6 @@
 import requests
 from utils.code_explainer import explain_code
-
+import traceback
 
 URL = "http://localhost:5000/pause_execution"
 
@@ -48,7 +48,9 @@ def pause_tool_execution(agent_name, tool_name, tool_args, code_true):
                               "table":table,"tool_args":tool_args_code,"code":code_true}
 
             suggestion = make_request(URL,code_json_send)
+            return suggestion
 
     except Exception as e:
+        print(traceback.format_exc)
         return None
         

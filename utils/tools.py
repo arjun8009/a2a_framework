@@ -52,7 +52,7 @@ def call_os_ngd(**kwargs):
     logger = kwargs["logger"]
 
     tool_args = {k:v for k,v in kwargs.items() if k!="ngd_name" and k!="logger"}
-    suggestion  = pause_tool_execution(kwargs["ngd_name"],"call_os_ngd",tool_args,code_true=False)
+    suggestion  = pause_tool_execution(kwargs["ngd_name"]+"_agent","call_os_ngd",tool_args,code_true=False)
     if suggestion is not None:
         return f"The Human  agent actively interrupted the tool call with these suggestions. \
             The Human suggestions are :  {suggestion}"
@@ -295,6 +295,7 @@ def code_executor(**kwargs):
 
             suggestion = pause_tool_execution("coding_agent","code_executor",{"code":code,"artifact_names":artifact_names},code_true=True)
             if suggestion is not None:
+                print("Suggestion", suggestion)
                 return f"The Human  agent actively interrupted the tool call with these suggestions. \
                         The Human suggestions are :  {suggestion}"
                 

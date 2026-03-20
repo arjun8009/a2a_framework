@@ -42,6 +42,7 @@ def set_pause_config():
         _pause_config = data["data"]
     else:
         _pause_config = {"all_tools":data["data"]}
+    print(_pause_config)
     return {"status":"success"},200
 
 
@@ -96,8 +97,9 @@ def tool_breakpoint(agent_name:str, tool_name:str, database_name:str, tool_args:
     if _pause_config.get("all_tools",None):
         tools_to_pause = _pause_config.get("all_tools",[])
     else:
-        tools_to_pause = _pause_config.get("agent_name",[])
+        tools_to_pause = _pause_config.get(agent_name,[])
     
+    print("tools to pause", tools_to_pause)
     arguments = format_arguments(agent_name,database_name,tool_args,code_table)
     
     if tool_name not in tools_to_pause:
@@ -112,6 +114,7 @@ def tool_breakpoint(agent_name:str, tool_name:str, database_name:str, tool_args:
     _pause_reply = None
 
     got_reply = _pause_event.wait(timeout=300)
+    print("got reply", got_reply)
     if not got_reply:
         return None
 
