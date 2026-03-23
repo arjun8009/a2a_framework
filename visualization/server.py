@@ -12,6 +12,8 @@ from utils.tools import human_send_message
 from utils.keys import set_api_keys
 import threading
 import traceback
+from pathlib import Path
+import shutil
 set_api_keys()
 
 config_file = None
@@ -19,9 +21,10 @@ _pause_config = None
 _pause_event = threading.Event()
 _pause_reply = None
 
-PATH_VISUALIZATION = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\visualization"
-DEFAULT_PATH_VISUALIZATION = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey"
-PATH_ARTIFACTS = r"C:\Users\ab1574\OneDrive - University of Exeter\Desktop\Ordnance_Survey\artifacts"
+PATH_VISUALIZATION = Path.cwd() / "visualization"
+DEFAULT_PATH_VISUALIZATION = Path.cwd()
+PATH_ARTIFACTS = Path.cwd() / "artifacts"
+PATH_MESSAGES = Path.cwd() / "message_store"
 
 app = Flask(__name__)
 CORS(app)
@@ -32,6 +35,22 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 @app.route("/Health", methods=['GET'])
 def health_check():
     return {"status":"success"},200
+
+@app.route("/delete-conversation",methods=['POST'])
+def delete_conversation():
+    messages_files = os.listdir(PATH_MESSAGES)
+    artifacts_files = os.listdir(PATH_ARTIFACTS)
+    if len(messages_files) > 0:
+        shutil.rmtree(PATH_MESSAGES)
+    if len(artifacts_files) > 0:
+        shutil.rmtree(PATH_ARTIFACTS)
+    os.makedirs(PATH_ARTIFACTS,exist_ok=True)
+    os.makedirs(PATH_MESSAGES,exist_ok=True)
+    return {"status":"success"},200
+
+        
+
+
 
 @app.route("/set-pause-config", methods=['POST'])
 def set_pause_config():

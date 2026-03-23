@@ -11,7 +11,8 @@ import {
   Avatar,
   Grid,
   Paper,
-  Select
+  Select,
+  Alert
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import ArtifactWindow from "./ArtifactWindow";
@@ -24,6 +25,7 @@ export default function ChatbotCard() {
   const [data,setData] = useState([])
   const [pause,setPause] = useState(null)
   const [pauseopen, setPauseOpen] = useState(false)
+  const [status,setStatus] = useState(null)
 
   const handlePauseOpen = ()=>{
     getPausePayload()
@@ -52,6 +54,25 @@ export default function ChatbotCard() {
     }
   }
 
+  const handleReset = async() =>{
+    const url = "http://localhost:5000/delete-conversation"
+    try{
+      const response = await fetch(url,{
+        method:"POST",
+        headers:{
+          'Content-Type': 'application/json',
+        }
+      });
+      if(response.ok){
+        setStatus("success")
+      }else{
+        setStatus("failure")
+      }
+
+    }catch{
+        setStatus("failure")
+    }
+  }
 
   const getArtifacts = async() =>{
     const url = "http://localhost:5000/get-artifacts"
@@ -84,6 +105,8 @@ export default function ChatbotCard() {
 
   return (
     <>
+    {status==="success" && (<Alert severity="success">Conversation reset successfully</Alert>)}
+    {status==="failure" && (<Alert severity="failure">Conversation reset unsuccessfully</Alert>)}
     <Card
       sx={{
         height: "100%",
@@ -124,6 +147,14 @@ export default function ChatbotCard() {
             onClick={handlePauseOpen}
             >
               Pause config
+            </Button>
+
+            <Button
+              variant="outlined"
+              sx={{ color: "white", fontSize: { xs: "10px", sm: "12px", md: "14px" } }}
+              onClick={handleReset}
+            >
+              Reset History
             </Button>
 
           </Box>
