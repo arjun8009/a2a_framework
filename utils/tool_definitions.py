@@ -68,10 +68,10 @@ metadata_all_artifacts = {
 
 
 
-os_ngd_tool_description = {
+osm_tool_description = {
         "type":"function",
-        "name":"call_os_ngd",
-        "description":"Tool that search os ngd and returns close results based on query but is not fully accurate",
+        "name":"call_osm",
+        "description":"Tool that search osm and returns close results based on query but is not fully accurate",
         "parameters":{
             "type":"object",
             "properties":{

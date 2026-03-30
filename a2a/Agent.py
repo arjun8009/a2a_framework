@@ -104,8 +104,8 @@ class Agent():
 
                 self.logger.info(f"Calling tool {call.name} with args : {args}")
                 args["logger"] = self.logger
-                if call.name == "call_os_ngd":
-                    args["ngd_name"] = self.agent_identity.agent_name
+                if call.name == "call_osm":
+                    args["osm_name"] = self.agent_identity.agent_name
                     args["query"] = query
 
                 if call.name == "send_message":

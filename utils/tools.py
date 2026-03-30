@@ -5,7 +5,7 @@ from a2a.Task import Task
 from a2a.SendMessage import SendMessage
 from a2a.Artifact import Artifact
 from a2a.Messages import Messages
-from utils.os_utils_data_raw import *
+from utils.osm_utils_data_raw import *
 from a2a.Human import Human
 from utils.card_templates import human_agent_card
 import uuid
@@ -24,53 +24,51 @@ from utils.pause_execution import pause_tool_execution
 
 
 
-''' Default place for adding tool. From OS NGD to other useful tools'''
+''' Default place for adding tool. From OSM to other useful tools'''
 
 ARTIFACT_PATH = Path.cwd() / "artifacts"
 
 
 # New function with raw data
-def call_os_ngd(**kwargs):
-    '''This is a single tool for calling os ngd data base. It checks which agent is calling it and calls that particular ngd
+def call_osm(**kwargs):
+    '''This is a single tool for calling os osm data base. It checks which agent is calling it and calls that particular osm
     args:
-        1. Different args based on different ngd features
-        2. ngd_name : mandatory name of the ngd to call
+        1. Different args based on different osm features
+        2. osm_name : mandatory name of the osm to call
 
         output:
-        The data fetched from the os ngd database in the form of a geopandas dataframe as an artifact and a summary of the data fetched'''
+        The data fetched from the osm database in the form of a geopandas dataframe as an artifact and a summary of the data fetched'''
     
-    ngd_util_mapping = {"address":query_address,
+    osm_util_mapping = {"address":query_address,
                        "buildings":query_buildings,
                        "named_area":apply_extent_named_area,
-                       "water_features":query_water_features,
                        "water_network":query_water_network,
                        "land_features":query_land_features,
-                       "land_use_features":query_land_use,
-                       "structures_agent":query_structure}
+                       "land_use_features":query_land_use}
     
-    args = inspect.signature(ngd_util_mapping[kwargs["ngd_name"]]).parameters.keys()
+    args = inspect.signature(osm_util_mapping[kwargs["osm_name"]]).parameters.keys()
     logger = kwargs["logger"]
 
-    tool_args = {k:v for k,v in kwargs.items() if k!="ngd_name" and k!="logger"}
-    suggestion  = pause_tool_execution(kwargs["ngd_name"]+"_agent","call_os_ngd",tool_args,code_true=False)
+    tool_args = {k:v for k,v in kwargs.items() if k!="osm_name" and k!="logger"}
+    suggestion  = pause_tool_execution(kwargs["osm_name"]+"_agent","call_osm",tool_args,code_true=False)
     if suggestion is not None:
         return f"The Human  agent actively interrupted the tool call with these suggestions. \
             The Human suggestions are :  {suggestion}"
     
     
     try:
-        result = ngd_util_mapping[kwargs["ngd_name"]](**{k:v for k,v in kwargs.items() if(k!="ngd_name" and k in args and k!="logger") })
+        result = osm_util_mapping[kwargs["osm_name"]](**{k:v for k,v in kwargs.items() if(k!="osm_name" and k in args and k!="logger") })
     except Exception as e:
-        logger.exception("Exception in call os ngd",e)
+        logger.exception("Exception in call osm",e)
         if isinstance(e,TypeError):
             return str(e)
         else:
-            return "There was an error while calling NGD. Most probable cause is wrong artifact name for bbox parameter. Try a few times with the correct artifact names."
+            return "There was an error while calling OSM. Most probable cause is wrong artifact name for bbox parameter. Try a few times with the correct artifact names."
 
     if not isinstance(result,list):
-        logger.info("NGD query result %s",result)
+        logger.info("OSM query result %s",result)
     else:
-        logger.info("NGD query result %s",result)
+        logger.info("OSM query result %s",result)
 
     if result is not None:
 
@@ -189,17 +187,7 @@ def generate_metadata_for_artifacts(**kwargs):
         2. first_five_rows : A list of dataframes containing first five rows of each artifac
         3. filenames : filename of each artifact'''
     
-    os_specific_scenarios = {
-        "buildingage_year" : "Year of building construction but only for buildings constructed after 1999. Tell the coding agent to use this when filtering building contruction year after 1999",
-        "buildingage_period" : "Period in which the building was constructed as a range 'y1-y2'. This contains all buildings pre 1999. Tell the coding agent to use this for filtering building construction year before 1999 and to search in the range",
-        "height_relativeroofbase_m" : "features to find heights of buildings correctly ",
-        "height_absolutemin_m":"Absolute_min to find the lowest point of a building (do not use it for finding heights of buildings)",
-        "height_absolutemax_m":"absoluate_max column to find the highest point of a building like a chimney (do not use it for finding heights of buildings)",
-        "basementpresence_selfcontained":"Indicates if the basement contains a self-contained flat and basement_presence indicates a basement is present or not",
-        "buildinguse_addresscount_residential" : "A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1",
-        "buildinguse_addresscount_total": "A home or a house or residential place in query of buildings is always defined where buildinguse_addresscount_residential >0 and buildinguse_addresscount_total =1",
-        "oslandcovertierb" : "a very useful column and should be included in analysis."
-    }
+    
     artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if name+".pkl" in os.listdir(ARTIFACT_PATH)]
     logger = kwargs["logger"]
     logger.info(f"artifacts loaded for metadata generation : {[i.name for i in artifacts]}")
@@ -212,21 +200,12 @@ def generate_metadata_for_artifacts(**kwargs):
         for col in df.columns:
             col_data = df[col]
 
-            if col in os_specific_scenarios.keys():
-                column_schema.append({
-                    "name": col,
-                    "special_description" : os_specific_scenarios[col],
-                    "dtype": str(col_data.dtype),
-                    "null_fraction": float(col_data.isna().mean()),
-                    "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
-                })
-            else:
-                column_schema.append({
-                    "name": col,
-                    "dtype": str(col_data.dtype),
-                    "null_fraction": float(col_data.isna().mean()),
-                    "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
-                })
+            column_schema.append({
+                "name": col,
+                "dtype": str(col_data.dtype),
+                "null_fraction": float(col_data.isna().mean()),
+                "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
+            })
 
             
 

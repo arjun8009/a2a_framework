@@ -18,7 +18,7 @@ planning_agent_card = AgentCard(agent_name="planning_agent",
 
 
 address_agent_card = AgentCard(agent_name="address",
-                               agent_description="a search agent for ordance surveys address database within an area, Given a query you will try to find relevant addresses or places given a name of a place or address.Use this only for named location geolocation. Artifacts are points",
+                               agent_description="a search agent for OpenStreetMap POI (point of interest) database within an area, Given a query you will try to find relevant addresses or places given a name of a place or address.Use this only for named location geolocation. Artifacts are points",
                                capabilities=["1. Given a place name or address name and the artifact name of where to search, it will search places in an area",
                                              "2. Note : only use this for named entitiy geo coding only. Do not using it for finding generic things without names"
                                              "3. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
@@ -31,7 +31,7 @@ address_agent_card = AgentCard(agent_name="address",
 
 
 building_agent_card = AgentCard(agent_name="buildings",
-                               agent_description="a search agent for ordance surveys buildings database within an area, Given a query you will try to find relevant buildings.It has 89 features and is a rich set so normally it can filter for all conditions related to buildings.Artifacts are small building polygons",
+                               agent_description="a search agent for OpenStreetMap buildings database within an area, Given a query you will try to find relevant buildings.It has a rich set of features so normally it can filter for all conditions related to buildings.Artifacts are small building polygons",
                                capabilities=["1. Given a query it will search it in an area artifact. It is very rich with 89 features so all conditions attached to buildings can be handled by it.",
                                              "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
                                              "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
@@ -41,19 +41,10 @@ building_agent_card = AgentCard(agent_name="buildings",
                                 output_modes=["output and the artifact name"])
 
 
-water_features_agent_card = AgentCard(agent_name="water_features",
-                               agent_description="a search agent for ordance surveys water features database within an area, Given a query you will try to find relevant features such as watercourses, lakes, drains, springs and intertidal watercourses across Great Britain",
-                               capabilities=["1. Given a query it will search it in an area artifact.",
-                                             "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
-                                             "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
-                                             "4. Has access to coding agent so can search further if you ask it to",
-                                             "5. Artifacts contain points and polygons of water features"],
-                                input_modes=["query : string"],
-                                output_modes=["output and the artifact name"])
 
 
 water_network_agent_card = AgentCard(agent_name="water_network",
-                               agent_description="a search agent for ordance surveys water network database within an area, Given a query you will try to find relevant Rivers, streams, lakes, lochs, drains and canals ",
+                               agent_description="a search agent for OpenStreetMap waterways database within an area, Given a query you will try to find relevant Rivers, streams, lakes, lochs, drains and canals ",
                                capabilities=["1. Given a query it will search it in an area artifact.",
                                              "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
                                              "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
@@ -63,9 +54,9 @@ water_network_agent_card = AgentCard(agent_name="water_network",
                                 output_modes=["output and the artifact name"])
 
 land_features_agent_card = AgentCard(agent_name="land_features",
-                               agent_description="a search agent for ordance surveys land features database within an area, Given a query, it will try to find relevant features which can be manmade \
+                               agent_description="a search agent for OpenStreetMap land features database within an area, Given a query, it will try to find relevant features which can be manmade \
                                                 (for example, tennis courts, residential gardens, construction sites) or natural land \
-                                                (for example, coniferous trees, cliffs, heath or rough grassland), but excludes features exclusively associated with buildings, structures, transport and water.",
+                                                (for example, coniferous trees, cliffs, heath or rough grassland), but excludes features exclusively associated with buildings, transport and water. It is popular OpenStreetMap features which are used to represent land features.",
                                 capabilities=["1. Given a query it will search it in an area artifact.",
                                              "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
                                              "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
@@ -75,21 +66,21 @@ land_features_agent_card = AgentCard(agent_name="land_features",
                                 output_modes=["output and the artifact name"])
 
 land_use_features_agent_card = AgentCard(agent_name="land_use_features",
-                               agent_description="a search agent for ordance surveys land use features database within an area, Given a query, it will try to find relevant features which are geographical representations \
+                               agent_description="a search agent for OpenStreetMap land use features database within an area, Given a query, it will try to find relevant features which are geographical representations \
                                 of areas identified as having a specific purpose (such as schools, universities, and caravan parks), as well as information about access to such areas. \
-                                Polygon feature which represents the recognisable extent of certain types of function or activity. Examples include a caravan site, a university, and a railway centre.",
+                                Polygon feature which represents the recognisable extent of certain types of function or activity. Examples include a caravan site, a university, and a railway centre. It is popular OpenStreetMap features which are used to represent land use features.",
                                 capabilities=["1. Given a query it will search it in an area artifact.",
                                              "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
                                              "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
                                              "4. Has access to coding agent so can search further if you ask it to",
-                                             "5. Artifacts contain point, line and polygon features of land features"],
+                                             "5. Artifacts contain point, line and polygon features of land use features"],
                                 input_modes=["query : string"],
                                 output_modes=["output and the artifact name"])
 
 
 
 named_area_agent_card = AgentCard(agent_name="named_area",
-                                  agent_description="a search agent for ordance surveys named area database. A named area by OS is defined as : A settlement, locality, geographical feature, or area of water that has a name, represented as a polygon. It contains information related to cities, counties, geographical descriptions etc. Artifacts are area polygons ",
+                                  agent_description="a search agent for OpenStreetMap boundaries database. A named area by OSM is defined as : A settlement, locality, geographical feature, or area of water that has a name, represented as a polygon. It contains information related to cities, counties, geographical descriptions etc. Artifacts are area polygons ",
                                   capabilities=["1. Given a named area like a city or a place it will search it",
                                              "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
                                              "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
@@ -99,15 +90,6 @@ named_area_agent_card = AgentCard(agent_name="named_area",
                                     input_modes=["query : string"],
                                     output_modes=["output and the artifact name"])
 
-structure_agent_card = AgentCard(agent_name="structures_agent",
-                                agent_description="a search agent for ordance surveys structure database within an area, Polygon feature representing a manmade construction that is not a building. Examples include a mast, a chimney, crane, solar panel etc, Artifacts are structure polygons",
-                                capabilities=["1. Given a structure type or description it will search it in an area artifact",
-                                             "2. If you need to search within an area bbox then you need to tell it the name of the artifact containing the bbox",
-                                             "3. If you give it the name of the artifact bbox and ask it to search within it, it will do so",
-                                             "4. Has access to coding agent so can search further if you ask it to",
-                                             "5. It cannot apply conditions. That job is for the plotting agent"],
-                                input_modes=["query : string"],
-                                output_modes=["output and the artifact name"])
 
 
 
