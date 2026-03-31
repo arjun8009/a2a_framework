@@ -49,13 +49,13 @@ def create_compatible_prompt_template(llm_instance,messages:list,isthinking:bool
     if not isinstance(llm_instance,ChatOllama):
         if isthinking:
             for i,j in enumerate(messages):
-                if j["role"] == "system":
+                if isinstance(j, dict) and j.get("role") == "system":
                     messages[i]["role"] = "user"
         return messages
     else:
         messages_changed = []
         for i in messages:
-            if i["role"]=="system":
+            if isinstance(i, dict) and i.get("role") == "system":
                 messages_changed.append(SystemMessage(content = i["content"]))
             else:
                 messages_changed.append(HumanMessage(content=i["content"]))
@@ -80,7 +80,7 @@ def run_llm(model_name:str, messages: list, schema:object, tools:object, port=No
         can be a simple response'''
     
     # use default args and add keys of additional args
-    default_args = {"temperature":0,"max_tokens":2048, "parallel_tool_calls":True}
+    default_args = {"temperature":0,"max_tokens":2048, "parallel_tool_calls":False}
     args = {**default_args, **additional_args}
 
     
@@ -101,7 +101,7 @@ def run_llm(model_name:str, messages: list, schema:object, tools:object, port=No
         
     elif model_name.startswith("gpt") or model_name.startswith("o"):
         llm_instance = OpenAI()
-        isthinking = True if model_name.startswith("o") or model_name=="gpt-5" else False
+        isthinking = True if model_name.startswith("o") or model_name.startswith("gpt-5") else False
     
     elif model_name.startswith("llama"):
         llm_instance = ChatOllama(model=model_name,max_tokens=args["max_tokens"],temperature=args["temperature"])

@@ -60,11 +60,18 @@ class Agent():
             messages[-1]["content"] = messages[-1]["content"] + f"\n The data artifacts provided to you are : {[i.name for i in self.artifacts_req]} with descriptions {[i.description for i in self.artifacts_req]}"
 
         output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions,port=self.port)
+        
         artifacts = None
         attempts = 0
         query = messages[-1]["content"]
+        self.logger.info(f"Attempt number {attempts} for tool calls. Messages are : {output}")
         if hasattr(output,"output"):
+
             while(output.output[-1].type=="function_call" and attempts < 50):
+
+                if self.llm_name.startswith("gpt-5") or self.llm_name.startswith("o"):
+                    messages.extend([i for i in output.output if i.type=="reasoning"])
+
                 fn_calls = [i for i in output.output if i.type=="function_call"]
 
                 # running of tools without multithreading
@@ -72,6 +79,7 @@ class Agent():
                 if "<HUMAN>" in messages[-1]["output"]:
                     return messages[-1]["output"],None
                 attempts = attempts + 1
+                
                 output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions,port=self.port)
         self.logger.info(f"Final output of the agent is : {output}")
         if hasattr(output,"output_text"):

@@ -200,37 +200,44 @@ def generate_metadata_for_artifacts(**kwargs):
     metadata = []
 
     for artifact in artifacts:
-        df = artifact.data
+        try:
+            df = artifact.data
 
-        column_schema = []
-        for col in df.columns:
-            col_data = df[col]
+            column_schema = []
+            for col in df.columns:
+                col_data = df[col]
 
-            column_schema.append({
-                "name": col,
-                "dtype": str(col_data.dtype),
-                "null_fraction": float(col_data.isna().mean()),
-                "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
-            })
+                column_schema.append({
+                    "name": col,
+                    "dtype": str(col_data.dtype),
+                    "null_fraction": float(col_data.isna().mean()),
+                    "example_values": col_data.dropna().unique()[:20].tolist() if len(col_data.dropna().unique()) > 20 else col_data.dropna().unique()
+                })
 
+                
             
-        
-        artifact_metadata = {
-            "filename": artifact.name,
-            "dataset_summary": {
-                "num_rows": len(df),
-                "num_columns": len(df.columns)
-            },
-            "column_schema": column_schema,
-            "usage_note": (
-                "Column schema is authoritative. "
-                "Do not infer column meaning from values alone."
-            )
-        }
-        if is_preview:
-            artifact_metadata["preview_rows"] = df.head(3).to_dict(orient="records")
+            artifact_metadata = {
+                "filename": artifact.name,
+                "dataset_summary": {
+                    "num_rows": len(df),
+                    "num_columns": len(df.columns)
+                },
+                "column_schema": column_schema,
+                "usage_note": (
+                    "Column schema is authoritative. "
+                    "Do not infer column meaning from values alone."
+                )
+            }
+            if is_preview:
+                artifact_metadata["preview_rows"] = df.head(3).to_dict(orient="records")
 
-        metadata.append(artifact_metadata)
+            metadata.append(artifact_metadata)
+        except Exception as e:
+            if isinstance(e,AttributeError):
+                metadata.append({"filename": artifact.name, "dataset_summary": artifact.description})
+            else:
+                logger.exception("Error generating metadata for artifact %s", artifact.name, exc_info=e)
+                continue
 
     return metadata
 
