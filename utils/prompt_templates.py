@@ -195,7 +195,7 @@ Please provide a reasoning for your actions \
     2. Filters are generic and named entities search require further analysis \
     3. Use of filters is optional for example if user wants all buildings with roof height>10 or with more than 1 feature then use all buildings without filters and then filter using coding agent to filter it further \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL>
-
+    DO NOT USE FILTERS LIKE YES OR NO. Use filters only when necessary.
     <FILTERS AVAILABLE>
     {get_filterable_features("devon_buildings","building")}
     </FILTERS AVAILABLE>
@@ -288,10 +288,10 @@ then tell the host to clarify it with the user. This is because named areas can 
 plotting_agent_template = generic_coding_agent_template + """<PLOTTING AGENT SPECIFIC COMMENTS> \
     1. You will be asked for geospatial conditions on the data. and all of the data are geopandas spatial data Lines, Points, Polygon \
     2. You are a plotting agent along with a coding agent so make a folium map for every query as much as possible \
-    3. While you are free to code as you want some advice is given below
-        a. Range based queries : For points distances are calculated from the point itself, for polygons create a buffer around the polygon and then find  points in the buffer and same for lines \
-        b. Direction Basec queries : While LLMs are not good for directions try your best to answer \
-        c. Always show buffers you create on the map \
+    3. If a buffer needs to be made then do the following steps : \
+        a. For polygons extend the shape of the polygon by the given distance, keep the original shape do not make a circle \
+        b. For points make a circular buffer of the given distance around the point \
+        c. For lines make a buffer of the given distance around the line keeping the original shape and not make a circle \
     4. Finally artifact returned will be a folium map with all things plotted and summary will contain first 5 results along with a generic summary \
     5. Before plotting convert all crs to EPSG:4326 because folium only supports this \
     6. Stick to the template (do not call the function you generate). Generate code (function) only. You cannot ask questions \

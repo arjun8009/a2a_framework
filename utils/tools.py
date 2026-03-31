@@ -188,7 +188,13 @@ def generate_metadata_for_artifacts(**kwargs):
         3. filenames : filename of each artifact'''
     
     is_preview = kwargs.get("is_preview",True)
-    artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if name+".pkl" in os.listdir(ARTIFACT_PATH)]
+    if len(kwargs["artifact_names"]) == 0:
+        return []
+    else:
+        if kwargs["artifact_names"][0].endswith(".pkl"):
+            artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,name)) for name in kwargs["artifact_names"] if name in os.listdir(ARTIFACT_PATH)]
+        else:
+            artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if f"{name}.pkl" in os.listdir(ARTIFACT_PATH)]
     logger = kwargs["logger"]
     logger.info(f"artifacts loaded for metadata generation : {[i.name for i in artifacts]}")
     metadata = []
