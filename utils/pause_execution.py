@@ -51,6 +51,6 @@ def pause_tool_execution(agent_name, tool_name, tool_args, code_true):
             return suggestion
 
     except Exception as e:
-        print(traceback.format_exc)
+        print(traceback.format_exc())
         return None
         

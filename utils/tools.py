@@ -187,7 +187,7 @@ def generate_metadata_for_artifacts(**kwargs):
         2. first_five_rows : A list of dataframes containing first five rows of each artifac
         3. filenames : filename of each artifact'''
     
-    
+    is_preview = kwargs.get("is_preview",True)
     artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if name+".pkl" in os.listdir(ARTIFACT_PATH)]
     logger = kwargs["logger"]
     logger.info(f"artifacts loaded for metadata generation : {[i.name for i in artifacts]}")
@@ -208,7 +208,7 @@ def generate_metadata_for_artifacts(**kwargs):
             })
 
             
-
+        
         artifact_metadata = {
             "filename": artifact.name,
             "dataset_summary": {
@@ -216,12 +216,13 @@ def generate_metadata_for_artifacts(**kwargs):
                 "num_columns": len(df.columns)
             },
             "column_schema": column_schema,
-            "preview_rows": df.head(3).to_dict(orient="records"),
             "usage_note": (
                 "Column schema is authoritative. "
                 "Do not infer column meaning from values alone."
             )
         }
+        if is_preview:
+            artifact_metadata["preview_rows"] = df.head(3).to_dict(orient="records")
 
         metadata.append(artifact_metadata)
 
@@ -238,8 +239,7 @@ def generate_metadata_for_all_artifacts(**kwargs):
         3. filenames : filename of each artifact'''
     
     logger = kwargs["logger"]
-    artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}")) for name in os.listdir(ARTIFACT_PATH)]
-    metadata = {i.name:i.description for i in artifacts}
+    metadata = generate_metadata_for_artifacts(artifact_names=os.listdir(ARTIFACT_PATH),logger=logger,is_preview=False)
     return metadata
 
 

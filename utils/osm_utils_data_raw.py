@@ -136,11 +136,12 @@ def apply_extent_named_area(bbox:str, polygon_or_point:bool,filename:str,query:s
 
 
 
-def query_water_network(bbox:str, filename:str,query:str):
+def query_water_network(bbox:str, filters:list, filename:str,query:str):
     '''Utility function to query OS Data Hub Water Network API
     args:
         1. bbox : NGD Extent to limit the query
-        2. filename : name of the output file
+        2. filters : list of filters to apply to the query
+        3. filename : name of the output file
     output:
         1. gdf : GeoDataFrame of the queried water network features'''
     

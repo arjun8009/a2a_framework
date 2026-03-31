@@ -23,6 +23,7 @@ _pause_reply = None
 
 PATH_VISUALIZATION = Path.cwd() / "visualization"
 DEFAULT_PATH_VISUALIZATION = Path.cwd()
+CONFIG_PATH = Path.cwd() / "agent_frameworks"
 PATH_ARTIFACTS = Path.cwd() / "artifacts"
 PATH_MESSAGES = Path.cwd() / "message_store"
 
@@ -167,7 +168,7 @@ def initialise_config():
     choice = choice["choice"]
     config_file = choice
     config = None
-    with open(f"C:/Users/ab1574/OneDrive - University of Exeter/Desktop/Ordnance_Survey/agent_frameworks/{choice}.json","rb") as file:
+    with open(CONFIG_PATH / f"{choice}.json", "rb") as file:
         config = json.load(file)
     agent_archiecture = OSAgentsInitializer(config).initialize_all_agents()
     agents = [agent_archiecture[i].agent_identity.model_dump() for i in agent_archiecture.keys()]

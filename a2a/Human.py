@@ -22,9 +22,8 @@ class Human():
         
         print("Messages for human to process:", messages[-1]["content"])
         try:
-           response = requests.post("http://localhost:5000/human_send", json={"query":messages[-1]["content"]})
-           print("RESPONSE FROM HUMAN", str(response.content))
-           return str(response.content),None
+           
+           return f"<HUMAN> {messages[-1]['content']}",None
         except Exception as e:
             
             print("OFFLINE MODE : Please provide your response to the following query:")
