@@ -22,7 +22,7 @@ class Human():
         
         print("Messages for human to process:", messages[-1]["content"])
         try:
-           
+           requests.post("http://localhost:5000/Health")
            return f"<HUMAN> {messages[-1]['content']}",None
         except Exception as e:
             

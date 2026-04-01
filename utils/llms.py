@@ -143,13 +143,13 @@ def run_llm(model_name:str, messages: list, schema:object, tools:object, port=No
                 if not isthinking:
                     return openai_llm_instance.responses.create(model = model_name,temperature=args["temperature"],parallel_tool_calls=args["parallel_tool_calls"],input=messages, tools=tools)
                 else:
-                    return openai_llm_instance.responses.create(model = model_name,input=messages,parallel_tool_calls=args["parallel_tool_calls"], tools=tools)
+                    return openai_llm_instance.responses.create(model = model_name,input=messages,parallel_tool_calls=args["parallel_tool_calls"], tools=tools, reasoning=args.get("reasoning", None), text=args.get("text", None))
             else:
                 if not isthinking:
                     return openai_llm_instance.chat.completions.create(model = model_name,max_tokens=args["max_tokens"],temperature=args["temperature"],messages=messages).choices[0].message.content
                     
                 else:
-                    return openai_llm_instance.chat.completions.create(model = model_name,messages=messages).choices[0].message.content
+                    return openai_llm_instance.chat.completions.create(model = model_name,messages=messages,reasoning=args.get("reasoning", None), text=args.get("text", None)).choices[0].message.content
 
     
 
