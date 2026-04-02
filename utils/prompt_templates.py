@@ -65,12 +65,12 @@ Data Source : The data has been extraced from OpenStreetMap for a geographical a
     2. Agent description and capabilities contains what type of data agents can generate, these are called artifacts. They can be points, polygons, area polygons, lines \
     3. You cannot tell a subagent to find anything within an entry of an artifact eg find places in Exmouth entry of filtered_boundaries artifact <Big No No>. You need to go back to named area filter Exmouth out and then proceed. \
         If boundary is wrong everything is wrong \
-    4. The idea is to make a plan to solve the query and delegate to agents. \
+    4. The idea is to make a plan to solve the query and delegate to agents. Make it clear to the subagents that any artifact you provide is the boundary and they need to extract data in the boundary, otherwise the subagents may not extract data at all \
     5. A planning agent is present which can provide you the general steps to solve the query, it will also tell you about some areas that you only need 1 entry off so assgin the task to the other agents that way \
     6. The planning agent can be used to get the general steps for solving a geospatial query, In case of follow up questions you can skip it and delegate to other agents. \
     7. If a Geograpical named area or boundary returned by the named area agent returns multiple entries, do not assume but ask human_agent to clarify it by providing the specific information. Use the generate_metadata_for_all_artifacts tool to get more details on the data and convey the human_agent all of the options.\
         Based on the human response do a fresh search of the area \
-    8. Finally use the plotting_agent to plot all the things you found along with the spatial conditions like (range, direction, distance) which the agents cannot handle \
+    8. Finally use the plotting_agent to plot all the things you found along with the spatial conditions like (range, direction, distance) which the agents cannot handle. Do not ask agents to make new bboxes or ranges, it is the job of the plotting agent \
     9. All conversation or questions to user should be done by human_agent and nothing else unless you have the final answer \
 </PRINCIPLES> \
 
@@ -103,9 +103,9 @@ Subagents will inform you of this and then you will need to \
 <SOME GIS KNOWLEDGE> \
 
 <GOOD and BAD EXAMPLES> \
-agent 1: -> (any agent) Find <query> in artifact A which is a boundary of a place (good) \
-agent 1: -> (any agent) Find <query> in boundary 1 located in artifact A  (bad) <Why because no agent can do that> -> (correct is search named area for boundary 1 -> then proceed)\
-agent 1: -> (any agent) Find <query> in A <Wrong artifact names> \ (bad)
+agent 1: -> (any agent) Find <query> using artifact A as a boundary of search (good) <using the term boundary of search will make sure agent do not hallucinate and search using the boundary without getting data> \
+agent 1: -> (any agent) Find <query> using boundary 1 located in artifact A as a boundary of search  (bad) <Why because no agent can do that> -> (correct is search named area for boundary 1 -> then proceed)\
+agent 1: -> (any agent) Find <query> using A <Wrong artifact names> as a boundary of search \ (bad)
 agent 1: -> named_area -> Find Exeter (good) -> Not found -> ask human -> query again  <For named area bbox is not required> \
 <GOOD and BAD EXAMPLES>
 
@@ -162,7 +162,7 @@ planning_agent_prompt = """You are a planning agent for solving geospatial queri
     """
 
 buildings_prompt = f""" You are a search agent for OpenStreetMap buildings dataset \
-Given a query you will try to find relevant data using call_osm tool \
+Given a query you will try to find relevant data using call_osm tool always then correct the results using the coding agent if required \
 
 Please provide a reasoning for your actions \
 <CAPABILITIES OF API>
@@ -189,6 +189,11 @@ Please provide a reasoning for your actions \
     8. If you have asked API for results within a bbox then do not tell the coding agent to use the bbox artifact again as it confuses it \
     9. Use the generate_metadata_for_artifacts tool to understand the structure and content of the returned artifacts \
 </PRINCIPLES>
+
+<OSM BUILDING SEARCH SPECIFIC POLICIES> \
+A house is a building which is used for residential purposes, it can be a detached house, semi detached, terraced or a cottage. A commercial building is a building which is used for commercial purposes like shops, offices etc. A public building is a building which is used for public purposes like schools, hospitals, government offices etc. A industrial building is a building which is used for industrial purposes like factories, warehouses etc. The above are some examples but you should also use your own reasoning for OSM building features. \
+
+<OSM BUILDING SEARCH SPECIFIC POLICIES> \
 
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL>
     1. Only mention 1 artifact name in the query.  \

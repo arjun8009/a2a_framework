@@ -1,0 +1,14 @@
+2026-04-02 10:22:54,963 INFO Agent host_agent Initialised
+2026-04-02 10:22:54,963 INFO Agent planning_agent Initialised
+2026-04-02 10:22:54,963 INFO Agent coding_agent Initialised
+2026-04-02 10:22:54,963 INFO Agent plotting_agent Initialised
+2026-04-02 10:22:54,963 INFO Agent address_agent Initialised
+2026-04-02 10:22:54,963 INFO Agent named_area_agent Initialised
+2026-04-02 10:22:54,963 INFO Agent buildings_agent Initialised
+2026-04-02 10:22:54,963 INFO Agent water_network_agent Initialised
+2026-04-02 10:22:54,964 INFO Agent land_features_agent Initialised
+2026-04-02 10:22:54,964 INFO Agent land_use_features_agent Initialised
+2026-04-02 10:22:54,964 INFO Agent human Initialised
+2026-04-02 10:22:54,964 INFO sending message from human to host Show me all the houses that are within a 20 minute walk of a hospital in merton.
+2026-04-02 10:22:59,035 INFO OFFLINE MODE
+2026-04-02 10:22:59,065 INFO Messages sent to agent host_agent : [{'role': 'user', 'content': 'Show me all houses in okehampton that are not within 2km of a library.'}, {'role': 'user', 'content': 'Show me all the houses that are within a 20 minute walk of a hospital in merton.'}]

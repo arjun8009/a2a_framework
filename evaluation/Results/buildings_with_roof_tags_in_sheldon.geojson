@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "buildings_with_roof_tags_in_sheldon",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::27700" } },
+"features": [
+
+]
+}
