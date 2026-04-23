@@ -19,6 +19,7 @@ import traceback
 from pathlib import Path
 import time
 import threading
+import ast
 from flask_socketio import SocketIO
 from utils.pause_execution import pause_tool_execution
 
@@ -152,10 +153,10 @@ def send_message(**kwargs):
     try:
         interaction = {"source":target, "target":source, "msg":output.task_output}
         requests.post("http://localhost:5000/interact",json=interaction)
-        logger.info(f"Output from agent {target} : {output.task_output}")
+        logger.info(f"Output from agent {target} : {str(output.task_output)}")
     except Exception as e:
         logger.warning("OFFLINE MODE")
-        logger.info(f"Output from agent {target} : {output.task_output}")
+        logger.info(f"Output from agent {target} : {str(output.task_output)}")
 
     if output.task_status == "success":
         
@@ -186,15 +187,16 @@ def generate_metadata_for_artifacts(**kwargs):
         1. columns : A list of columns for each artifact
         2. first_five_rows : A list of dataframes containing first five rows of each artifac
         3. filenames : filename of each artifact'''
-    
+
+    artifact_names = ast.literal_eval(kwargs["artifact_names"]) if isinstance(kwargs["artifact_names"], str) else kwargs["artifact_names"]
     is_preview = kwargs.get("is_preview",True)
-    if len(kwargs["artifact_names"]) == 0:
+    if len(artifact_names) == 0:
         return []
     else:
-        if kwargs["artifact_names"][0].endswith(".pkl"):
-            artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,name)) for name in kwargs["artifact_names"] if name in os.listdir(ARTIFACT_PATH)]
+        if artifact_names[0].endswith(".pkl"):
+            artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,name)) for name in artifact_names if name in os.listdir(ARTIFACT_PATH)]
         else:
-            artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in kwargs["artifact_names"] if f"{name}.pkl" in os.listdir(ARTIFACT_PATH)]
+            artifacts = [joblib.load(os.path.join(ARTIFACT_PATH,f"{name}.pkl")) for name in artifact_names if f"{name}.pkl" in os.listdir(ARTIFACT_PATH)]
     logger = kwargs["logger"]
     logger.info(f"artifacts loaded for metadata generation : {[i.name for i in artifacts]}")
     metadata = []

@@ -20,10 +20,10 @@ class OSAgentsInitializer():
         self.agent_dict = config
         self.logging_filename = logging_filename
         if diff_dir is not None:
-            self.logger = logging.getLogger(f"evaluation/{diff_dir}/{self.logging_filename}")
+            self.logger = logging.getLogger(f"{diff_dir}/{self.logging_filename}")
             self.logger.setLevel(logging.INFO)
             self.logger.handlers.clear()
-            filehandler = logging.FileHandler(f"evaluation/{diff_dir}/{self.logging_filename}.log",mode="w")
+            filehandler = logging.FileHandler(f"{diff_dir}/{self.logging_filename}.log",mode="w")
             filehandler.setLevel(logging.INFO)
             formatter = logging.Formatter("%(asctime)s %(levelname)s %(message)s")
             filehandler.setFormatter(formatter)

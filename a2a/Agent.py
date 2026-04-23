@@ -4,6 +4,9 @@ from a2a.Artifact import Artifact
 from pydantic import BaseModel
 import requests
 import logging
+import joblib
+from a2a.DpoData import DpoDataRaw
+import time
 
 class Agent():
 
@@ -64,7 +67,6 @@ class Agent():
         artifacts = None
         attempts = 0
         query = messages[-1]["content"]
-        self.logger.info(f"Attempt number {attempts} for tool calls. Messages are : {output}")
         if hasattr(output,"output"):
 
             while(output.output[-1].type=="function_call" and attempts < 50):
@@ -82,6 +84,13 @@ class Agent():
                 
                 output = run_llm(self.llm_name,messages,self.schema, self.tool_definitions,port=self.port)
         self.logger.info(f"Final output of the agent is : {output}")
+
+        if self.agent_identity.agent_name.startswith("host"):
+            messages_complete = messages
+            messages_complete.append(output)
+            data_obj = DpoDataRaw(agent_name=self.agent_identity.agent_name, agent_message_data=messages_complete, agent_system_instruction=self.system_instruction, agent_tool_definitions=self.tool_definitions)
+            joblib.dump(data_obj,f"DPO_dumps/{self.agent_identity.agent_name}_{time.time()}.joblib")
+        
         if hasattr(output,"output_text"):
             return output.output_text,artifacts
         else:

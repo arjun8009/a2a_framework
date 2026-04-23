@@ -55,7 +55,7 @@
             "agent_name":"named_area_agent",
             "version":"1.0.0",
             "agent_details":"named_area_agent_card",
-            "llm_name":"gpt-4o",
+            "llm_name":"gpt-4.1",
             "system_instruction":"named_area_prompt",
             "additional_args":{"parallel_tool_calls":false},
             "tools":["send_message","call_osm","generate_metadata_for_artifacts"],

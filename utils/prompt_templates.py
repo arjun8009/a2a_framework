@@ -21,7 +21,8 @@ generic_coding_agent_template = """You are a coding agent whose task is to gener
                 d. artifact data : The actual data object you are generating. only 2 types plots, geodataframe are allowed. \
             else:
                 return [a summary of the output, None,None,None] \
-            4. Since you may return filtered or data artifacts or objects try to combine in a single artifact as you can only return 1 artifact. \
+            7. Since you may return filtered or data artifacts or objects try to combine in a single artifact as you can only return 1 artifact. \
+            8. Read the metadata and then decide how would the code extract the required information without irrelevant information. \
             
 
     <STRICT TEMPLATE FOR FUNCTION DEFINITION> : \
@@ -33,7 +34,7 @@ generic_coding_agent_template = """You are a coding agent whose task is to gener
     
     <POLICIES> : \
         1. You must strictly follow the function definition template provided above. Write code using template, make the function, execute it and return the results \
-        2. Do not make your own data, columns only use the data provided to you and read the metadata. \
+        2. Do not make your own data, Read the metadata and then decide how would the code extract the required information. \
         3. Search using multiple columns to increase search quality not just one column \
         4. Make sure that the search results are relevant to the query asked. like if Exe river is requested, you do not return exe street \
         5. stick to the code template provided and output format \
@@ -41,6 +42,7 @@ generic_coding_agent_template = """You are a coding agent whose task is to gener
         7. Keep on making code and handle the errors do not return error as output \
         8. <MOST IMPORTANT> Filtering using categorical columns is tricky, use all possible categories that are correct, do not leave categories that are correct but may seem less relevant </MOST IMPORTANT>
         9. <MOST IMPORTANT>Use the column names provided by the metadata do not search for column names </MOST IMPORTANT> \
+        10 <MOST IMPORTANT> Read the metadata and then decide how would the code extract the required information without irrelevant information. </MOST IMPORTANT> \
     <POLICIES> \
     
     <RESPONSE EXPECTATION> : \
@@ -69,14 +71,14 @@ Data Source : The data has been extraced from OpenStreetMap for a geographical a
     5. A planning agent is present which can provide you the general steps to solve the query, it will also tell you about some areas that you only need 1 entry off so assgin the task to the other agents that way \
     6. The planning agent can be used to get the general steps for solving a geospatial query, In case of follow up questions you can skip it and delegate to other agents. \
     7. If a Geograpical named area or boundary returned by the named area agent returns multiple entries, do not assume but ask human_agent to clarify it by providing the specific information. Use the generate_metadata_for_all_artifacts tool to get more details on the data and convey the human_agent all of the options.\
-        Based on the human response do a fresh search of the area \
+        Based on the human response do a fresh search of the area by providing the named_area agent an identifiable id of the chosen area as an additional clue \
     8. Finally use the plotting_agent to plot all the things you found along with the spatial conditions like (range, direction, distance) which the agents cannot handle. Do not ask agents to make new bboxes or ranges, it is the job of the plotting agent \
     9. All conversation or questions to user should be done by human_agent and nothing else unless you have the final answer \
 </PRINCIPLES> \
 
 <VITAL NOTE>
 1. If a Geograpical named area or boundary returned by the named area agent returns multiple entries, do not assume but ask human_agent to clarify it by providing the specific information. Use the generate_metadata_for_all_artifacts tool to get more details on the data and convey the human_agent all of the options. \
-Based on the human response do a fresh search of the area \
+Based on the human response do a fresh search of the area by providing the named_area agent an identifiable id of the chosen area as an additional clue \
 2. Agents cannot go gis operations like ranges, intersections etc. They are good at filtering and searches. These GIS operations need to be done at the end by plotting agent \
 3. Always reuse artifacts they are stored so call the generate_metadata_for_all_artifacts too to know what information you have. This is mandatory for all questions follow up or new and after human clarification. \
 4. Do not stop if information is not found in 1 database try in other relevant ones \
@@ -106,7 +108,8 @@ Subagents will inform you of this and then you will need to \
 agent 1: -> (any agent) Find <query> using artifact A as a boundary of search (good) <using the term boundary of search will make sure agent do not hallucinate and search using the boundary without getting data> \
 agent 1: -> (any agent) Find <query> using boundary 1 located in artifact A as a boundary of search  (bad) <Why because no agent can do that> -> (correct is search named area for boundary 1 -> then proceed)\
 agent 1: -> (any agent) Find <query> using A <Wrong artifact names> as a boundary of search \ (bad)
-agent 1: -> named_area -> Find Exeter (good) -> Not found -> ask human -> query again  <For named area bbox is not required> \
+agent 1: -> named_area -> Find Exeter (good) -> Not found -> ask human -> query again Find Exeter  <For named area bbox is not required> \
+agent 1: -> named_area -> Find Exeter (good) -> multiple found -> ask human -> query again Find Exeter with id <id> in the data <For named area bbox is not required> \
 <GOOD and BAD EXAMPLES>
 
 """
@@ -272,7 +275,9 @@ Please provide a reasoning for your actions \
     5. Finally return the filtered artifact names only and the results of your search. \
     6. use the send_message tool to call the data_analysis_agent with the proper name of the agent \
     7. Provide a filename for the coding agent to save the filtered results as well \
-    8. Use the generate_metadata_for_artifacts tool to understand the structure and content of the returned artifacts \
+    8. Use the generate_metadata_for_artifacts tool to understand the structure and content of the returned artifact. \
+        a. If artifact contain multiple entries with the same name then tell the host \
+        b. But if the name is different than the search then filter again using coding agent \
 </PRINCIPLES>
 
 
@@ -282,9 +287,10 @@ Please provide a reasoning for your actions \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL>
 
 <MOST IMPORTANT POLICY> \
-1. After you get final search results after coding agent filtering and are about to return the results for a named area eg (city, county etc). If there are multiple entries \
-then tell the host to clarify it with the human_agent. Tell the host it is mandatory to clarify with the human agent. \
-2. use the generate_metadata_for_artifacts tool to understand the structure and content of the returned artifacts and then convey the information to the host \
+1. If the search is for a geographical area then be very specific for the instruction given to the data analysis agent \
+2. Use the generate_metadata_for_artifacts tool to understand the structure and content of the returned artifact. \
+        a. If artifact contain multiple entries with the same name then tell the host \
+        b. But if the name is different than the search then filter again using coding agent \
 3. Tell the host that the user needs to clarify it \
 <MOST IMPORTANT POLICY> \
 

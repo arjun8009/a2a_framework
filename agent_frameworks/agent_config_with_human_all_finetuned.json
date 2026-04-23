@@ -3,19 +3,22 @@
             "agent_name": "host_agent",
             "version": "1.0.0",
             "agent_details":"host_agent_card",
-            "llm_name":"gpt-4.1",
+            "llm_name":"Qwen3.5-9b",
             "tools":["send_message","generate_metadata_for_all_artifacts"],
             "tool_definitions":["send_message_definitions","metadata_all_artifacts"],
             "additional_args":{"parallel_tool_calls":false},
-            "system_instruction":"host_prompt_template_for_os_version_2",
-            "available_agents":["planning_agent","address_agent","named_area_agent","buildings_agent","water_features_agent","water_network_agent","land_features_agent","land_use_features_agent","structures_agent","plotting_agent","human"]
+            "system_instruction":"host_prompt_template_for_osm",
+            "additional_prompts":"query_updation_for_host",
+            "port":8001,
+            "available_agents":["planning_agent","address_agent","named_area_agent","buildings_agent","water_network_agent","land_features_agent","land_use_features_agent","plotting_agent","human"]
         },
         {
             "agent_name":"planning_agent",
             "version":"1.0.0",
             "agent_details":"planning_agent_card",
             "llm_name":"gpt-4o-mini",
-            "system_instruction":"planning_agent_prompt"
+            "system_instruction":"planning_agent_prompt",
+            "port":null
         },
         {
             "agent_name":"coding_agent",
@@ -25,7 +28,9 @@
             "system_instruction":"generic_coding_agent_template",
             "additional_args":{"parallel_tool_calls":false},
             "tools":["code_executor","generate_metadata_for_artifacts"],
-            "tool_definitions":["code_executor_definition","code_metadata_generator_definition"]
+            "tool_definitions":["code_executor_definition","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
+            "port":null
         },
         {
             "agent_name":"plotting_agent",
@@ -35,7 +40,8 @@
             "system_instruction":"plotting_agent_template",
             "additional_args":{"parallel_tool_calls":false},
             "tools":["code_executor","generate_metadata_for_artifacts"],
-            "tool_definitions":["code_executor_definition","code_metadata_generator_definition"]
+            "tool_definitions":["code_executor_definition","code_metadata_generator_definition"],
+            "port":null
         },
         {
             "agent_name":"address_agent",
@@ -44,86 +50,76 @@
             "llm_name":"gpt-4o",
             "system_instruction":"places_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"]
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
+            "available_agents":["coding_agent"],
+            "port":null
         },
         {
             "agent_name":"named_area_agent",
             "version":"1.0.0",
             "agent_details":"named_area_agent_card",
-            "llm_name":"Qwen3.5-27B",
+            "llm_name":"gpt-4o",
             "system_instruction":"named_area_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"]
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
+            "available_agents":["coding_agent"],
+            "port":null
         },
         {
             "agent_name":"buildings_agent",
             "version":"1.0.0",
             "agent_details":"building_agent_card",
-            "llm_name":"Qwen3.5-27B",
+            "llm_name":"gpt-4o",
             "system_instruction":"buildings_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"]
-        },
-        {
-            "agent_name":"water_features_agent",
-            "version":"1.0.0",
-            "agent_details":"water_features_agent_card",
-            "llm_name":"Qwen3.5-27B",
-            "system_instruction":"water_features_prompt",
-            "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"]
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
+            "available_agents":["coding_agent"],
+            "port":null
         },
         {
             "agent_name":"water_network_agent",
             "version":"1.0.0",
             "agent_details":"water_network_agent_card",
-            "llm_name":"Qwen3.5-27B",
+            "llm_name":"gpt-4o",
             "system_instruction":"water_network_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"]
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
+            "available_agents":["coding_agent"],
+            "port":null
         },
         {
             "agent_name":"land_features_agent",
             "version":"1.0.0",
             "agent_details":"land_features_agent_card",
-            "llm_name":"Qwen3.5-27B",
+            "llm_name":"gpt-4o",
             "system_instruction":"land_features_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"]
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
+            "available_agents":["coding_agent"],
+            "port":null
         },
         {
             "agent_name":"land_use_features_agent",
             "version":"1.0.0",
             "agent_details":"land_use_features_agent_card",
-            "llm_name":"Qwen3.5-27B",
+            "llm_name":"gpt-4o",
             "system_instruction":"land_use_features_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"]
-        },
-        {
-            "agent_name":"structures_agent",
-            "version":"1.0.0",
-            "agent_details":"structure_agent_card",
-            "llm_name":"Qwen3.5-27B",
-            "system_instruction":"structure_prompt",
-            "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"]
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
+            "available_agents":["coding_agent"],
+            "port":null
         },
         {
             "agent_name":"human",

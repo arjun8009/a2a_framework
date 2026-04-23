@@ -11,3 +11,5 @@ frontend/node_modules/*
 osm_data/*
 *.html
 evaluation_backup/*
+DPO_dumps/*
+evaluation/*

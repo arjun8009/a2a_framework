@@ -92,6 +92,7 @@ def run_llm(model_name:str, messages: list, schema:object, tools:object, port=No
     if model_name.startswith("Qwen"):
         
         llm_instance = OpenAI(base_url=f"http://localhost:{port}/v1", api_key="dummy")
+    
 
         model_name = llm_instance.models.list().data[0].id
     elif model_name.startswith("Devstral"):

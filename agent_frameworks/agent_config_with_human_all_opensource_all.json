@@ -3,13 +3,14 @@
             "agent_name": "host_agent",
             "version": "1.0.0",
             "agent_details":"host_agent_card",
-            "llm_name":"gpt-4.1",
+            "llm_name":"o3",
             "tools":["send_message","generate_metadata_for_all_artifacts"],
             "tool_definitions":["send_message_definitions","metadata_all_artifacts"],
             "additional_args":{"parallel_tool_calls":false},
-            "system_instruction":"host_prompt_template_for_os_version_2",
+            "system_instruction":"host_prompt_template_for_osm",
+            "additional_prompts":"query_updation_for_host",
             "port":null,
-            "available_agents":["planning_agent","address_agent","named_area_agent","buildings_agent","water_features_agent","water_network_agent","land_features_agent","land_use_features_agent","structures_agent","plotting_agent","human"]
+            "available_agents":["planning_agent","address_agent","named_area_agent","buildings_agent","water_network_agent","land_features_agent","land_use_features_agent","plotting_agent","human"]
         },
         {
             "agent_name":"planning_agent",
@@ -28,7 +29,8 @@
             "additional_args":{"parallel_tool_calls":false},
             "tools":["code_executor","generate_metadata_for_artifacts"],
             "tool_definitions":["code_executor_definition","code_metadata_generator_definition"],
-            "port":8001
+            "additional_prompts":"human_confirmation_addition",
+            "port":8002
         },
         {
             "agent_name":"plotting_agent",
@@ -45,13 +47,14 @@
             "agent_name":"address_agent",
             "version":"1.0.0",
             "agent_details":"address_agent_card",
-            "llm_name":"gpt-4o",
+            "llm_name":"Qwen3.5-27B",
             "system_instruction":"places_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
             "available_agents":["coding_agent"],
-            "port":8000
+            "port":8001
         },
         {
             "agent_name":"named_area_agent",
@@ -60,10 +63,11 @@
             "llm_name":"Qwen3.5-27B",
             "system_instruction":"named_area_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
             "available_agents":["coding_agent"],
-            "port":8000
+            "port":8001
         },
         {
             "agent_name":"buildings_agent",
@@ -72,22 +76,11 @@
             "llm_name":"Qwen3.5-27B",
             "system_instruction":"buildings_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
             "available_agents":["coding_agent"],
-            "port":8000
-        },
-        {
-            "agent_name":"water_features_agent",
-            "version":"1.0.0",
-            "agent_details":"water_features_agent_card",
-            "llm_name":"Qwen3.5-27B",
-            "system_instruction":"water_features_prompt",
-            "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"],
-            "port":8000
+            "port":8001
         },
         {
             "agent_name":"water_network_agent",
@@ -96,10 +89,11 @@
             "llm_name":"Qwen3.5-27B",
             "system_instruction":"water_network_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
             "available_agents":["coding_agent"],
-            "port":8000
+            "port":8001
         },
         {
             "agent_name":"land_features_agent",
@@ -108,10 +102,11 @@
             "llm_name":"Qwen3.5-27B",
             "system_instruction":"land_features_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
             "available_agents":["coding_agent"],
-            "port":8000
+            "port":8001
         },
         {
             "agent_name":"land_use_features_agent",
@@ -120,22 +115,11 @@
             "llm_name":"Qwen3.5-27B",
             "system_instruction":"land_use_features_prompt",
             "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
+            "tools":["send_message","call_osm","generate_metadata_for_artifacts"],
+            "tool_definitions":["send_message_definitions","osm_tool_description","code_metadata_generator_definition"],
+            "additional_prompts":"human_confirmation_addition",
             "available_agents":["coding_agent"],
-            "port":8000
-        },
-        {
-            "agent_name":"structures_agent",
-            "version":"1.0.0",
-            "agent_details":"structure_agent_card",
-            "llm_name":"Qwen3.5-27B",
-            "system_instruction":"structure_prompt",
-            "additional_args":{"parallel_tool_calls":false},
-            "tools":["send_message","call_os_ngd"],
-            "tool_definitions":["send_message_definitions","os_ngd_tool_description"],
-            "available_agents":["coding_agent"],
-            "port":8000
+            "port":8001
         },
         {
             "agent_name":"human",
