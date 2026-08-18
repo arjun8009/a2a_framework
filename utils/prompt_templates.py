@@ -181,7 +181,7 @@ Please provide a reasoning for your actions \
         Then return that you cannot solve this\
     ELSE\
     2. call the call_osm tool with the appropriate params \
-        b. filters: list = A list of filters which are provided below if any are required \
+        b. filters: list = A list of filters which are provided below if any are required. or None if no filters are applicable \
         c. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
         d. filename : str = The name of the file to save the artifact as \
     3. The tool will return to you number of search results and the artifact names.\
@@ -202,6 +202,7 @@ A house is a building which is used for residential purposes, it can be a detach
     1. Only mention 1 artifact name in the query.  \
     2. Filters are generic and named entities search require further analysis \
     3. Use of filters is optional for example if user wants all buildings with roof height>10 or with more than 1 feature then use all buildings without filters and then filter using coding agent to filter it further \
+    4. Important : Do not use any filters not in the list below if nothing matches then keep it None and use coding agent to filter further \
 
     <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL>
     DO NOT USE FILTERS LIKE YES OR NO. Use filters only when necessary.
@@ -332,7 +333,7 @@ Please provide a reasoning for your actions \
         Then return that you cannot solve this\
     ELSE\
     2. call the os ngd tool with the appropriate params \
-        a. filters: list = A list of filters which are provided below if any are required \
+        a. filters: list = This is actually the column `waterway` in osm waterways dataset so use this for basic filtering but for any other column features use the coding agent \
         b. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
         c. filename : str = The name of the file to save the artifact as \
     
@@ -348,6 +349,7 @@ Please provide a reasoning for your actions \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL>
 1. Only mention 1 artifact name in the query.  \
 2. Filters are not available and named entities search require further analysis \
+4. Do not use any filters not in the list below if nothing matches then keep it None and use coding agent to filter further \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL> \
 
 <FILTERS AVAILABLE>
@@ -374,7 +376,7 @@ Please provide a reasoning for your actions \
     ELSE\
     2. call the call_osm tool with the appropriate params \
         a. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
-        b. filters : list = A list of filters which are provided below  \
+        b. filters : list = This is actually the column `natural` in osm natural dataset so use this for basic filtering but for any other column features use the coding agent \
         c. filename : str = The name of the file to save the artifact as \
     
     3. The tool will return to you number of search results and the artifact names. (can be 1 or 2)\
@@ -389,6 +391,7 @@ Please provide a reasoning for your actions \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL> \
 1. Only mention 1 artifact name in the query.  \
 2. Filters are generic and named entities search require further analysis \
+3. Important : Do not use any filters not in the list below. If nothing matches, keep it None and use the coding agent to filter further. \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL> \
 
 
@@ -419,7 +422,7 @@ Please provide a reasoning for your actions \
     ELSE\
     2. call the call_osm tool with the appropriate params \
         a. bbox : str = The name of the bbox artifact to search within. Will be provided to you in message history. So look at the message history to choose the correct name. \
-        b. filters : list = A list of filters which are provided below \
+        b. filters : list = This is actually the column `landuse` in osm landuse dataset so use this for basic filtering but for any other column features use the coding agent \
         c. filename : str = The name of the file to save the artifact as \
     
     3. The tool will return to you number of search results and the artifact names. (can be 1 or 2)\
@@ -434,6 +437,7 @@ Please provide a reasoning for your actions \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL> \
 1. Only mention 1 artifact name in the query.  \
 2. Filters are generic and named entities search require further analysis \
+3. Important : Do not use any filters not in the list below if nothing matches then keep it None and use coding agent to filter further \
 <CONSTRAINT FOR DATA ANALYSIS AGENT and OSM TOOL> \
 
 <FILTERS AVAILABLE> \
