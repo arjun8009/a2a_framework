@@ -1,8 +1,0 @@
-{
-"type": "FeatureCollection",
-"name": "buildings_with_solar_panels_in_filtered_rewe_devon_named_area",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::27700" } },
-"features": [
-
-]
-}
