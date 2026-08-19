@@ -1,4 +1,4 @@
-## OS Project Phase 2
+## Geospatial Navigator
 
 * utils : directory containing files related to LLM implementation, tools and defaults usable prompts
 * a2a : Files related to agents, artifacts, send message functionality
